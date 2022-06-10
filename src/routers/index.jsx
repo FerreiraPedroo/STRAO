@@ -1,14 +1,17 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { NavBar } from "../component/NavBar";
+import { Routes, Route, Navigate } from "react-router-dom"
+import { AppContext } from '../provider/app'
+import { NavBar } from "../component/NavBar"
 
-import { Home } from "../pages/Home";
+import { Home } from "../pages/Home"
 import { Login } from "../pages/Login"
-import { AppUseContext } from '../provider/app'
+import { EmployeeRegister } from "../pages/RecursosHumanos/EmployeeRegister"
+import { EmployeeVacation } from "../pages/RecursosHumanos/EmployeeVacation"
+import { EmployeeSheet } from "../pages/RecursosHumanos/EmployeeSheet"
+import { EmployeeList } from "../pages/RecursosHumanos/EmployeeList";
 
 export const AppRouter = () => {
-  const { user } = AppUseContext();
-
+  const { user } = AppContext()
 
   const PrivateRoutes = ({ children }) => {
     if (user) {
@@ -16,33 +19,61 @@ export const AppRouter = () => {
         <NavBar />
         {children}
       </>
+    } else {
+      return <Navigate to="/" />
     }
   }
 
   const PublicRoutes = ({ children }) => {
-    if (!user) {
+    if (user) {
+      return <Navigate to="/home" />
+    } else {
       return children
     }
   }
-  console.log(user)
+
   return (
-    <page-container>
-      <Routes>
+    <Routes>
+      <Route path="/home" element={
+        <PrivateRoutes>
+          <Home />
+        </PrivateRoutes>
+      } />
+      <Route path="/" element={
+        <PublicRoutes>
+          <Login />
+        </PublicRoutes>
+      } />
 
-        <Route path="/" element={
-          <>
-            <PrivateRoutes>
-              <Home />
-            </PrivateRoutes>
-            <PublicRoutes>
-              <Login />
-            </PublicRoutes>
-          </>
-        } />
+      {/* RH */}
+      <Route path="/rh/register/employee" element={
+        <PrivateRoutes>
+          <EmployeeRegister />
+        </PrivateRoutes>
+      } />
+      <Route path="/rh/list/employee" element={
+        <PrivateRoutes>
+          <EmployeeList />
+        </PrivateRoutes>
+      } />
+      <Route path="/rh/sheet" element={
+        <PrivateRoutes>
+          <EmployeeSheet />
+        </PrivateRoutes>
+      } />
+      <Route path="/rh/vacation" element={
+        <PrivateRoutes>
+          <EmployeeVacation />
+        </PrivateRoutes>
+      } />
 
 
-      </Routes>
-    </page-container>
+
+
+
+
+
+    </Routes>
   )
 
 } 

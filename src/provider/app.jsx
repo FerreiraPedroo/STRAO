@@ -1,21 +1,23 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import React, { createContext, useState, useContext, useEffect } from 'react';
+// import jsonwebtoken from 'jsonwebtoken';
+import { Navigate } from 'react-router-dom';
 
-const AppContext = React.createContext();
+import { loginService } from '../services/login/index'
+
+const AppUseContext = createContext({});
 
 export const AppProvider = ({ children }) => {
-  const [user, setUser] = useState()
+  const [user, setUser] = useState('')
 
-  const userLogin = () => {
-    setUser({
-      token: "3ed84ff8a63c27b05de62fa9e8",
-      user: "mastermaker1@gmail.com",
-      auth: true,
-      avatar: "../../assets/img/home-bg2.png"
-    })
-    
-    localStorage.setItem("auth", JSON.stringify({ token: "3ed84ff8a63c27b05de62fa9e8", user: "mastermaker1@gmail.com", auth: true, avatar: "../../assets/img/home-bg2.png" }))
-    return <Navigate to="/home" />
+  const userLogin = async (_user, _password) => {
+    const loginReturnData = await loginService(_user, _password)
+    console.log(loginReturnData)
+    if (loginReturnData.codStatus === 200) {
+      localStorage.setItem("auth", JSON.stringify({ token: loginReturnData.token, user: loginReturnData.user, accessLevel: loginReturnData.accessLevel, }))
+      setUser({ token: loginReturnData.token, user: loginReturnData.user, accessLevel: loginReturnData.accessLevel, })
+      return true
+    }
+    return (false)
   }
 
   useEffect(() => {
@@ -26,10 +28,13 @@ export const AppProvider = ({ children }) => {
   }, [])
 
   return (
-    <AppContext.Provider value={{ user, userLogin }}>
+    <AppUseContext.Provider value={{ user, userLogin }}>
       {children}
-    </AppContext.Provider>
+    </AppUseContext.Provider>
   )
 }
 
-export const AppUseContext = () => useContext(AppContext)
+export const AppContext = () => {
+  const context = useContext(AppUseContext)
+  return context
+}

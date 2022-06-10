@@ -1,13 +1,24 @@
-import React from "react";
-import { AppUseContext } from "../../provider/app";
-
+import React, { useState } from "react";
+import { AppContext } from "../../provider/app";
 
 import * as S from "./styles"
 import homebg2 from "./img/home-bg2.png"
 
-
 export const Login = () => {
-  const { user, userLogin } = AppUseContext()
+  const { user, userLogin } = AppContext()
+  const [userData, setUserData] = useState('')
+  const [passwordData, setPasswordData] = useState('')
+
+  const handleInputUser = (e) => {
+    setUserData(e.target.value)
+  }
+  const handleInputPassword = (e) => {
+    setPasswordData(e.target.value)
+  }
+  const handleLogin = async () => {
+    const data = await userLogin(userData, passwordData)
+    console.log(data)
+  }
 
   return (
     <S.Container>
@@ -23,12 +34,12 @@ export const Login = () => {
         </S.InputBox>
 
         <S.PasswordBox>
-          <S.UserInput />
-          <S.PasswordInput type="password" />
+          <S.UserInput value={userData} onChange={handleInputUser} />
+          <S.PasswordInput type="password" value={passwordData} onChange={handleInputPassword} />
         </S.PasswordBox>
 
         <S.ButtonBox>
-          <S.Button type="image" src={homebg2} onClick={() => userLogin()} />
+          <S.Button type="image" src={homebg2} onClick={()=>handleLogin()} />
         </S.ButtonBox>
 
       </S.LoginContainer>
