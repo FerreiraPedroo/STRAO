@@ -11,7 +11,6 @@ export const loginService = async (_user, _password) => {
       },
       withCredentials: true,
     })
-    console.log(data)
     return data
     
   } catch (err) {

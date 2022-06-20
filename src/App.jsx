@@ -1,7 +1,7 @@
 import React from "react";
 import { AppRouter } from './routers/index';
 import { BrowserRouter } from 'react-router-dom';
-import { AppProvider } from './provider/app'
+import { GlobalProvider } from './provider/app'
 
 import './assets/App.css'
 
@@ -9,9 +9,9 @@ export const App = () => {
 
   return (
     <BrowserRouter>
-      <AppProvider>
+      <GlobalProvider>
         <AppRouter />
-      </AppProvider>
+      </GlobalProvider>
     </BrowserRouter>
   )
 }

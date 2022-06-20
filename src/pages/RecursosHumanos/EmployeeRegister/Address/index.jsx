@@ -12,7 +12,7 @@ export const Address = ({ formik }) => {
 
         <S.Box>
           <S.RegisterText>CEP</S.RegisterText>
-          <S.RegisterInput />
+          <S.RegisterInput id="address.zipcode" value={formik.values.address.zipcode} onChange={formik.handleChange} />
         </S.Box>
 
 

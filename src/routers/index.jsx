@@ -1,34 +1,38 @@
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom"
-import { AppContext } from '../provider/app'
-import { NavBar } from "../component/NavBar"
+import React, { useContext } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { GlobalUseContext } from '../provider/app';
+import { NavBar } from "../component/NavBar";
+import { Notification } from "../component/Notification";
 
-import { Home } from "../pages/Home"
-import { Login } from "../pages/Login"
-import { EmployeeRegister } from "../pages/RecursosHumanos/EmployeeRegister"
-import { EmployeeVacation } from "../pages/RecursosHumanos/EmployeeVacation"
-import { EmployeeSheet } from "../pages/RecursosHumanos/EmployeeSheet"
+import { Home } from "../pages/Home";
+import { Login } from "../pages/Login";
+import { EmployeeRegister } from "../pages/RecursosHumanos/EmployeeRegister";
+import { EmployeeVacation } from "../pages/RecursosHumanos/EmployeeVacation";
+import { EmployeeSheet } from "../pages/RecursosHumanos/EmployeeSheet";
+import { SheetEdit } from "../pages/RecursosHumanos/EmployeeSheet/SheetEdit";
 import { EmployeeList } from "../pages/RecursosHumanos/EmployeeList";
 
+
 export const AppRouter = () => {
-  const { user } = AppContext()
+  const { userData } = useContext(GlobalUseContext)
 
   const PrivateRoutes = ({ children }) => {
-    if (user) {
-      return <>
+    if (userData) {
+      return (<>
         <NavBar />
+        <Notification />
         {children}
-      </>
+      </>)
     } else {
-      return <Navigate to="/" />
+      return (<Navigate to="/" />)
     }
   }
 
   const PublicRoutes = ({ children }) => {
-    if (user) {
-      return <Navigate to="/home" />
+    if (userData) {
+      return (<Navigate to="/home" />)
     } else {
-      return children
+      return (children)
     }
   }
 
@@ -59,6 +63,11 @@ export const AppRouter = () => {
       <Route path="/rh/sheet" element={
         <PrivateRoutes>
           <EmployeeSheet />
+        </PrivateRoutes>
+      } />
+      <Route path="/rh/sheet/edit" element={
+        <PrivateRoutes>
+          <SheetEdit />
         </PrivateRoutes>
       } />
       <Route path="/rh/vacation" element={

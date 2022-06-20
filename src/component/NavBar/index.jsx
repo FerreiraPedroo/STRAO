@@ -1,6 +1,6 @@
 
-import { useState } from 'react'
-import { AppContext } from '../../provider/app'
+import { useState, useContext } from 'react'
+import { GlobalUseContext } from '../../provider/app'
 import { useNavigate } from "react-router-dom";
 
 import * as S from './styles'
@@ -19,7 +19,7 @@ const subCategoryLink = {
 }
 
 export const NavBar = () => {
-  const { user } = AppContext()
+  const { userData } = useContext(GlobalUseContext)
   const navigate = useNavigate();
 
   const [category, setCategory] = useState(categoryAndSubCategory)
@@ -47,7 +47,7 @@ export const NavBar = () => {
   return (
     <S.Container>
       <S.UserAvatar>
-        <S.UserAvatarImg img={user.avatar} />
+        <S.UserAvatarImg img={userData.avatar} />
       </S.UserAvatar>
       <S.NavContainer>
         {categorySelected ? (
