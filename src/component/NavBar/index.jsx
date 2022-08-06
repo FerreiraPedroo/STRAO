@@ -1,14 +1,33 @@
-
 import { useState, useContext } from 'react'
 import { GlobalUseContext } from '../../provider/app'
 import { useNavigate } from "react-router-dom";
 
 import * as S from './styles'
+import rhIcon from '../../assets/icons/department/rh.png'
 
-const categoryAndSubCategory = {
-  "Recursos Humanos": ["Cadastro funcionário", "Lista funcionários", "Ponto", "Férias"],
-  "Segurança do Trabalho": ["EPI", "CAT", "DDS"],
-  "Suprimentos": ["Compras", "Almoxarifado"],
+const imgLoad = {
+  rh: rhIcon
+}
+
+const categoriesList = [
+  "Recursos Humanos",
+  "Segurança Trabalho",
+  "Suprimentos"
+]
+
+const subCategoryList = {
+  "Recursos Humanos": {
+    imagem: imgLoad.rh,
+    subCategory: ["Cadastro funcionário", "Lista funcionários", "Ponto", "Férias"]
+  },
+  "Segurança Trabalho": {
+    imagem: imgLoad.rh,
+    subCategory: ["EPI", "CAT", "DDS"]
+  },
+  "Suprimentos": {
+    imagem: imgLoad.rh,
+    subCategory: ["Compras", "Almoxarifado"]
+  },
 }
 
 const subCategoryLink = {
@@ -22,7 +41,7 @@ export const NavBar = () => {
   const { userData } = useContext(GlobalUseContext)
   const navigate = useNavigate();
 
-  const [category, setCategory] = useState(categoryAndSubCategory)
+  const [categories, setCategories] = useState(categoriesList)
   const [categorySelected, setCategorySelected] = useState("")
   const [subCategorySelected, setSubCategorySelected] = useState("")
 
@@ -30,47 +49,22 @@ export const NavBar = () => {
     setCategorySelected(_category)
   }
 
-  const backCategory = () => {
-    setSubCategorySelected("")
-    setCategorySelected("")
-    navigate("/home")
-  }
-
-  const changePage = (_url, _subCategory) => {
-    if (_url) {
-      setSubCategorySelected(_subCategory)
-      navigate(_url)
-    }
-  }
-
-
   return (
     <S.Container>
       <S.UserAvatar>
         <S.UserAvatarImg img={userData.avatar} />
       </S.UserAvatar>
       <S.NavContainer>
-        {categorySelected ? (
-          <>
-            <S.BackArrowCategory onClick={() => backCategory()}>{"<-"}</S.BackArrowCategory>
-            <S.Category select={true}>{categorySelected}</S.Category>
-            <S.Arrow>{'>'}</S.Arrow>
-            {category[categorySelected].map(cat => (
-              <S.SubCategory key={cat} select={subCategorySelected === cat} onClick={() => changePage(subCategoryLink[cat], cat)}> {cat}</S.SubCategory>
-            ))}
-          </>
-        ) : (
-          <>
-            <S.BackArrowCategory noPointer={true} />
-            {
-              Object.entries(category).map(cat => (
-                <S.Category key={cat} select={subCategorySelected === cat} onClick={() => selectCategory(cat[0])}>{cat[0]}</S.Category>
-              ))
-            }
-          </>
-        )}
-
+        {
+          categories.map(category => (
+            <S.BtnDepartment key={category} select={subCategorySelected === category} >
+              <S.ImgDepartment src={subCategoryList[category].imagem} />
+              <S.TextDepartment>{category}</S.TextDepartment>
+            </S.BtnDepartment>
+          ))
+        }
       </S.NavContainer>
+
     </S.Container >
   )
 }
