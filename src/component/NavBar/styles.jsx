@@ -18,23 +18,35 @@ export const Container = styled.div`
   padding: 8px 16px;
   background-color: ${props.navMenuContainerBackColor};
   `
+export const StraoTitle = styled.p`
+  font-size: 28px;
+  font-weight: bolder;
+  margin-bottom: 6px;
+  `;
 
 export const UserAvatar = styled.div`
-  min-width: 80px;
-  min-height: 96px;
-  width: 80px;
+  width: 100%;
+  min-height: 128px;
   height: 96px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  border: 1px solid silver;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  margin-bottom: 14px;
   `
 export const UserAvatarImg = styled.img.attrs(props => ({
   src: './home-bg2.png'
 }))`
-  width: 100%;
-  height: 100%;
+  width: 80px;
+  height: 96px;
   border-radius: 8px;
+  border: 1px solid silver;
+  margin-bottom: 4px;
   `
+export const UserName = styled.p`
+  text-align: center;
+`;
 
 export const NavContainer = styled.div`
   width: 100%;
@@ -71,21 +83,4 @@ height: 56px;
 export const TextDepartment = styled.p`
   font-size: ${props.navMenuButtonTextSize};
 `;
-
-export const Category2 = styled.div`
-  min-width: 92px;
-  height: 80px;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  user-select: none;
-  margin-right: 8px;
-  padding: 4px 12px;
-  word-wrap: break-word;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
-  background-color: ${({ select }) => select && '#DCDCDC;'};
-  border: ${({ select }) => select ? '1px solid #696969' : '1px solid #A9A9A9'};
-`
 

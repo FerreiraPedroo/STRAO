@@ -51,8 +51,10 @@ export const NavBar = () => {
 
   return (
     <S.Container>
+      <S.StraoTitle>STRAO</S.StraoTitle>
       <S.UserAvatar>
         <S.UserAvatarImg img={userData.avatar} />
+        <S.UserName>Pedro</S.UserName>
       </S.UserAvatar>
       <S.NavContainer>
         {
