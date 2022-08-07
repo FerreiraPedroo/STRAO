@@ -8,9 +8,18 @@ export const DriverLicense = ({ formik }) => {
   const handleOpen = () => {
 
   }
+
+  const handleNotLicence = (e) => {
+console.log(e)
+  }
+
   return (
     <S.Container onClick={() => handleOpen}>
-      <S.Title open={true}>HABILITAÇÃO</S.Title>
+      <S.Title open={true}>
+        <S.TitleBox>
+          HABILITAÇÃO | <S.NotLicenceInput type='checkbox' onClick={(e)=>handleNotLicence(e)} /><S.NotLicence>Não habilitado</S.NotLicence>
+        </S.TitleBox>
+      </S.Title>
       <S.DataContainer>
         <S.CNHRegisterBox>
           <S.CNHRegisterText>REGISTRO CNH</S.CNHRegisterText>

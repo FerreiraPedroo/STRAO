@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 const yearData = ["2022", "2021", "2020"];
 
-export const EmployeeSheet = () => {
+export const RhEmployeeSheet = () => {
   const navigate = useNavigate();
   const { userData } = useContext(GlobalUseContext);
   const [searchFilter, setSearchFilter] = useState({ month: "janeiro", year: "2022", contract: userData.contract[0].name });
@@ -24,25 +24,43 @@ export const EmployeeSheet = () => {
         status: "Enviado",
         month: "Janeiro",
         year: "2022",
-        sheet: [
-          ["10:40", "12:30", "13:40", "14:50"],
-          ["10:40", "12:30", "13:40", "14:50"],
-          ["10:40", "12:30", "12:30", "14:50"],
-          ["10:40", "12:30"],
-          ["10:40", "12:30"],
-          ["sabado"],
-          ["domingo"],
-          ["falta"],
-          ["10:40", "12:30", "13:40", "14:50"],
-          ["feriado"],
-          ["feriado"],
-          ["10:40", "12:30", "13:40", "14:50"],
-          ["sabado"],
-          ["domingo"],
-        ],
         sheetFile: [],
         documentFile: [],
       },
+      {
+        employee_id: 12344,
+        employee_fullName: "Pedro Henrique de Assis Ferreira",
+        contract_id: "12345648",
+        contract_name: "Ministério da Econômia",
+        status: "Enviado",
+        month: "Janeiro",
+        year: "2022",
+        sheetFile: [],
+        documentFile: [],
+      },
+      {
+        employee_id: 12344,
+        employee_fullName: "Pedro Henrique de Assis Ferreira",
+        contract_id: "12345648",
+        contract_name: "Ministério da Econômia",
+        status: "Pendente",
+        month: "Janeiro",
+        year: "2022",
+        sheetFile: [],
+        documentFile: [],
+      },
+      {
+        employee_id: 12344,
+        employee_fullName: "Pedro Henrique de Assis Ferreira",
+        contract_id: "12345648",
+        contract_name: "Ministério da Econômia",
+        status: "Pendente",
+        month: "Janeiro",
+        year: "2022",
+        sheetFile: [],
+        documentFile: [],
+      },
+ 
     ]
   );
 
@@ -98,17 +116,27 @@ export const EmployeeSheet = () => {
         </S.InputBox>
       </S.Box>
 
+      <S.SheetHead>
+        <S.SheetHeadText>Registro</S.SheetHeadText>
+        <S.SheetHeadText>Nome</S.SheetHeadText>
+        <S.SheetHeadText>Ações</S.SheetHeadText>
+        <S.SheetHeadText>Status</S.SheetHeadText>
+      </S.SheetHead>
+
       {searchEmployeeSheet.length !== 0 ?
         searchEmployeeSheet.map((employee) => (
           <S.FindEmployeeList key={employee.employee_id}>
-            <S.EmployeePhoto src={employee.photo} />
+            <S.EmployeeRegister>{employee.employee_id}</S.EmployeeRegister>
             <S.EmployeeName>{employee.employee_fullName}</S.EmployeeName>
-
-            {employee.status === "Pendente" && <S.EmployeeButton>Adicionar</S.EmployeeButton>}
-            {employee.status === "Enviado" && <S.EmployeeButton onClick={() => navigate("/rh/sheet/edit", { state: "sheetId"})}> Editar</S.EmployeeButton>}
-            {employee.documentFile.length !== 0 && <S.EmployeeButton>documentos</S.EmployeeButton>}
-            {employee.sheetFile.length !== 0 && <S.EmployeeButton>escaneado</S.EmployeeButton>}
-
+            <S.EmployeeAction>
+              {employee.status === "Pendente" && <S.EmployeeButton>Adicionar</S.EmployeeButton>}
+              {employee.status === "Enviado" && <>
+                <S.EmployeeButton>Alterar</S.EmployeeButton>
+                <S.EmployeeButton>Visualizar</S.EmployeeButton>
+              </>
+              }
+              {/* {employee.sheetFile.length == 0 && <S.EmployeeButton>escaneado</S.EmployeeButton>} */}
+            </S.EmployeeAction>
             <S.EmployeeStatus status={employee.status}>{employee.status}</S.EmployeeStatus>
           </S.FindEmployeeList>
         ))

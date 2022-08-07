@@ -8,10 +8,10 @@ export const Title = styled.summary`
   height: 32px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 1.15rem;
   border: 1px solid #696969;
   padding-left: 8px;
-  padding-top: 5px;
   border-radius: 2px 2px 0 0;
   cursor: pointer;
 
@@ -20,12 +20,25 @@ export const Title = styled.summary`
     font-weight: bolder;
     width: 32px;
     height: 28px;
-    margin-top: -4px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 `
+
+export const TitleBox = styled.div`
+display: flex;
+align-items: center;
+`;
+
+export const NotLicenceInput = styled.input`
+ margin-left: 16px;
+ outline: 0;
+`
+export const NotLicence = styled.p`
+  padding: 6px;
+`
+
 export const DataContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -86,3 +99,5 @@ export const CategoryOther = styled.input`
   outline: 0;
 
 `
+
+

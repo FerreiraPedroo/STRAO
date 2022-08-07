@@ -2,6 +2,11 @@ import styled from 'styled-components'
 
 const props = {
   'cardCategoryNameTextSize': '16px',
+  'navMenuButtonSizeWidth': '100px',
+  'navMenuButtonSizeHeight': '96px',
+  'navMenuButtonBackColor': '#C0C0C0',
+
+  'navMenuContainerBackColor': '#D3D3D3',
 }
 
 export const Container = styled.div`
@@ -14,9 +19,9 @@ export const Container = styled.div`
   gap: 16px;
 `;
 export const DepartmentCategoryCard = styled.div`
-  min-width: 256px;
-  width: 256px;
-  height: 192px;
+  min-width: 160px;
+  width: 160px;
+  height: 128px;
   border-radius: 4px;
   box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
   background-color: #F5F5F5;

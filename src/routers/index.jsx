@@ -6,83 +6,82 @@ import { Notification } from "../component/Notification";
 
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
-import { EmployeeRegister } from "../pages/RecursosHumanos/EmployeeRegister";
-import { EmployeeVacation } from "../pages/RecursosHumanos/EmployeeVacation";
-import { EmployeeSheet } from "../pages/RecursosHumanos/EmployeeSheet";
-import { SheetEdit } from "../pages/RecursosHumanos/EmployeeSheet/SheetEdit";
-import { EmployeeList } from "../pages/RecursosHumanos/EmployeeList";
+
+import { RhHome } from "../pages/RecursosHumanos";
+import { RhEmployeeList } from "../pages/RecursosHumanos/EmployeeList";
+import { RhEmployeeSheet } from "../pages/RecursosHumanos/EmployeeSheet";
+import { RhEmployeeRegister } from "../pages/RecursosHumanos/EmployeeRegister";
+import { RhEmployeeVacation } from "../pages/RecursosHumanos/EmployeeVacation";
 
 
 export const AppRouter = () => {
-  const { userData } = useContext(GlobalUseContext)
+  const { userData } = useContext(GlobalUseContext);
 
   const PrivateRoutes = ({ children }) => {
     if (userData) {
-      return (<>
-        <NavBar />
-        <Notification />
-        {children}
-      </>)
+      return (
+        children
+      )
     } else {
-      return (<Navigate to="/" />)
+      return (<Navigate to="/" />);
     }
   }
 
   const PublicRoutes = ({ children }) => {
     if (userData) {
-      return (<Navigate to="/home" />)
+      return (<Navigate to="/home" />);
     } else {
-      return (children)
+      return (children);
     }
   }
 
   return (
-    <Routes>
-      <Route path="/home" element={
-        <PrivateRoutes>
-          <Home />
-        </PrivateRoutes>
-      } />
-      <Route path="/" element={
-        <PublicRoutes>
-          <Login />
-        </PublicRoutes>
-      } />
+    <>
+      {userData &&
+        (<NavBar />)
+      }
 
-      {/* RH */}
-      <Route path="/rh/register/employee" element={
-        <PrivateRoutes>
-          <EmployeeRegister />
-        </PrivateRoutes>
-      } />
-      <Route path="/rh/list/employee" element={
-        <PrivateRoutes>
-          <EmployeeList />
-        </PrivateRoutes>
-      } />
-      <Route path="/rh/sheet" element={
-        <PrivateRoutes>
-          <EmployeeSheet />
-        </PrivateRoutes>
-      } />
-      <Route path="/rh/sheet/edit" element={
-        <PrivateRoutes>
-          <SheetEdit />
-        </PrivateRoutes>
-      } />
-      <Route path="/rh/vacation" element={
-        <PrivateRoutes>
-          <EmployeeVacation />
-        </PrivateRoutes>
-      } />
+      <Routes>
+        <Route path="/" element={
+          <PublicRoutes>
+            <Login />
+          </PublicRoutes>
+        } />
+        <Route path="/home" element={
+          <PrivateRoutes>
+            <Home />
+          </PrivateRoutes>
+        } />
 
+        {/* RH */}
+        <Route path="/rh" element={
+          <PrivateRoutes>
+            <RhHome />
+          </PrivateRoutes>
+        } />
+        <Route path="/rh/employee/register" element={
+          <PrivateRoutes>
+            <RhEmployeeRegister />
+          </PrivateRoutes>
+        } />
+        <Route path="/rh/employee/list" element={
+          <PrivateRoutes>
+            <RhEmployeeList />
+          </PrivateRoutes>
+        } />
+        <Route path="/rh/sheet" element={
+          <PrivateRoutes>
+            <RhEmployeeSheet />
+          </PrivateRoutes>
+        } />
+        <Route path="/rh/vacation" element={
+          <PrivateRoutes>
+            <RhEmployeeVacation />
+          </PrivateRoutes>
+        } />
 
-
-
-
-
-
-    </Routes>
+      </Routes>
+    </>
   )
 
 } 

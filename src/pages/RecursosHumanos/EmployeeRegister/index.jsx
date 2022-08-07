@@ -11,7 +11,7 @@ import { Address } from "./Address";
 import * as S from "./styles";
 
 
-export const EmployeeRegister = () => {
+export const RhEmployeeRegister = () => {
   const { userData } = useContext(GlobalUseContext);
   const [contractSelected, setContractSelected] = useState();
 
@@ -174,8 +174,8 @@ export const EmployeeRegister = () => {
       <S.InformationContainer>
         <DriverLicense formik={formik} />
         {/* <Occupation formik={formik} /> */}
-        <Uniform formik={formik} />
-        <Address formik={formik} />
+        {/* <Uniform formik={formik} /> */}
+        {/* <Address formik={formik} /> */}
       </S.InformationContainer>
 
       <S.SubmitBox>

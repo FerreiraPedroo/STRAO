@@ -3,7 +3,7 @@ import * as S from "./styles"
 
 
 
-export const EmployeeVacation = () => {
+export const RhEmployeeVacation = () => {
 
 
 

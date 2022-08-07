@@ -14,7 +14,7 @@ export const Title = styled.div`
   height: 60px;
   display: flex;
   align-items: center;
-  text-align: center;
+  justify-content: center;
   font-family: Verdana;
   font-weight: 600;
   font-size: 2rem;
@@ -23,7 +23,7 @@ export const Title = styled.div`
 export const Box = styled.div`
   width: 100%;
   display: flex;
-  align-items: end;
+  justify-content: center;
   flex-wrap: wrap;
   padding-bottom: 40px;
   gap: 16px;
@@ -41,12 +41,10 @@ export const FindSelect = styled.select`
   border: 1px solid #C0C0C0;
   outline: 0;
 `;
-
 export const FindBoxFind = styled.div`
   display: flex;
 `;
 export const FindOption = styled.option``;
-
 export const FindIcon = styled.input`
   width: 32px;
   height: 32px;
@@ -65,9 +63,6 @@ export const FindIcon = styled.input`
       `
   }
 `;
-
-
-
 export const FindEmployeeSelect = styled.select`
   width: 100%;
   height: 32px;
@@ -76,27 +71,84 @@ export const FindEmployeeSelect = styled.select`
   outline: 0;
 `;
 export const FindEmployeeOption = styled.option``;
-export const FindEmployeeList = styled.div`
-  width: 100%; 
+
+
+
+export const SheetHead = styled.div`
+  width: 100%;
+  height: 32px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 8px;
-  &:hover{
-    cursor: pointer;
-  }
+  padding: 4px;
   gap: 8px;
-  border: 1px solid #C0C0C0;
+  margin-bottom: 12px;
 `;
-export const EmployeePhoto = styled.img`
-  min-width: 40px;
-  height: 40px;
-  margin-right: 8px;
-  border-right: 1px solid #c0c0c0;
+export const SheetHeadText = styled.div`
+  width: 45%;
+  text-align: center;
+  &:nth-child(1){
+    width: 15%;
+    min-width: 96px; 
+  }
+  &:nth-child(2){
+    text-align: start;
+    padding-left: 12px;
+    min-width: 128px;
+  }
+  &:nth-child(3){
+    width: 30%;
+    text-align: start;
+    min-width: 128px; 
+  }
+  &:nth-child(4){
+    width: 10%;
+    min-width: 96px;
+  }
+`;
+
+
+export const FindEmployeeList = styled.div`
+  width: 100%;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+  gap: 8px;
+  border: 1px solid #c0c0c0;
+`;
+export const EmployeeRegister = styled.div`
+  width: 15%;
+  min-width: 96px; 
+  display:flex;
+  justify-content: center;
+  place-items: center;
 `;
 export const EmployeeName = styled.p`
-  width: 100%;
-  font-size: 1.10rem;
-  margin-right: 8px;
+  width: 45%;
+`;
+export const EmployeeAction = styled.div`
+  min-width: 128px; 
+  width: 30%;
+  display: flex;
+  gap: 6px;
+`;
+export const EmployeeStatus = styled.p`
+  min-width: 96px;  
+  width: 10%;
+  border: 1px solid #c0c0c0;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.30rem;
+
+  ${({ status }) =>
+    status === "Enviado" && "color: #33f; background-color: #ccf; border: 1px solid #66f;"
+  }
+  ${({ status }) =>
+    status === "Pendente" && "color: tomato; background-color: #fcc; border: 1px solid #f99;"
+  }
+
 `;
 
 export const EmployeeButton = styled.button`
@@ -117,18 +169,7 @@ export const EmployeeButton = styled.button`
   border: 1px solid #A9A9A9;
   box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
 `;
-export const EmployeeStatus = styled.p`
-  min-width: 128px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.30rem;
-  margin-right: 8px;
 
-  ${({status}) =>
-    status === "Enviado" && "color: #33f; background-color: #ccf; border: 1px solid #66f;"
-  }
-  ${({status}) =>
-    status === "Pendente" && "color: tomato; background-color: #fcc; border: 1px solid #f99;"
-  }
 
-`;
+
+

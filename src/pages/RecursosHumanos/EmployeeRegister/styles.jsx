@@ -51,9 +51,9 @@ export const NameInput = styled.input`
   border: 1px solid #696969;
   outline: 0;
 
-  &:disabled {
-    background-color: #A9A9A9;
-  }
+  // &:disabled {
+  //   background-color: #A9A9A9;
+  // }
 `;
 export const BirthDateInput = styled.input`
   min-width: 220px;
@@ -62,9 +62,9 @@ export const BirthDateInput = styled.input`
   border: 1px solid #696969;
   outline: 0;
 
-  &:disabled {
-    background-color: #A9A9A9;
-  }
+  // &:disabled {
+  //   background-color: #A9A9A9;
+  // }
 `;
 export const OccupationRegisterBox = styled.div`
 `;
@@ -80,9 +80,9 @@ export const OccupationRegisterInput = styled.input`
   border: 1px solid #696969;
   outline: 0;
 
-  &:disabled {
-    background-color: #A9A9A9;
-  }
+  // &:disabled {
+  //   background-color: #A9A9A9;
+  // }
 `;
 export const OccupationRegisterSelect = styled.select`
   min-width: 220px;
@@ -92,9 +92,9 @@ export const OccupationRegisterSelect = styled.select`
   border: 1px solid #696969;
   outline: 0;
 
-  &:disabled {
-    background-color: #A9A9A9;
-  }
+  // &:disabled {
+  //   background-color: #A9A9A9;
+  // }
 `;
 export const OccupationRegisterOption = styled.option``;
 export const InformationContainer = styled.div`
@@ -107,7 +107,6 @@ export const InformationContainer = styled.div`
 export const SubmitBox = styled.div`
   width: 100%;
   min-height: 80px;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

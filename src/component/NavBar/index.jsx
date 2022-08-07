@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import * as S from './styles'
 import rhIcon from '../../assets/icons/department/rh.png'
+import { useEffect } from 'react';
 
 const imgLoad = {
   rh: rhIcon
@@ -15,39 +16,36 @@ const categoriesList = [
   "Suprimentos"
 ]
 
-const subCategoryList = {
+const categoryDataList = {
   "Recursos Humanos": {
     imagem: imgLoad.rh,
+    link: "/rh",
     subCategory: ["Cadastro funcionário", "Lista funcionários", "Ponto", "Férias"]
   },
   "Segurança Trabalho": {
     imagem: imgLoad.rh,
+    link: "/safety",
     subCategory: ["EPI", "CAT", "DDS"]
   },
   "Suprimentos": {
     imagem: imgLoad.rh,
+    link: "/supply",
     subCategory: ["Compras", "Almoxarifado"]
   },
-}
-
-const subCategoryLink = {
-  "Cadastro funcionário": "/rh/register/employee",
-  "Lista funcionários": "/rh/list/employee",
-  "Férias": "/rh/vacation",
-  "Ponto": "/rh/sheet",
 }
 
 export const NavBar = () => {
   const { userData } = useContext(GlobalUseContext)
   const navigate = useNavigate();
 
-  const [categories, setCategories] = useState(categoriesList)
+  const [categories, setCategories] = useState([])
   const [categorySelected, setCategorySelected] = useState("")
-  const [subCategorySelected, setSubCategorySelected] = useState("")
 
-  const selectCategory = (_category) => {
-    setCategorySelected(_category)
-  }
+  useEffect(() => {
+    setCategories(categoriesList)
+
+  }, [])
+
 
   return (
     <S.Container>
@@ -59,8 +57,8 @@ export const NavBar = () => {
       <S.NavContainer>
         {
           categories.map(category => (
-            <S.BtnDepartment key={category} select={subCategorySelected === category} >
-              <S.ImgDepartment src={subCategoryList[category].imagem} />
+            <S.BtnDepartment key={category} select={''} onClick={() => navigate(categoryDataList[category].link)}>
+              <S.ImgDepartment src={categoryDataList[category].imagem} />
               <S.TextDepartment>{category}</S.TextDepartment>
             </S.BtnDepartment>
           ))

@@ -6,7 +6,7 @@ import findEmployee from "../../../assets/img/find-employee.svg";
 
 import * as S from "./styles";
 
-export const EmployeeList = () => {
+export const RhEmployeeList = () => {
   const { userData } = useContext(GlobalUseContext);
 
   const [searchFilter, setSearchFilter] = useState({ findBy: "fullName", contract: userData.contract[0].name });
