@@ -11,10 +11,10 @@ export const GlobalProvider = ({ children }) => {
 
   const userLogin = async (_user, _password) => {
     const loginReturnData = await loginService(_user, _password);
-
     if (loginReturnData.codStatus === 200) {
       localStorage.setItem("auth", JSON.stringify(loginReturnData));
       setUserData({ token: loginReturnData.token, user: loginReturnData.user, accessLevel: loginReturnData.accessLevel, });
+      // setConfigData({rh: loginReturnData.rh})
       return true
     }
     return false

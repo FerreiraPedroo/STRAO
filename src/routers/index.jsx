@@ -13,6 +13,10 @@ import { RhEmployeeSheet } from "../pages/RecursosHumanos/EmployeeSheet";
 import { RhEmployeeRegister } from "../pages/RecursosHumanos/EmployeeRegister";
 import { RhEmployeeVacation } from "../pages/RecursosHumanos/EmployeeVacation";
 
+import { Admin } from "../pages/Admin";
+import { AdminUserRegister } from "../pages/Admin/UserRegister";
+import { AdminUserList } from "../pages/Admin/UserList";
+
 
 export const AppRouter = () => {
   const { userData } = useContext(GlobalUseContext);
@@ -50,6 +54,23 @@ export const AppRouter = () => {
         <Route path="/home" element={
           <PrivateRoutes>
             <Home />
+          </PrivateRoutes>
+        } />
+
+        {/* ADMINISTRAÇÃO */}
+        <Route path="/admin" element={
+          <PrivateRoutes>
+            <Admin />
+          </PrivateRoutes>
+        } />
+        <Route path="/admin/user/register" element={
+          <PrivateRoutes>
+            <AdminUserRegister />
+          </PrivateRoutes>
+        } />
+        <Route path="/admin/user/list" element={
+          <PrivateRoutes>
+            <AdminUserList />
           </PrivateRoutes>
         } />
 

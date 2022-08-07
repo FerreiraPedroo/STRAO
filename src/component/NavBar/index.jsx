@@ -13,7 +13,8 @@ const imgLoad = {
 const categoriesList = [
   "Recursos Humanos",
   "Segurança Trabalho",
-  "Suprimentos"
+  "Suprimentos",
+  "Admin"
 ]
 
 const categoryDataList = {
@@ -31,6 +32,11 @@ const categoryDataList = {
     imagem: imgLoad.rh,
     link: "/supply",
     subCategory: ["Compras", "Almoxarifado"]
+  },
+  "Admin": {
+    imagem: imgLoad.rh,
+    link: "/admin",
+    subCategory: ["Registrar usuário", "Modificar usuário"]
   },
 }
 

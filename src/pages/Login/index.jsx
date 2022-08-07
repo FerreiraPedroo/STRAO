@@ -1,24 +1,23 @@
 import React, { useState, useContext } from "react";
 import { GlobalUseContext } from "../../provider/app";
 
-import * as S from "./styles"
-import homebg2 from "./img/home-bg2.png"
+import * as S from "./styles";
+import homebg2 from "./img/home-bg2.png";
 
 
 export const Login = () => {
-  const { userLogin } = useContext(GlobalUseContext)
-  const [user, setUser] = useState('')
-  const [password, setPassword] = useState('')
+  const { userLogin } = useContext(GlobalUseContext);
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleInputUser = (e) => {
-    setUser(e.target.value)
+    setUser(e.target.value);
   }
   const handleInputPassword = (e) => {
-    setPassword(e.target.value)
+    setPassword(e.target.value);
   }
   const handleLogin = async () => {
-    const data = await userLogin(user, password)
-    console.log(data)
+    const data = await userLogin(user, password);
   }
 
   return (
