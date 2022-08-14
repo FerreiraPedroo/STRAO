@@ -17,7 +17,7 @@ console.log(e)
     <S.Container onClick={() => handleOpen}>
       <S.Title open={true}>
         <S.TitleBox>
-          HABILITAÇÃO | <S.NotLicenceInput type='checkbox' onClick={(e)=>handleNotLicence(e)} /><S.NotLicence>Não habilitado</S.NotLicence>
+          HABILITAÇÃO | <S.NotLicenceInput id="driverLicense.noLicense" type='checkbox' onClick={(e)=>handleNotLicence(e)} /><S.NotLicence>Não habilitado</S.NotLicence>
         </S.TitleBox>
       </S.Title>
       <S.DataContainer>
