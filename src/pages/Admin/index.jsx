@@ -8,7 +8,6 @@ const adminCardList = [
   { name: 'Lista de usuários', img: '', link: '/admin/user/list' },
 ]
 
-
 export const Admin = () => {
   const navigate = useNavigate();
 
@@ -19,7 +18,6 @@ export const Admin = () => {
     setCards(adminCardList);
     setCategory('');
   }, []);
-
 
   return (
     <S.Container>
@@ -35,6 +33,5 @@ export const Admin = () => {
         ))
       }
     </S.Container >
-
   )
 }
