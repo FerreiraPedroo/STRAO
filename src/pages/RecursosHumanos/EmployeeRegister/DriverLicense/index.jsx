@@ -17,7 +17,7 @@ console.log(e)
     <S.Container onClick={() => handleOpen}>
       <S.Title open={true}>
         <S.TitleBox>
-          HABILITAÇÃO | <S.NotLicenceInput id="driverLicense.noLicense" type='checkbox' onClick={(e)=>handleNotLicence(e)} /><S.NotLicence>Não habilitado</S.NotLicence>
+          HABILITAÇÃO | <S.NotLicenceInput id="driverLicense.withoutLicense" type='checkbox' value={formik.values.driverLicense.withoutLicense} onChange={formik.handleChange} /><S.NotLicence>Não habilitado</S.NotLicence>
         </S.TitleBox>
       </S.Title>
       <S.DataContainer>
@@ -35,7 +35,7 @@ console.log(e)
         </S.CNHRegisterBox>
         <S.CNHRegisterBox>
           <S.CNHRegisterText>FOTO CNH</S.CNHRegisterText>
-          <S.CNHRegisterPhoto type="driverLicense.file" name="arquivo" id="photoDriverLicense" value={formik.values.driverLicense.photoDriverLicense} onChange={formik.handleChange} />
+          <S.CNHRegisterPhoto type="driverLicense.photoDriverLicense" name="driverLicense.photoDriverLicense" id="driverLicense.photoDriverLicense" value={formik.values.driverLicense.photoDriverLicense} onChange={formik.handleChange} />
         </S.CNHRegisterBox>
         <S.CategoryBox>
           <S.CategoryText>CATEGORIA</S.CategoryText>

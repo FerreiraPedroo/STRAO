@@ -11,8 +11,9 @@ export const RhEmployeeList = () => {
 
   const [searchFilter, setSearchFilter] = useState({
     findBy: "fullName",
-    contract: userData.contract.length ? userData.contract[0].name : "",
+    contract: userData.contracts.length ? userData.contracts[0].name : "",
   });
+  console.log(searchFilter);
   const [employeeFind, setEmployeeFind] = useState("");
   const [findStatus, setFindStatus] = useState(false);
   const [findEmployeeResponse, setFindEmployeeResponse] = useState([]);
@@ -48,7 +49,7 @@ export const RhEmployeeList = () => {
             onChange={(e) => handleFilter("contract", e.target.value)}
           >
             {userData.hasOwnProperty("contract") &&
-              userData.contract.map((contract) => (
+              userData.contracts.map((contract) => (
                 <S.FindEmployeeOption key={contract.name} value={contract.name}>
                   {contract.name}
                 </S.FindEmployeeOption>
