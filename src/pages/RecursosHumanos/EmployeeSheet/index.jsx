@@ -13,7 +13,7 @@ const yearData = ["2022", "2021", "2020"];
 export const RhEmployeeSheet = () => {
   const navigate = useNavigate();
   const { userData } = useContext(GlobalUseContext);
-  const [searchFilter, setSearchFilter] = useState({ month: "janeiro", year: "2022", contract: userData.contract[0].name });
+  const [searchFilter, setSearchFilter] = useState({ month: "janeiro", year: "2022", contract: userData.contracts[0].name });
   const [searchEmployeeSheet, setSearchEmployeeSheet] = useState(
     [
       {
