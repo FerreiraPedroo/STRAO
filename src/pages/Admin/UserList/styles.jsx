@@ -10,12 +10,12 @@ const props = {
 
 export const Container = styled.div`
   width: 100%;
-  padding: 32px;
   display: flex;
-  justify-content: start;
-  align-content: start;
   flex-wrap: wrap;
-  gap: 16px;
+  justify-content: center;
+  align-content: start;
+  padding: 16px 32px;
+  gap: 4px;
 `;
 
 export const PageTitle = styled.h1`
