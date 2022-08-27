@@ -1,13 +1,21 @@
 import styled from "styled-components";
 
+const props = {
+  textFontFamily: "Arial",
+  titleTextSize: "40px",
+  titleTextColor: "#999",
+  errorTextColor: "#f66",
+  textSize: "",
+};
+
 export const Container = styled.div`
-  max-width: 1920px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 32px;
-  padding: 0 74px;
+width: 100%;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-content: start;
+padding: 16px 32px;
+gap: 4px;
 `;
 export const PersonalInformationContainer = styled.div`
   width: 100%;
@@ -15,20 +23,27 @@ export const PersonalInformationContainer = styled.div`
   display: flex;
   margin-bottom: 16px;
 `;
-export const Title = styled.div`
+export const PageTitle = styled.h1`
+  font-family: ${props.textFontFamily};
+  font-size: ${props.titleTextSize};
+  color: ${props.titleTextColor};
+
   width: 100%;
-  height: 60px;
   display: flex;
-  align-items: center;
-  text-align: center;
-  font-family: Verdana;
-  font-weight: 600;
-  font-size: 2rem;
-  margin-bottom: 12px;
+  justify-content: center;
+  padding: 8px;
+  margin-bottom: 16px;
 `;
 export const PersonalInformation = styled.div`
   width: 100%;
   margin-bottom: 12px;  
+`;
+export const ErrorMessage = styled.p`
+  width: 100%;
+  height: 20px;
+  color: red;
+  text-align: end;
+  padding: 0 8px;
 `;
 export const PhotoBox = styled.div`
   min-width: 120px;
@@ -117,11 +132,23 @@ export const SubmitButton = styled.input`
   font-size: 20px;
   border-radius: 6px;
   background-color: #DCDCDC;
-  border: 1px solid black;
+  border: 1px solid #555;
   cursor: pointer;
 
   &:active not(:disabled) {
     border: 1px solid silver;
     transform: scale(0.98);
+  }
+
+  &:hover {
+    cursor: pointer;
+    border-color: #000;
+    background-color: #bbb;
+  }
+  
+  &:active{
+    color: #555;
+    border-color: #000;
+    background-color: #999;
   }
 `;
