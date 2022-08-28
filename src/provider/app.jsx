@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 import { loginService } from "../services/login/index";
@@ -13,14 +13,15 @@ export const GlobalProvider = ({ children }) => {
     const loginReturnData = await loginService(_user, _password);
 
     if (loginReturnData.codStatus === 200) {
-      localStorage.setItem("token", JSON.stringify(loginReturnData));
+      localStorage.setItem("strao-token", loginReturnData.token);
+      localStorage.setItem("strao-data", JSON.stringify(loginReturnData));
       setUserData({
         token: loginReturnData.token,
         userName: loginReturnData.userName,
         data: loginReturnData.userData,
       });
     }
-  
+
     return loginReturnData;
   };
 
@@ -29,27 +30,12 @@ export const GlobalProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // const storedData = JSON.parse(localStorage.getItem("auth")) | [];
-    // storedData.contracts = [
-    //   {
-    //     name: "Ministério da Educação",
-    //     centerCosts: ["01-00001", "01-00002", "01-00003", "01-00004"],
-    //     jobs: ["Professor", "Merendeira", "Diretora Adjunta"],
-    //   },
-    //   {
-    //     name: "Ministério da Econômia",
-    //     centerCosts: ["02-00001", "02-00002"],
-    //     jobs: ["Gerente", "Diretor", "CEO"],
-    //   },
-    //   {
-    //     name: "Ministério da Defesa",
-    //     centerCosts: ["03-00011", "03-00012"],
-    //     jobs: ["Auxiliar", "Assistente"],
-    //   },
-    // ];
-    // if (storedData) {
-    //   setUserData(storedData);
-    // }
+    const storedToken = localStorage.getItem("strao-token");
+    const storedData = JSON.parse(localStorage.getItem("strao-data"));
+
+    if (storedToken && storedData) {
+      setUserData(storedData);
+    }
   }, []);
 
   return (

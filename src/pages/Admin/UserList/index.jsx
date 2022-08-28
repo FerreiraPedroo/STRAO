@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api.js";
+import { Notification } from "../../../component/Notification";
 
 import * as S from "./styles.jsx";
 
 export const AdminUserList = () => {
   const navigate = useNavigate();
+  const [notificationModal, setNotificationModal] = useState({});
   const [userList, setUserList] = useState();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getUserList = async () => {
       try {
-        const { data } = await api.get("admin/user/list");
+        const { data } = await api.get("admin/user/list", {
+          headers: { "x-access-token": localStorage.getItem("strao-token") },
+        });
         setUserList(data);
         setLoading(false);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+        setNotificationModal(error.response.data);
+        // navigate(-1);
+      }
     };
     getUserList();
   }, []);
@@ -23,8 +31,11 @@ export const AdminUserList = () => {
   return (
     <S.Container>
       <S.PageTitle>LISTA DE USUÁRIOS</S.PageTitle>
+      {notificationModal.codStatus && (
+        <Notification type="full" msg={notificationModal.message} />
+      )}
       {loading ? (
-        <>Carregando...</>
+        <>{!notificationModal.codStatus && <>Carregando...</>}</>
       ) : (
         <S.ListUserBox>
           <S.ListUserHeader>

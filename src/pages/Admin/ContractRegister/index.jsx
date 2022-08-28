@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { api } from "../../../services/api";
 import { Notification } from "../../../component/Notification";
 
-import * as S from "./styles.jsx";
+import * as S from './styles.jsx';
 
-export const AdminUserRegister = () => {
+export const AdminContractRegister = () => {
   const navigate = useNavigate();
   const [notificationModal, setNotificationModal] = useState({});
   const [submitReturnErrorMsg, setSubmitReturnErrorMsg] = useState({});
@@ -14,10 +14,10 @@ export const AdminUserRegister = () => {
   const formik = useFormik({
     initialValues: {
       name: "",
-      birthDate: "",
-      email: "",
-      password: "",
-      passwordRepeat: "",
+      cod: "",
+      startDate: "",
+      endDate: "",
+      contractValue: "",
     },
     validate: (values) => {
       const errors = {};
@@ -27,40 +27,20 @@ export const AdminUserRegister = () => {
       } else if (values.name.trim().length < 4) {
         errors.name = "O nome deve ter no minimo 4 letras.";
       }
-
-      if (!values.birthDate) {
-        errors.birthDate = "A data de nascimento é obrigatória.";
+      if (!values.startDate) {
+        errors.startDate = "A data de inicio é obrigatória.";
       }
-
-      if (!values.email) {
-        errors.email = "O e-mail é obrigatório.";
-      } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-      ) {
-        errors.email = "E-mail inválido.";
+      if (!values.endDate) {
+        errors.endDate = "A data de término é obrigatória.";
       }
-
-      if (!values.password) {
-        errors.password = "A senha é obrigatória.";
-      } else if (values.password.length < 8 || values.password.length > 20) {
-        errors.password = "A senha deve ter entre 8 a 20 caracteres.";
+      if (!values.contractValue) {
+        errors.contractValue = "O valor é obrigatória.";
       }
-
-      if (!values.passwordRepeat) {
-        errors.passwordRepeat = "A senha é obrigatória.";
-      } else if (values.passwordRepeat !== values.password) {
-        errors.passwordRepeat = "A senha não é igual.";
-      }
-
       return errors;
     },
     onSubmit: async (values) => {
       try {
-        const { data } = await api.post(
-          "admin/user/new",
-          { ...values },
-          { headers: { "x-access-token": localStorage.getItem("strao-token") } }
-        );
+        const { data } = await api.post("admin/contract/new", { ...values });
         setNotificationModal(data);
         formik.resetForm();
       } catch (error) {
@@ -72,10 +52,10 @@ export const AdminUserRegister = () => {
 
   return (
     <S.Container>
-      {notificationModal.codStatus && (
+            {notificationModal.codStatus && (
         <Notification type="full" msg={notificationModal.msg} />
       )}
-      <S.PageTitle>REGISTRO DE USUÁRIO</S.PageTitle>
+      <S.PageTitle>CADASTRO DE CONTRATO</S.PageTitle>
       <S.Form onSubmit={formik.handleSubmit}>
         <S.InputBox>
           <S.InputTitleText>NOME</S.InputTitleText>
@@ -93,64 +73,65 @@ export const AdminUserRegister = () => {
         </S.InputBox>
 
         <S.InputBox>
-          <S.InputTitleText>E-MAIL</S.InputTitleText>
+          <S.InputTitleText>CÓDIGO</S.InputTitleText>
           <S.Input
-            id="email"
-            name="email"
+            id="cod"
+            name="cod"
             type="text"
-            value={formik.values.email}
+            value={formik.values.cod}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           <S.InputErrorText>
-            {formik.touched.email && formik.errors.email}
+            {formik.touched.cod && formik.errors.cod}
           </S.InputErrorText>
         </S.InputBox>
 
         <S.InputBox>
-          <S.InputTitleText>DATA DE NASCIMENTO</S.InputTitleText>
+          <S.InputTitleText>DATA DE INÍCIO</S.InputTitleText>
           <S.Input
-            id="birthDate"
-            name="birthDate"
+            id="startDate"
+            name="startDate"
             type="date"
-            value={formik.values.birthDate}
+            value={formik.values.startDate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           <S.InputErrorText>
-            {formik.touched.birthDate && formik.errors.birthDate}
+            {formik.touched.startDate && formik.errors.startDate}
           </S.InputErrorText>
         </S.InputBox>
 
         <S.InputBox>
-          <S.InputTitleText>SENHA</S.InputTitleText>
+          <S.InputTitleText>DATA DE TÉRMINO</S.InputTitleText>
           <S.Input
-            id="password"
-            name="password"
-            type="password"
-            value={formik.values.password}
+            id="endDate"
+            name="endDate"
+            type="date"
+            value={formik.values.endDate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           <S.InputErrorText>
-            {formik.touched.password && formik.errors.password}
+            {formik.touched.endDate && formik.errors.endDate}
           </S.InputErrorText>
         </S.InputBox>
 
         <S.InputBox>
-          <S.InputTitleText>REPETIR SENHA</S.InputTitleText>
+          <S.InputTitleText>VALOR R$ TOTAL</S.InputTitleText>
           <S.Input
-            id="passwordRepeat"
-            name="passwordRepeat"
-            type="passwordRepeat"
-            value={formik.values.passwordRepeat}
+            id="contractValue"
+            name="contractValue"
+            type="number"
+            value={formik.values.contractValue}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           <S.InputErrorText>
-            {formik.touched.passwordRepeat && formik.errors.passwordRepeat}
+            {formik.touched.contractValue && formik.errors.contractValue}
           </S.InputErrorText>
         </S.InputBox>
+
 
         <S.ButtonFormSubmit type="submit">ENVIAR</S.ButtonFormSubmit>
         <S.SubmitErrorText>
@@ -158,5 +139,5 @@ export const AdminUserRegister = () => {
         </S.SubmitErrorText>
       </S.Form>
     </S.Container>
-  );
-};
+  )
+}

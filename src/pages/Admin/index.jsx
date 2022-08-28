@@ -7,6 +7,7 @@ import * as S from "./styles.jsx";
 const adminCardList = [
   { name: "Registrar usuário", img: "", link: "/admin/user/register" },
   { name: "Lista de usuários", img: "", link: "/admin/user/list" },
+  { name: "Contratos", img: "", link: "/admin/contract/list" },
 ];
 
 export const Admin = () => {
