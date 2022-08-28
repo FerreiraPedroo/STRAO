@@ -14,9 +14,9 @@ export const Container = styled.div`
 `
 export const LoginContainer = styled.div`
   position: relative;
-  top: 60%;
+  top: 50%;
   width: 100%;  
-  height: 20%;
+  height: 256px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,29 +24,24 @@ export const LoginContainer = styled.div`
   gap: 10px;
 `
 export const Text = styled.div`
+  height: 36px;
   font-size: ${({ size }) => size && `${size}rem;`};
   padding: 4px;
+  overflow-wrap: break-word;
  
 `
 export const InputBox = styled.div`
 height: 100%;
 display: flex;
 flex-direction: column;
-justify-content: space-evenly;
-align-items: flex-end;
-
-`
-export const PasswordBox = styled.div`
-height: 100%;
-display: flex;
-flex-direction: column;
-justify-content: space-evenly;
+justify-content: center;
+gap: 12px;
 
 `
 export const UserInput = styled.input`
 width: 250px;
-height: 36px;
-padding: 0 6px;
+height: 40px;
+padding: 4px;
 font-size: 1.25rem;
 border: 1px solid silver;
 border-radius: 4px;
@@ -56,7 +51,7 @@ border: 1px solid rgba(0,0,0,0.5);
 export const PasswordInput = styled.input`
 width: 250px;
 height: 36px;
-padding: 0 6px;
+padding: 4px;
 font-size: 1.25rem;
 border: 1px solid silver;
 border-radius: 4px;

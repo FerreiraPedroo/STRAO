@@ -6,22 +6,22 @@ import { loginService } from "../services/login/index";
 export const GlobalUseContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-  const [userData, setUserData] = useState("");
+  const [userData, setUserData] = useState();
   const [configData, setConfigData] = useState();
 
   const userLogin = async (_user, _password) => {
     const loginReturnData = await loginService(_user, _password);
+
     if (loginReturnData.codStatus === 200) {
-      localStorage.setItem("auth", JSON.stringify(loginReturnData));
+      localStorage.setItem("token", JSON.stringify(loginReturnData));
       setUserData({
         token: loginReturnData.token,
-        user: loginReturnData.user,
-        accessLevel: loginReturnData.accessLevel,
+        userName: loginReturnData.userName,
+        data: loginReturnData.userData,
       });
-      // setConfigData({rh: loginReturnData.rh})
-      return true;
     }
-    return false;
+  
+    return loginReturnData;
   };
 
   const handleNewConfigData = (_data) => {
@@ -29,27 +29,27 @@ export const GlobalProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("auth"));
-    storedData.contracts = [
-      {
-        name: "Ministério da Educação",
-        centerCosts: ["01-00001", "01-00002", "01-00003", "01-00004"],
-        jobs: ["Professor", "Merendeira", "Diretora Adjunta"],
-      },
-      {
-        name: "Ministério da Econômia",
-        centerCosts: ["02-00001", "02-00002"],
-        jobs: ["Gerente", "Diretor", "CEO"],
-      },
-      {
-        name: "Ministério da Defesa",
-        centerCosts: ["03-00011", "03-00012"],
-        jobs: ["Auxiliar", "Assistente"],
-      },
-    ];
-    if (storedData) {
-      setUserData(storedData);
-    }
+    // const storedData = JSON.parse(localStorage.getItem("auth")) | [];
+    // storedData.contracts = [
+    //   {
+    //     name: "Ministério da Educação",
+    //     centerCosts: ["01-00001", "01-00002", "01-00003", "01-00004"],
+    //     jobs: ["Professor", "Merendeira", "Diretora Adjunta"],
+    //   },
+    //   {
+    //     name: "Ministério da Econômia",
+    //     centerCosts: ["02-00001", "02-00002"],
+    //     jobs: ["Gerente", "Diretor", "CEO"],
+    //   },
+    //   {
+    //     name: "Ministério da Defesa",
+    //     centerCosts: ["03-00011", "03-00012"],
+    //     jobs: ["Auxiliar", "Assistente"],
+    //   },
+    // ];
+    // if (storedData) {
+    //   setUserData(storedData);
+    // }
   }, []);
 
   return (
