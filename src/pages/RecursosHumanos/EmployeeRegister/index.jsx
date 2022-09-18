@@ -12,6 +12,7 @@ import { Button } from "../../../component/Button";
 
 import * as S from "./styles";
 
+
 const formikAditionaValues = {
   uniform: {
     head: {},
@@ -106,14 +107,16 @@ export const RhEmployeeRegister = () => {
         <S.NameBox>
           <S.NameBox>
             <S.OccupationRegisterBox>
-              <S.OccupationRegisterText>NOME COMPLETO</S.OccupationRegisterText>
+            <S.OccupationRegisterText>NOME COMPLETO</S.OccupationRegisterText>
               <S.NameInput
                 id="fullName"
                 name="fullName"
                 value={formik.values.fullName}
                 onChange={formik.handleChange}
               />
-              <S.ErrorMessage>{formik.touched.fullName && formik.errors.fullName}</S.ErrorMessage>
+              <S.ErrorMessage>
+                {formik.touched.fullName && formik.errors.fullName}
+              </S.ErrorMessage>
             </S.OccupationRegisterBox>
 
             <S.OccupationRegisterBox>
@@ -159,7 +162,9 @@ export const RhEmployeeRegister = () => {
                   </S.OccupationRegisterOption>
                 ))}
             </S.OccupationRegisterSelect>
-            <S.ErrorMessage>{formik.touched.contract_id && formik.errors.contract_id}</S.ErrorMessage>
+            <S.ErrorMessage>
+              {formik.touched.contract_id && formik.errors.contract_id}
+            </S.ErrorMessage>
           </S.OccupationRegisterBox>
 
           <S.OccupationRegisterBox>
@@ -185,7 +190,9 @@ export const RhEmployeeRegister = () => {
                   )
                 )}
             </S.OccupationRegisterSelect>
-            <S.ErrorMessage>{formik.touched.centerCost_id && formik.errors.centerCost_id}</S.ErrorMessage>
+            <S.ErrorMessage>
+              {formik.touched.centerCost_id && formik.errors.centerCost_id}
+            </S.ErrorMessage>
           </S.OccupationRegisterBox>
 
           <S.OccupationRegisterBox>
@@ -198,18 +205,15 @@ export const RhEmployeeRegister = () => {
               <S.OccupationRegisterOption id=""></S.OccupationRegisterOption>
               {contractSelected &&
                 userData.contracts[contractSelected].jobs &&
-                userData.contracts[contractSelected].jobs.map(
-                  (job) => (
-                    <S.OccupationRegisterOption
-                      key={job}
-                      value={job}
-                    >
-                      {job}
-                    </S.OccupationRegisterOption>
-                  )
-                )}
+                userData.contracts[contractSelected].jobs.map((job) => (
+                  <S.OccupationRegisterOption key={job} value={job}>
+                    {job}
+                  </S.OccupationRegisterOption>
+                ))}
             </S.OccupationRegisterSelect>
-            <S.ErrorMessage>{formik.touched.job && formik.errors.job}</S.ErrorMessage>
+            <S.ErrorMessage>
+              {formik.touched.job && formik.errors.job}
+            </S.ErrorMessage>
           </S.OccupationRegisterBox>
 
           <S.OccupationRegisterBox>
@@ -239,7 +243,9 @@ export const RhEmployeeRegister = () => {
                 Suprimentos
               </S.OccupationRegisterOption>
             </S.OccupationRegisterSelect>
-            <S.ErrorMessage>{formik.touched.department && formik.errors.department}</S.ErrorMessage>
+            <S.ErrorMessage>
+              {formik.touched.department && formik.errors.department}
+            </S.ErrorMessage>
           </S.OccupationRegisterBox>
 
           <S.OccupationRegisterBox>

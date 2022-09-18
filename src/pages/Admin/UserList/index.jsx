@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api.js";
 import { Notification } from "../../../component/Notification";
+
+import { GlobalUseContext } from "../../../provider/app";
 
 import * as S from "./styles.jsx";
 
 export const AdminUserList = () => {
   const navigate = useNavigate();
+  const { handle } = useContext(GlobalUseContext);
   const [notificationModal, setNotificationModal] = useState({});
   const [userList, setUserList] = useState();
   const [loading, setLoading] = useState(true);
@@ -20,9 +23,11 @@ export const AdminUserList = () => {
         setUserList(data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        console.log(error.response.data);
+        if (error.response.data.codStatus === 401) {
+          handle.invalidToken();
+        }
         setNotificationModal(error.response.data);
-        // navigate(-1);
       }
     };
     getUserList();

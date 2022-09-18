@@ -22,6 +22,7 @@ export const PersonalInformationContainer = styled.div`
   height: auto;
   display: flex;
   margin-bottom: 16px;
+
 `;
 export const PageTitle = styled.h1`
   font-family: ${props.textFontFamily};
@@ -60,7 +61,8 @@ export const NameBox = styled.div`
   gap: 20px;
 `;
 export const NameInput = styled.input`
-  width: 460px;
+  min-width: 360px;
+  width: 200px;
   height: 32px;
   padding: 4px;
   border: 1px solid #696969;

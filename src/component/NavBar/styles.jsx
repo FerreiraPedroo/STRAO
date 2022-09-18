@@ -10,7 +10,7 @@ const props = {
 }
 
 export const Container = styled.div`
-  width: 142px;
+  width: 164px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,21 @@ export const StraoTitle = styled.p`
   font-size: 28px;
   font-weight: bolder;
   margin-bottom: 6px;
-  `;
+`;
+
+export const Logout = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  background-color: red;
+  cursor: pointer;
+`;
 
 export const UserAvatar = styled.div`
   width: 100%;
@@ -68,7 +82,7 @@ export const BtnDepartment = styled.div`
   background-color: ${({ select }) => select ? '#DCDCDC;' : props.navMenuButtonBackColor};
   border: ${({ select }) => select ? '1px solid #696969' : '1px solid #A9A9A9'};
   padding: 4px 2px;
-  gap: 8px;
+  gap: 6px;
     
   &:hover{
     border: 1px solid black;

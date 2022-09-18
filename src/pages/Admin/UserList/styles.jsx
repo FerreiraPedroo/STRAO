@@ -2,20 +2,22 @@ import styled from "styled-components";
 
 const props = {
   textFontFamily: "Arial",
-  titleTextSize: "40px",
-  titleTextColor: "#999",
+  paragraphTextSize: "16px",
+  
+
+  titlePageTextSize: "40px",
+  titlePageTextColor: "#999",
   errorTextColor: "#f66",
-  textSize: "",
+  headTextSize: "20px",
 };
 
 export const Container = styled.div`
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: start;
+  flex-direction: column;
   padding: 16px 32px;
-  gap: 4px;
+  gap: 8px;
+
 `;
 
 export const PageTitle = styled.h1`
@@ -27,7 +29,6 @@ export const PageTitle = styled.h1`
   display: flex;
   justify-content: center;
   padding: 8px;
-  margin-bottom: 16px;
 `;
 
 export const ListUserBox = styled.div`
@@ -61,13 +62,15 @@ export const ListHeadText = styled.p`
 `;
 export const UserBox = styled.div`
   width: 100%;
-  height: 40px;
+  height: 32px;
   display: flex;
   border: 1px solid #bbb;
+  background-color: #ffffff;
   align-items: center;
   padding: 12px;
-  margin-bottom: 4px;
+  margin-bottom: 1px;
   gap: 8px;
+  cursor: pointer;
 
   &:hover{
     border: 1px solid #777; 
