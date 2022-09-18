@@ -8,6 +8,7 @@
   user-select: none;
   color: black;
   /* border: 1px solid blue; */
+  
 }
 body{
   height: 100vh;
@@ -19,5 +20,4 @@ body{
 
 [disabled] {
   background-color: #A9A9A9;
-
 }
