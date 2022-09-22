@@ -1,6 +1,6 @@
 import { api } from '../api';
 
-export const loginService = async (_user, _password) => {
+export const loginService = async (_user, _password, _dataVersion) => {
   try {
     const { data } = await api({
       url: '/login',
@@ -8,12 +8,33 @@ export const loginService = async (_user, _password) => {
       data: {
         user: _user,
         password: _password,
+        dataVersion: _dataVersion,
       },
       withCredentials: true,
     })
-    return data
-    
+    return data;
+
   } catch (err) {
-    return (err.response.data)
+    if (err.response.data) {
+      return (err.response.data)
+    }
+    return { codStatus: 0, message: "Erro ao conectar.", codName: "" };
   }
 }
+export const logoutService = async () => {
+  try {
+    const { data } = await api({
+      url: '/logout',
+      method: 'POST',
+      withCredentials: true,
+    })
+    return data
+
+  } catch (err) {
+    if (err.response.data) {
+      return (err.response.data)
+    }
+    return { codStatus: 0, message: "Erro ao conectar.", codName: "" };
+  }
+}
+

@@ -1,44 +1,45 @@
 import React, { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { GlobalUseContext } from "../provider/app";
+
 import { NavBar } from "../component/NavBar";
 import { Notification } from "../component/Notification";
 
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 
-import { RhHome } from "../pages/RecursosHumanos";
-import { RhEmployeeList } from "../pages/RecursosHumanos/EmployeeList";
-import { RhEmployeeSheet } from "../pages/RecursosHumanos/EmployeeSheet";
-import { RhEmployeeRegister } from "../pages/RecursosHumanos/EmployeeRegister";
-import { RhEmployeeVacation } from "../pages/RecursosHumanos/EmployeeVacation";
+// import { RhHome } from "../pages/RecursosHumanos";
+// import { RhEmployeeList } from "../pages/RecursosHumanos/EmployeeList";
+// import { RhEmployeeSheet } from "../pages/RecursosHumanos/EmployeeSheet";
+// import { RhEmployeeRegister } from "../pages/RecursosHumanos/EmployeeRegister";
+// import { RhEmployeeVacation } from "../pages/RecursosHumanos/EmployeeVacation";
 
 import { Admin } from "../pages/Admin";
 import { AdminUserRegister } from "../pages/Admin/UserRegister";
 import { AdminUserList } from "../pages/Admin/UserList";
+import { AdminContract } from "../pages/Admin/ContractList";
+import { AdminUserEdit } from "../pages/Admin/UserEdit";
 
 export const AppRouter = () => {
-  const { userData } = useContext(GlobalUseContext);
+  const { userTokenData } = useContext(GlobalUseContext);
 
   const PrivateRoutes = ({ children }) => {
-    if (userData) {
-      return children;
-    } else {
+    if (!userTokenData) {
       return <Navigate to="/" />;
     }
+    return children;
   };
 
   const PublicRoutes = ({ children }) => {
-    if (userData) {
+    if (userTokenData) {
       return <Navigate to="/home" />;
-    } else {
-      return children;
     }
+    return children;
   };
 
   return (
     <>
-      {userData && (
+      {userTokenData && (
         <>
           <NavBar />
           <Notification />
@@ -88,9 +89,28 @@ export const AppRouter = () => {
             </PrivateRoutes>
           }
         />
+        <Route
+          path="/admin/user/edit"
+          element={
+            <PrivateRoutes>
+              <AdminUserEdit />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/admin/contract/list"
+          element={
+            <PrivateRoutes>
+              <AdminContract />
+            </PrivateRoutes>
+          }
+        />
+
+
+        
 
         {/* RH */}
-        <Route
+        {/* <Route
           path="/rh"
           element={
             <PrivateRoutes>
@@ -129,7 +149,7 @@ export const AppRouter = () => {
               <RhEmployeeVacation />
             </PrivateRoutes>
           }
-        />
+        /> */}
       </Routes>
     </>
   );

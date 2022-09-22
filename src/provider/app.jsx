@@ -1,45 +1,91 @@
 import React, { createContext, useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-import { loginService } from "../services/login/index";
+import { loginService, logoutService } from "../services/login/index";
 
 export const GlobalUseContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-  const [userData, setUserData] = useState();
-  const [configData, setConfigData] = useState();
+  const [userTokenData, setUserTokenData] = useState();
+  const [userDataVersion, setUserDataVersion] = useState();
+  const [userData, setUserData] = useState(
+    'JSON.parse(localStorage.getItem("strao-user-data"))'
+  );
+  const { pathname: pageName } = useLocation();
 
   const userLogin = async (_user, _password) => {
-    const loginReturnData = await loginService(_user, _password);
-
-    if (loginReturnData.codStatus === 200) {
-      localStorage.setItem("strao-token", loginReturnData.token);
-      localStorage.setItem("strao-data", JSON.stringify(loginReturnData));
-      setUserData({
-        token: loginReturnData.token,
-        userName: loginReturnData.userName,
-        data: loginReturnData.userData,
-      });
+    const data = await loginService(_user, _password, userDataVersion);
+    if (data.codStatus === 200) {
+      handleContext.newLoginData(data);
     }
-
-    return loginReturnData;
+    return data;
   };
 
-  const handleNewConfigData = (_data) => {
-    setConfigData(_data);
+  const userLogout = async () => {
+    const data = await logoutService();
+    if (data.codStatus === 200) {
+      handleContext.removeLoginData();
+      return true;
+    }
+    return data;
+  };
+
+  const handleContext = {
+    newLoginData: (_data) => {
+      setUserTokenData(_data.token);
+      setUserData(_data.userData);
+      setUserDataVersion(_data.dataVersion);
+      localStorage.setItem("strao-token", _data.token);
+      localStorage.setItem("strao-user-data", JSON.stringify(_data.userData));
+      localStorage.setItem("strao-user-data-version", _data.dataVersion);
+    },
+
+    removeLoginData: () => {
+      localStorage.removeItem("strao-token");
+      localStorage.removeItem("strao-user-data");
+      localStorage.removeItem("strao-user-data-version");
+      setUserTokenData("");
+      setUserDataVersion("");
+      setUserData("");
+    },
+
+    checkUserDataVersion: (_version) => {
+      if (userDataVersion === _version) {
+        return true;
+      }
+      return false;
+    },
   };
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("strao-token");
-    const storedData = JSON.parse(localStorage.getItem("strao-data"));
+    let storedToken = localStorage.getItem("strao-token");
+    let storedDataVersion = localStorage.getItem("strao-user-data-version");
+    let storedData;
+
+    try {
+      storedData = JSON.parse(localStorage.getItem("strao-user-data"));
+    } catch (err) {
+      storedData = false;
+    }
 
     if (storedToken && storedData) {
+      setUserTokenData(storedToken);
+      setUserDataVersion(storedDataVersion);
       setUserData(storedData);
     }
   }, []);
 
   return (
-    <GlobalUseContext.Provider value={{ userData, userLogin, configData }}>
+    <GlobalUseContext.Provider
+      value={{
+        userLogin,
+        userLogout,
+        userTokenData,
+        userData,
+        handleContext,
+        pageName,
+      }}
+    >
       {children}
     </GlobalUseContext.Provider>
   );
