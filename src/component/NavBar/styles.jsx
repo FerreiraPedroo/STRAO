@@ -11,7 +11,7 @@ const props = {
 
 export const Container = styled.div`
   width: 164px;
-  height: 100vh;
+  height: calc(100vh - 40px);
   display: flex;
   flex-direction: column;
   place-items: center;

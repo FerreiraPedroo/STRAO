@@ -39,3 +39,74 @@ export const Button = styled.input`
       Theme[theme] ? `${Theme[theme].buttonActiveBgColor}` : "#999"};
   }
 `;
+export const ButtonBack = styled.button`
+  width: ${({ width }) => (width ? `${width}px` : "32px")};
+  height: ${({ height }) => (height ? `${height}px` : "32px")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  border-radius: 100%;
+  border: 1.4px solid #a9a9a9;
+  cursor: pointer;
+  background-color: #c9c9c9;
+  user-select: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    transform: scale(0.96);
+  }
+`;
+
+const propsTheme = {
+  find: `
+  background: #908E8E;
+  border: 1px solid #C9C9C9;
+  `,
+  remove: `
+  background: #DA532C;
+  border: 1px solid #FA734C;
+  `,
+  correct: `
+  background: #00A300;
+  border: 1px solid #20C320;
+  `,
+  document: `
+  background: #1E90FF;
+  border: 1px solid #ADD8E6;
+  `,
+  normal: `
+  background: #908E8E;
+  border: 1px solid #C9C9C9;
+  `,
+};
+export const Button40x32 = styled.button`
+  width: ${({ width }) => (width ? `${width}px` : "40px")};
+  height: ${({ height }) => (height ? `${height}px` : "32px")};
+  position: relative;
+  top: -1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+
+  &:not(:active){
+    box-shadow: 2px 2px 0px #000000;
+  }
+  
+  &:hover:not(:active){
+    box-shadow: 0px 0px 0px #000000;
+    top: 1px;
+    left: 1px;
+  }
+
+  &:active{
+    box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.25);
+    top: 1px;
+    left: 1px;
+  }
+
+  ${({ typeStyle }) => typeStyle && propsTheme[typeStyle]}
+`;

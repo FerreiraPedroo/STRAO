@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { GlobalUseContext } from "../../provider/app";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 import * as S from "./styles";
 import rhIcon from "../../assets/icons/department/rh.png";
@@ -8,14 +8,8 @@ import { useEffect } from "react";
 
 const imgLoad = {
   rh: rhIcon,
+  admin: rhIcon,
 };
-
-const categoriesList = [
-  "Recursos Humanos",
-  // "Segurança Trabalho",
-  // "Suprimentos",
-  // "Admin"
-];
 
 const categoryDataList = {
   "Recursos Humanos": {
@@ -49,7 +43,7 @@ export const NavBar = () => {
   const { userData, userLogout } = useContext(GlobalUseContext);
   const navigate = useNavigate();
 
-  const [categories, setCategories] = useState([]);
+  const [departments, setDepartments] = useState();
   const [categorySelected, setCategorySelected] = useState("");
 
   const logout = async () => {
@@ -62,7 +56,13 @@ export const NavBar = () => {
   };
 
   useEffect(() => {
-    setCategories(categoriesList);
+    const departmentsList = [];
+    for (const [key, value] of Object.entries(userData.departments)) {
+      if (value.link !== "/home") {
+        departmentsList.push(value);
+      }
+    }
+    setDepartments(departmentsList);
   }, []);
 
   return (
@@ -74,15 +74,15 @@ export const NavBar = () => {
         <S.UserName>Pedro</S.UserName>
       </S.UserAvatar>
       <S.NavContainer>
-        {categories &&
-          categories.map((category) => (
+        {departments &&
+          departments.map((department) => (
             <S.BtnDepartment
-              key={category}
+              key={department.name}
               select={""}
-              onClick={() => navigate(categoryDataList[category].link)}
+              onClick={() => navigate(department.link)}
             >
-              <S.ImgDepartment src={categoryDataList[category].imagem} />
-              <S.TextDepartment>{category}</S.TextDepartment>
+              <S.ImgDepartment src={imgLoad[department.imagem]} />
+              <S.TextDepartment>{department.name}</S.TextDepartment>
             </S.BtnDepartment>
           ))}
       </S.NavContainer>
