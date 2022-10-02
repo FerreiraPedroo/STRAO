@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const props = {
-  'textSize': '',
-  'bgColor': '',
-}
+  textSize: "",
+  bgColor: "",
+};
 
 export const Container = styled.div`
   width: 100%;
@@ -13,6 +13,7 @@ export const Container = styled.div`
   align-content: start;
   flex-wrap: wrap;
   gap: 16px;
+  background-color: #ededed;
 `;
 
 export const Card = styled.div`
@@ -20,27 +21,27 @@ export const Card = styled.div`
   width: 256px;
   height: 192px;
   border-radius: 4px;
-  box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
-  background-color: #F5F5F5;
-  border: 1px solid #A9A9A9;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+  background-color: #f5f5f5;
+  border: 1px solid #a9a9a9;
   padding: 6px;
   cursor: pointer;
   user-select: none;
   overflow: hidden;
 
-  &:hover{
+  &:hover {
     border: 1px solid black;
   }
 `;
 
 export const Box = styled.div`
-display: flex;
-justify-content: space-between;
-margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
 `;
 export const Img = styled.img`
-width: 64px;
-height: 64px;
+  width: 64px;
+  height: 64px;
 `;
 export const CategoryNotification = styled.p`
   width: 48px;
@@ -51,7 +52,7 @@ export const CategoryNotification = styled.p`
   justify-content: center;
   font-size: ${props.cardCategoryNameTextSize};
   margin-right: 16px;
-  border: 1px solid #A9A9A9;
+  border: 1px solid #a9a9a9;
 `;
 
 export const CategoryName = styled.p`

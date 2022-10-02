@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { GlobalUseContext } from "../../provider/app";
 import { Card } from "../../component/Card/index.jsx";
 
@@ -16,7 +16,7 @@ const departmentCardList = [
 const pageName = "Recursos Humanos"
 
 export const RhHome = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { userData } = useContext(GlobalUseContext);
   const [departmentCard, setDepartmentCard] = useState([]);
 

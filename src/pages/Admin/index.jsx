@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { GlobalUseContext } from "../../provider/app.jsx";
 import { Card } from "../../component/Card/index.jsx";
 
 import * as S from "./styles.jsx";
 
-const adminCardList = [
-  { name: "Registrar usuário", img: "", link: "/admin/user/register" },
-  { name: "Lista de usuários", img: "", link: "/admin/user/list" },
-  { name: "Contratos", img: "", link: "/admin/contract/list" },
-];
-
 export const Admin = () => {
-  const navigate = useNavigate();
-
-  const [cards, setCards] = useState([]);
-  const [category, setCategory] = useState("");
+  const { userData, pageName } = useContext(GlobalUseContext);
+  const [cards, setCards] = useState();
 
   useEffect(() => {
-    setCards(adminCardList);
-    setCategory("");
+
+    setCards(userData.departments[pageName]);
   }, []);
 
   return (
     <S.Container>
-      {cards.map((card) => (
+      {cards && cards.actions.map((card) => (
         <Card key={card.name} data={card} />
       ))}
     </S.Container>

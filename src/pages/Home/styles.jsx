@@ -13,4 +13,5 @@ export const Container = styled.div`
   align-content: start;
   flex-wrap: wrap;
   gap: 16px;
+  background-color: #ededed;
 `;

@@ -13,15 +13,16 @@ export const Login = () => {
   const handleInputUser = (e) => {
     setUser(e.target.value);
   };
-
   const handleInputPassword = (e) => {
     setPassword(e.target.value);
   };
 
   const handleLogin = async () => {
     setErrorLogin("");
+    
     const data = await userLogin(user, password);
     if (data.codStatus !== 200) {
+      setErrorLogin("Erro ao conectar.");
       setErrorLogin(data.message);
     }
   };

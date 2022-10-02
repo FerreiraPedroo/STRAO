@@ -1,34 +1,85 @@
 import styled from "styled-components";
 
 const props = {
-  textFontFamily: "Arial",
-  paragraphTextSize: "16px",
-  
+  textPageTitle: `
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: Arial;
+  font-size: 36px;
+  color:#999;
+  font-style: italic;
+  `,
 
-  titlePageTextSize: "40px",
-  titlePageTextColor: "#999",
+  headeTitle: `
+  font-family: Courier New;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 700;  
+  `,
+
+  paragraphTextSize: `
+  font-family: 'Courier New';
+  font-style: italic;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  `,
+
   errorTextColor: "#f66",
-  headTextSize: "20px",
+
 };
 
 export const Container = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
-  padding: 16px 32px;
-  gap: 8px;
-
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: start;
+  background-color: #ededed;
+  padding: 16px;
+  gap: 4px;
 `;
 
-export const PageTitle = styled.h1`
-  font-family: ${props.textFontFamily};
-  font-size: ${props.titleTextSize};
-  color: ${props.titleTextColor};
-
+export const PageHeader = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 8px;
+  align-items: center;
+
+  margin-bottom: 16px;
+`;
+export const PageTitle = styled.h1`
+  ${props.textPageTitle}
+  padding-right: 32px;
+`;
+
+export const CenterContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+export const FilterContainer = styled.div`
+  width: 100%;
+  background-color: #e5e5e5;
+  padding: 8px 16px 16px 16px;
+  margin
+`;
+export const FilterTitle = styled.p`
+  width: 100%;
+  ${props.headeTitle}
+`;
+export const FilterInputBox = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: end;
+  gap: 16px;
 `;
 
 export const ListUserBox = styled.div`
@@ -38,52 +89,44 @@ export const ListUserBox = styled.div`
   justify-content: center;
 `;
 export const ListUserHeader = styled.div`
-width: 100%;
-height: 32px;
-display: flex;
-align-items: center;
-padding: 12px;
-gap: 8px;
-`;
-export const ListHeadText = styled.p`
-  text-align: center;
-
-  &:nth-child(1){
-    min-width: 380px;
-    text-align: start;
-  }
-  &:nth-child(2){
-    min-width: 200px;
-  }
-  &:nth-child(3){
-    min-width: 256px;
-    text-align: center;
-  }
-`;
-export const UserBox = styled.div`
   width: 100%;
   height: 32px;
   display: flex;
-  border: 1px solid #bbb;
-  background-color: #ffffff;
   align-items: center;
-  padding: 12px;
+  gap: 2px;
+  border: 1px solid transparent;
+  margin-bottom: 2px;
+`;
+export const ListHeadText = styled.p`
+  ${({ w }) => (w ? `min-width:${w}` : "width:100%;")};
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e5e5;
+  ${props.headeTitle}
+`;
+export const UserBox = styled.div`
+  width: 100%;
+  display: flex;
   margin-bottom: 1px;
-  gap: 8px;
+  gap: 2px;
   cursor: pointer;
+  margin: 0px 0px;
+  border: 1px solid transparent;
 
-  &:hover{
-    border: 1px solid #777; 
+  &:hover {
+    border: 1px solid #777;
   }
 `;
-export const UserName = styled.p`
-  min-width: 380px;
-`;
-export const UserBirthDate = styled.p`
-  min-width: 200px;
-  text-align: center;
-`;
-export const UserEmail = styled.p`
-  min-width: 256px;
-  text-align: center;
+export const UserText = styled.p`
+  ${({ w }) => (w ? `min-width:${w}` : "width:100%;")};
+  ${({ color }) => (color ? `color:${color}` : "")};
+  height: 36px;
+  background: #dddddd;
+  border: 1px solid #dddddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  ${props.paragraphTextSize}
 `;

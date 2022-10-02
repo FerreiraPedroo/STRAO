@@ -5,6 +5,7 @@ import { api } from "../../../services/api";
 import { Notification } from "../../../component/Notification";
 
 import * as S from "./styles.jsx";
+import { Button } from "../../../component/Button";
 
 export const AdminUserRegister = () => {
   const navigate = useNavigate();
@@ -75,7 +76,11 @@ export const AdminUserRegister = () => {
       {notificationModal.codStatus && (
         <Notification type="full" msg={notificationModal.msg} />
       )}
+      <S.PageHeader>
+      <Button typeStyle="back" value="<" onClick={() => navigate(-1)} />
       <S.PageTitle>REGISTRO DE USUÁRIO</S.PageTitle>
+      </S.PageHeader>
+
       <S.Form onSubmit={formik.handleSubmit}>
         <S.InputBox>
           <S.InputTitleText>NOME</S.InputTitleText>
