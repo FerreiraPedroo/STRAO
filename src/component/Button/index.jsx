@@ -2,6 +2,11 @@ import * as S from "./styles";
 
 import { Check, FileText, MagnifyingGlass, Trash } from "phosphor-react";
 
+/**
+ * 
+ * @param {typeStyle} typeStyle "normal-128x32 | back-32x32 | find-40x32 | remove-40x32 | correct-40x32 | document-40x32" 
+  * @returns 
+ */
 export const Button = ({
   value,
   typeStyle = "normal",

@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  height: 46px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  ${({ type }) => type === "textonly" && "height: 40px;"}
+`;
 export const TitleText = styled.p`
   height: 14px;
   font-family: Courier New;
@@ -13,15 +19,32 @@ export const Input = styled.input`
   width: 256px;
   height: 32px;
   padding: 8px;
-  background: #FFFFFF;
+  background: #ffffff;
   border: 0.5px solid #a1a1a1;
   box-shadow: inset 1px 1px 1px #969696, inset -1px -1px 1px #969696;
   border-radius: 2px;
   outline: 0;
 
-  &:disabled{
-    border: 0.5px solid #C9C9C9;
-    background: #E0E0E0;
-    color: #B6B6B6;
+  &:disabled {
+    border: 0.5px solid #c9c9c9;
+    background: #e0e0e0;
+    color: #b6b6b6;
+  }
+`;
+
+export const Select = styled.select`
+  width: 256px;
+  height: 32px;
+  padding: 4px;
+  background: #ffffff;
+  border: 0.5px solid #a1a1a1;
+  box-shadow: inset 1px 1px 1px #969696, inset -1px -1px 1px #969696;
+  border-radius: 2px;
+  outline: 0;
+
+  &:disabled {
+    border: 0.5px solid #c9c9c9;
+    background: #e0e0e0;
+    color: #b6b6b6;
   }
 `;
