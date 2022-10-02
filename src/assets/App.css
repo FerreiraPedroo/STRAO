@@ -6,16 +6,18 @@
   font-size: 16px;
   box-sizing: border-box;
   user-select: none;
-  color: black;
+  color: #767676;
   /* border: 1px solid blue; */
   
 }
 body{
   height: 100vh;
+  padding: 20px 20px 20px 0;
+  background-color: #d3d3d3;
+  /* overflow: hidden; */
 }
 #root {
   display: flex;
-  background-color: #EDEDED;
 }
 
 [disabled] {
