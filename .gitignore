@@ -7,7 +7,6 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-ideias
 node_modules
 dist
 dist-ssr
@@ -23,9 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-
-src/pages/PAGE MODEL - FORM/index.jsx
-src/pages/PAGE MODEL - FORM/styles.jsx
-src/pages/PAGE MODEL/index.jsx
-src/pages/PAGE MODEL/styles.jsx
+ideias/workspace.jpg
+ideias/thomas+vranas+supes+academy+proact.gif
+ideias/Lotus SmartCenter for OS2.png
+ideias/image.png
+ideias/image 1.png
+ideias/How-The-Internet-Of-The-2000s-Shaped-An-Entire-Generation-Of-Developers.png
+ideias/desenhos-lineares-de-pessoas-sentadas-à-mesa-cafés-ilustração-vetorial-desenhada-manualmente-pelo-invólucro-mão-por-linha-168339414.jpg
+ideias/desenhos-lineares-de-pessoas-sentadas-à-mesa-cafés-ilustração-vetorial-desenhada-manualmente-pelo-in.svg
+ideias/ChatWindow.png
+ideias/Captura de tela 2022-09-15 221823.png
+ideias/Captura de tela 2022-08-25 173933.png
+ideias/Captura de tela 2022-05-23 103735.png
+ideias/aim_inline.gif
+ideias/140016-Friendships-Were-Easier-with-AIM_Facebook-1200x628.jpg
+ideias/10-0f4cc488466a86fc5876f0e5565d282c-AOL Instant Messanger 1.png

@@ -1,57 +1,72 @@
-import { useState, useContext } from "react";
-import { GlobalUseContext } from "../../provider/app";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import * as S from "./styles";
-import { useEffect } from "react";
+
+import user_avatar from "../../assets/img/user_avatar.png";
+import img_recursos_humanos from "../../assets/img/menu/recursos-humanos.svg";
+import icon_menu from "../../assets/icons/menu/menu.svg";
+
+const menuCards = [
+    {
+        path: "/rh",
+        title: "Recursos Humanos",
+        img: img_recursos_humanos,
+    },
+    {
+        path: "/supply",
+        title: "Suprimentos",
+        img: img_recursos_humanos,
+    },
+    {
+        path: "/safety",
+        title: "Segurança do Trabalho",
+        img: img_recursos_humanos,
+    },
+    {
+        path: "/feets",
+        title: "Frotas",
+        img: img_recursos_humanos,
+    },
+];
 
 export const NavBar = () => {
-  const { userData, userLogout } = useContext(GlobalUseContext);
-  const navigate = useNavigate();
+    const [showMenu, setShowMenu] = useState(false);
+    const navigate = useNavigate();
 
-  const [departments, setDepartments] = useState();
-
-  const logout = async () => {
-    const returnData = await userLogout();
-    if (returnData.status === 200) {
-      navigate("/");
-    } else {
-      console.log("ERRO AO EFETUAR O LOGOUT");
+    function menuNavigation(path) {
+        setShowMenu((prevState) => !prevState);
+        navigate(path);
     }
-  };
 
-  useEffect(() => {
-    const departmentsList = [];
-    console.log(userData);
-    for (const [key, value] of Object.entries(userData.departments)) {
-      if (value.url !== "/home") {
-        departmentsList.push(value);
-      }
-    }
-    setDepartments(departmentsList);
-  }, []);
-
-  return (
-    <S.Container>
-      <S.StraoTitle>STRAO</S.StraoTitle>
-      <S.Logout onClick={logout}>{`<`}</S.Logout>
-      <S.UserAvatar>
-        <S.UserAvatarImg img={userData.avatar} />
-        <S.UserName>Pedro</S.UserName>
-      </S.UserAvatar>
-      <S.NavContainer>
-        {departments &&
-          departments.map((department) => (
-            <S.BtnDepartment
-              key={department.name}
-              select={""}
-              onClick={() => navigate(department.url)}
-            >
-              <S.ImgDepartment src={department.imagem} />
-              <S.TextDepartment>{department.name}</S.TextDepartment>
-            </S.BtnDepartment>
-          ))}
-      </S.NavContainer>
-    </S.Container>
-  );
+    return (
+        <S.Container>
+            <S.LeftContainer>
+                <S.MenuContainer>
+                    <S.MenuButton src={icon_menu} onClick={() => setShowMenu((prevState) => !prevState)} />
+                    {showMenu && (
+                        <S.MenuOptions>
+                            {menuCards.map((card) => (
+                                <S.MenuCard key={card.title} onClick={() => menuNavigation(card.path)}>
+                                    <S.MenuCardImg src={card.img} />
+                                    <S.MenuCardTitle>{card.title}</S.MenuCardTitle>
+                                </S.MenuCard>
+                            ))}
+                        </S.MenuOptions>
+                    )}
+                </S.MenuContainer>
+                <S.Title
+                    onClick={() => {
+                        navigate("/home");
+                        setShowMenu(false);
+                    }}
+                >
+                    STRAO
+                </S.Title>
+            </S.LeftContainer>
+            <S.RightContainer>
+                <S.Avatar src={user_avatar} />
+                <S.UserName>STRAO</S.UserName>
+            </S.RightContainer>
+        </S.Container>
+    );
 };
