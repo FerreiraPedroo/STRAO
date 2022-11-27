@@ -1,6 +1,5 @@
-
 export const Theme = {
-  normal:{
+  normal: {
     buttonTextColor: "#000",
     buttonBorderColor: "#555",
     buttonBgColor: "#dcdcdc",
@@ -16,5 +15,5 @@ export const Theme = {
     buttonDisableTextColor: "#000",
     buttonDisableBorderColor: "#000",
     buttonDisableBgColor: "#999",
-  }
-}
+  },
+};

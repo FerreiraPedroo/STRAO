@@ -1,156 +1,30 @@
-import React, { useContext } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { GlobalUseContext } from "../provider/app";
-
-import { NavBar } from "../component/NavBar";
-import { Notification } from "../component/Notification";
-
-import { Home } from "../pages/Home";
+import React from "react";
+import { createBrowserRouter } from "react-router-dom";
+import { Root } from "../pages/Root";
 import { Login } from "../pages/Login";
+import { ErrorPage } from "../errorPage";
 
-// import { RhHome } from "../pages/RecursosHumanos";
-// import { RhEmployeeList } from "../pages/RecursosHumanos/EmployeeList";
-// import { RhEmployeeSheet } from "../pages/RecursosHumanos/EmployeeSheet";
-// import { RhEmployeeRegister } from "../pages/RecursosHumanos/EmployeeRegister";
-// import { RhEmployeeVacation } from "../pages/RecursosHumanos/EmployeeVacation";
+import { Home } from "../pages/Home/index";
+import { HumanResources } from "../pages/HumanResources"
 
-import { Admin } from "../pages/Admin";
-import { AdminUserRegister } from "../pages/Admin/UserRegister";
-import { AdminUserList } from "../pages/Admin/UserList";
-import { AdminContract } from "../pages/Admin/ContractList";
-import { AdminUserEdit } from "../pages/Admin/UserEdit";
-
-export const AppRouter = () => {
-  const { userTokenData } = useContext(GlobalUseContext);
-
-  const PrivateRoutes = ({ children }) => {
-    if (!userTokenData) {
-      return <Navigate to="/" />;
-    }
-    return children;
-  };
-
-  const PublicRoutes = ({ children }) => {
-    if (userTokenData) {
-      return <Navigate to="/home" />;
-    }
-    return children;
-  };
-
-  return (
-    <>
-      {userTokenData && (
-        <>
-          <NavBar />
-          <Notification />
-        </>
-      )}
-
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <PublicRoutes>
-              <Login />
-            </PublicRoutes>
-          }
-        />
-        <Route
-          path="/home"
-          element={
-            <PrivateRoutes>
-              <Home />
-            </PrivateRoutes>
-          }
-        />
-
-        {/* ADMINISTRAÇÃO */}
-        <Route
-          path="/admin"
-          element={
-            <PrivateRoutes>
-              <Admin />
-            </PrivateRoutes>
-          }
-        />
-        <Route
-          path="/admin/user/register"
-          element={
-            <PrivateRoutes>
-              <AdminUserRegister />
-            </PrivateRoutes>
-          }
-        />
-        <Route
-          path="/admin/user/list"
-          element={
-            <PrivateRoutes>
-              <AdminUserList />
-            </PrivateRoutes>
-          }
-        />
-        <Route
-          path="/admin/user/edit"
-          element={
-            <PrivateRoutes>
-              <AdminUserEdit />
-            </PrivateRoutes>
-          }
-        />
-        <Route
-          path="/admin/contract/list"
-          element={
-            <PrivateRoutes>
-              <AdminContract />
-            </PrivateRoutes>
-          }
-        />
-
-
-        
-
-        {/* RH */}
-        {/* <Route
-          path="/rh"
-          element={
-            <PrivateRoutes>
-              <RhHome />
-            </PrivateRoutes>
-          }
-        />
-        <Route
-          path="/rh/employee/register"
-          element={
-            <PrivateRoutes>
-              <RhEmployeeRegister />
-            </PrivateRoutes>
-          }
-        />
-        <Route
-          path="/rh/employee/list"
-          element={
-            <PrivateRoutes>
-              <RhEmployeeList />
-            </PrivateRoutes>
-          }
-        />
-        <Route
-          path="/rh/sheet"
-          element={
-            <PrivateRoutes>
-              <RhEmployeeSheet />
-            </PrivateRoutes>
-          }
-        />
-        <Route
-          path="/rh/vacation"
-          element={
-            <PrivateRoutes>
-              <RhEmployeeVacation />
-            </PrivateRoutes>
-          }
-        /> */}
-      </Routes>
-    </>
-  );
-};
+export const router = createBrowserRouter([
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/",
+        element: <Root />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: "/home",
+                element: <Home />,
+            },
+            {
+                path: "/rh",
+                element: <HumanResources />,
+            },
+        ],
+    },
+]);

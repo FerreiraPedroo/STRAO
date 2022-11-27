@@ -16,7 +16,10 @@ export const errorHandle = (_data, setNotificationModal, handleContext) => {
       setNotificationModal(responseError);
       break;
     default:
-      setNotificationModal({ codStatus: 0, message: `ERRO DESCONHECIDO: ${responseError.message}` });
+      setNotificationModal({
+        codStatus: 0,
+        message: `ERRO DESCONHECIDO: ${responseError.message}`,
+      });
       break;
   }
 };
