@@ -7,7 +7,7 @@ import { Notification } from "../../../component/Notification";
 import { GlobalUseContext } from "../../../provider/app";
 
 import { Button } from "../../../component/Button";
-import { Input } from "../../../component/Input";
+import { Input } from "../../../component/Input/Text/styles";
 
 import * as S from "./styles.jsx";
 
@@ -72,7 +72,6 @@ export const AdminUserEdit = () => {
           const categoryData = actual[dataOptions[_type][_action]].find(
             (value) => value.id === _id
           );
-          console.log(actual);
 
           if (categoryData) {
             actual[dataOptions[_type][_action]] = actual[
@@ -181,6 +180,7 @@ export const AdminUserEdit = () => {
                     {userData.allContracts &&
                       userData.allContracts.map((contract) => (
                         <option
+                          key={contract.id}
                           selected={contractSelect === contract.id}
                           value={contract.id}
                         >
@@ -201,7 +201,7 @@ export const AdminUserEdit = () => {
                 <S.HeaderTitle>Contratos associados</S.HeaderTitle>
                 {userData.userContracts &&
                   userData.userContracts.map((contract) => (
-                    <S.InputBox>
+                    <S.InputBox key={contract.id}>
                       <Input
                         type="textonly"
                         disabled={true}
@@ -240,6 +240,7 @@ export const AdminUserEdit = () => {
                       {userData.allDepartments &&
                         userData.allDepartments.map((department) => (
                           <option
+                            key={department.id}
                             selected={departmentSelect === department.id}
                             value={department.id}
                           >
@@ -260,7 +261,7 @@ export const AdminUserEdit = () => {
                   <S.HeaderTitle>Departamentos associados</S.HeaderTitle>
                   {userData.userDepartments &&
                     userData.userDepartments.map((department) => (
-                      <S.InputBox>
+                      <S.InputBox key={department.id}>
                         <Input
                           type="textonly"
                           disabled={true}
@@ -313,7 +314,7 @@ export const AdminUserEdit = () => {
                                       }
                                       value={action.id}
                                     >
-                                      {">> " + action.name}
+                                      {" > " + action.name}
                                     </option>
                                   )}
                                 </>

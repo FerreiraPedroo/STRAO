@@ -118,7 +118,6 @@ export const ModalMessage = styled.div`
   font-weight: bold;
   color: #060;
   padding: 20px;
-
 `;
 export const ButtonFormSubmit = styled.button`
   width: 128px;
@@ -133,7 +132,7 @@ export const ButtonFormSubmit = styled.button`
     background-color: #bbb;
   }
 
-  &:active{
+  &:active {
     color: #555;
     border-color: #000;
     background-color: #999;

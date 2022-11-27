@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const props = {
   textFontFamily: "Arial",
@@ -20,7 +20,6 @@ export const Container = styled.div`
   gap: 4px;
 `;
 
-
 export const PageTitle = styled.h1`
   font-family: ${props.textFontFamily};
   font-size: ${props.titleTextSize};
@@ -35,7 +34,6 @@ export const PageTitle = styled.h1`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  
 `;
 export const InputBox = styled.div``;
 export const InputTitleText = styled.p`
@@ -71,7 +69,7 @@ export const ButtonFormSubmit = styled.button`
     background-color: #bbb;
   }
 
-  &:active{
+  &:active {
     color: #555;
     border-color: #000;
     background-color: #999;

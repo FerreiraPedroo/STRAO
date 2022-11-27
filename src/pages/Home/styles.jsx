@@ -1,12 +1,12 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const props = {
-  'cardCategoryNameTextSize': '16px',
-}
+  cardCategoryNameTextSize: "16px",
+};
 
 export const Container = styled.div`
   width: 100%;
-  border: 1px solid #A9A9A9;
+  border: 1px solid #a9a9a9;
   padding: 16px 16px;
   display: flex;
   justify-content: start;

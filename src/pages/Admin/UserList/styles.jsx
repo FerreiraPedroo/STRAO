@@ -31,7 +31,6 @@ const props = {
   `,
 
   errorTextColor: "#f66",
-
 };
 
 export const Container = styled.div`

@@ -6,9 +6,9 @@ export const Notification = ({ type, msg, onClick }) => {
   const [showModal, setShowModal] = useState();
 
   const clickButton = () => {
-    setShowModal("")
-    onClick()
-  }
+    setShowModal("");
+    onClick();
+  };
   useEffect(() => {
     setShowModal(type);
   }, []);

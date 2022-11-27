@@ -1,32 +1,31 @@
 import styled from "styled-components";
 
 export const Window = styled.div`
-
   ${({ sizeWindow }) => `
-  min-width: ${sizeWindow ? sizeWindow.x : '100'}px;
-  min-height: ${sizeWindow ? sizeWindow.y : '100'}px;
+  min-width: ${sizeWindow ? sizeWindow.x : "100"}px;
+  min-height: ${sizeWindow ? sizeWindow.y : "100"}px;
   `}
 
   ${({ positionWindow }) => `
-  left: ${positionWindow ? positionWindow.x : '100'}px;
-  top: ${positionWindow ? positionWindow.y : '100'}px;
+  left: ${positionWindow ? positionWindow.x : "100"}px;
+  top: ${positionWindow ? positionWindow.y : "100"}px;
   `}
 
   position: absolute;
   display: flex;
   flex-direction: column;
-  background-color: #C0C0C0;
+  background-color: #c0c0c0;
   border: 4px double black;
   background-color: white;
   overflow-y: auto;
-  `;
+`;
 ///////////////////////////////////////////////
 export const TitleContainer = styled.div`
   width: 100%;
   height: 24px;
   display: flex;
   background-color: white;
-  `;
+`;
 export const MenuButton = styled.div`
   min-width: 24px;
   min-height: 24px;
@@ -41,8 +40,7 @@ export const MenuButton = styled.div`
   &:hover {
     cursor: pointer;
   }
-
-  `;
+`;
 export const TitleText = styled.div`
   width: 100%;
   min-height: 100%;
@@ -53,13 +51,13 @@ export const TitleText = styled.div`
   border-bottom: 1px solid black;
   background-color: white;
   font-size: 0.9rem;
-  `;
+`;
 export const ButtonBox = styled.div`
   min-width: 48px;
   min-height: 24px;
   display: flex;
   background-color: #c0c0c0;
-  `;
+`;
 export const MaxButton = styled.div`
   width: 24px;
   min-height: 24px;
@@ -75,7 +73,7 @@ export const MaxButton = styled.div`
   &:hover {
     cursor: pointer;
   }
-  `;
+`;
 export const MinButton = styled.div`
   width: 24px;
   min-height: 24px;
@@ -91,7 +89,7 @@ export const MinButton = styled.div`
   &:hover {
     cursor: pointer;
   }
-  `;
+`;
 ///////////////////////////////////////////////
 export const MenuContainer = styled.div`
   width: 100%;
@@ -99,7 +97,7 @@ export const MenuContainer = styled.div`
   display: flex;
   background-color: white;
   border-bottom: 1px solid black;
-  `;
+`;
 export const MenuText = styled.div`
   height: 16px;
   display: flex;
@@ -109,16 +107,16 @@ export const MenuText = styled.div`
   padding: 0 10px;
   border-bottom: 1px solid black;
 
-  &:hover{
+  &:hover {
     cursor: pointer;
     font-weight: bolder;
   }
-  `;
+`;
 ///////////////////////////////////////////////
 export const BodyContainer = styled.div`
   ${({ sizeWindow }) => `
-  max-width: ${sizeWindow ? sizeWindow.x : '100'}px;
-  min-height: ${sizeWindow ? sizeWindow.y : '100'}px;
+  max-width: ${sizeWindow ? sizeWindow.x : "100"}px;
+  min-height: ${sizeWindow ? sizeWindow.y : "100"}px;
   `}
 
   display: flex;
@@ -126,7 +124,7 @@ export const BodyContainer = styled.div`
   color: black;
   background-color: white;
   border-bottom: 1px solid black;
-  `;
+`;
 //////////////////////////////////////////////////
 export const Text = styled.div`
   font-size: 0.8rem;
@@ -144,21 +142,21 @@ export const StatusBarBox = styled.div`
   display: flex;
   font-size: 0.8rem;
   color: black;
-  background-color: #C0C0C0;
-  `;
+  background-color: #c0c0c0;
+`;
 export const StatusBar = styled.div`
   width: 100%;
   height: 18px;
   display: flex;
   font-size: 0.7rem;
   color: black;
-  background-color: #C0C0C0;
+  background-color: #c0c0c0;
   margin: 3px 8px 2px 8px;
   padding: 2px;
-  border: 1px inset #FFFFFF;
+  border: 1px inset #ffffff;
   border-left: 1px solid #808080;
   border-top: 1px solid #808080;
-  `;
+`;
 //////////////////////////////////////////////////
 export const Resize = styled.div`
   position: absolute;
@@ -169,10 +167,10 @@ export const Resize = styled.div`
   // display: flex;
   font-size: 0.8rem;
   color: black;
-  background-color: #C0C0C0;
+  background-color: #c0c0c0;
   // z-index: 100;
 
-  &:hover{
-    cursor: nw-resize	;
+  &:hover {
+    cursor: nw-resize;
   }
-  `;
+`;

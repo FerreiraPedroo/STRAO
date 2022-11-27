@@ -6,7 +6,7 @@ import { Notification } from "../../../component/Notification";
 import { GlobalUseContext } from "../../../provider/app";
 
 import { Button } from "../../../component/Button";
-import { Input } from "../../../component/Input";
+import { Input } from "../../../component/Input/Text";
 
 import * as S from "./styles.jsx";
 import { errorHandle } from "../../../services/ErrorHandle/index.jsx";
@@ -18,8 +18,8 @@ export const AdminUserList = () => {
   const [userList, setUserList] = useState();
   const [loading, setLoading] = useState(true);
 
-  const [filterUserName, setFilterUserName] = useState();
-  const [filterUserEmail, setFilterUserEmail] = useState();
+  const [filterUserName, setFilterUserName] = useState("");
+  const [filterUserEmail, setFilterUserEmail] = useState("");
 
   useEffect(() => {
     const getUserList = async () => {
@@ -80,6 +80,7 @@ export const AdminUserList = () => {
             </S.ListUserHeader>
             {userList.map((user) => (
               <S.UserBox
+                key={user.email}
                 onClick={() =>
                   navigate("/admin/user/edit", {
                     state: { email: user.email },

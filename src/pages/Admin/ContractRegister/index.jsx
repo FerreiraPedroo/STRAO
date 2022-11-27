@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { api } from "../../../services/api";
 import { Notification } from "../../../component/Notification";
 
-import * as S from './styles.jsx';
+import * as S from "./styles.jsx";
 
 export const AdminContractRegister = () => {
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ export const AdminContractRegister = () => {
 
   return (
     <S.Container>
-            {notificationModal.codStatus && (
+      {notificationModal.codStatus && (
         <Notification type="full" msg={notificationModal.msg} />
       )}
       <S.PageTitle>CADASTRO DE CONTRATO</S.PageTitle>
@@ -132,12 +132,11 @@ export const AdminContractRegister = () => {
           </S.InputErrorText>
         </S.InputBox>
 
-
         <S.ButtonFormSubmit type="submit">ENVIAR</S.ButtonFormSubmit>
         <S.SubmitErrorText>
           {submitReturnErrorMsg.codStatus && submitReturnErrorMsg.msg}
         </S.SubmitErrorText>
       </S.Form>
     </S.Container>
-  )
-}
+  );
+};

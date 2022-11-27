@@ -3,9 +3,9 @@ import * as S from "./styles";
 import { Check, FileText, MagnifyingGlass, Trash } from "phosphor-react";
 
 /**
- * 
- * @param {typeStyle} typeStyle "normal-128x32 | back-32x32 | find-40x32 | remove-40x32 | correct-40x32 | document-40x32" 
-  * @returns 
+ *
+ * @param {typeStyle} typeStyle "normal-128x32 | back-32x32 | find-40x32 | remove-40x32 | correct-40x32 | document-40x32"
+ * @returns
  */
 export const Button = ({
   value,
@@ -18,12 +18,14 @@ export const Button = ({
     <>
       {typeStyle === "back" && (
         <S.ButtonBack
-          width={32}
-          height={32}
+          width={48}
+          height={48}
           disabled={disable}
           theme={theme}
           onClick={onClick}
-        >{value}</S.ButtonBack>
+        >
+          {value}
+        </S.ButtonBack>
       )}
       {typeStyle === "find" && (
         <S.Button40x32

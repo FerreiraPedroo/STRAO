@@ -80,7 +80,6 @@ export const SubTitleStatus = styled.h2`
   color: ${({ status }) => (status === "active" ? "#00A300;" : "#DA532C;")};
 `;
 
-
 export const CenterContainer = styled.main`
   width: 100%;
   display: flex;
@@ -89,7 +88,6 @@ export const CenterContainer = styled.main`
   padding: 16px;
   gap: 16px;
 `;
-
 
 export const HeaderCenter = styled.div`
   display: flex;
@@ -107,13 +105,11 @@ export const RemoveButtonBox = styled.div`
   align-items: center;
 `;
 
-
 export const PrincipalData = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
 `;
-
 
 export const CategoryContainer = styled.div`
   display: flex;
@@ -121,7 +117,6 @@ export const CategoryContainer = styled.div`
   border-radius: 3px;
   gap: 16px;
 `;
-
 
 export const LeftContainer = styled.div`
   display: flex;
@@ -138,7 +133,6 @@ export const InputBox = styled.div`
   align-items: flex-end;
   gap: 8px;
 `;
-
 
 export const DepartmentContainer = styled.div`
   display: flex;

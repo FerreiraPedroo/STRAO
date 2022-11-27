@@ -1,12 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
 
-import { App } from './App';
+import { router } from "./routers/index";
 
-ReactDOM
-  .createRoot(document.getElementById('root'))
-  .render(
-    // <React.StrictMode>
-      <App />
-    // </React.StrictMode>
-    );
+import { GlobalProvider } from "./provider/app";
+import "./assets/globalcss.css";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  // <React.StrictMode>
+  <GlobalProvider>
+    <RouterProvider router={router} />
+  </GlobalProvider>
+  // </React.StrictMode>
+);

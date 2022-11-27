@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { api } from "../../../services/api";
@@ -74,11 +74,11 @@ export const AdminUserRegister = () => {
   return (
     <S.Container>
       {notificationModal.codStatus && (
-        <Notification type="full" msg={notificationModal.msg} />
+        <Notification type="full" msg={notificationModal.message} />
       )}
       <S.PageHeader>
-      <Button typeStyle="back" value="<" onClick={() => navigate(-1)} />
-      <S.PageTitle>REGISTRO DE USUÁRIO</S.PageTitle>
+        <Button typeStyle="back" value="<" onClick={() => navigate(-1)} />
+        <S.PageTitle>REGISTRO DE USUÁRIO</S.PageTitle>
       </S.PageHeader>
 
       <S.Form onSubmit={formik.handleSubmit}>
@@ -147,7 +147,7 @@ export const AdminUserRegister = () => {
           <S.Input
             id="passwordRepeat"
             name="passwordRepeat"
-            type="passwordRepeat"
+            type="password"
             value={formik.values.passwordRepeat}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}

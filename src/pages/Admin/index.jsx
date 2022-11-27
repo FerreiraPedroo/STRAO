@@ -9,15 +9,13 @@ export const Admin = () => {
   const [cards, setCards] = useState();
 
   useEffect(() => {
-
     setCards(userData.departments[pageName]);
   }, []);
 
   return (
     <S.Container>
-      {cards && cards.actions.map((card) => (
-        <Card key={card.name} data={card} />
-      ))}
+      {cards &&
+        cards.actions.map((card) => <Card key={card.name} data={card} />)}
     </S.Container>
   );
 };
