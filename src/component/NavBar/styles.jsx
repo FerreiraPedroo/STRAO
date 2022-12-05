@@ -48,7 +48,7 @@ export const MenuButton = styled.img`
 `;
 export const MenuOptions = styled.div`
     position: absolute;
-    top: 55px;
+    top: 47px;
     left: -9px;
 
     display: flex;

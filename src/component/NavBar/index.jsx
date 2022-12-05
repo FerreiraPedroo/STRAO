@@ -30,6 +30,7 @@ const menuCards = [
 ];
 
 export const NavBar = () => {
+    
     const [showMenu, setShowMenu] = useState(false);
     const navigate = useNavigate();
 

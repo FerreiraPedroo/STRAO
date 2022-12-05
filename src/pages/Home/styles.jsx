@@ -6,7 +6,6 @@ const props = {
 
 export const Container = styled.div`
   width: 100%;
-  border: 1px solid #a9a9a9;
   padding: 16px 16px;
   display: flex;
   justify-content: start;
