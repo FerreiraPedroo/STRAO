@@ -1,81 +1,95 @@
 import React, { createContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-    const [appLoading, setAppLoading] = useState(true);
+	const [appLoading, setAppLoading] = useState(true);
 
-    const [userToken, setUserToken] = useState();
-    const [userData, setUserData] = useState();
-    const [userDataVersion, setUserDataVersion] = useState();
+	const [userToken, setUserToken] = useState();
+	const [userData, setUserData] = useState();
+	const [userDataVersion, setUserDataVersion] = useState();
 
-    const handleContext = {
-        newLoginData: (_data) => {
-            setUserToken(_data.token);
-            setUserData(_data.userData);
-            setUserDataVersion(_data.dataVersion);
-            localStorage.setItem("strao-token", _data.token);
-            localStorage.setItem("strao-user-data", JSON.stringify(_data.userData));
-            localStorage.setItem("strao-user-data-version", _data.dataVersion);
-        },
+	const newLoginData = (data) => {
+		setUserToken(data.token);
+		setUserData(data.userData);
+		setUserDataVersion(data.dataVersion);
+		localStorage.setItem("strao-token", data.token);
+		localStorage.setItem("strao-user-data", JSON.stringify(data.userData));
+		localStorage.setItem("strao-user-data-version", data.dataVersion);
+	};
 
-        removeLoginData: () => {
-            localStorage.removeItem("strao-token");
-            localStorage.removeItem("strao-user-data");
-            localStorage.removeItem("strao-user-data-version");
-            setUserTokenData("");
-            setUserDataVersion("");
-            setUserData("");
-        },
+	const removeLoginData = () => {
+		localStorage.removeItem("strao-token");
+		localStorage.removeItem("strao-user-data");
+		localStorage.removeItem("strao-user-data-version");
+		setUserData("");
+		setUserToken("");
+		setUserDataVersion("");
+	};
 
-        checkUserDataVersion: (_version) => {
-            if (userDataVersion === _version) {
-                return true;
-            }
-            return false;
-        },
+	const checkUserDataVersion = (version) => {
+		if (userDataVersion === version) {
+			return true;
+		}
+		return false;
+	};
 
-        verifyTokenPresence: () => {
-            const verifyToken = localStorage.getItem("strao-token");
-            return !verifyToken
-        }
-    };
+	const verifyTokenPresence = () => {
+		const verifyUserToken = localStorage.getItem("strao-token");
+		const verifyUserData = localStorage.getItem("strao-user-data");
+		const verifyUserDataVersion = localStorage.getItem(
+			"strao-user-data-version"
+		);
 
-    useEffect(() => {
-        let storedToken = localStorage.getItem("strao-token");
-        let storedDataVersion = localStorage.getItem("strao-user-data-version");
-        let storedData;
+		if (!verifyUserToken || !verifyUserData || !verifyUserDataVersion) {
+			return false;
+		}
 
-        try {
-            storedData = JSON.parse(localStorage.getItem("strao-user-data"));
-        } catch (err) {
-            storedData = null;
-        }
+		return true;
+	};
 
-        if (!storedToken || !storedData || !storedDataVersion) {
-            localStorage.removeItem("strao-token");
-            localStorage.removeItem("strao-user-data-version");
-            localStorage.removeItem("strao-user-data");
-            setUserToken("");
-            setUserDataVersion("");
-            setUserData({});
-        }
+	useEffect(() => {
+		let storedToken = localStorage.getItem("strao-token");
+		let storedDataVersion = localStorage.getItem("strao-user-data-version");
+		let storedData;
 
-        if (storedToken && storedData && storedDataVersion) {
-            setUserToken(storedToken);
-            setUserDataVersion(storedDataVersion);
-            setUserData(storedData);
-        }
-    }, []);
+		try {
+			storedData = JSON.parse(localStorage.getItem("strao-user-data"));
+		} catch (err) {
+			storedData = null;
+		}
 
-    return (
-        <GlobalContext.Provider
-            value={{
-                handleContext,
-                userToken,
-            }}
-        >
-            {children}
-        </GlobalContext.Provider>
-    );
+		if (!storedToken || !storedData || !storedDataVersion) {
+			localStorage.removeItem("strao-token");
+			localStorage.removeItem("strao-user-data-version");
+			localStorage.removeItem("strao-user-data");
+			setUserToken("");
+			setUserDataVersion("");
+			setUserData();
+			<Link to="/" />;
+		}
+
+		if (storedToken && storedData && storedDataVersion) {
+			setUserToken(storedToken);
+			setUserDataVersion(storedDataVersion);
+			setUserData(storedData);
+		}
+	}, []);
+
+	return (
+		<GlobalContext.Provider
+			value={{
+				newLoginData,
+                removeLoginData,
+                checkUserDataVersion,
+                verifyTokenPresence,
+				userToken,
+				userData,
+				userDataVersion
+			}}
+		>
+			{children}
+		</GlobalContext.Provider>
+	);
 };

@@ -15,10 +15,10 @@ export const AdminUserRegister = () => {
   const formik = useFormik({
     initialValues: {
       name: "",
-      birthDate: "",
+      birth_date: "",
       email: "",
       password: "",
-      passwordRepeat: "",
+      password_repeat: "",
     },
     validate: (values) => {
       const errors = {};
@@ -29,8 +29,8 @@ export const AdminUserRegister = () => {
         errors.name = "O nome deve ter no minimo 4 letras.";
       }
 
-      if (!values.birthDate) {
-        errors.birthDate = "A data de nascimento é obrigatória.";
+      if (!values.birth_date) {
+        errors.birth_date = "A data de nascimento é obrigatória.";
       }
 
       if (!values.email) {
@@ -47,10 +47,10 @@ export const AdminUserRegister = () => {
         errors.password = "A senha deve ter entre 8 a 20 caracteres.";
       }
 
-      if (!values.passwordRepeat) {
-        errors.passwordRepeat = "A senha é obrigatória.";
-      } else if (values.passwordRepeat !== values.password) {
-        errors.passwordRepeat = "A senha não é igual.";
+      if (!values.password_repeat) {
+        errors.password_repeat = "A senha é obrigatória.";
+      } else if (values.password_repeat !== values.password) {
+        errors.password_repeat = "A senha não é igual.";
       }
 
       return errors;
@@ -123,7 +123,7 @@ export const AdminUserRegister = () => {
             onBlur={formik.handleBlur}
           />
           <S.InputErrorText>
-            {formik.touched.birthDate && formik.errors.birthDate}
+            {formik.touched.birth_date && formik.errors.birth_date}
           </S.InputErrorText>
         </S.InputBox>
 
@@ -148,12 +148,12 @@ export const AdminUserRegister = () => {
             id="passwordRepeat"
             name="passwordRepeat"
             type="password"
-            value={formik.values.passwordRepeat}
+            value={formik.values.password_repeat}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           <S.InputErrorText>
-            {formik.touched.passwordRepeat && formik.errors.passwordRepeat}
+            {formik.touched.password_repeat && formik.errors.password_repeat}
           </S.InputErrorText>
         </S.InputBox>
 

@@ -7,51 +7,56 @@ import * as S from "./styles";
 import homebg2 from "./img/home-bg2.png";
 
 export const Login = () => {
-    const { handleContext, userDataVersion } = useContext(GlobalContext);
-    const navigate = useNavigate();
-    
-    const [user, setUser] = useState("");
-    const [password, setPassword] = useState("");
-    const [errorLogin, setErrorLogin] = useState("");
+	const navigate = useNavigate();
+	const { newLoginData, userDataVersion } = useContext(GlobalContext);
 
-    const handleInputUser = (e) => {
-        setUser(e.target.value);
-    };
-    const handleInputPassword = (e) => {
-        setPassword(e.target.value);
-    };
-    const handleLogin = async () => {
-        setErrorLogin("");
-        const data = await loginService(user, password, userDataVersion);
+	const [user, setUser] = useState("");
+	const [password, setPassword] = useState("");
+	const [errorLogin, setErrorLogin] = useState("");
 
-        if (data.codStatus === 200) {
-            handleContext.newLoginData(data);
-            navigate("/home");
-        }
+	const handleInputUser = (e) => {
+		setUser(e.target.value);
+		setErrorLogin("");
+	};
+	const handleInputPassword = (e) => {
+		setPassword(e.target.value);
+		setErrorLogin("");
+	};
+	const handleLogin = async () => {
+		const data = await loginService(user, password, userDataVersion);
 
-        if (data.codStatus !== 200) {
-            setErrorLogin("Erro ao conectar.");
-            setErrorLogin(data.message);
-        }
-    };
+		if (data.codStatus === 200) {
+			newLoginData(data);
+			navigate("/home");
+		}
 
-    return (
-        <S.Container>
-            <S.LoginContainer>
-                <S.InputBox>
-                    <S.Text size="2">usuário</S.Text>
-                    <S.UserInput value={user} onChange={handleInputUser} />
+		if (data.codStatus !== 200) {
+			setErrorLogin("Erro ao conectar.");
+			setErrorLogin(data.message);
+		}
+	};
 
-                    <S.Text size="2">senha</S.Text>
-                    <S.PasswordInput type="password" value={password} onChange={handleInputPassword} />
+	return (
+		<S.Container>
+			<S.LoginContainer>
+				<S.InputBox>
+					<S.Text size="2">usuário</S.Text>
+					<S.UserInput value={user} onChange={handleInputUser} />
 
-                    <S.Text size="1">{errorLogin}</S.Text>
-                </S.InputBox>
+					<S.Text size="2">senha</S.Text>
+					<S.PasswordInput
+						type="password"
+						value={password}
+						onChange={handleInputPassword}
+					/>
 
-                <S.ButtonBox>
-                    <S.Button type="image" src={homebg2} onClick={() => handleLogin()} />
-                </S.ButtonBox>
-            </S.LoginContainer>
-        </S.Container>
-    );
+					<S.Text size="1">{errorLogin}</S.Text>
+				</S.InputBox>
+
+				<S.ButtonBox>
+					<S.Button type="image" src={homebg2} onClick={handleLogin} />
+				</S.ButtonBox>
+			</S.LoginContainer>
+		</S.Container>
+	);
 };
