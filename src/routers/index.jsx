@@ -19,7 +19,7 @@ import { AdminUserRegister } from "../pages/Admin/UserRegister";
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
-		<Route>
+		<Route path="/">
 			<Route path="/">
 				<Route index element={<Login />} />
 				<Route path="login" element={<Login />} />

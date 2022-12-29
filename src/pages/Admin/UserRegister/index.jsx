@@ -115,10 +115,10 @@ export const AdminUserRegister = () => {
         <S.InputBox>
           <S.InputTitleText>DATA DE NASCIMENTO</S.InputTitleText>
           <S.Input
-            id="birthDate"
-            name="birthDate"
+            id="birth_date"
+            name="birth_date"
             type="date"
-            value={formik.values.birthDate}
+            value={formik.values.birth_date}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -145,8 +145,8 @@ export const AdminUserRegister = () => {
         <S.InputBox>
           <S.InputTitleText>REPETIR SENHA</S.InputTitleText>
           <S.Input
-            id="passwordRepeat"
-            name="passwordRepeat"
+            id="password_repeat"
+            name="password_repeat"
             type="password"
             value={formik.values.password_repeat}
             onChange={formik.handleChange}

@@ -1,6 +1,6 @@
 import * as S from "./styles";
 
-import { Check, FileText, MagnifyingGlass, Trash } from "phosphor-react";
+import { Check, FileText, MagnifyingGlass, Trash, NotePencil } from "phosphor-react";
 
 /**
  *
@@ -53,6 +53,20 @@ export const Button = ({
           <Trash size={24} color="#ffffff" />
         </S.Button40x32>
       )}
+      {typeStyle === "edit" && (
+        <S.Button40x32
+          typeStyle={typeStyle}
+          value={value}
+          width={40}
+          height={32}
+          disabled={disable}
+          theme={theme}
+          onClick={onClick}
+        >
+          <NotePencil size={24} color="#ffffff" />
+        </S.Button40x32>
+      )}
+
       {typeStyle === "correct" && (
         <S.Button40x32
           typeStyle={typeStyle}

@@ -3,20 +3,22 @@ import * as S from "./styles";
 
 export const Input = ({
   type = "input",
-  title,
-  value,
+  filterTitle,
+  filterName,
+  filterValue,
+  filterOnChange,
+  filterPlaceholder,
   disabled,
-  placeholder,
-  onChange,
   readOnly,
 }) => {
   return (
     <S.Container type={type}>
-      <S.TitleText>{value && title}</S.TitleText>
+      <S.TitleText>{filterValue && filterTitle}</S.TitleText>
       <S.Input
-        onChange={onChange}
-        value={value}
-        placeholder={placeholder}
+        onChange={filterOnChange}
+        name={filterName}
+        value={filterValue}
+        placeholder={filterPlaceholder}
         disabled={disabled}
         readOnly={readOnly}
       />

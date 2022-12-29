@@ -1,111 +1,91 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../../services/api.js";
 import { Notification } from "../../../component/Notification";
 
 import { GlobalContext } from "../../../provider/app";
 
-import { Button } from "../../../component/Button";
-import { Input } from "../../../component/Input/Text";
-
-import * as S from "./styles.jsx";
 import { errorHandle } from "../../../services/ErrorHandle/index.jsx";
+import { PageList } from "../../../component/PageList/index.jsx";
 
 export const AdminUserList = () => {
 	const navigate = useNavigate();
-	const { handleContext, userData, userToken } = useContext(GlobalContext);
 
-	const [notificationModal, setNotificationModal] = useState();
-	const [userList, setUserList] = useState();
-	const [loading, setLoading] = useState(true);
+	const { userToken } = useContext(GlobalContext);
+	const [userListData] = useState({
+		columns: [
+			{ title: "status", htmlName: "status", size: 0 },
+			{ title: "nome", htmlName: "name", size: 0 },
+			{ title: "email", htmlName: "email", size: 0 },
+			{ title: "contrato", htmlName: "contract", size: 0 }
+		],
+		actions: [
+			{
+				title: "Remover",
+				typeStyle: "remove",
+				action: () => {}
+			},
+			{
+				title: "Editar",
+				typeStyle: "edit",
+				action: (data) =>
+					navigate("/admin/user/edit", {
+						state: { email: data.email }
+					})
+			}
+		],
+		filters: [
+			{
+				type: "text",
+				htmlName: "user",
+				htmlPlaceholder: "Usuário"
+			},
+			{
+				type: "list",
+				htmlName: "contract",
+				htmlPlaceholder: "Contrato"
+			},
+			{
+				type: "list",
+				htmlName: "status",
+				htmlPlaceholder: "",
+				defaultOption: 0,
+				options: ["ativo", "inativo"]
+			}
+		]
+	});
 
-	const [filterUserName, setFilterUserName] = useState("");
-	const [filterUserEmail, setFilterUserEmail] = useState("");
-
-	useEffect(() => {
-		const getUserList = async () => {
+	/**
+	 * @param filters - { name: value, name: value } objeto com os filtros que serão usados na requisição.
+	 * @returns
+	 */
+	const getUserList = (filters) => {
+		const getData = async function () {
 			try {
 				const { data } = await api({
 					url: "/admin/user/list",
 					method: "GET",
 					headers: { "x-access-token": userToken },
+					params: { ...filters },
 					withCredentials: true
 				});
-
-				setUserList(data);
-				setLoading(false);
+				return data;
 			} catch (error) {
 				errorHandle(error, setNotificationModal, handleContext);
 			}
 		};
-		getUserList();
-	}, []);
+		const data = getData();
+		return data;
+	};
 
 	return (
-		<S.Container>
-			<S.PageHeader>
-				<Button typeStyle="back" value="<" onClick={() => navigate(-1)} />
-				<S.PageTitle>LISTA DE USUÁRIOS</S.PageTitle>
-			</S.PageHeader>
-			{notificationModal && (
-				<Notification
-					type="full"
-					msg={notificationModal.message}
-					onClick={() => navigate(-1)}
-				/>
-			)}
-			{loading ? (
-				<>Carregando...</>
-			) : (
-				<S.CenterContainer>
-					<S.FilterContainer>
-						<S.FilterTitle>Filtro</S.FilterTitle>
-						<S.FilterInputBox>
-							<Input
-								title="Usuário"
-								onChange={(e) => setFilterUserName(e.target.value)}
-								value={filterUserName}
-								placeholder={"Usuário"}
-							/>
-							<Input
-								title="Email"
-								onChange={(e) => setFilterUserEmail(e.target.value)}
-								value={filterUserEmail}
-								placeholder={"Email"}
-							/>
-							<Button typeStyle="find" onClick={() => navigate(-1)} />
-						</S.FilterInputBox>
-					</S.FilterContainer>
-					<S.ListUserBox>
-						<S.ListUserHeader>
-							<S.ListHeadText w="96px">Situação</S.ListHeadText>
-							<S.ListHeadText w="384px">Nome</S.ListHeadText>
-							<S.ListHeadText w="320px">E-mail</S.ListHeadText>
-							<S.ListHeadText>Ações</S.ListHeadText>
-						</S.ListUserHeader>
-						{userList.map((user) => (
-							<S.UserBox
-								key={user.email}
-								onClick={() =>
-									navigate("/admin/user/edit", {
-										state: { email: user.email }
-									})
-								}
-							>
-								<S.UserText
-									w="96px"
-									color={user.status === "active" ? "#00A300" : "tomato"}
-								>
-									{user.status === "active" ? "Ativo" : "Inativo"}
-								</S.UserText>
-								<S.UserText w="384px">{user.name}</S.UserText>
-								<S.UserText w="320px">{user.email}</S.UserText>
-								<S.UserText></S.UserText>
-							</S.UserBox>
-						))}
-					</S.ListUserBox>
-				</S.CenterContainer>
-			)}
-		</S.Container>
+		<PageList
+			title="Lista de usuários"
+			subTitle="administre os usuários do sistema."
+			getListDataAPI={getUserList}
+			columns={userListData.columns}
+			filters={userListData.filters}
+			actions={userListData.actions}
+		/>
 	);
 };

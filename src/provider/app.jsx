@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-	const [appLoading, setAppLoading] = useState(true);
+	const [appLoading, setAppLoading] = useState(false);
 
 	const [userToken, setUserToken] = useState();
 	const [userData, setUserData] = useState();
@@ -67,7 +67,6 @@ export const GlobalProvider = ({ children }) => {
 			setUserToken("");
 			setUserDataVersion("");
 			setUserData();
-			<Link to="/" />;
 		}
 
 		if (storedToken && storedData && storedDataVersion) {
@@ -75,21 +74,22 @@ export const GlobalProvider = ({ children }) => {
 			setUserDataVersion(storedDataVersion);
 			setUserData(storedData);
 		}
+        setAppLoading(true);
 	}, []);
 
 	return (
 		<GlobalContext.Provider
 			value={{
 				newLoginData,
-                removeLoginData,
-                checkUserDataVersion,
-                verifyTokenPresence,
+				removeLoginData,
+				checkUserDataVersion,
+				verifyTokenPresence,
 				userToken,
 				userData,
 				userDataVersion
 			}}
 		>
-			{children}
+			{appLoading && children}
 		</GlobalContext.Provider>
 	);
 };
