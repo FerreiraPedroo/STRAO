@@ -15,6 +15,7 @@ import { HumanResources } from "../pages/HumanResources";
 import { HumanResourcesEmployeeRegister } from "../pages/HumanResources/EmployeeRegister";
 
 import { AdminUserList } from "../pages/Admin/UserList";
+import { AdminUserEdit } from "../pages/Admin/UserEdit";
 import { AdminUserRegister } from "../pages/Admin/UserRegister";
 
 export const router = createBrowserRouter(
@@ -37,8 +38,9 @@ export const router = createBrowserRouter(
 
 				<Route path="admin">
 					<Route index element={<Admin />} />
-					<Route path="user/register" element={<AdminUserRegister />} />
 					<Route path="user/list" element={<AdminUserList />} />
+					<Route path="user/edit" element={<AdminUserEdit />} />
+					<Route path="user/register" element={<AdminUserRegister />} />
 				</Route>
 			</Route>
 		</Route>
