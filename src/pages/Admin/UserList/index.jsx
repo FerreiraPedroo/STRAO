@@ -1,17 +1,15 @@
 import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api.js";
-import { Notification } from "../../../component/Notification";
 
+import { NotificationModal } from "../../../component/NotificationModal";
 import { GlobalContext } from "../../../provider/app";
-
-import { errorHandle } from "../../../services/ErrorHandle/index.jsx";
 import { PageList } from "../../../component/PageList/index.jsx";
 
 export const AdminUserList = () => {
 	const navigate = useNavigate();
-
 	const { userToken } = useContext(GlobalContext);
+	const [notification, setNotification] = useState();
 	const [userListData] = useState({
 		columns: [
 			{ title: "status", htmlName: "status", size: 0 },
@@ -30,7 +28,7 @@ export const AdminUserList = () => {
 				typeStyle: "edit",
 				action: (data) =>
 					navigate("/admin/user/edit", {
-						state: { email: data.email }
+						state: { userId: data._id }
 					})
 			}
 		],
@@ -55,11 +53,8 @@ export const AdminUserList = () => {
 		]
 	});
 
-	/**
-	 * @param filters - { name: value, name: value } objeto com os filtros que serão usados na requisição.
-	 * @returns
-	 */
 	const getUserList = (filters) => {
+		// filters - { name: value, name: value } objeto com os filtros que serão usados na requisição.
 		const getData = async function () {
 			try {
 				const { data } = await api({
@@ -71,7 +66,11 @@ export const AdminUserList = () => {
 				});
 				return data;
 			} catch (error) {
-				errorHandle(error, setNotificationModal, handleContext);
+				if (!error.response.status && !error.response.data) {
+					error.response.data = { message: error.message };
+				}
+				setNotification(error.response.data);
+				return [];
 			}
 		};
 		const data = getData();
@@ -79,13 +78,22 @@ export const AdminUserList = () => {
 	};
 
 	return (
-		<PageList
-			title="Lista de usuários"
-			subTitle="administre os usuários do sistema."
-			getListDataAPI={getUserList}
-			columns={userListData.columns}
-			filters={userListData.filters}
-			actions={userListData.actions}
-		/>
+		<>
+			{notification && (
+				<NotificationModal
+					type={"full"}
+					msg={notification.message}
+					onClick={() => navigate(-1)}
+				/>
+			)}
+			<PageList
+				title="Lista de usuários"
+				subTitle="administre os usuários do sistema."
+				getListDataAPI={getUserList}
+				columns={userListData.columns}
+				filters={userListData.filters}
+				actions={userListData.actions}
+			/>
+		</>
 	);
 };

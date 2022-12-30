@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import * as N from "./styled";
 
-export const Notification = ({ type, msg, onClick }) => {
+export const NotificationModal = ({ type, msg, onClick }) => {
   const [showModal, setShowModal] = useState();
 
   const clickButton = () => {
@@ -15,7 +15,7 @@ export const Notification = ({ type, msg, onClick }) => {
 
   return (
     <>
-      {showModal === "text" && (
+      {showModal === "modal" && (
         <N.Container>
           <N.TitleText notified={"success"}>Notificação</N.TitleText>
           <N.NotificationText notified={"success"}>
