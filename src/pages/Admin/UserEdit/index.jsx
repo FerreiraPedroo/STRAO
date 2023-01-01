@@ -59,7 +59,7 @@ export const AdminUserEdit = () => {
 						type: _type,
 						action: _action,
 						id: _id,
-						email: userData.email
+						userId: location.state.userId
 					}
 				},
 				{ headers: { "x-access-token": userToken } }
@@ -98,7 +98,6 @@ export const AdminUserEdit = () => {
 			try {
 				const { data } = await api.get("admin/user/data", {
 					params: { userId: location.state.userId },
-					data: { userId: location.state.userId },
 					headers: { "x-access-token": userToken }
 				});
 				setUserData(data);
@@ -177,7 +176,7 @@ export const AdminUserEdit = () => {
 
 										{userData.allContracts &&
 											userData.allContracts.map((contract) => (
-												<option key={contract.id} value={contract.title}>
+												<option key={contract.id} value={contract.id}>
 													{contract.title}
 												</option>
 											))}
@@ -232,7 +231,7 @@ export const AdminUserEdit = () => {
 												{userData.allDepartments &&
 													userData.allDepartments.map((department) => (
 														<option
-															value={department.title}
+															value={department.id}
 															key={department.id}
 														>
 															{department.title}
@@ -299,7 +298,7 @@ export const AdminUserEdit = () => {
 																		/>
 																	)}
 																	{action.department_id === department.id && (
-																		<option value={action.title}>
+																		<option value={action.id}>
 																			{" > " + action.title}
 																		</option>
 																	)}

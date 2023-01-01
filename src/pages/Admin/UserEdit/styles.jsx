@@ -113,9 +113,10 @@ export const PrincipalData = styled.div`
 
 export const CategoryContainer = styled.div`
 	display: flex;
+	flex-wrap: wrap;
 	border: 2px solid #767676;
 	border-radius: 3px;
-	gap: 16px;
+	padding-bottom: 10px;
 `;
 
 export const LeftContainer = styled.div`
@@ -143,13 +144,14 @@ export const DepartmentContainer = styled.div`
 `;
 export const SubDepartmentContainer = styled.div`
 	display: flex;
+	flex-wrap: wrap;
 `;
 export const SubDepartmentActionsContainer = styled.div`
 	width: 100%;
-    display: flex;
-	border: 1px solid #767676;
-	margin: 8px 16px;
-	border-radius: 3px;
+	display: flex;
+	flex-wrap: wrap;
+	border-top: 1px solid #767676;
+	padding-bottom: 10px;
 `;
 export const DepartmentAction = styled.p`
 	padding-top: 8px;
