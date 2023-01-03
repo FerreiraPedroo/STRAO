@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { ArrowBendRightDown, ArrowFatLeft } from "phosphor-react";
 import { Button } from "../../component/Button";
 import { Input } from "../../component/Input/Text";
+import { Select } from "../Input/Select/index";
 
 import * as S from "./styles.jsx";
 
@@ -69,7 +71,7 @@ export const PageList = ({
 	filters = []
 }) => {
 	const navigate = useNavigate();
-	const [listData, setListData] = useState([]);
+	const [listData, setListData] = useState();
 	const listRefHTML = useRef();
 	const [headerInfo, setHeaderInfo] = useState();
 	const [listChangeSize, setListChangeSize] = useState(false);
@@ -79,11 +81,17 @@ export const PageList = ({
 	const [filterState, setFilterState] = useState(
 		(() => {
 			return filters.reduce((acc, cur) => {
+				if (cur.type === "list") {
+					return {
+						...acc,
+						[cur.htmlName]: cur.options[cur.defaultOption].value
+					};
+				}
 				return { ...acc, [cur.htmlName]: "" };
 			}, {});
 		})()
 	);
-
+    console.log(filterState)
 	function changeFilter(event) {
 		setFilterState(
 			(prev) => (prev = { ...prev, [event.target.name]: event.target.value })
@@ -95,8 +103,16 @@ export const PageList = ({
 	}
 
 	useEffect(() => {
+		const filter = {};
+		for (const [key, value] of Object.entries(filterState)) {
+			if (value) {
+				filter[key] = value;
+			} else {
+				delete filter[key];
+			}
+		}
 		const getData = async () => {
-			const data = await getListDataAPI(filterState);
+			const data = await getListDataAPI(filter);
 			setListData(data);
 		};
 		getData();
@@ -106,18 +122,26 @@ export const PageList = ({
 		if (listRefHTML.current) {
 			const rows = listRefHTML.current.children;
 			const columnsInfo = columns;
+			const columnsSize = [];
 
 			for (let i = 0; i < rows.length; i++) {
 				const column = rows[i].children;
 				for (let r = 0; r < column.length; r++) {
-					if (!columnsInfo[r].size) {
-						columnsInfo[r].size = column[r].offsetWidth;
+					if (!columnsSize[r]) {
+						columnsSize[r] = column[r].offsetWidth;
 					}
-					if (columnsInfo[r].size < column[r].offsetWidth) {
-						columnsInfo[r].size = column[r].offsetWidth;
+					if (columnsSize[r] < column[r].offsetWidth) {
+						columnsSize[r] = column[r].offsetWidth;
 					}
 				}
 			}
+
+			for (let i = 0; i < columnsInfo.length; i++) {
+				columnsInfo[
+					i
+				].size = `${columnsInfo[i].minSize}px; max-width:${columnsInfo[i].maxSize}px; flex: auto; width:${columnsSize[i]}`;
+			}
+
 			setListChangeSize((prevState) => !prevState);
 			setHeaderInfo(columnsInfo);
 		}
@@ -125,29 +149,39 @@ export const PageList = ({
 
 	return (
 		<S.Container>
-			<S.PageHeader>
-				<Button typeStyle="back" value="<" onClick={() => navigate(-1)}>
-					Voltar
-				</Button>
-				<S.PageTitle>
-					{title}
-					<S.PageSubTitle>{subTitle}</S.PageSubTitle>
-				</S.PageTitle>
-			</S.PageHeader>
-
 			<S.CenterContainer>
+
 				<S.FilterContainer>
 					<S.FilterTitle>Filtros</S.FilterTitle>
 					<S.FilterInputBox>
 						{filters.map((filter) => (
-							<Input
-								key={filter.htmlName}
-								filterTitle={filter.title}
-								filterName={filter.htmlName}
-								filterValue={filterState[filter.htmlName]}
-								filterOnChange={changeFilter}
-								filterPlaceholder={filter.htmlPlaceholder}
-							/>
+							<div key={filter.htmlName}>
+								{filter.type == "list" && (
+									<Select
+										filterTitle={filter.title}
+										filterName={filter.htmlName}
+										filterValue={filterState[filter.htmlName]}
+										filterOnChange={changeFilter}
+										filterPlaceholder={filter.htmlPlaceholder}
+									>
+										{filter.options &&
+											filter.options.map((option) => (
+												<option key={option.value} value={option.value}>
+													{option.title}
+												</option>
+											))}
+									</Select>
+								)}
+								{filter.type == "text" && (
+									<Input
+										filterTitle={filter.title}
+										filterName={filter.htmlName}
+										filterValue={filterState[filter.htmlName]}
+										filterOnChange={changeFilter}
+										filterPlaceholder={filter.htmlPlaceholder}
+									/>
+								)}
+							</div>
 						))}
 						<Button typeStyle="find" onClick={getNewFilteredListData} />
 					</S.FilterInputBox>
@@ -170,7 +204,8 @@ export const PageList = ({
 
 				<S.ListUserContainer ref={listRefHTML}>
 					<S.ListUserHeaderBox>
-						{listData.length != 0 &&
+						{listData &&
+							listData.length != 0 &&
 							headerInfo.map((header) => (
 								<S.ListHeadText
 									key={header.htmlName}
@@ -181,23 +216,28 @@ export const PageList = ({
 								</S.ListHeadText>
 							))}
 					</S.ListUserHeaderBox>
-					{listData.length == 0 && <>Carregando...</>}
-					{listData.map((data) => (
-						<S.ListUserBox
-							key={JSON.stringify(data)}
-							reloadListSize={listChangeSize}
-							data-selected={data == rowSelected}
-							onClick={() => setRowSelected(data)}
-						>
-							{headerInfo.map((column) => (
-								<S.UserText key={column.htmlName} w={column.size}>
-									{data[column.htmlName]}
-								</S.UserText>
-							))}
-						</S.ListUserBox>
-					))}
+
+					{listData &&
+						listData.map((data) => (
+							<S.ListUserBox
+								key={JSON.stringify(data)}
+								reloadListSize={listChangeSize}
+								data-selected={data == rowSelected}
+								onClick={() => setRowSelected(data)}
+							>
+								{headerInfo.map((column) => (
+									<S.UserText key={column.htmlName} w={column.size}>
+										{data[column.htmlName]}
+									</S.UserText>
+								))}
+							</S.ListUserBox>
+						))}
 				</S.ListUserContainer>
+                
 			</S.CenterContainer>
+
+			{!listData && <>Carregando...</>}
+			{listData && listData.length == 0 && <>Lista vazia</>}
 		</S.Container>
 	);
 };

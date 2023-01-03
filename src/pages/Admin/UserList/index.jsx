@@ -5,6 +5,9 @@ import { api } from "../../../services/api.js";
 import { NotificationModal } from "../../../component/NotificationModal";
 import { GlobalContext } from "../../../provider/app";
 import { PageList } from "../../../component/PageList/index.jsx";
+import { PageTitle } from "../../../component/PageTitle/index.jsx";
+
+import * as S from "./styles";
 
 export const AdminUserList = () => {
 	const navigate = useNavigate();
@@ -12,10 +15,28 @@ export const AdminUserList = () => {
 	const [notification, setNotification] = useState();
 	const [userListData] = useState({
 		columns: [
-			{ title: "status", htmlName: "status", size: 0 },
-			{ title: "nome", htmlName: "name", size: 0 },
-			{ title: "email", htmlName: "email", size: 0 },
-			{ title: "contrato", htmlName: "contract", size: 0 }
+			{
+				title: "status",
+				htmlName: "status",
+				size: 0,
+				minSize: 120,
+				maxSize: 120
+			},
+			{ title: "nome", htmlName: "name", size: 0, minSize: 120, maxSize: 700 },
+			{
+				title: "email",
+				htmlName: "email",
+				size: 0,
+				minSize: 120,
+				maxSize: 320
+			},
+			{
+				title: "contrato",
+				htmlName: "contract",
+				size: 0,
+				minSize: 120,
+				maxSize: "50%"
+			}
 		],
 		actions: [
 			{
@@ -35,20 +56,18 @@ export const AdminUserList = () => {
 		filters: [
 			{
 				type: "text",
-				htmlName: "user",
-				htmlPlaceholder: "Usuário"
-			},
-			{
-				type: "list",
-				htmlName: "contract",
-				htmlPlaceholder: "Contrato"
+				htmlName: "name",
+				htmlPlaceholder: "Nome"
 			},
 			{
 				type: "list",
 				htmlName: "status",
 				htmlPlaceholder: "",
-				defaultOption: 0,
-				options: ["ativo", "inativo"]
+				defaultOption: 1,
+				options: [
+					{ title: "ativo", value: "active" },
+					{ title: "inativo", value: "inactive" }
+				]
 			}
 		]
 	});
@@ -78,7 +97,7 @@ export const AdminUserList = () => {
 	};
 
 	return (
-		<>
+		<S.Container>
 			{notification && (
 				<NotificationModal
 					type={"full"}
@@ -86,14 +105,16 @@ export const AdminUserList = () => {
 					onClick={() => navigate(-1)}
 				/>
 			)}
+			<PageTitle
+				title="Lista de usuários do sistema"
+				subTitle="administre o acesso ao sistema"
+			/>
 			<PageList
-				title="Lista de usuários"
-				subTitle="administre os usuários do sistema."
 				getListDataAPI={getUserList}
 				columns={userListData.columns}
 				filters={userListData.filters}
 				actions={userListData.actions}
 			/>
-		</>
+		</S.Container>
 	);
 };

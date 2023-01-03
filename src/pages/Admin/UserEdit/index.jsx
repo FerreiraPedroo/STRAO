@@ -18,9 +18,6 @@ export const AdminUserEdit = () => {
 
 	const [loading, setLoading] = useState(true);
 	const [userData, setUserData] = useState();
-	const [contracts, setContracts] = useState([]);
-	const [departments, setDepartments] = useState([]);
-	const [departmentActions, setDepartmentActions] = useState([]);
 
 	const [contractSelect, setContractSelect] = useState("");
 	const [departmentSelect, setDepartmentSelect] = useState("");
@@ -101,9 +98,6 @@ export const AdminUserEdit = () => {
 					headers: { "x-access-token": userToken }
 				});
 				setUserData(data);
-				setContracts(data.userContracts);
-				setDepartments(data.userDepartments);
-				setDepartmentActions(data.userDepartmentActions);
 			} catch (error) {}
 			setLoading(false);
 		};

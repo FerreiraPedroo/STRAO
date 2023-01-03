@@ -7,7 +7,7 @@ export const Card = ({ data }) => {
 	const navigate = useNavigate();
 
 	return (
-		<S.Container onClick={() => navigate(data.url)}>
+		<S.Container onClick={() => navigate(data.path)}>
 			<S.Box>
 				<S.Img src={data.img} />
 				{/* <S.CategoryNotification>0</S.CategoryNotification> */}

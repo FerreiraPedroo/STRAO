@@ -16,7 +16,7 @@ export const TitleText = styled.p`
 
 export const Select = styled.select`
   width: 256px;
-  height: 32px;
+  height: 28px;
   padding: 4px;
   background: #ffffff;
   border: 0.5px solid #a1a1a1;

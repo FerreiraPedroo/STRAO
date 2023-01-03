@@ -13,7 +13,7 @@ export const Input = ({
 }) => {
   return (
     <S.Container type={type}>
-      <S.TitleText>{filterValue && filterTitle}</S.TitleText>
+      <S.TitleText disabled={disabled}>{filterValue && filterPlaceholder}</S.TitleText>
       <S.Input
         onChange={filterOnChange}
         name={filterName}

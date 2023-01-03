@@ -15,12 +15,12 @@ export const Select = ({
 		<S.Container>
 			<S.TitleText>{filterValue && filterTitle}</S.TitleText>
 			<S.Select
-				onChange={filterOnChange}
 				name={filterName}
-				value={filterValue}
-				placeholder={filterPlaceholder}
+				defaultValue={filterValue}
 				disabled={disabled}
 				readOnly={readOnly}
+				onChange={filterOnChange}
+				placeholder={filterPlaceholder}
 			>
 				{children}
 			</S.Select>

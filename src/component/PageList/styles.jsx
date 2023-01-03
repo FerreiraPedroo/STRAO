@@ -35,8 +35,7 @@ export const Container = styled.div`
 	flex-wrap: wrap;
 	justify-content: center;
 	align-content: start;
-	background-color: #ededed;
-	padding: 16px 24px;
+	background-color: #f5f3f0;
 `;
 
 export const PageHeader = styled.div`
@@ -65,6 +64,8 @@ export const FilterContainer = styled.div`
 	background-color: #e5e5e5;
 	padding: 0px 16px 12px 16px;
 	gap: 16px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
 `;
 export const FilterTitle = styled.div`
 	${props.headeTitle}
@@ -84,23 +85,25 @@ export const ActionsContainer = styled.div`
 	background-color: #e5e5e5;
 	padding: 12px 16px 12px 16px;
 	gap: 16px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
 `;
 export const ActionsTitle = styled.div`
 	${props.headeTitle}
 	align-self: center;
 `;
 export const ActionButtonBox = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 6px;
 `;
 
 export const ListUserContainer = styled.div`
 	display: flex;
+	width: 100%;
 	align-self: start;
 	flex-direction: column;
-	// border: 1px solid red;
 `;
 export const ListUserHeaderBox = styled.div`
 	height: 32px;
@@ -122,6 +125,7 @@ export const ListHeadText = styled.p`
 `;
 export const ListUserBox = styled.div`
 	display: flex;
+	width: 100%;
 	justify-content: start;
 	margin-bottom: 1px;
 	gap: 2px;
@@ -135,8 +139,8 @@ export const ListUserBox = styled.div`
 	}
 `;
 export const UserText = styled.div`
-	max-width: 320px;
-	${(props) => `min-width:${props.w}px`};
+
+	${({ w }) => `min-width:${w}px`};
 	${({ color }) => (color ? `color:${color}` : "")};
 	padding: 4px 10px;
 	background: #dddddd;
