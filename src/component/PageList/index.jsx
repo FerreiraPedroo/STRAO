@@ -1,122 +1,30 @@
-import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-import { ArrowBendRightDown, ArrowFatLeft } from "phosphor-react";
-import { Button } from "../../component/Button";
-import { Input } from "../../component/Input/Text";
-import { Select } from "../Input/Select/index";
+import React, { useState, useRef, useLayoutEffect } from "react";
 
 import * as S from "./styles.jsx";
 
 // exemplo
-// const [userListData] = useState({
-//     columns: [
-//         { title: "status", htmlName: "status", size: 0 },
-//         { title: "nome", htmlName: "name", size: 0 },
-//         { title: "email", htmlName: "email", size: 0 },
-//         { title: "contrato", htmlName: "contract", size: 0 }
-//     ],
-//     actions: [
-//         {
-//             title: "Remover",
-//             typeStyle: "remove",
-//             action: () => {}
-//         },
-//         {
-//             title: "Editar",
-//             typeStyle: "edit",
-//             action: (data) =>
-//                 navigate("/admin/user/edit", {
-//                     state: { email: data.email }
-//                 })
-//         }
-//     ],
-//     filters: [
-//         {
-//             type: "text",
-//             htmlName: "user",
-//             htmlPlaceholder: "Usuário"
-//         },
-//         {
-//             type: "list",
-//             htmlName: "contract",
-//             htmlPlaceholder: "Contrato"
-//         },
-//         {
-//             type: "list",
-//             htmlName: "status",
-//             htmlPlaceholder: "",
-//             defaultOption: 0,
-//             options: ["ativo", "inativo"]
-//         }
-//     ]
-// });
+// const userListData = {
+// 	columns: [
+// 		{ title: "status", htmlName: "status", size: 0 },
+// 		{ title: "nome", htmlName: "name", size: 0 },
+// 		{ title: "email", htmlName: "email", size: 0 },
+// 		{ title: "contrato", htmlName: "contract", size: 0 }
+// 	]
+// };
 
 /**
- 
- * @param title - String - Titulo principal da página.
- * @param subTitle - String - Sub titulo da página.
- * @param getDataAPI - Função - API para obter os dados que serão exibidos na lista.
- * @param column - Array `[{ title, htmlName ,size }]` - Nome das colunas que serão exibidas na lista na ordem que estiver no array, os `htmlName` devem ser o mesmo do retorno da api.
- * @param actions - Array `[{ title, typeStyle, action(data)}] `
- * @param filters - Array `[{ type, htmlName, htmlPlaceholder }]` - Filtros que serão exibidos.
- * @returns
+ *
  */
-export const PageList = ({
-	title,
-	subTitle,
-	getListDataAPI,
-	columns = [],
-	actions = [],
-	filters = []
-}) => {
-	const navigate = useNavigate();
-	const [listData, setListData] = useState();
+export const PageList = ({ listData, columns = [], getDataSelected, loading = false }) => {
 	const listRefHTML = useRef();
-	const [headerInfo, setHeaderInfo] = useState();
+	const [headerInfo, setHeaderInfo] = useState([]);
+	const [dataSelected, setDataSelected] = useState();
 	const [listChangeSize, setListChangeSize] = useState(false);
 
-	const [rowSelected, setRowSelected] = useState();
-	const [filterChangeListData, setFilterChangeListData] = useState(false);
-	const [filterState, setFilterState] = useState(
-		(() => {
-			return filters.reduce((acc, cur) => {
-				if (cur.type === "list") {
-					return {
-						...acc,
-						[cur.htmlName]: cur.options[cur.defaultOption].value
-					};
-				}
-				return { ...acc, [cur.htmlName]: "" };
-			}, {});
-		})()
-	);
-    console.log(filterState)
-	function changeFilter(event) {
-		setFilterState(
-			(prev) => (prev = { ...prev, [event.target.name]: event.target.value })
-		);
+	function handleDataSelected(data) {
+		getDataSelected(data);
+		setDataSelected(data);
 	}
-
-	function getNewFilteredListData() {
-		setFilterChangeListData((prev) => !prev);
-	}
-
-	useEffect(() => {
-		const filter = {};
-		for (const [key, value] of Object.entries(filterState)) {
-			if (value) {
-				filter[key] = value;
-			} else {
-				delete filter[key];
-			}
-		}
-		const getData = async () => {
-			const data = await getListDataAPI(filter);
-			setListData(data);
-		};
-		getData();
-	}, [filterChangeListData]);
 
 	useLayoutEffect(() => {
 		if (listRefHTML.current) {
@@ -150,58 +58,6 @@ export const PageList = ({
 	return (
 		<S.Container>
 			<S.CenterContainer>
-
-				<S.FilterContainer>
-					<S.FilterTitle>Filtros</S.FilterTitle>
-					<S.FilterInputBox>
-						{filters.map((filter) => (
-							<div key={filter.htmlName}>
-								{filter.type == "list" && (
-									<Select
-										filterTitle={filter.title}
-										filterName={filter.htmlName}
-										filterValue={filterState[filter.htmlName]}
-										filterOnChange={changeFilter}
-										filterPlaceholder={filter.htmlPlaceholder}
-									>
-										{filter.options &&
-											filter.options.map((option) => (
-												<option key={option.value} value={option.value}>
-													{option.title}
-												</option>
-											))}
-									</Select>
-								)}
-								{filter.type == "text" && (
-									<Input
-										filterTitle={filter.title}
-										filterName={filter.htmlName}
-										filterValue={filterState[filter.htmlName]}
-										filterOnChange={changeFilter}
-										filterPlaceholder={filter.htmlPlaceholder}
-									/>
-								)}
-							</div>
-						))}
-						<Button typeStyle="find" onClick={getNewFilteredListData} />
-					</S.FilterInputBox>
-				</S.FilterContainer>
-
-				<S.ActionsContainer>
-					<S.ActionsTitle>Ações</S.ActionsTitle>
-					{actions.map((action) => (
-						<S.ActionButtonBox key={action.title}>
-							<Button
-								typeStyle={action.typeStyle}
-								title={action.title}
-								onClick={() => action.action(rowSelected)}
-								disable={!rowSelected}
-							/>
-							{action.title}
-						</S.ActionButtonBox>
-					))}
-				</S.ActionsContainer>
-
 				<S.ListUserContainer ref={listRefHTML}>
 					<S.ListUserHeaderBox>
 						{listData &&
@@ -216,14 +72,13 @@ export const PageList = ({
 								</S.ListHeadText>
 							))}
 					</S.ListUserHeaderBox>
-
 					{listData &&
 						listData.map((data) => (
 							<S.ListUserBox
 								key={JSON.stringify(data)}
 								reloadListSize={listChangeSize}
-								data-selected={data == rowSelected}
-								onClick={() => setRowSelected(data)}
+								data-selected={data == dataSelected}
+								onClick={() => handleDataSelected(data)}
 							>
 								{headerInfo.map((column) => (
 									<S.UserText key={column.htmlName} w={column.size}>
@@ -233,7 +88,6 @@ export const PageList = ({
 							</S.ListUserBox>
 						))}
 				</S.ListUserContainer>
-                
 			</S.CenterContainer>
 
 			{!listData && <>Carregando...</>}

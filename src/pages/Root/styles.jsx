@@ -6,6 +6,5 @@ export const Container = styled.div`
 
 export const CenterContainer = styled.div`
 	display: flex;
-	height: 100vh;
 	background-color: #f5f3f0;
 `;

@@ -1,24 +1,22 @@
 import React from "react";
 import * as S from "./styles";
 
-export const Input = ({
-  type = "input",
-  filterTitle,
-  filterName,
-  filterValue,
-  filterOnChange,
-  filterPlaceholder,
+export const InputText = ({
+  inputName,
+  inputValue,
+  inputOnChange,
+  inputPlaceholder,
   disabled,
   readOnly,
 }) => {
   return (
-    <S.Container type={type}>
-      <S.TitleText disabled={disabled}>{filterValue && filterPlaceholder}</S.TitleText>
+    <S.Container>
+      <S.TitleText disabled={disabled}>{inputValue && inputPlaceholder}</S.TitleText>
       <S.Input
-        onChange={filterOnChange}
-        name={filterName}
-        value={filterValue}
-        placeholder={filterPlaceholder}
+        onChange={inputOnChange}
+        name={inputName}
+        value={inputValue}
+        placeholder={inputPlaceholder}
         disabled={disabled}
         readOnly={readOnly}
       />

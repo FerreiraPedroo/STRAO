@@ -112,6 +112,32 @@ const propsTheme = {
         cursor: default;
     }  
   `,
+	hidden: `
+    background: #1E90FF;
+    border: 1px solid #ADD8E6;
+    &:disabled{
+        color: #9F9F9F;
+        border: 2px solid #A5C2CC;
+        background-color: #81ADD8;
+        box-shadow: 0px 0px 0px #000000;
+    }
+    &:hover:disabled{
+        cursor: default;
+    } 
+    `,
+	show: `
+    background: #1E90FF;
+    border: 1px solid #ADD8E6;
+    &:disabled{
+        color: #9F9F9F;
+        border: 2px solid #A5C2CC;
+        background-color: #81ADD8;
+        box-shadow: 0px 0px 0px #000000;
+    }
+    &:hover:disabled{
+        cursor: default;
+    } 
+    `,
 	document: `
     background: #1E90FF;
     border: 1px solid #ADD8E6;

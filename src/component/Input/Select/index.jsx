@@ -1,8 +1,7 @@
 import React from "react";
 import * as S from "./styles";
 
-export const Select = ({
-	filterTitle,
+export const InputSelect = ({
 	filterName,
 	filterValue,
 	filterOnChange,
@@ -13,7 +12,7 @@ export const Select = ({
 }) => {
 	return (
 		<S.Container>
-			<S.TitleText>{filterValue && filterTitle}</S.TitleText>
+			<S.TitleText disabled={disabled}>{filterPlaceholder}</S.TitleText>
 			<S.Select
 				name={filterName}
 				defaultValue={filterValue}

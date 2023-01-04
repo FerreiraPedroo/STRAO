@@ -1,6 +1,6 @@
 import * as S from "./styles";
 
-import { Check, FileText, MagnifyingGlass, Trash, NotePencil } from "phosphor-react";
+import { Check, FileText, MagnifyingGlass, Trash, NotePencil, EyeSlash, Eye } from "phosphor-react";
 
 /**
  *
@@ -64,6 +64,32 @@ export const Button = ({
           onClick={onClick}
         >
           <NotePencil size={24} color="#ffffff" />
+        </S.Button40x32>
+      )}
+      {typeStyle === "hidden" && (
+        <S.Button40x32
+          typeStyle={typeStyle}
+          value={value}
+          width={40}
+          height={32}
+          disabled={disable}
+          theme={theme}
+          onClick={onClick}
+        >
+          <EyeSlash size={24} color="#ffffff" />
+        </S.Button40x32>
+      )}
+      {typeStyle === "show" && (
+        <S.Button40x32
+          typeStyle={typeStyle}
+          value={value}
+          width={40}
+          height={32}
+          disabled={disable}
+          theme={theme}
+          onClick={onClick}
+        >
+          <Eye size={24} color="#ffffff" />
         </S.Button40x32>
       )}
 
