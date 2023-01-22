@@ -3,6 +3,11 @@ import { api } from "../../../services/api";
 import { useFormik } from "formik";
 import { GlobalContext } from "../../../provider/app";
 
+import { PageTitle } from "../../../component/PageTitle";
+import { InputText } from "../../../component/Input/Text";
+import { InputDate } from "../../../component/Input/Date";
+import { InputSelect } from "../../../component/Input/Select";
+
 import { DriverLicense } from "./DriverLicense";
 import { Occupation } from "./Occupation";
 import { Uniform } from "./Uniform";
@@ -12,54 +17,189 @@ import { Button } from "../../../component/Button";
 
 import * as S from "./styles";
 
-const formikAditionaValues = {
+const formikAditionalValues = {
 	uniform: {
-		head: {},
-		body: {},
-		waist_legs: {},
-		arms_hands: {},
-		foot: {}
+		head: {
+			helmet: {
+				name: "",
+				storeCode: "",
+				receiveData: "",
+				observation: ""
+			},
+			mask: {
+				name: "",
+				storeCode: "",
+				receiveData: "",
+				observation: ""
+			},
+			glasses: {
+				name: "",
+				storeCode: "",
+				receiveData: "",
+				observation: ""
+			},
+			earProtector: {
+				name: "",
+				storeCode: "",
+				receiveData: "",
+				observation: ""
+			},
+			other: {
+				name: "",
+				storeCode: "",
+				receiveData: "",
+				observation: ""
+			}
+		},
+		body: {
+			apron: [
+				{
+					name: "",
+					storeCode: "",
+					receiveData: "",
+					observation: ""
+				}
+			],
+			shirt: [
+				{
+					name: "",
+					storeCode: "",
+					receiveData: "",
+					observation: ""
+				}
+			],
+			glasses: [
+				{
+					name: "",
+					storeCode: "",
+					receiveData: "",
+					observation: ""
+				}
+			],
+			earProtector: [
+				{
+					name: "",
+					storeCode: "",
+					receiveData: "",
+					observation: ""
+				}
+			],
+			other: [
+				{
+					name: "",
+					storeCode: "",
+					receiveData: "",
+					observation: ""
+				}
+			]
+		},
+		waistLegs: {
+			longPants: [
+				{
+					name: "",
+					storeCode: "",
+					receiveData: "",
+					observation: ""
+				}
+			],
+			shinGuard: [
+				{
+					name: "",
+					storeCode: "",
+					receiveData: "",
+					observation: ""
+				}
+			],
+			other: [
+				{
+					name: "",
+					storeCode: "",
+					receiveData: "",
+					observation: ""
+				}
+			]
+		},
+		armsHands: {
+			glove: [
+				{
+					name: "",
+					storeCode: "",
+					receiveData: "",
+					observation: ""
+				}
+			],
+			other: [
+				{
+					name: "",
+					storeCode: "",
+					receiveData: "",
+					observation: ""
+				}
+			]
+		},
+		foot: {
+			securityBoot: [
+				{
+					name: "",
+					storeCode: "",
+					receiveData: "",
+					observation: ""
+				}
+			],
+			other: [
+				{
+					name: "",
+					storeCode: "",
+					receiveData: "",
+					observation: ""
+				}
+			]
+		}
 	},
 	address: {
 		type: "home",
-		zipcode: "",
-		addrees: "",
+		zipCode: "",
+		address: "",
 		number: "",
 		reference: "",
 		district: "",
 		city: "",
 		state: "",
 		country: "",
-		other: ""
+		other: "",
+		map: ""
+	},
+	driverLicense: {
+		withoutLicense: "",
+		register: "",
+		expeditionDate: "",
+		expireDate: "",
+		photoDriverLicense: "",
+		points: "",
+		pointsHistory: [],
+		category: []
 	}
 };
 
 export const HumanResourcesEmployeeRegister = () => {
 	const { userData, handleContext } = useContext(GlobalContext);
-
-
 	const [contractSelected, setContractSelected] = useState();
 
 	const formik = useFormik({
 		initialValues: {
-			full_name: "",
+			fullName: "",
 			identification: "",
 			photo: "",
-			birth_day: "",
+			birthDay: "",
 			job: "",
 			department: "",
 			admission: "",
 			demission: "",
 			contract_id: "",
-			center_cost_id: "",
-			driver_license: {
-				without_license: "",
-				register: "",
-				expire_date: "",
-				photo_driver_license: "",
-				points: "",
-				category: []
-			}
+			centerCost_id: "",
+			driverLicense: { ...formikAditionalValues.driverLicense },
+			uniform: { ...formikAditionalValues.uniform },
+			address: { ...formikAditionalValues.address }
 		},
 		validate: (values) => {
 			const errors = {};
@@ -88,6 +228,9 @@ export const HumanResourcesEmployeeRegister = () => {
 		}
 	});
 
+	useEffect(() => {
+		console.log(formik.values);
+	}, []);
 	const registerEmployee = async (values) => {
 		try {
 			const { data } = await api.post("/rh/employee/register", values);
@@ -97,207 +240,197 @@ export const HumanResourcesEmployeeRegister = () => {
 			return false;
 		}
 	};
-
+console.log(userData);
 	return (
 		<S.Container>
-			<S.PageTitle>CADASTRO DE FUNCIONÁRIOS</S.PageTitle>
+			<PageTitle
+				title="Registro de funcionário"
+				subTitle="registre um novo funcionário em um contrato."
+			/>
+			{userData && userData.departments ? (
+				<>
+					{/* <S.PersonalInformationContainer>
+						<S.PhotoBox>
+							<S.EmployeePhoto />
+							<S.PhotoButtons>
+								<Button typeStyle="add" />
+								<Button typeStyle="remove" disable={true} />
+								<Button typeStyle="edit"/>
+							</S.PhotoButtons>
+						</S.PhotoBox>
+						<S.InputContainer>
+							<S.InputBox>
+								<InputText
+									inputId="fullName"
+									inputName="fullName"
+									inputValue={formik.values.fullName}
+									inputPlaceholder="Nome completo"
+									inputOnChange={formik.handleChange}
+									inputShowInfo={true}
+								/>
+								<S.ErrorMessage>
+									{formik.touched.fullName && formik.errors.fullName}
+								</S.ErrorMessage>
+							</S.InputBox>
 
-			<S.PersonalInformation></S.PersonalInformation>
+							<S.InputBox>
+								<InputText
+									inputId="identification"
+									inputName="identification"
+									inputValue={formik.values.identification}
+									inputPlaceholder="Nº de Identificação"
+									inputOnChange={formik.handleChange}
+									inputShowInfo={true}
+								/>
+								<S.ErrorMessage>
+									{formik.touched.contract_id && formik.errors.contract_id}
+								</S.ErrorMessage>
+							</S.InputBox>
 
-			<S.PersonalInformationContainer>
-				<S.PhotoBox>FOTO</S.PhotoBox>
-				<S.NameBox>
-					<S.NameBox>
-						<S.OccupationRegisterBox>
-							<S.OccupationRegisterText>NOME COMPLETO</S.OccupationRegisterText>
-							<S.NameInput
-								id="full_name"
-								name="full_name"
-								value={formik.values.full_name}
-								onChange={formik.handleChange}
-							/>
-							<S.ErrorMessage>
-								{formik.touched.full_name && formik.errors.full_name}
-							</S.ErrorMessage>
-						</S.OccupationRegisterBox>
+							<S.InputBox>
+								<InputDate
+									inputId="birthDay"
+									inputName="birthDay"
+									inputValue={formik.values.birthDay}
+									inputPlaceholder="Data de nascimento"
+									inputOnChange={formik.handleChange}
+									inputShowInfo={true}
+								/>
+								<S.ErrorMessage>
+									{formik.touched.contract_id && formik.errors.contract_id}
+								</S.ErrorMessage>
+							</S.InputBox>
 
-						<S.OccupationRegisterBox>
-							<S.OccupationRegisterText>IDENTIFICAÇÃO</S.OccupationRegisterText>
-							<S.OccupationRegisterInput
-								id="identification"
-								name="identification"
-								value={formik.values.identification}
-								onChange={formik.handleChange}
-							/>
-						</S.OccupationRegisterBox>
-					</S.NameBox>
+							<S.InputBox>
+								<InputSelect
+									selectId="contract_id"
+									selectName="contract_id"
+									selectValue={formik.values.contract_id}
+									selectPlaceholder="Contrato"
+									selectShowInfo={true}
+									selectOnChange={(e) => {
+										formik.handleChange(e);
+										setContractSelected(e.target.value);
+									}}
+								>
+									<option value="">Selecione o contrato</option>
+									{userData.hasOwnProperty("contracts") &&
+										userData.contracts.map((contract) => (
+											<option key={contract.title} value={contract.id}>
+												{contract.title}
+											</option>
+										))}
+								</InputSelect>
+								<S.ErrorMessage>
+									{formik.touched.contract_id && formik.errors.contract_id}
+								</S.ErrorMessage>
+							</S.InputBox>
 
-					<S.OccupationRegisterBox>
-						<S.OccupationRegisterText>
-							DATA DE NASCIMENTO
-						</S.OccupationRegisterText>
-						<S.BirthDateInput
-							type="date"
-							id="birth_day"
-							name="birth_day"
-							value={formik.values.birth_day}
-							onChange={formik.handleChange}
-						/>
-					</S.OccupationRegisterBox>
+							<S.InputBox>
+								<InputSelect
+									selectId="centerCost_id"
+									selectName="centerCost_id"
+									selectValue={formik.values.centerCost_id}
+									selectPlaceholder="Centro de custo"
+									selectShowInfo={true}
+									selectOnChange={(e) => {
+										formik.handleChange(e);
+										setContractSelected(e.target.value);
+									}}
+								>
+									<option value="">Selecione o centro de custo</option>
+									{userData.hasOwnProperty("centersCost") &&
+										userData.centersCost.map((centerCost) => (
+											<option key={centerCost.title} value={centerCost.id}>
+												{centerCost.title}
+											</option>
+										))}
+								</InputSelect>
+								<S.ErrorMessage>
+									{formik.touched.centerCost_id && formik.errors.centerCost_id}
+								</S.ErrorMessage>
+							</S.InputBox>
 
-					<S.OccupationRegisterBox>
-						<S.OccupationRegisterText>CONTRATO</S.OccupationRegisterText>
-						<S.OccupationRegisterSelect
-							id="contract_id"
-							name="contract_id"
-							disabled={false}
-							onChange={(e) => {
-								formik.handleChange(e);
-								setContractSelected(e.target.value);
-							}}
-						>
-							<S.OccupationRegisterOption value=""></S.OccupationRegisterOption>
-							{/* {userData.hasOwnProperty("contracts") &&
-								userData.contracts.map((contract, index) => (
-									<S.OccupationRegisterOption
-										key={contract.title}
-										value={index}
-									>
-										{contract.title}
-									</S.OccupationRegisterOption>
-								))} */}
-						</S.OccupationRegisterSelect>
-						<S.ErrorMessage>
-							{formik.touched.contract_id && formik.errors.contract_id}
-						</S.ErrorMessage>
-					</S.OccupationRegisterBox>
+							<S.InputBox>
+								<InputSelect
+									selectId="job"
+									selectName="job"
+									selectValue={formik.values.job}
+									selectPlaceholder="Cargo"
+									selectShowInfo={true}
+									selectOnChange={(e) => {
+										formik.handleChange(e);
+										setContractSelected(e.target.value);
+									}}
+								>
+									<option value="">Selecione o cargo</option>
+									{userData.hasOwnProperty("jobs") &&
+										userData.jobs.map((job) => (
+											<option key={job.title} value={job.id}>
+												{job.title}
+											</option>
+										))}
+								</InputSelect>
+								<S.ErrorMessage>
+									{formik.touched.job && formik.errors.job}
+								</S.ErrorMessage>
+							</S.InputBox>
 
-					<S.OccupationRegisterBox>
-						<S.OccupationRegisterText>CENTRO DE CUSTO</S.OccupationRegisterText>
-						<S.OccupationRegisterSelect
-							id="center_cost_id"
-							name="center_cost_id"
-							disabled={!contractSelected}
-							value={formik.values.centerCost}
-							onChange={formik.handleChange}
-						>
-							<S.OccupationRegisterOption value=""></S.OccupationRegisterOption>
-							{contractSelected &&
-								userData.contracts[contractSelected].centerCosts &&
-								userData.contracts[contractSelected].centerCosts.map(
-									(centerCost) => (
-										<S.OccupationRegisterOption
-											key={centerCost}
-											value={centerCost}
-										>
-											{centerCost}
-										</S.OccupationRegisterOption>
-									)
-								)}
-						</S.OccupationRegisterSelect>
-						<S.ErrorMessage>
-							{formik.touched.center_cost_id && formik.errors.center_cost_id}
-						</S.ErrorMessage>
-					</S.OccupationRegisterBox>
-
-					<S.OccupationRegisterBox>
-						<S.OccupationRegisterText>CARGO (?)</S.OccupationRegisterText>
-						<S.OccupationRegisterSelect
-							name="job"
-							disabled={!contractSelected}
-							onChange={formik.handleChange}
-						>
-							<S.OccupationRegisterOption id=""></S.OccupationRegisterOption>
-							{contractSelected &&
-								userData.contracts[contractSelected].jobs &&
-								userData.contracts[contractSelected].jobs.map((job) => (
-									<S.OccupationRegisterOption key={job} value={job}>
-										{job}
-									</S.OccupationRegisterOption>
+							<S.InputBox>
+								<InputSelect
+									selectId="department"
+									selectName="department"
+									selectValue={formik.values.department}
+									selectPlaceholder="Departamento"
+									selectShowInfo={true}
+									selectOnChange={(e) => {
+										formik.handleChange(e);
+										setContractSelected(e.target.value);
+									}}
+								>
+									<option value="">Selecione o cargo</option>
+							{userData.hasOwnProperty("departments") &&
+								userData.departments.map((department) => (
+									<option key={department.title} value={department.id}>
+										{department.title}
+									</option>
 								))}
-						</S.OccupationRegisterSelect>
-						<S.ErrorMessage>
-							{formik.touched.job && formik.errors.job}
-						</S.ErrorMessage>
-					</S.OccupationRegisterBox>
 
-					<S.OccupationRegisterBox>
-						<S.OccupationRegisterText>DEPARTAMENTO</S.OccupationRegisterText>
-						<S.OccupationRegisterSelect
-							name="department"
-							disabled={false}
-							onChange={formik.handleChange}
-						>
-							<S.OccupationRegisterOption value=""></S.OccupationRegisterOption>
-							<S.OccupationRegisterOption value="Administração">
-								Administração
-							</S.OccupationRegisterOption>
-							<S.OccupationRegisterOption value="Departamento Pessoal">
-								Departamento Pessoal
-							</S.OccupationRegisterOption>
-							<S.OccupationRegisterOption value="Financeiro">
-								Financeiro
-							</S.OccupationRegisterOption>
-							<S.OccupationRegisterOption value="Operacional">
-								Operacional
-							</S.OccupationRegisterOption>
-							<S.OccupationRegisterOption value="Recursos Humanos">
-								Recursos Humanos
-							</S.OccupationRegisterOption>
-							<S.OccupationRegisterOption value="Suprimentos">
-								Suprimentos
-							</S.OccupationRegisterOption>
-						</S.OccupationRegisterSelect>
-						<S.ErrorMessage>
-							{formik.touched.department && formik.errors.department}
-						</S.ErrorMessage>
-					</S.OccupationRegisterBox>
+									<option value="">Selecione o departamento</option>
+									<option value="Administração">Administração</option>
+									<option value="Departamento Pessoal">
+										Departamento Pessoal
+									</option>
+									<option value="Financeiro">Financeiro</option>
+									<option value="Operacional">Operacional</option>
+									<option value="Recursos Humanos">Recursos Humanos</option>
+									<option value="Suprimentos">Suprimentos</option>
+								</InputSelect>
+								<S.ErrorMessage>
+									{formik.touched.department && formik.errors.department}
+								</S.ErrorMessage>
+							</S.InputBox>
+						</S.InputContainer>
+					</S.PersonalInformationContainer> */}
 
-					<S.OccupationRegisterBox>
-						<S.OccupationRegisterText>ADMISSÃO</S.OccupationRegisterText>
-						<S.OccupationRegisterInput
-							id="admission"
-							name="admission"
-							type="date"
-							disabled={false}
-							value={formik.values.admission}
-							onChange={formik.handleChange}
+					<S.InformationContainer>
+						<DriverLicense formik={formik} />
+						{/* <Occupation formik={formik} /> */}
+						{/* <Uniform formik={formik} /> */}
+						<Address formik={formik} />
+					</S.InformationContainer>
+
+					<S.SubmitBox>
+						<S.SubmitButton
+							type="submit"
+							disabled={formik.isSubmitting}
+							onClick={(e) => formik.handleSubmit(e)}
 						/>
-					</S.OccupationRegisterBox>
-
-					<S.OccupationRegisterBox>
-						<S.OccupationRegisterText>DEMISSÃO</S.OccupationRegisterText>
-						<S.OccupationRegisterInput
-							id="demission"
-							name="demission"
-							type="date"
-							disabled={false}
-							value={formik.values.demission}
-							onChange={formik.handleChange}
-						/>
-					</S.OccupationRegisterBox>
-
-					{/* <S.OccupationRegisterBox>
-            <S.OccupationRegisterText>------</S.OccupationRegisterText>
-            <S.OccupationRegisterInput disabled={true} />
-          </S.OccupationRegisterBox> */}
-				</S.NameBox>
-			</S.PersonalInformationContainer>
-
-			<S.InformationContainer>
-				<DriverLicense formik={formik} />
-				{/* <Occupation formik={formik} /> */}
-				{/* <Uniform formik={formik} /> */}
-				{/* <Address formik={formik} /> */}
-			</S.InformationContainer>
-
-			<S.SubmitBox>
-				<S.SubmitButton
-					type="submit"
-					disabled={formik.isSubmitting}
-					onClick={(e) => formik.handleSubmit(e)}
-				/>
-			</S.SubmitBox>
+					</S.SubmitBox>
+				</>
+			) : (
+				"Não disponivel"
+			)}
 		</S.Container>
 	);
 };

@@ -17,7 +17,7 @@ export const NavBar = () => {
 	}
 
 	return (
-		<S.Container>
+		<S.Container onMouseLeave={() => setShowMenu(false)}>
 			<S.LeftContainer>
 				<S.MenuContainer>
 					<S.MenuButton

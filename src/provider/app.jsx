@@ -26,6 +26,7 @@ export const GlobalProvider = ({ children }) => {
 		setUserData("");
 		setUserToken("");
 		setUserDataVersion("");
+        return "/login";
 	};
 
 	const checkUserDataVersion = (version) => {

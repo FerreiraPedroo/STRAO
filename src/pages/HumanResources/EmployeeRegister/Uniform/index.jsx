@@ -1,131 +1,131 @@
 import React from "react";
+import { InputText } from "../../../../component/Input/Text";
 
 import * as S from "./styles";
 
 export const Uniform = ({ formik }) => {
-  return (
-    <S.Container>
-      <S.Title>UNIFORME</S.Title>
-      <S.DataContainer>
-        <S.BodyPartBox>
-          <S.BodyPartText>CABEÇA</S.BodyPartText>
+	return (
+		<S.Container>
+			<S.Title>Uniforme</S.Title>
+			<S.DataContainer>
+				<S.BodyPartBox>
+					<S.BodyPartText>Cabeça</S.BodyPartText>
 
-          <S.UniformPartBox>
-            <S.UniformPart>
-              <S.UniformPartText>CAPACETE</S.UniformPartText>
-              <S.UniformPartInput
-                id="uniform.head.helmet"
-                value={formik.values.uniform.head.helmet}
-                onChange={formik.handleChange}
-              />
-            </S.UniformPart>
+					<S.UniformPartBox>
+						<InputText
+							inputId="uniform.head.helmet"
+							inputName="uniform.head.helmet"
+							inputPlaceholder="Capacete"
+							inputValue={formik.values.uniform.head.helmet.name}
+							inputOnChange={formik.handleChange}
+							inputShowInfo={true}
+						/>
 
-            <S.UniformPart>
-              <S.UniformPartText>MÁSCARA</S.UniformPartText>
-              <S.UniformPartInput
-                id="uniform.head.mask"
-                value={formik.values.uniform.head.mask}
-                onChange={formik.handleChange}
-              />
-            </S.UniformPart>
+						<InputText
+							inputId="uniform.head.mask"
+							inputName="uniform.head.mask"
+							inputPlaceholder="Máscara"
+							inputValue={formik.values.uniform.head.mask.name}
+							inputOnChange={formik.handleChange}
+							inputShowInfo={true}
+						/>
 
-            <S.UniformPart>
-              <S.UniformPartText>ÓCULOS</S.UniformPartText>
-              <S.UniformPartInput
-                id="uniform.head.glasses"
-                value={formik.values.uniform.head.glasses}
-                onChange={formik.handleChange}
-              />
-            </S.UniformPart>
+						<InputText
+							inputId="uniform.head.glasses"
+							inputName="uniform.head.glasses"
+							inputPlaceholder="Óculos"
+							inputValue={formik.values.uniform.head.glasses.name}
+							inputOnChange={formik.handleChange}
+							inputShowInfo={true}
+						/>
 
-            <S.UniformPart>
-              <S.UniformPartText>PROTETOR AUDITIVO</S.UniformPartText>
-              <S.UniformPartInput
-                id="uniform.head.earProtector"
-                value={formik.values.uniform.head.earProtector}
-                onChange={formik.handleChange}
-              />
-            </S.UniformPart>
-          </S.UniformPartBox>
-        </S.BodyPartBox>
+						<InputText
+							inputId="uniform.head.earProtector"
+							inputName="uniform.head.earProtector"
+							inputPlaceholder="Protetor auditivo"
+							inputValue={formik.values.uniform.head.earProtector.name}
+							inputOnChange={formik.handleChange}
+							inputShowInfo={true}
+						/>
+					</S.UniformPartBox>
+				</S.BodyPartBox>
 
-        <S.BodyPartBox>
-          <S.BodyPartText>CORPO</S.BodyPartText>
-          <S.UniformPartBox>
-            <S.UniformPart>
-              <S.UniformPartText>AVENTAL</S.UniformPartText>
-              <S.UniformPartInput
-                id="uniform.head.apron"
-                value={formik.values.uniform.head.apron}
-                onChange={formik.handleChange}
-              />
-            </S.UniformPart>
+				<S.BodyPartBox>
+					<S.BodyPartText>Corpo</S.BodyPartText>
+					<S.UniformPartBox>
+						<InputText
+							inputId="uniform.body.apron"
+							inputName="uniform.body.apron"
+							inputPlaceholder="Avental"
+							inputValue={formik.values.uniform.body.apron.name}
+							inputOnChange={formik.handleChange}
+							inputShowInfo={true}
+						/>
+						<InputText
+							inputId="uniform.body.shirt"
+							inputName="uniform.body.shirt"
+							inputPlaceholder="Avental"
+							inputValue={formik.values.uniform.body.shirt.name}
+							inputOnChange={formik.handleChange}
+							inputShowInfo={true}
+						/>
+					</S.UniformPartBox>
+				</S.BodyPartBox>
 
-            <S.UniformPart>
-              <S.UniformPartText>CAMISA</S.UniformPartText>
-              <S.UniformPartInput
-                id="uniform.head.shirt"
-                value={formik.values.uniform.head.shirt}
-                onChange={formik.handleChange}
-              />
-            </S.UniformPart>
-          </S.UniformPartBox>
-        </S.BodyPartBox>
+				<S.BodyPartBox>
+					<S.BodyPartText>Cintura e pernas</S.BodyPartText>
 
-        <S.BodyPartBox>
-          <S.BodyPartText>CINTURA E PERNAS</S.BodyPartText>
+					<S.UniformPartBox>
+						<InputText
+							inputId="uniform.waistLegs.longPants"
+							inputName="uniform.waistLegs.longPants"
+							inputPlaceholder="Avental"
+							inputValue={formik.values.uniform.waistLegs.longPants.name}
+							inputOnChange={formik.handleChange}
+							inputShowInfo={true}
+						/>
 
-          <S.UniformPartBox>
-            <S.UniformPart>
-              <S.UniformPartText>CALÇA COMPRIDA</S.UniformPartText>
-              <S.UniformPartInput
-                id="uniform.head.longPants"
-                value={formik.values.uniform.head.longPants}
-                onChange={formik.handleChange}
-              />
-            </S.UniformPart>
+						<InputText
+							inputId="uniform.waistLegs.shinGuard"
+							inputName="uniform.waistLegs.shinGuard"
+							inputPlaceholder="Caneleira"
+							inputValue={formik.values.uniform.waistLegs.shinGuard.name}
+							inputOnChange={formik.handleChange}
+							inputShowInfo={true}
+						/>
+					</S.UniformPartBox>
+				</S.BodyPartBox>
 
-            <S.UniformPart>
-              <S.UniformPartText>CANELEIRA</S.UniformPartText>
-              <S.UniformPartInput
-                id="uniform.head.shinGuard"
-                value={formik.values.uniform.head.shinGuard}
-                onChange={formik.handleChange}
-              />
-            </S.UniformPart>
-          </S.UniformPartBox>
-        </S.BodyPartBox>
+				<S.BodyPartBox>
+					<S.BodyPartText>Mãos e braços</S.BodyPartText>
 
-        <S.BodyPartBox>
-          <S.BodyPartText>MÃOS E BRAÇOS</S.BodyPartText>
+					<S.UniformPartBox>
+						<InputText
+							inputId="uniform.armsHands.glove"
+							inputName="uniform.armsHands.glove"
+							inputPlaceholder="Avental"
+							inputValue={formik.values.uniform.armsHands.glove.name}
+							inputOnChange={formik.handleChange}
+							inputShowInfo={true}
+						/>
+					</S.UniformPartBox>
+				</S.BodyPartBox>
 
-          <S.UniformPartBox>
-            <S.UniformPart>
-              <S.UniformPartText>LUVA</S.UniformPartText>
-              <S.UniformPartInput
-                id="uniform.head.glove"
-                value={formik.values.uniform.head.glove}
-                onChange={formik.handleChange}
-              />
-            </S.UniformPart>
-          </S.UniformPartBox>
-        </S.BodyPartBox>
+				<S.BodyPartBox>
+					<S.BodyPartText>Pés</S.BodyPartText>
 
-        <S.BodyPartBox>
-          <S.BodyPartText>PÉS</S.BodyPartText>
-
-          <S.UniformPartBox>
-            <S.UniformPart>
-              <S.UniformPartText>BOTA DE SEGURANÇA</S.UniformPartText>
-              <S.UniformPartInput
-                id="uniform.head.securityBoot"
-                value={formik.values.uniform.head.securityBoot}
-                onChange={formik.handleChange}
-              />
-            </S.UniformPart>
-          </S.UniformPartBox>
-        </S.BodyPartBox>
-      </S.DataContainer>
-    </S.Container>
-  );
+					<S.UniformPartBox>
+						<InputText
+							inputId="uniform.foot.securityBoot"
+							inputName="uniform.foot.securityBoot"
+							inputPlaceholder="Bota"
+							inputValue={formik.values.uniform.foot.securityBoot.name}
+							inputOnChange={formik.handleChange}
+							inputShowInfo={true}
+						/>
+					</S.UniformPartBox>
+				</S.BodyPartBox>
+			</S.DataContainer>
+		</S.Container>
+	);
 };

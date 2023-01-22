@@ -1,14 +1,13 @@
 import React from "react";
 import * as S from "./styles";
 
-export const InputText = ({
-    inputId,
+export const InputDate = ({
+	inputId,
 	inputName,
 	inputValue,
 	inputOnChange,
 	inputPlaceholder,
 	inputShowInfo = false,
-    inputWidth = "256px",
 	disabled,
 	readOnly
 }) => {
@@ -19,14 +18,14 @@ export const InputText = ({
 			</S.TitleText>
 
 			<S.Input
-                id={inputId}
-                onChange={inputOnChange}
+				id={inputId}
+                type="date"
+				onChange={inputOnChange}
 				name={inputName}
 				value={inputValue}
 				placeholder={!inputShowInfo ? inputPlaceholder : ""}
 				disabled={disabled}
 				readOnly={readOnly}
-                width={inputWidth}
 			/>
 		</S.Container>
 	);

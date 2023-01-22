@@ -14,7 +14,6 @@ export const Container = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-content: start;
-	background-color: #f5f3f0;
 	padding: 16px;
     padding-bottom: 64px;
 	gap: 16px;

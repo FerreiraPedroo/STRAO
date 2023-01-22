@@ -12,10 +12,16 @@ export const Admin = () => {
 
 	return (
 		<S.Container>
-			{Object.values(userData.departments[location.pathname].actions).map(
-				(card) => (
-					<Card key={card.title} data={card} />
-				)
+			{userData.departments[location.pathname].actions.length ? (
+				<>
+					{Object.values(userData.departments[location.pathname].actions).map(
+						(card) => (
+							<Card key={card.title} data={card} />
+						)
+					)}
+				</>
+			) : (
+				<S.NoAction>Sem ações.</S.NoAction>
 			)}
 		</S.Container>
 	);

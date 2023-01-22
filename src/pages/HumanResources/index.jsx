@@ -7,14 +7,24 @@ import { Card } from "../../component/Card/index.jsx";
 import * as S from "./styles.jsx";
 
 export const HumanResources = () => {
-  const location = useLocation();
-  const { userData } = useContext(GlobalContext);
+	const location = useLocation();
+	const { userData } = useContext(GlobalContext);
 
-  return (
-    <S.Container>
-      {Object.values(userData.departments[location.pathname].actions).map((card) => (
-        <Card key={card.title} data={card} />
-      ))}
-    </S.Container>
-  );
+	return (
+		<S.Container>
+			{userData.departments[location.pathname].actions.length ? (
+				<>
+					{Object.values(userData.departments[location.pathname].actions).map(
+						(card) => (
+							<Card key={card.title} data={card} />
+						)
+					)}
+				</>
+			) : (
+                <S.NoAction>
+				Sem ações.
+                </S.NoAction>
+			)}
+		</S.Container>
+	);
 };

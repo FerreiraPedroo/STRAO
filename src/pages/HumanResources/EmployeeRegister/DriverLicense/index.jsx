@@ -1,4 +1,6 @@
 import React from "react";
+import { InputDate } from "../../../../component/Input/Date";
+import { InputText } from "../../../../component/Input/Text";
 
 import * as S from "./styles";
 
@@ -13,11 +15,11 @@ export const DriverLicense = ({ formik }) => {
 		<S.Container onClick={() => handleOpen}>
 			<S.Title open={true}>
 				<S.TitleBox>
-					HABILITAÇÃO |{" "}
+					Habilitação
 					<S.NotLicenceInput
-						id="driver_license.without_license"
+						id="driverLicense.withoutLicense"
 						type="checkbox"
-						value={formik.values.driver_license.without_license}
+						value={formik.values.driverLicense.withoutLicense}
 						onChange={formik.handleChange}
 					/>
 					<S.NotLicence>Não habilitado</S.NotLicence>
@@ -25,47 +27,71 @@ export const DriverLicense = ({ formik }) => {
 			</S.Title>
 			<S.DataContainer>
 				<S.CNHRegisterBox>
-					<S.CNHRegisterText>REGISTRO CNH</S.CNHRegisterText>
-					<S.CNHRegisterInput
-						id="driver_license.register"
-						value={formik.values.driver_license.register}
-						onChange={formik.handleChange}
+					<InputText
+						inputId="driverLicense.register"
+						inputName="driverLicense.register"
+						inputPlaceholder="Registro CNH"
+						inputValue={formik.values.driverLicense.register}
+						inputOnChange={formik.handleChange}
+						inputShowInfo={true}
 					/>
 				</S.CNHRegisterBox>
+
 				<S.CNHRegisterBox>
-					<S.CNHRegisterText>VALIDADE</S.CNHRegisterText>
-					<S.CNHRegisterInput
-						id="driver_license.expire_date"
-						value={formik.values.driver_license.expire_date}
-						onChange={formik.handleChange}
+					<InputDate
+						inputId="driverLicense.expeditionDate"
+						inputName="driverLicense.expeditionDate"
+						inputPlaceholder="Data de expedição CNH"
+						inputValue={formik.values.driverLicense.expeditionDate}
+						inputOnChange={formik.handleChange}
+						inputShowInfo={true}
 					/>
 				</S.CNHRegisterBox>
+
 				<S.CNHRegisterBox>
-					<S.CNHRegisterText>PONTOS</S.CNHRegisterText>
-					<S.CNHRegisterInput
-						id="driver_license.points"
-						value={formik.values.driver_license.points}
-						onChange={formik.handleChange}
+					<InputDate
+						inputId="driverLicense.expireDate"
+						inputName="driverLicense.expireDate"
+						inputPlaceholder="Data de validade CNH"
+						inputValue={formik.values.driverLicense.expireDate}
+						inputOnChange={formik.handleChange}
+						inputShowInfo={true}
 					/>
 				</S.CNHRegisterBox>
+
 				<S.CNHRegisterBox>
-					<S.CNHRegisterText>FOTO CNH</S.CNHRegisterText>
-					<S.CNHRegisterPhoto
-						type="driver_license.photo_driver_license"
-						name="driver_license.photo_driver_license"
-						id="driver_license.photo_driver_license"
-						value={formik.values.driver_license.photo_driver_license}
-						onChange={formik.handleChange}
+					<InputText
+						inputId="driverLicense.points"
+						inputName="driverLicense.points"
+						inputPlaceholder="Pontos de infração"
+						inputValue={formik.values.driverLicense.points}
+						inputOnChange={formik.handleChange}
+						inputShowInfo={true}
+						inputWidth="160px"
 					/>
 				</S.CNHRegisterBox>
+
+				<S.CNHRegisterBox>
+					<InputText
+						inputId="driverLicense.photoDriverLicense"
+						inputname="driverLicense.photoDriverLicense"
+						inputValue={formik.values.driverLicense.photoDriverLicense}
+						inputOnChange={formik.handleChange}
+						inputPlaceholder="Documento CNH"
+						inputShowInfo={true}
+                        inputWidth="128px"
+					/>
+				</S.CNHRegisterBox>
+
 				<S.CategoryBox>
-					<S.CategoryText>CATEGORIA</S.CategoryText>
+
+					<S.CategoryText>Categoria</S.CategoryText>
 					<S.Box>
 						A
 						<S.CategoryCheck
 							type="checkbox"
-							id="driver_license.category.A"
-							value={formik.values.driver_license.category.A}
+							id="driverLicense.category.A"
+							value={formik.values.driverLicense.category.A}
 							onChange={formik.handleChange}
 						/>
 					</S.Box>
@@ -73,8 +99,8 @@ export const DriverLicense = ({ formik }) => {
 						B
 						<S.CategoryCheck
 							type="checkbox"
-							id="driver_license.category.B"
-							value={formik.values.driver_license.category.B}
+							id="driverLicense.category.B"
+							value={formik.values.driverLicense.category.B}
 							onChange={formik.handleChange}
 						/>
 					</S.Box>
@@ -82,8 +108,8 @@ export const DriverLicense = ({ formik }) => {
 						C
 						<S.CategoryCheck
 							type="checkbox"
-							id="driver_license.category.C"
-							value={formik.values.driver_license.category.C}
+							id="driverLicense.category.C"
+							value={formik.values.driverLicense.category.C}
 							onChange={formik.handleChange}
 						/>
 					</S.Box>
@@ -91,8 +117,8 @@ export const DriverLicense = ({ formik }) => {
 						D
 						<S.CategoryCheck
 							type="checkbox"
-							id="driver_license.category.D"
-							value={formik.values.driver_license.category.D}
+							id="driverLicense.category.D"
+							value={formik.values.driverLicense.category.D}
 							onChange={formik.handleChange}
 						/>
 					</S.Box>
@@ -100,8 +126,8 @@ export const DriverLicense = ({ formik }) => {
 						E
 						<S.CategoryCheck
 							type="checkbox"
-							id="driver_license.category.E"
-							value={formik.values.driver_license.category.E}
+							id="driverLicense.category.E"
+							value={formik.values.driverLicense.category.E}
 							onChange={formik.handleChange}
 						/>
 					</S.Box>
@@ -109,8 +135,8 @@ export const DriverLicense = ({ formik }) => {
 						AB
 						<S.CategoryCheck
 							type="checkbox"
-							id="driver_license.category.AB"
-							value={formik.values.driver_license.category.AB}
+							id="driverLicense.category.AB"
+							value={formik.values.driverLicense.category.AB}
 							onChange={formik.handleChange}
 						/>
 					</S.Box>
@@ -118,8 +144,8 @@ export const DriverLicense = ({ formik }) => {
 						AD
 						<S.CategoryCheck
 							type="checkbox"
-							id="driver_license.category.AD"
-							value={formik.values.driver_license.category.AD}
+							id="driverLicense.category.AD"
+							value={formik.values.driverLicense.category.AD}
 							onChange={formik.handleChange}
 						/>
 					</S.Box>
@@ -127,17 +153,17 @@ export const DriverLicense = ({ formik }) => {
 						AE
 						<S.CategoryCheck
 							type="checkbox"
-							id="driver_license.category.AE"
-							value={formik.values.driver_license.category.AE}
+							id="driverLicense.category.AE"
+							value={formik.values.driverLicense.category.AE}
 							onChange={formik.handleChange}
 						/>
 					</S.Box>
 					<S.Box>
-						OUTRO
+						Outro
 						<S.CategoryOther
 							type="text"
-							id="driver_license.category.other"
-							value={formik.values.driver_license.category.other}
+							id="driverLicense.category.other"
+							value={formik.values.driverLicense.category.other}
 							onChange={formik.handleChange}
 						/>
 					</S.Box>

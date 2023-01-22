@@ -40,7 +40,7 @@ export const Button = styled.input`
 	}
 `;
 export const ButtonBack = styled.button`
-	width: ${({ width }) => (width ? `${width}px` : "32px")};
+	min-width: ${({ width }) => (width ? `${width}px` : "32px")};
 	height: ${({ height }) => (height ? `${height}px` : "32px")};
 	display: flex;
 	justify-content: center;
@@ -99,19 +99,6 @@ const propsTheme = {
         cursor: default;
     } 
     `,
-	correct: `
-    background: #00A300;
-    border: 1px solid #20C320;
-    &:disabled{
-        color: #9F9F9F;
-        border: 2px solid #6BA76B;
-        background-color: #4E744E;
-        box-shadow: 0px 0px 0px #000000;
-    }
-    &:hover:disabled{
-        cursor: default;
-    }  
-  `,
 	hidden: `
     background: #1E90FF;
     border: 1px solid #ADD8E6;
@@ -151,6 +138,34 @@ const propsTheme = {
         cursor: default;
     } 
     `,
+
+	correct: `
+    background: #00A300;
+    border: 1px solid #20C320;
+    &:disabled{
+        color: #9F9F9F;
+        border: 2px solid #6BA76B;
+        background-color: #4E744E;
+        box-shadow: 0px 0px 0px #000000;
+    }
+    &:hover:disabled{
+        cursor: default;
+    }  
+  `,
+	add: `
+    background: #00A300;
+    border: 1px solid #20C320;
+    &:disabled{
+        color: #9F9F9F;
+        border: 2px solid #6BA76B;
+        background-color: #4E744E;
+        box-shadow: 0px 0px 0px #000000;
+    }
+    &:hover:disabled{
+        cursor: default;
+    }  
+  `,
+
 	normal: `
     background: #908E8E;
     border: 1px solid #C9C9C9;

@@ -13,7 +13,7 @@ import { PageAction } from "../../../component/PageAction/index.jsx";
 
 export const AdminUserList = () => {
 	const navigate = useNavigate();
-	const { userToken } = useContext(GlobalContext);
+	const { userToken, removeLoginData } = useContext(GlobalContext);
 	const [notification, setNotification] = useState();
 
 	const [loading, setLoading] = useState(true);
@@ -95,7 +95,7 @@ export const AdminUserList = () => {
 
 		const getData = async function () {
 			setLoading(true);
-            setUserSelected("")
+			setUserSelected("");
 			try {
 				const { data } = await api({
 					url: "/admin/user/list",
@@ -107,11 +107,16 @@ export const AdminUserList = () => {
 
 				setUserList(data);
 			} catch (error) {
+				if (error.response.status === 401) {
+					error.response.data.url = removeLoginData();
+					setNotification(error.response.data);
+				}
+
 				if (!error.response.status && !error.response.data) {
 					error.response.data = { message: error.message };
 				}
-				setNotification(error.response.data);
-				return [];
+
+				setUserList([]);
 			}
 			setLoading(false);
 		};
@@ -121,14 +126,14 @@ export const AdminUserList = () => {
 	useEffect(() => {
 		getUserList(filtersSelected);
 	}, [filtersSelected]);
-
+console.log(notification)
 	return (
 		<S.Container>
 			{notification && (
 				<NotificationModal
 					type={"full"}
 					msg={notification.message}
-					onClick={() => navigate(-1)}
+					onClick={() => notification.codStatus == 401 && navigate(notification.url)}
 				/>
 			)}
 			<PageTitle

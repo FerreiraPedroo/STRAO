@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { api } from "../../../services/api";
 import { NotificationModal } from "../../../component/NotificationModal";
+import { PageTitle } from "../../../component/PageTitle";
 
 import * as S from "./styles.jsx";
-import { Button } from "../../../component/Button";
 
 export const AdminUserRegister = () => {
 	const navigate = useNavigate();
@@ -40,8 +40,8 @@ export const AdminUserRegister = () => {
 			) {
 				errors.email = "E-mail inválido.";
 			} else {
-                setSubmitReturnErrorMsg("")
-            }
+				setSubmitReturnErrorMsg("");
+			}
 
 			if (!values.password) {
 				errors.password = "A senha é obrigatória.";
@@ -81,12 +81,17 @@ export const AdminUserRegister = () => {
 	return (
 		<S.Container>
 			{notification && (
-				<NotificationModal type="full" msg={notification.message} />
+				<NotificationModal
+					type="full"
+					msg={notification.message}
+					onClick={() => navigate(-1)}
+				/>
 			)}
-			<S.PageHeader>
-				<Button typeStyle="back" value="<" onClick={() => navigate(-1)} />
-				<S.PageTitle>REGISTRO DE USUÁRIO</S.PageTitle>
-			</S.PageHeader>
+			<PageTitle
+				title="Registro de usuário"
+				subTitle="registro de usuário para acesso ao sistema"
+				loading={"loading"}
+			/>
 
 			<S.SubmitErrorText>
 				{submitReturnErrorMsg.codStatus && submitReturnErrorMsg.message}

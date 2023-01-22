@@ -2,24 +2,29 @@ import React from "react";
 import * as S from "./styles";
 
 export const InputSelect = ({
-	filterName,
-	filterValue,
-	filterOnChange,
-	filterPlaceholder,
+	selectId,
+	selectName,
+	selectValue,
+	selectOnChange,
+	selectPlaceholder,
+    selectShowInfo,
 	disabled,
 	readOnly,
 	children
 }) => {
 	return (
 		<S.Container>
-			<S.TitleText disabled={disabled}>{filterPlaceholder}</S.TitleText>
+			<S.TitleText disabled={disabled}>
+				{(selectValue || selectShowInfo) && selectPlaceholder}
+			</S.TitleText>
 			<S.Select
-				name={filterName}
-				defaultValue={filterValue}
+				id={selectId}
+				name={selectName}
+				defaultValue={selectValue}
 				disabled={disabled}
 				readOnly={readOnly}
-				onChange={filterOnChange}
-				placeholder={filterPlaceholder}
+				onChange={selectOnChange}
+				placeholder={selectPlaceholder}
 			>
 				{children}
 			</S.Select>

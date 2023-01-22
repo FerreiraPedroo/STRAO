@@ -15,7 +15,7 @@ export const TitleText = styled.p`
 	${({ disabled }) => disabled && "color: #b6b6b6;"}
 `;
 export const Input = styled.input`
-	width: ${({width}) => width};
+	width: 256px;
 	height: 32px;
 	padding: 0px 8px 2px 8px;
 	background-color: #ffffff;
