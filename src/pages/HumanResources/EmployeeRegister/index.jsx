@@ -184,6 +184,7 @@ const formikAditionalValues = {
 export const HumanResourcesEmployeeRegister = () => {
 	const { userData, handleContext } = useContext(GlobalContext);
 	const [contractSelected, setContractSelected] = useState();
+    const [formikInitialState] = useState();
 
 	const formik = useFormik({
 		initialValues: {
