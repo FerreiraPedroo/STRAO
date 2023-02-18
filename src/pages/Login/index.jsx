@@ -1,14 +1,19 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GlobalContext } from "../../provider/app";
+
 import { loginService } from "../../services/login";
+import { useSelector, useDispatch } from "react-redux";
+
+import { appDataUpdate } from "../../services/store/features/data/appData"
 
 import * as S from "./styles";
 import homebg2 from "./img/home-bg2.png";
 
 export const Login = () => {
+	const appData = useSelector((state) => state.appData);
+	const dispatch = useDispatch();
+
 	const navigate = useNavigate();
-	const { newLoginData, userDataVersion } = useContext(GlobalContext);
 
 	const [user, setUser] = useState("");
 	const [password, setPassword] = useState("");
@@ -23,10 +28,14 @@ export const Login = () => {
 		setErrorLogin("");
 	};
 	const handleLogin = async () => {
-		const data = await loginService(user, password, userDataVersion);
+		const data = await loginService(user, password, appData.dataVersion);
 
 		if (data.codStatus === 200) {
-			newLoginData(data);
+			localStorage.setItem("strao-user-info", JSON.stringify({name: data.userInfo.name, avatar: data.userInfo.avatar}))
+			localStorage.setItem("strao-token", data.token)
+			localStorage.setItem("strao-data", JSON.stringify(data.data))
+			localStorage.setItem("strao-data-version", data.dataVersion)
+			dispatch(appDataUpdate(data))
 			navigate("/home");
 		}
 

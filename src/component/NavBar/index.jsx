@@ -1,14 +1,16 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GlobalContext } from "../../provider/app";
+import { useSelector } from "react-redux";
 import * as S from "./styles";
 
 import user_avatar from "../../assets/img/user_avatar.png";
 import icon_menu from "../../assets/icons/menu/menu.svg";
+import { Clipboard } from "phosphor-react";
 
 export const NavBar = () => {
 	const navigate = useNavigate();
-	const { userData } = useContext(GlobalContext);
+	const menuData = useSelector((state) => state.appData.data.departments);
+	console.log(menuData);
 	const [showMenu, setShowMenu] = useState(false);
 
 	function menuNavigation(path) {
@@ -24,9 +26,9 @@ export const NavBar = () => {
 						src={icon_menu}
 						onClick={() => setShowMenu((prevState) => !prevState)}
 					/>
-					{showMenu && (
+					{showMenu && menuData && (
 						<S.MenuOptions>
-							{Object.values(userData.departments).map((card) => (
+							{Object.values(menuData).map((card) => (
 								<S.MenuCard
 									key={card.title}
 									onClick={() => menuNavigation(card.path)}
@@ -48,6 +50,10 @@ export const NavBar = () => {
 				</S.Title>
 			</S.LeftContainer>
 			<S.RightContainer>
+				<S.NotificationBox>
+					<Clipboard size={32} />
+					<S.NotificationNumber>0</S.NotificationNumber>
+				</S.NotificationBox>
 				<S.Avatar src={user_avatar} />
 				<S.UserName>STRAO</S.UserName>
 			</S.RightContainer>

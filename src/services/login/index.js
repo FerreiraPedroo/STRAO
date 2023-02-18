@@ -41,7 +41,7 @@ export const logoutService = async () => {
 		return {
 			codStatus: 0,
 			codName: "",
-			message: "Erro ao conectar.",
+			message: "Erro ao desconectar.",
 			data: ""
 		};
 	}

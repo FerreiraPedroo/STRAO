@@ -1,20 +1,21 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import { GlobalContext } from "../../provider/app";
 import { Card } from "../../component/Card/index.jsx";
 
 import * as S from "./styles.jsx";
 
 export const HumanResources = () => {
-	const location = useLocation();
-	const { userData } = useContext(GlobalContext);
+	const {pathname} = useLocation();
+	const departmentActions = useSelector((state) => state.appData.data.departmentActions[`${pathname}`]);
+	console.log(departmentActions);
 
 	return (
 		<S.Container>
-			{userData.departments[location.pathname].actions.length ? (
+			{departmentActions.length ? (
 				<>
-					{Object.values(userData.departments[location.pathname].actions).map(
+					{Object.values(departmentActions).map(
 						(card) => (
 							<Card key={card.title} data={card} />
 						)

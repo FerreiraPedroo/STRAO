@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { GlobalContext } from "../../provider/app";
+import { useSelector } from "react-redux";
 
 import { Outlet, useNavigate } from "react-router-dom";
 import { NavBar } from "../../component/NavBar";
@@ -7,19 +7,30 @@ import { SideBar } from "../../component/SideBar";
 
 import * as S from "./styles.jsx";
 
+const verifyDataApp = ({ appData }) => {
+	if (
+		appData.userInfo &&
+		appData.token &&
+		appData.data
+	) {
+		return true;
+	}
+	return false
+};
+
 export function Root() {
 	const navigate = useNavigate();
-	const { verifyTokenPresence } = useContext(GlobalContext);
+	const verifyData = useSelector(verifyDataApp);
 
 	useEffect(() => {
-		if (!verifyTokenPresence()) navigate("/login");
-	}, []);
+		if (!verifyData) navigate("/login");
+	}, [verifyData]);
 
 	return (
 		<S.Container>
 			<NavBar />
 			<S.CenterContainer>
-				{/* <SideBar /> */}
+				<SideBar />
 				<Outlet />
 			</S.CenterContainer>
 		</S.Container>

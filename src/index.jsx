@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { GlobalProvider } from "./provider/app";
 
 import { router } from "./routers/index";
-import store from "./store";
+import { store } from "./services/store/store";
 
 import "./assets/globalcss.css";
 

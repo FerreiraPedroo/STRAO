@@ -6,14 +6,15 @@ import {
 } from "react-router-dom";
 
 import { Root } from "../pages/Root";
-import { Login } from "../pages/Login";
 import { ErrorPage } from "../errorPage";
-import { Admin } from "../pages/Admin";
 
+import { Login } from "../pages/Login";
 import { Home } from "../pages/Home/index";
+
 import { HumanResources } from "../pages/HumanResources";
 import { HumanResourcesEmployeeRegister } from "../pages/HumanResources/EmployeeRegister";
 
+import { Admin } from "../pages/Admin";
 import { AdminUserList } from "../pages/Admin/UserList";
 import { AdminUserEdit } from "../pages/Admin/UserEdit";
 import { AdminUserRegister } from "../pages/Admin/UserRegister";
@@ -25,6 +26,7 @@ export const router = createBrowserRouter(
 				<Route index element={<Login />} />
 				<Route path="login" element={<Login />} />
 			</Route>
+
 			<Route element={<Root />}>
 				<Route path="home" element={<Home />} />
 
