@@ -10,7 +10,6 @@ import { Clipboard } from "phosphor-react";
 export const NavBar = () => {
 	const navigate = useNavigate();
 	const menuData = useSelector((state) => state.appData.data.departments);
-	console.log(menuData);
 	const [showMenu, setShowMenu] = useState(false);
 
 	function menuNavigation(path) {
@@ -26,7 +25,7 @@ export const NavBar = () => {
 						src={icon_menu}
 						onClick={() => setShowMenu((prevState) => !prevState)}
 					/>
-					{showMenu && menuData && (
+					{showMenu && (
 						<S.MenuOptions>
 							{Object.values(menuData).map((card) => (
 								<S.MenuCard
