@@ -18,11 +18,11 @@ export const PageTitle = ({ title, subTitle }) => {
 	return (
 		<S.PageTitleContainer>
 			<S.PageHeader>
-				<Button
+				{/* <Button
 					typeStyle="back"
 					value={<ArrowFatLeft size={24} />}
 					onClick={() => navigate(-1)}
-				></Button>
+				></Button> */}
 
 				<S.PageTitle>
 					{title}

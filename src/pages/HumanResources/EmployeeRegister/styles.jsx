@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
 	width: 100%;
     height: 100%;
-    border: 1px solid red;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -14,7 +13,7 @@ export const Container = styled.div`
 export const PersonalInformationContainer = styled.div`
 	display: flex;
 	width: 100%;
-	align-items: center;
+	align-items: start;
 	background-color: #e5e5e5;
 	padding: 12px 16px 12px 16px;
 	gap: 16px;

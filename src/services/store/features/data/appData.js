@@ -11,9 +11,9 @@ export const appDataSlice = createSlice({
 			}
 		})(),
 		token: localStorage.getItem("strao-token"),
-		data: (() => {
+		dataInfo: (() => {
 			try {
-				return JSON.parse(localStorage.getItem("strao-data"));
+				return JSON.parse(localStorage.getItem("strao-data-info"));
 			} catch (e) {
 				return null;
 			}
@@ -28,8 +28,8 @@ export const appDataSlice = createSlice({
 					avatar: action.payload.userInfo.avatar
 				},
 				token: action.payload.token,
-				data: action.payload.data,
-				dataVersion: action.payload.dataVersion ?? 1
+				dataInfo: action.payload.dataInfo,
+				dataVersion: action.payload.version
 			});
 		}
 	}

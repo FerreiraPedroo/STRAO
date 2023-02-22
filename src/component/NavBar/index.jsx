@@ -9,7 +9,7 @@ import { Clipboard } from "phosphor-react";
 
 export const NavBar = () => {
 	const navigate = useNavigate();
-	const menuData = useSelector((state) => state.appData.data.departments);
+	const menuData = useSelector((state) => state.appData.dataInfo.departments);
 	const [showMenu, setShowMenu] = useState(false);
 
 	function menuNavigation(path) {

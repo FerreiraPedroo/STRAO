@@ -9,7 +9,7 @@ import * as S from "./styles.jsx";
 export const HumanResources = () => {
 	const { pathname } = useLocation();
 	const departmentSector = useSelector(
-		(state) => state.appData.data.departmentSector[`${pathname}`]
+		(state) => state.appData.dataInfo.departmentSectors[`${pathname}`]
 	);
 
 	return (

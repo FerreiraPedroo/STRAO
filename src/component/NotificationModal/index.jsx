@@ -2,38 +2,33 @@ import { useEffect, useState } from "react";
 
 import * as N from "./styled";
 
-export const NotificationModal = ({ type, msg, onClick }) => {
-  const [showModal, setShowModal] = useState();
+export const NotificationModal = ({ type, theme, message, messageTitle, onClick }) => {
+	const [showModal, setShowModal] = useState();
 
-  const clickButton = () => {
-    setShowModal("");
-    onClick();
-  };
-  useEffect(() => {
-    setShowModal(type);
-  }, []);
+	useEffect(() => {
+		setShowModal(type);
+	}, []);
 
-  return (
-    <>
-      {showModal === "modal" && (
-        <N.Container>
-          <N.TitleText notified={"success"}>Notificação</N.TitleText>
-          <N.NotificationText notified={"success"}>
-            Registrado com sucesso.
-          </N.NotificationText>
-        </N.Container>
-      )}
-      {showModal === "full" && (
-        <N.ContainerFull>
-          <N.Modal>
-            <N.ModalClose onClick={() => clickButton()}>X</N.ModalClose>
-            <N.ModalMessage>{msg}</N.ModalMessage>
-            <N.ButtonFormSubmit onClick={() => clickButton()}>
-              Voltar
-            </N.ButtonFormSubmit>
-          </N.Modal>
-        </N.ContainerFull>
-      )}
-    </>
-  );
+	return (
+		<>
+			{showModal === "modal" && (
+				<N.Container theme={theme}>
+					<N.NotificationTitleText theme={theme}>Notificação</N.NotificationTitleText>
+					<N.NotificationText theme={theme}>{message}</N.NotificationText>
+				</N.Container>
+			)}
+			{showModal === "full" && (
+				<N.ContainerFull>
+					<N.Modal theme={theme}>
+						<N.ModalClose theme={theme} onClick={onClick}>X</N.ModalClose>
+						<N.ModalMessageTitle>{messageTitle}</N.ModalMessageTitle>
+						<N.ModalMessage>{message}</N.ModalMessage>
+						<N.ButtonFormSubmit onClick={onClick}>
+							Voltar
+						</N.ButtonFormSubmit>
+					</N.Modal>
+				</N.ContainerFull>
+			)}
+		</>
+	);
 };

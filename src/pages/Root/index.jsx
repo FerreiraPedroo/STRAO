@@ -11,7 +11,7 @@ const verifyDataApp = ({ appData }) => {
 	if (
 		appData.userInfo &&
 		appData.token &&
-		appData.data
+		appData.dataInfo
 	) {
 		return true;
 	}

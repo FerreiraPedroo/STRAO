@@ -5,7 +5,7 @@ import * as S from "./styles.jsx";
 
 export const Card = ({ data }) => {
 	const navigate = useNavigate();
-
+console.log(data)
 	return (
 		<S.Container onClick={() => navigate(data.path)}>
 			<S.Box>
