@@ -1,30 +1,29 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import { NavBar } from "../../component/NavBar";
 import { SideBar } from "../../component/SideBar";
 
 import * as S from "./styles.jsx";
 
-const verifyDataApp = ({ appData }) => {
+const verifyDataApp = (state) => {
 	if (
-		appData.userInfo &&
-		appData.token &&
-		appData.dataInfo
+		!state.appData.userInfo ||
+		!state.appData.token ||
+		!state.appData.dataInfo
 	) {
-		return true;
+		return false;
 	}
-	return false
+	return true;
 };
 
 export function Root() {
-	const navigate = useNavigate();
-	const verifyData = useSelector(verifyDataApp);
+	const result = useSelector(verifyDataApp);
 
-	useEffect(() => {
-		if (!verifyData) navigate("/login");
-	}, [verifyData]);
+	if (!result) {
+		return <Navigate to="/login" replace={true} />;
+	}
 
 	return (
 		<S.Container>

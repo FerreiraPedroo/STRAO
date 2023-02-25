@@ -1,98 +1,119 @@
 import React, { useState, useContext } from "react";
-import { GlobalUseContext } from "../../../provider/app";
 import { api } from "../../../services/api";
+import { useSelector } from "react-redux";
 
 import findEmployee from "../../../assets/img/find-employee.svg";
 
 import * as S from "./styles";
 
-export const RhEmployeeList = () => {
-  const { userData } = useContext(GlobalUseContext);
+import { PageTitle } from "../../../component/PageTitle";
+import { InputSelect } from "../../../component/Input/Select";
+import { InputText } from "../../../component/Input/Text";
+import { PageFilter } from "../../../component/PageFilter";
+import { PageList } from "../../../component/PageList";
 
-  const [searchFilter, setSearchFilter] = useState({
-    findBy: "fullName",
-    contract: userData.contracts.length ? userData.contracts[0].name : "",
-  });
-  console.log(searchFilter);
-  const [employeeFind, setEmployeeFind] = useState("");
-  const [findStatus, setFindStatus] = useState(false);
-  const [findEmployeeResponse, setFindEmployeeResponse] = useState([]);
+// const filters = [
+// 	{
+// 		type: "text",
+// 		htmlName: "user",
+// 		htmlPlaceholder: "Usuário"
+// 	},
+// 	{
+// 		type: "select",
+// 		htmlName: "contract",
+// 		htmlPlaceholder: "Contrato",
 
-  const handleFilter = (filterName, filterData) => {
-    const filter = { ...searchFilter, [filterName]: filterData };
-    setSearchFilter(filter);
-  };
+// 		defaultOption: 0,
+// 		options: [
+// 			{ title: "Todos", value: "" },
+// 			{ title: "Ativo", value: "active" },
+// 			{ title: "Inativo", value: "inactive" }
+// 		]
+// 	}
+// ];
 
-  const sendFilter = async () => {
-    setFindStatus(true);
-    try {
-      const { data } = await api.get("/rh/employee/find", {
-        params: { ...searchFilter, employee: employeeFind },
-      });
-      console.log(data.data);
-      setFindEmployeeResponse(data.data);
-      setFindStatus(false);
-    } catch (error) {
-      console.log("ERROR: ", error);
-      setFindStatus(false);
-    }
-  };
+export const HumanResourcesEmployeeList = () => {
+	const userData = useSelector((state) => state.appData.dataInfo);
 
-  return (
-    <S.Container>
-      <S.Title>LISTA DE FUNCIONÁRIOS</S.Title>
+	const [findStatus, setFindStatus] = useState(false);
+	const [findEmployeeResponse, setFindEmployeeResponse] = useState([]);
+	const [employeeSelected, setEmployeeSelected] = useState();
 
-      <S.FindEmployeeBox>
-        <S.FindEmployeeInputBox>
-          <S.FindEmployeeText>Contrato</S.FindEmployeeText>
-          <S.FindEmployeeSelect
-            onChange={(e) => handleFilter("contract", e.target.value)}
-          >
-            {userData.hasOwnProperty("contract") &&
-              userData.contracts.map((contract) => (
-                <S.FindEmployeeOption key={contract.name} value={contract.name}>
-                  {contract.name}
-                </S.FindEmployeeOption>
-              ))}
-          </S.FindEmployeeSelect>
-        </S.FindEmployeeInputBox>
+	const [filters] = useState([
+		{
+			type: "select",
+			htmlName: "contract",
+			htmlPlaceholder: "Contrato",
+			showInfo: true,
+			defaultOption: 0,
+			options: Object.values(userData.contracts).reduce((acc, cur) => {
+				acc.push({ title: cur.title, value: cur._id });
+				return acc;
+			}, [])
+		},
+		{
+			type: "select",
+			htmlName: "findBy",
+			htmlPlaceholder: "Procurar por",
+			showInfo: true,
+			defaultOption: 0,
+			options: [
+				{ title: "Nome", value: "fullName" },
+				{ title: "Identificação", value: "identification" }
+			]
+		},
+		{
+			type: "text",
+			htmlName: "findText",
+			htmlPlaceholder: "Procurar",
+			showInfo: true
+		}
+	]);
+	const [listColumns] = useState([
+		{ title: "Status", htmlName: "status", minSize: 96, maxSize: 128, align: "center" },
+		{ title: "Nome", htmlName: "fullName", minSize: 256, maxSize: 320 },
+		{ title: "E-mail", htmlName: "email", size: 0 }
+	]);
 
-        <S.FindEmployeeInputBox>
-          <S.FindEmployeeText>Procurar pelo</S.FindEmployeeText>
-          <S.FindEmployeeSelect
-            onChange={(e) => handleFilter("findBy", e.target.value)}
-          >
-            <S.FindEmployeeOption value="fullName">Nome</S.FindEmployeeOption>
-            <S.FindEmployeeOption value="identification">
-              ID
-            </S.FindEmployeeOption>
-          </S.FindEmployeeSelect>
-        </S.FindEmployeeInputBox>
+	// const handleFilter = (filterName, filterData) => {
+	// 	const filter = { ...searchFilter, [filterName]: filterData };
+	// 	setSearchFilter(filter);
+	// };
 
-        <S.FindEmployeeInputBox>
-          <S.FindEmployeeText>Procurar</S.FindEmployeeText>
-          <S.FindEmployeeBoxFind>
-            <S.FindEmployeeInput
-              onChange={(e) => setEmployeeFind(e.target.value)}
-              value={employeeFind}
-            />
-            <S.FindEmployeeIcon
-              type="image"
-              src={findEmployee}
-              onClick={sendFilter}
-              disabled={findStatus}
-            />
-          </S.FindEmployeeBoxFind>
-        </S.FindEmployeeInputBox>
-      </S.FindEmployeeBox>
+	const getEmployeeSearch = async (filters) => {
+		setFindStatus(true);
+		try {
+			const { data } = await api.get("/rh/employee/find", {
+				params: filters
+			});
 
-      {findEmployeeResponse.map((employee) => (
-        <S.FindEmployeeList key={employee._id}>
-          <S.EmployeePhoto src={employee.photo} />
-          <S.EmployeeName>{employee.fullName}</S.EmployeeName>
-          <S.EmployeeRegister>{employee.status}</S.EmployeeRegister>
-        </S.FindEmployeeList>
-      ))}
-    </S.Container>
-  );
+			setFindEmployeeResponse(data.data);
+			setFindStatus(false);
+		} catch (error) {
+			console.log("ERROR: ", error);
+			setFindStatus(false);
+		}
+	};
+
+	return (
+		<S.Container>
+			<PageTitle
+				title="Lista de funcionários"
+				subTitle="pesquise pelos funcionários registrados"
+			/>
+
+			<PageFilter
+				filtersData={filters}
+				getSearch={getEmployeeSearch}
+				loading={findStatus}
+			/>
+
+			<PageList
+				listData={findEmployeeResponse}
+				columns={listColumns}
+				setDataSelected={setEmployeeSelected}
+				loading={findStatus}
+			/>
+		</S.Container>
+	);
 };

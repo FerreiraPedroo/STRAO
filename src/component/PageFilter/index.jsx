@@ -7,26 +7,26 @@ import { InputSelect } from "../Input/Select/index";
 import * as S from "./styles.jsx";
 
 // exemplo
-// const [userListData] = {
-// 	filters: [
+// const [userListData] = [
 // 		{
 // 			type: "text",
 // 			htmlName: "user",
 // 			htmlPlaceholder: "Usuário"
+//			showInfo: true,
 // 		},
 // 		{
 // 			type: "select",
 // 			htmlName: "status",
 // 			htmlPlaceholder: "Status",
 // 			defaultOption: 0,
+// 			showInfo: true,
 // 			options: [
 // 				{ title: "Todos", value: "" },
 // 				{ title: "Ativo", value: "active" },
 // 				{ title: "Inativo", value: "inactive" }
 // 			]
 // 		}
-// 	]
-// };
+// 	];
 
 /**
  * @param title - String - Titulo principal da página.
@@ -35,7 +35,7 @@ import * as S from "./styles.jsx";
  */
 export const PageFilter = ({
 	filtersData = [],
-	getFiltersSelected,
+	getSearch,
 	loading = false
 }) => {
 	const [filters, setFilters] = useState(
@@ -44,24 +44,22 @@ export const PageFilter = ({
 				if (cur.type === "select") {
 					return {
 						...acc,
-						[cur.htmlName]: cur.options[1].value
+						[cur.htmlName]: cur.options[0].value
 					};
 				}
 				return { ...acc, [cur.htmlName]: "" };
 			}, {});
-            console.log(data)
-            return data
+			return data;
 		})()
 	);
 
 	function handleFilter(event) {
-		setFilters(
-			(prev) => (prev = { ...prev, [event.target.name]: event.target.value })
-		);
+		const newFilters = { ...filters, [event.target.name]: event.target.value };
+		setFilters(newFilters);
 	}
 
 	function sendFiltersSelected() {
-		getFiltersSelected(filters);
+		getSearch(filters);
 	}
 
 	return (
@@ -72,11 +70,13 @@ export const PageFilter = ({
 					<div key={filter.htmlName}>
 						{filter.type == "select" && (
 							<InputSelect
-								filterName={filter.htmlName}
-								filterValue={filters[filter.htmlName]}
-								filterOnChange={handleFilter}
-								filterPlaceholder={filter.htmlPlaceholder}
+								selectId={filter.htmlName}
+								selectName={filter.htmlName}
+								selectValue={filters[filter.htmlName]}
+								selectOnChange={handleFilter}
+								selectPlaceholder={filter.htmlPlaceholder}
 								disabled={loading}
+								selectShowInfo={filter.showInfo}
 							>
 								{filter.options &&
 									filter.options.map((option) => (
@@ -88,11 +88,13 @@ export const PageFilter = ({
 						)}
 						{filter.type == "text" && (
 							<InputText
+								inputId={filter.htmlName}
 								inputName={filter.htmlName}
 								inputValue={filters[filter.htmlName]}
 								inputOnChange={handleFilter}
 								inputPlaceholder={filter.htmlPlaceholder}
 								disabled={loading}
+								inputShowInfo={filter.showInfo}
 							/>
 						)}
 					</div>

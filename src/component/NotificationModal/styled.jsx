@@ -15,7 +15,7 @@ export const Container = styled.div`
 	right: 0;
 
 	width: 240px;
-	min-height: 24px;
+	// min-height: 24px;
 
 	display: flex;
 	flex-direction: column;
@@ -49,7 +49,7 @@ export const NotificationTitleText = styled.div`
 `;
 export const NotificationText = styled.div`
 	width: 100%;
-	height: 24px;
+	// height: 24px;
 	text-align: center;
 	padding: 2px;
 
@@ -57,13 +57,11 @@ export const NotificationText = styled.div`
 		theme === "success" &&
 		`
     background-color: #5b5;
-    color: white;
   `};
 	${({ theme }) =>
 		theme === "fail" &&
 		`
     background-color: #fbb;
-    color: white;
   `};
 `;
 

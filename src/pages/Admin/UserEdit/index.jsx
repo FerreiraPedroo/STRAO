@@ -2,8 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { api } from "../../../services/api.js";
 
-import { GlobalContext } from "../../../provider/app";
-
 import { Button } from "../../../component/Button";
 import { InputText } from "../../../component/Input/Text/index";
 import { InputSelect } from "../../../component/Input/Select/index";

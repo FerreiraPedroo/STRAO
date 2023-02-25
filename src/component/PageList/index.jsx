@@ -2,52 +2,59 @@ import React, { useState, useRef, useLayoutEffect } from "react";
 
 import * as S from "./styles.jsx";
 
-// exemplo
-// const userListData = {
-// 	columns: [
-// 		{ title: "status", htmlName: "status", size: 0 },
-// 		{ title: "nome", htmlName: "name", size: 0 },
-// 		{ title: "email", htmlName: "email", size: 0 },
-// 		{ title: "contrato", htmlName: "contract", size: 0 }
-// 	]
-// };
+// Exemplo
+// const columns: [
+// 		{ title: "status", htmlName: "status", minSize: 96, maxSize: 128, align: "center" },
+// 		{ title: "nome", htmlName: "name", minSize: 96, maxSize: 128, align: "center" },
+// 		{ title: "email", htmlName: "email", minSize: 96, maxSize: 128, align: "center" },
+// 		{ title: "contrato", htmlName: "contract", minSize: 96, maxSize: 128, align: "center" },
+// 	];
 
 /**
  *
  */
-export const PageList = ({ listData, columns = [], getDataSelected, loading = false }) => {
+export const PageList = ({
+	listData,
+	columns = [],
+	setDataSelected,
+	loading = false
+}) => {
 	const listRefHTML = useRef();
 	const [headerInfo, setHeaderInfo] = useState([]);
-	const [dataSelected, setDataSelected] = useState();
+	const [rowSelected, setRowSelected] = useState();
 	const [listChangeSize, setListChangeSize] = useState(false);
 
 	function handleDataSelected(data) {
-		getDataSelected(data);
 		setDataSelected(data);
+		setRowSelected(data);
 	}
 
 	useLayoutEffect(() => {
 		if (listRefHTML.current) {
 			const rows = listRefHTML.current.children;
+
 			const columnsInfo = columns;
 			const columnsSize = [];
 
-			for (let i = 0; i < rows.length; i++) {
-				const column = rows[i].children;
-				for (let r = 0; r < column.length; r++) {
-					if (!columnsSize[r]) {
-						columnsSize[r] = column[r].offsetWidth;
+			for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
+				const row = rows[rowIndex].children;
+
+				for (let columnIndex = 0; columnIndex < row.length; columnIndex++) {
+
+					if (!columnsSize[columnIndex]) {
+						columnsSize[columnIndex] = row[columnIndex].offsetWidth;
 					}
-					if (columnsSize[r] < column[r].offsetWidth) {
-						columnsSize[r] = column[r].offsetWidth;
+
+					if (columnsSize[columnIndex] < row[columnIndex].offsetWidth) {
+						columnsSize[columnIndex] = row[columnIndex].offsetWidth;
 					}
 				}
-			}
 
-			for (let i = 0; i < columnsInfo.length; i++) {
-				columnsInfo[
-					i
-				].size = `${columnsInfo[i].minSize}px; max-width:${columnsInfo[i].maxSize}px; flex: auto; width:${columnsSize[i]}`;
+				for (let i = 0; i < columnsInfo.length; i++) {
+					columnsInfo[
+						i
+					].size = `${columnsInfo[i].minSize}px; flex: 1; max-width:${columnsInfo[i].maxSize}px; width:${columnsSize[i]}; text-align: ${columnsInfo[i].align};`;
+				}
 			}
 
 			setListChangeSize((prevState) => !prevState);
@@ -77,7 +84,7 @@ export const PageList = ({ listData, columns = [], getDataSelected, loading = fa
 							<S.ListUserBox
 								key={JSON.stringify(data)}
 								reloadListSize={listChangeSize}
-								data-selected={data == dataSelected}
+								data-selected={data == rowSelected}
 								onClick={() => handleDataSelected(data)}
 							>
 								{headerInfo.map((column) => (

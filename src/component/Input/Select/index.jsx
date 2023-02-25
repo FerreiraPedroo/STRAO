@@ -7,7 +7,7 @@ export const InputSelect = ({
 	selectValue,
 	selectOnChange,
 	selectPlaceholder,
-    selectShowInfo,
+	selectShowInfo,
 	disabled,
 	readOnly,
 	children
@@ -15,7 +15,8 @@ export const InputSelect = ({
 	return (
 		<S.Container>
 			<S.TitleText disabled={disabled}>
-				{(selectValue || selectShowInfo) && selectPlaceholder}
+				{((selectValue && selectShowInfo) || selectShowInfo) &&
+					selectPlaceholder }
 			</S.TitleText>
 			<S.Select
 				id={selectId}

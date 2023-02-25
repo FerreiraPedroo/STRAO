@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api.js";
 
 import { NotificationModal } from "../../../component/NotificationModal";
-import { GlobalContext } from "../../../provider/app";
 import { PageFilter } from "../../../component/PageFilter/index";
 import { PageList } from "../../../component/PageList/index";
 import { PageTitle } from "../../../component/PageTitle/index";
@@ -13,7 +12,7 @@ import { PageAction } from "../../../component/PageAction/index.jsx";
 
 export const AdminUserList = () => {
 	const navigate = useNavigate();
-	const { userToken, removeLoginData } = useContext(GlobalContext);
+	const { userToken, removeLoginData } = useContext();
 	const [notification, setNotification] = useState();
 
 	const [loading, setLoading] = useState(true);

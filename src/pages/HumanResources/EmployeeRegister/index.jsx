@@ -185,9 +185,9 @@ const formikAditionalValues = {
 
 export const HumanResourcesEmployeeRegister = () => {
 	const appData = useSelector((state) => state.appData.dataInfo);
+	const [contractSelected, setContractSelected] = useState();
 	const navigate = useNavigate();
 
-	const [contractSelected, setContractSelected] = useState();
 	const [messageModal, setMessageModal] = useState();
 
 	const formik = useFormik({
@@ -197,13 +197,13 @@ export const HumanResourcesEmployeeRegister = () => {
 			photo: "",
 			birthDay: "",
 			job: "",
-			department: "",
+			department_id: "",
 			admission: "",
 			demission: "",
 			contract_id: "",
 			centerCost_id: "",
 			driverLicense: { ...formikAditionalValues.driverLicense },
-			uniform: { ...formikAditionalValues.uniform },
+			// uniform: { ...formikAditionalValues.uniform },
 			address: { ...formikAditionalValues.address }
 		},
 		validate: (values) => {
@@ -215,8 +215,8 @@ export const HumanResourcesEmployeeRegister = () => {
 			if (!values.job) {
 				errors.job = "Selecione um campo.";
 			}
-			if (!values.department) {
-				errors.department = "Selecione um campo.";
+			if (!values.department_id) {
+				errors.department_id = "Selecione um campo.";
 			}
 			if (!values.contract_id) {
 				errors.contract_id = "Selecione um campo.";
@@ -227,31 +227,31 @@ export const HumanResourcesEmployeeRegister = () => {
 
 			return errors;
 		},
-		onSubmit: async (values) => {
-			await registerEmployee(values);
-			return;
-		}
-	});
+		onSubmit: async (values, actions) => {
+			const result = await registerEmployee(values);
 
-	useEffect(() => {
-		console.log(formik.values);
-	}, []);
-
-	const registerEmployee = async (values) => {
-		try {
-			const { data } = await api.post("/rh/employee/register", {
-				data: values
-			});
-			console.log(data);
-
-			if (data.codStatus === 200) {
+			if (result) {
 				setMessageModal({
 					type: "full",
 					theme: "success",
 					messageTitle: "Sucesso",
 					message: "Funcionário registrado com sucesso."
 				});
+				formik.resetForm();
 			}
+
+			return;
+		}
+	});
+
+	useEffect(() => {}, []);
+
+	const registerEmployee = async (values) => {
+		try {
+			const { data } = await api.post("/rh/employee/register", {
+				data: values
+			});
+
 			return true;
 		} catch (err) {
 			let errMessage = "";
@@ -265,7 +265,7 @@ export const HumanResourcesEmployeeRegister = () => {
 				errMessage = err.message;
 			}
 			setMessageModal({
-				type: "full",
+				type: "modal",
 				theme: "fail",
 				messageTitle: "Erro",
 				message: `Não foi possivel registrar o funcionario. ${errMessage}`,
@@ -287,10 +287,7 @@ export const HumanResourcesEmployeeRegister = () => {
 					theme={messageModal.theme}
 					message={messageModal.message}
 					messageTitle={messageModal.messageTitle}
-					onClick={() => {
-						messageModal.onClick();
-						setMessageModal(false);
-					}}
+					onClick={() => setMessageModal(false)}
 				/>
 			)}
 			{appData && appData.departments ? (
@@ -350,23 +347,23 @@ export const HumanResourcesEmployeeRegister = () => {
 
 							<S.InputBox>
 								<InputSelect
-									selectId="department"
-									selectName="department"
-									selectValue={formik.values.department}
+									selectId="department_id"
+									selectName="department_id"
+									selectValue={formik.values.department_id}
 									selectPlaceholder="Departamento"
 									selectShowInfo={true}
 									selectOnChange={formik.handleChange}
 								>
-									<option value="">Selecione o departamento</option>
+									<option value=""></option>
 									{appData.hasOwnProperty("departments") &&
 										Object.values(appData.departments).map((department) => (
-											<option key={department.title} value={department.id}>
+											<option key={department.title} value={department._id}>
 												{department.title}
 											</option>
 										))}
 								</InputSelect>
 								<S.ErrorMessage>
-									{formik.touched.department && formik.errors.department}
+									{formik.touched.department_id && formik.errors.department_id}
 								</S.ErrorMessage>
 							</S.InputBox>
 
@@ -378,14 +375,26 @@ export const HumanResourcesEmployeeRegister = () => {
 									selectPlaceholder="Contrato"
 									selectShowInfo={true}
 									selectOnChange={(e) => {
+										setContractSelected(
+											document.getElementById(e.target.value)
+												? document
+														.getElementById(e.target.value)
+														.attributes.getNamedItem("name").value
+												: ""
+										);
 										formik.handleChange(e);
-										setContractSelected(e.target.value);
 									}}
+									disabled={!formik.values.department_id}
 								>
-									<option value="">Selecione o contrato</option>
+									<option value=""></option>
 									{appData.hasOwnProperty("contracts") &&
 										Object.values(appData.contracts).map((contract) => (
-											<option key={contract.title} value={contract.id}>
+											<option
+												key={contract.title}
+												id={contract._id}
+												name={contract.title}
+												value={contract._id}
+											>
 												{contract.title}
 											</option>
 										))}
@@ -403,11 +412,12 @@ export const HumanResourcesEmployeeRegister = () => {
 									selectPlaceholder="Cargo"
 									selectShowInfo={true}
 									selectOnChange={formik.handleChange}
+									disabled={!contractSelected}
 								>
-									<option value="">Selecione o cargo</option>
+									<option value=""></option>
 									{appData.contracts.hasOwnProperty(contractSelected) &&
 										appData.contracts[contractSelected].jobs.map((job) => (
-											<option key={job.title} value={job.id}>
+											<option key={job.title} value={job._id}>
 												{job.title}
 											</option>
 										))}
@@ -425,12 +435,13 @@ export const HumanResourcesEmployeeRegister = () => {
 									selectPlaceholder="Centro de custo"
 									selectShowInfo={true}
 									selectOnChange={formik.handleChange}
+									disabled={!formik.values.job}
 								>
-									<option value="">Selecione o centro de custo</option>
+									<option value=""></option>
 									{appData.contracts.hasOwnProperty(contractSelected) &&
 										appData.contracts[contractSelected].centerCosts.map(
 											(centerCost) => (
-												<option key={centerCost.title} value={centerCost.id}>
+												<option key={centerCost.title} value={centerCost._id}>
 													{centerCost.title}
 												</option>
 											)

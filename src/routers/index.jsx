@@ -13,6 +13,7 @@ import { Home } from "../pages/Home/index";
 
 import { HumanResources } from "../pages/HumanResources";
 import { HumanResourcesEmployeeRegister } from "../pages/HumanResources/EmployeeRegister";
+import { HumanResourcesEmployeeList } from "../pages/HumanResources/EmployeeList";
 
 import { Admin } from "../pages/Admin";
 import { AdminUserList } from "../pages/Admin/UserList";
@@ -32,10 +33,8 @@ export const router = createBrowserRouter(
 
 				<Route path="rh">
 					<Route index element={<HumanResources />} />
-					<Route
-						path="employee/register"
-						element={<HumanResourcesEmployeeRegister />}
-					/>
+					<Route path="employee/register" element={<HumanResourcesEmployeeRegister />} />
+					<Route path="employee/all" element={<HumanResourcesEmployeeList />} />
 				</Route>
 
 				<Route path="admin">
