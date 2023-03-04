@@ -35,7 +35,7 @@ import * as S from "./styles.jsx";
  */
 export const PageFilter = ({
 	filtersData = [],
-	getSearch,
+	getFiltersSelected,
 	loading = false
 }) => {
 	const [filters, setFilters] = useState(
@@ -59,7 +59,7 @@ export const PageFilter = ({
 	}
 
 	function sendFiltersSelected() {
-		getSearch(filters);
+		getFiltersSelected(filters);
 	}
 
 	return (

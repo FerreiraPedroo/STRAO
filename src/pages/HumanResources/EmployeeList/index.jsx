@@ -104,7 +104,7 @@ export const HumanResourcesEmployeeList = () => {
 
 			<PageFilter
 				filtersData={filters}
-				getSearch={getEmployeeSearch}
+				getFiltersSelected={getEmployeeSearch}
 				loading={findStatus}
 			/>
 

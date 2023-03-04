@@ -8,6 +8,7 @@ export const InputDate = ({
 	inputOnChange,
 	inputPlaceholder,
 	inputShowInfo = false,
+	inputWidth,
 	disabled,
 	readOnly
 }) => {
@@ -26,6 +27,7 @@ export const InputDate = ({
 				placeholder={!inputShowInfo ? inputPlaceholder : ""}
 				disabled={disabled}
 				readOnly={readOnly}
+				width={inputWidth}
 			/>
 		</S.Container>
 	);

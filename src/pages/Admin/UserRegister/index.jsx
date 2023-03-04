@@ -6,10 +6,13 @@ import { NotificationModal } from "../../../component/NotificationModal";
 import { PageTitle } from "../../../component/PageTitle";
 
 import * as S from "./styles.jsx";
+import { InputText } from "../../../component/Input/Text";
+import { InputDate } from "../../../component/Input/Date";
 
 export const AdminUserRegister = () => {
 	const navigate = useNavigate();
 	const [notification, setNotification] = useState();
+	const [loading, setLoading] = useState(false);
 	const [submitReturnErrorMsg, setSubmitReturnErrorMsg] = useState({});
 
 	const formik = useFormik({
@@ -64,6 +67,7 @@ export const AdminUserRegister = () => {
 					{ ...values },
 					{ headers: { "x-access-token": localStorage.getItem("strao-token") } }
 				);
+				console.log(data)
 				setNotification(data);
 				formik.resetForm();
 			} catch (error) {
@@ -83,14 +87,14 @@ export const AdminUserRegister = () => {
 			{notification && (
 				<NotificationModal
 					type="full"
-					msg={notification.message}
-					onClick={() => navigate(-1)}
+					message={notification.message}
+					onClick={() => setNotification()}
 				/>
 			)}
 			<PageTitle
 				title="Registro de usuário"
 				subTitle="registro de usuário para acesso ao sistema"
-				loading={"loading"}
+				loading={loading}
 			/>
 
 			<S.SubmitErrorText>
@@ -99,14 +103,16 @@ export const AdminUserRegister = () => {
 
 			<S.Form onSubmit={formik.handleSubmit}>
 				<S.InputBox>
-					<S.InputTitleText>NOME</S.InputTitleText>
-					<S.Input
-						id="name"
-						name="name"
-						type="text"
-						value={formik.values.name}
-						onChange={formik.handleChange}
+					<InputText
+						inputId="name"
+						inputName="name"
+						inputValue={formik.values.name}
+						inputOnChange={formik.handleChange}
 						onBlur={formik.handleBlur}
+						inputPlaceholder="Usuário"
+						inputShowInfo={true}
+						disabled={loading}
+						inputWidth="100%"
 					/>
 					<S.InputErrorText>
 						{formik.touched.name && formik.errors.name}
@@ -114,14 +120,16 @@ export const AdminUserRegister = () => {
 				</S.InputBox>
 
 				<S.InputBox>
-					<S.InputTitleText>E-MAIL</S.InputTitleText>
-					<S.Input
-						id="email"
-						name="email"
-						type="text"
-						value={formik.values.email}
-						onChange={formik.handleChange}
+					<InputText
+						inputId="email"
+						inputName="email"
+						inputValue={formik.values.email}
+						inputOnChange={formik.handleChange}
 						onBlur={formik.handleBlur}
+						inputPlaceholder="E-Mail"
+						inputShowInfo={true}
+						disabled={loading}
+						inputWidth="100%"
 					/>
 					<S.InputErrorText>
 						{formik.touched.email && formik.errors.email}
@@ -129,14 +137,16 @@ export const AdminUserRegister = () => {
 				</S.InputBox>
 
 				<S.InputBox>
-					<S.InputTitleText>DATA DE NASCIMENTO</S.InputTitleText>
-					<S.Input
-						id="birth_date"
-						name="birth_date"
-						type="date"
-						value={formik.values.birth_date}
-						onChange={formik.handleChange}
+					<InputDate
+						inputId="birth_date"
+						inputName="birth_date"
+						inputValue={formik.values.birth_date}
+						inputOnChange={formik.handleChange}
 						onBlur={formik.handleBlur}
+						inputPlaceholder="Data de nascimento"
+						inputShowInfo={true}
+						disabled={loading}
+						inputWidth="100%"
 					/>
 					<S.InputErrorText>
 						{formik.touched.birth_date && formik.errors.birth_date}
@@ -144,14 +154,16 @@ export const AdminUserRegister = () => {
 				</S.InputBox>
 
 				<S.InputBox>
-					<S.InputTitleText>SENHA</S.InputTitleText>
-					<S.Input
-						id="password"
-						name="password"
-						type="password"
-						value={formik.values.password}
-						onChange={formik.handleChange}
+					<InputText
+						inputId="password"
+						inputName="password"
+						inputValue={formik.values.password}
+						inputOnChange={formik.handleChange}
 						onBlur={formik.handleBlur}
+						inputPlaceholder="Senha"
+						inputShowInfo={true}
+						disabled={loading}
+						inputWidth="100%"
 					/>
 					<S.InputErrorText>
 						{formik.touched.password && formik.errors.password}
@@ -159,14 +171,16 @@ export const AdminUserRegister = () => {
 				</S.InputBox>
 
 				<S.InputBox>
-					<S.InputTitleText>REPETIR SENHA</S.InputTitleText>
-					<S.Input
-						id="password_repeat"
-						name="password_repeat"
-						type="password"
-						value={formik.values.password_repeat}
-						onChange={formik.handleChange}
+					<InputText
+						inputId="password_repeat"
+						inputName="password_repeat"
+						inputValue={formik.values.password_repeat}
+						inputOnChange={formik.handleChange}
 						onBlur={formik.handleBlur}
+						inputPlaceholder="Repetir a senha"
+						inputShowInfo={true}
+						disabled={loading}
+						inputWidth="100%"
 					/>
 					<S.InputErrorText>
 						{formik.touched.password_repeat && formik.errors.password_repeat}

@@ -196,15 +196,15 @@ export const HumanResourcesEmployeeRegister = () => {
 			identification: "",
 			photo: "",
 			birthDay: "",
-			job: "",
+			job_id: "",
 			department_id: "",
 			admission: "",
 			demission: "",
 			contract_id: "",
-			centerCost_id: "",
-			driverLicense: { ...formikAditionalValues.driverLicense },
+			centerCost_id: ""
+			// driverLicense: { ...formikAditionalValues.driverLicense },
 			// uniform: { ...formikAditionalValues.uniform },
-			address: { ...formikAditionalValues.address }
+			// address: { ...formikAditionalValues.address }
 		},
 		validate: (values) => {
 			const errors = {};
@@ -212,8 +212,8 @@ export const HumanResourcesEmployeeRegister = () => {
 			if (!values.fullName) {
 				errors.fullName = "O nome não pode ficar em branco.";
 			}
-			if (!values.job) {
-				errors.job = "Selecione um campo.";
+			if (!values.job_id) {
+				errors.job_id = "Selecione um campo.";
 			}
 			if (!values.department_id) {
 				errors.department_id = "Selecione um campo.";
@@ -248,9 +248,7 @@ export const HumanResourcesEmployeeRegister = () => {
 
 	const registerEmployee = async (values) => {
 		try {
-			const { data } = await api.post("/rh/employee/register", {
-				data: values
-			});
+			const { data } = await api.post("/rh/employee/register", { ...values });
 
 			return true;
 		} catch (err) {
@@ -406,9 +404,9 @@ export const HumanResourcesEmployeeRegister = () => {
 
 							<S.InputBox>
 								<InputSelect
-									selectId="job"
-									selectName="job"
-									selectValue={formik.values.job}
+									selectId="job_id"
+									selectName="job_id"
+									selectValue={formik.values.job_id}
 									selectPlaceholder="Cargo"
 									selectShowInfo={true}
 									selectOnChange={formik.handleChange}
@@ -423,7 +421,7 @@ export const HumanResourcesEmployeeRegister = () => {
 										))}
 								</InputSelect>
 								<S.ErrorMessage>
-									{formik.touched.job && formik.errors.job}
+									{formik.touched.job_id && formik.errors.job_id}
 								</S.ErrorMessage>
 							</S.InputBox>
 
@@ -435,7 +433,7 @@ export const HumanResourcesEmployeeRegister = () => {
 									selectPlaceholder="Centro de custo"
 									selectShowInfo={true}
 									selectOnChange={formik.handleChange}
-									disabled={!formik.values.job}
+									disabled={!formik.values.job_id}
 								>
 									<option value=""></option>
 									{appData.contracts.hasOwnProperty(contractSelected) &&
@@ -455,10 +453,10 @@ export const HumanResourcesEmployeeRegister = () => {
 					</S.PersonalInformationContainer>
 
 					<S.InformationContainer>
-						<DriverLicense formik={formik} />
+						{/* <DriverLicense formik={formik} /> */}
 						{/* <Occupation formik={formik} />
 						<Uniform formik={formik} /> */}
-						<Address formik={formik} />
+						{/* <Address formik={formik} /> */}
 					</S.InformationContainer>
 
 					<S.SubmitBox>

@@ -12,7 +12,6 @@ import { PageAction } from "../../../component/PageAction/index.jsx";
 
 export const AdminUserList = () => {
 	const navigate = useNavigate();
-	const { userToken, removeLoginData } = useContext();
 	const [notification, setNotification] = useState();
 
 	const [loading, setLoading] = useState(true);
@@ -96,23 +95,15 @@ export const AdminUserList = () => {
 			setLoading(true);
 			setUserSelected("");
 			try {
-				const { data } = await api({
-					url: "/admin/user/list",
-					method: "GET",
-					headers: { "x-access-token": userToken },
-					params: { ...sanitizedFilters },
-					withCredentials: true
+				const { data } = await api.get("/admin/user/list", {
+					params: { ...sanitizedFilters }
 				});
 
 				setUserList(data);
 			} catch (error) {
-				if (error.response.status === 401) {
+				if (error.response && error.response.status === 401) {
 					error.response.data.url = removeLoginData();
 					setNotification(error.response.data);
-				}
-
-				if (!error.response.status && !error.response.data) {
-					error.response.data = { message: error.message };
 				}
 
 				setUserList([]);
@@ -125,14 +116,16 @@ export const AdminUserList = () => {
 	useEffect(() => {
 		getUserList(filtersSelected);
 	}, [filtersSelected]);
-console.log(notification)
+
 	return (
 		<S.Container>
 			{notification && (
 				<NotificationModal
 					type={"full"}
 					msg={notification.message}
-					onClick={() => notification.codStatus == 401 && navigate(notification.url)}
+					onClick={() =>
+						notification.codStatus == 401 && navigate(notification.url)
+					}
 				/>
 			)}
 			<PageTitle
@@ -153,9 +146,10 @@ console.log(notification)
 			<PageList
 				listData={userList}
 				columns={userPageData.columns}
-				getDataSelected={setUserSelected}
+				setDataSelected={setUserSelected}
 				loading={loading}
 			/>
+
 		</S.Container>
 	);
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { api } from "../../../services/api.js";
 
@@ -13,7 +13,7 @@ import * as S from "./styles.jsx";
 export const AdminUserEdit = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const { userToken } = useContext(GlobalContext);
+
 	const [notification, setNotification] = useState();
 
 	const [loading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ export const AdminUserEdit = () => {
 
 	const [contractSelect, setContractSelect] = useState("");
 	const [departmentSelect, setDepartmentSelect] = useState("");
-	const [departmentActionSelect, setDepartmentActionSelect] = useState("");
+	const [departmentSectionSelect, setDepartmentSectionSelect] = useState("");
 
 	const [actionsPageData, setActionsPageData] = useState([
 		{
@@ -57,12 +57,12 @@ export const AdminUserEdit = () => {
 			removeReverse: "allDepartments",
 			selectCategory: () => setDepartmentSelect("")
 		},
-		departmentActions: {
-			add: "allDepartmentActions",
-			remove: "userDepartmentActions",
-			addReverse: "userDepartmentActions",
-			removeReverse: "allDepartmentActions",
-			selectCategory: () => setDepartmentActionSelect("")
+		departmentSectors: {
+			add: "allDepartmentSectors",
+			remove: "userDepartmentSectors",
+			addReverse: "userDepartmentSectors",
+			removeReverse: "allDepartmentSectors",
+			selectCategory: () => setDepartmentSectionSelect("")
 		},
 		status: {
 			add: "active",
@@ -74,18 +74,14 @@ export const AdminUserEdit = () => {
 
 	const changeUpdate = async (_type, _action, _id) => {
 		try {
-			const { data } = await api.put(
-				"/admin/user/data/update",
-				{
-					data: {
-						type: _type,
-						action: _action,
-						actionId: _id,
-						userId: location.state.userId
-					}
-				},
-				{ headers: { "x-access-token": userToken } }
-			);
+			const { data } = await api.put("/admin/user/data/update", {
+				data: {
+					type: _type,
+					action: _action,
+					actionId: _id,
+					userId: location.state.userId
+				}
+			});
 			if (data.codStatus === 200) {
 				if (_type === "status") {
 					console.log("STATUS:", dataOptions[_type][_action]);
@@ -151,8 +147,7 @@ export const AdminUserEdit = () => {
 		const getUserInfo = async () => {
 			try {
 				const { data } = await api.get("admin/user/data", {
-					params: { userId: location.state.userId },
-					headers: { "x-access-token": userToken }
+					params: { userId: location.state.userId }
 				});
 				handleHiddenShowAction(data.status);
 				setUserData(data);
@@ -164,6 +159,11 @@ export const AdminUserEdit = () => {
 
 	return (
 		<S.Container>
+			<PageTitle
+				title="Editar usuário"
+				subTitle="adicione e remova permissões do usuário."
+				loading={loading}
+			/>
 			{userData ? (
 				<>
 					<PageTitle
@@ -214,8 +214,8 @@ export const AdminUserEdit = () => {
 							<S.HeaderTitle>Contratos</S.HeaderTitle>
 							<S.InputBox>
 								<InputSelect
-									filterValue={contractSelect}
-									filterOnChange={(e) => setContractSelect(e.target.value)}
+									selectValue={contractSelect}
+									selectOnChange={(e) => setContractSelect(e.target.value)}
 								>
 									<option value={""}>Selecione o contrato</option>
 
@@ -263,8 +263,8 @@ export const AdminUserEdit = () => {
 								<S.HeaderTitle>Departamentos</S.HeaderTitle>
 								<S.InputBox>
 									<InputSelect
-										filterValue={departmentSelect}
-										filterOnChange={(e) => setDepartmentSelect(e.target.value)}
+										selectValue={departmentSelect}
+										selectOnChange={(e) => setDepartmentSelect(e.target.value)}
 									>
 										<>
 											<option value={""}>Selecione o departamento</option>
@@ -312,20 +312,20 @@ export const AdminUserEdit = () => {
 
 						<S.SubDepartmentActionsContainer>
 							<S.LeftContainer>
-								<S.HeaderTitle>Ações dos departamentos</S.HeaderTitle>
+								<S.HeaderTitle>Setores dos departamentos</S.HeaderTitle>
 								<S.InputBox>
 									<InputSelect
-										filterValue={departmentActionSelect}
-										filterOnChange={(e) =>
-											setDepartmentActionSelect(e.target.value)
+										selectValue={departmentSectionSelect}
+										selectOnChange={(e) =>
+											setDepartmentSectionSelect(e.target.value)
 										}
 									>
 										<option value="">Selecione a ação</option>
-										{userData.allDepartmentActions &&
+										{userData.allDepartmentSectors &&
 											userData.userDepartments &&
 											userData.userDepartments.map((department) => (
 												<>
-													{userData.allDepartmentActions.map(
+													{userData.allDepartmentSectors.map(
 														(action, index) => (
 															<>
 																{index === 0 && (
@@ -347,14 +347,15 @@ export const AdminUserEdit = () => {
 												</>
 											))}
 									</InputSelect>
+									{console.log(departmentSectionSelect)}
 									<Button
 										typeStyle="correct"
-										disable={!departmentActionSelect}
+										disable={!departmentSectionSelect}
 										onClick={() =>
 											changeUpdate(
-												"departmentActions",
+												"departmentSectors",
 												"add",
-												departmentActionSelect
+												departmentSectionSelect
 											)
 										}
 									/>
@@ -363,14 +364,14 @@ export const AdminUserEdit = () => {
 
 							<S.RightContainer>
 								<S.HeaderTitle>Ações associadas</S.HeaderTitle>
-								{userData.userDepartmentActions &&
+								{userData.userDepartmentSectors &&
 									userData.userDepartments &&
 									userData.userDepartments.map((department) => (
 										<>
-											{userData.userDepartmentActions.map((action, index) => (
+											{userData.userDepartmentSectors.map((action, index) => (
 												<>
 													{index === 0 &&
-														userData.userDepartmentActions.find(
+														userData.userDepartmentSectors.find(
 															(av) => av.department === department.id
 														) && (
 															<S.DepartmentAction>
@@ -388,7 +389,7 @@ export const AdminUserEdit = () => {
 																typeStyle="remove"
 																onClick={() =>
 																	changeUpdate(
-																		"departmentActions",
+																		"departmentSectors",
 																		"remove",
 																		action.id
 																	)

@@ -10,12 +10,12 @@ const props = {
 
 export const Container = styled.div`
 	width: 100%;
+	height: 100%;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	flex-wrap: wrap;
+	justify-content: start;
 	align-content: start;
-	padding: 16px;
-    padding-bottom: 64px;
+	padding: 16px 32px;
 	gap: 16px;
 `;
 

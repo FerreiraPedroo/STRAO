@@ -15,7 +15,7 @@ export const TitleText = styled.p`
 	${({ disabled }) => disabled && "color: #b6b6b6;"}
 `;
 export const Input = styled.input`
-	width: 256px;
+	width: ${({ width }) => width};
 	height: 32px;
 	padding: 0px 8px 2px 8px;
 	background-color: #ffffff;
@@ -35,8 +35,8 @@ export const Input = styled.input`
 `;
 
 export const ErrorMsg = styled.div`
-    width: 100%;
-    height: 12px;
-    font-size: 0.8rem;
-    border:1 px solid red;
+	width: 100%;
+	height: 12px;
+	font-size: 0.8rem;
+	border: 1 px solid red;
 `;

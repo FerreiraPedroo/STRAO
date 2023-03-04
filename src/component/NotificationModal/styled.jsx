@@ -141,7 +141,6 @@ export const ModalMessage = styled.div`
 	font-family: ${props.textFontFamily};
 	font-size: 1.5rem;
 	font-weight: bold;
-	color: white;
 	padding: 14px;
 `;
 export const ModalMessageTitle = styled.div`
@@ -152,7 +151,6 @@ export const ModalMessageTitle = styled.div`
 	font-family: ${props.textFontFamily};
 	font-size: 28px;
 	font-weight: bold;
-	color: white;
 `;
 export const ButtonFormSubmit = styled.button`
 	width: 128px;
