@@ -20,6 +20,9 @@ import { AdminUserList } from "../pages/Admin/UserList";
 import { AdminUserEdit } from "../pages/Admin/UserEdit";
 import { AdminUserRegister } from "../pages/Admin/UserRegister";
 
+import { Supply } from "../pages/Supply";
+import { SupplyWarehouseItems } from "../pages/Supply/Warehouse/Items";
+
 export const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/">
@@ -33,7 +36,10 @@ export const router = createBrowserRouter(
 
 				<Route path="rh">
 					<Route index element={<HumanResources />} />
-					<Route path="employee/register" element={<HumanResourcesEmployeeRegister />} />
+					<Route
+						path="employee/register"
+						element={<HumanResourcesEmployeeRegister />}
+					/>
 					<Route path="employee/all" element={<HumanResourcesEmployeeList />} />
 				</Route>
 
@@ -42,6 +48,12 @@ export const router = createBrowserRouter(
 					<Route path="user/list" element={<AdminUserList />} />
 					<Route path="user/edit" element={<AdminUserEdit />} />
 					<Route path="user/register" element={<AdminUserRegister />} />
+				</Route>
+
+				<Route path="supply">
+					<Route index element={<Supply />} />
+					<Route path="warehouse/items" element={<SupplyWarehouseItems />} />
+
 				</Route>
 			</Route>
 		</Route>

@@ -249,7 +249,6 @@ export const HumanResourcesEmployeeRegister = () => {
 	const registerEmployee = async (values) => {
 		try {
 			const { data } = await api.post("/rh/employee/register", { ...values });
-
 			return true;
 		} catch (err) {
 			let errMessage = "";

@@ -4,8 +4,7 @@ import { Button } from "../Button";
 
 import * as S from "./styles.jsx";
 
-// const dataPageData = {
-// 	actions: [
+// const actions: [
 // 		{
 // 			title: "Excluir",
 // 			typeStyle: "remove",
@@ -21,8 +20,8 @@ import * as S from "./styles.jsx";
 // 					state: { dataId: data._id }
 // 				})
 // 		}
-// 	]
-// };
+// 	]/
+
 
 /**
  *
@@ -41,7 +40,6 @@ export const PageAction = ({
 					disabled={!dataSelected || loading}
 					show={action.show}
 				>
-					{console.log(actionsData)}
 					<Button
 						typeStyle={action.typeStyle}
 						title={action.title}

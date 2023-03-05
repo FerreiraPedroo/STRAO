@@ -10,8 +10,3 @@ export const Container = styled.div`
 	gap: 16px;
 	background-color: #f5f3f0;
 `;
-
-export const NoAction = styled.div`
-	width: 100%;
-	text-align: center;
-`;
