@@ -6,8 +6,9 @@ import { PageTitle } from "../../../../component/PageTitle/index.jsx";
 import { PageFilter } from "../../../../component/PageFilter/index.jsx";
 import { PageList } from "../../../../component/PageList/index.jsx";
 import { PageAction } from "../../../../component/PageAction/index.jsx";
-import { ModalEdit } from "../../../../component/ModalEdit/index.jsx";
+
 import { NotificationModal } from "../../../../component/NotificationModal/index.jsx";
+import { useNavigate } from "react-router-dom";
 
 const itemColumns = [
 	{
@@ -84,6 +85,7 @@ const itemFilterData = [
 ];
 
 export function SupplyWarehouseItems() {
+	const navigate = useNavigate();
 	const [items, setItems] = useState([]);
 	const [itemSelected, setItemSelected] = useState();
 	const [notification, setNotification] = useState();
@@ -105,27 +107,13 @@ export function SupplyWarehouseItems() {
 
 	const itemActions = [
 		{
-			title: "Excluir",
-			typeStyle: "remove",
-			show: itemSelected && itemSelected.revised ? true : false,
-			action: () => {}
-		},
-		{
-			title:
-				itemSelected && itemSelected.status == "active"
-					? "Desativar"
-					: "Ativar",
-			typeStyle:
-				itemSelected && itemSelected.status == "active" ? "hidden" : "show",
-			show: true,
-			action: () => {}
-		},
-		{
 			title: "Editar",
 			typeStyle: "edit",
-			show: true,
+			show: itemSelected && itemSelected.revised ? false : true,
 			action: (item) => {
-				modalOpen(item);
+				navigate("/supply/warehouse/item/edit", {
+					state: item
+				});
 			}
 		}
 	];
@@ -145,13 +133,6 @@ export function SupplyWarehouseItems() {
 					onClick={() => {}}
 				/>
 			)}
-
-			{/* <ModalEdit 
-                title=" any;"
-                subtitle=": any;"
-                itemData=": any;"
-                handleSaveItemData={() => "" }
-            /> */}
 			<PageTitle
 				title="Materiais cadastrados"
 				subTitle="todos os tipos de materiais cadastrados no sistema"

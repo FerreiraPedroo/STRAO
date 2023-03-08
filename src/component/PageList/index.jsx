@@ -61,7 +61,7 @@ export const PageList = ({
 			setHeaderInfo(columnsInfo);
 		}
 	}, [listData]);
-console.log(listData)
+
 	return (
 		<S.Container>
 			<S.CenterContainer>

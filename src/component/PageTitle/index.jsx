@@ -12,22 +12,27 @@ import { Button } from "../Button/index";
  * @param subTitle - String - Sub titulo da página.
  * @returns
  */
-export const PageTitle = ({ title, subTitle }) => {
+export const PageTitle = ({ title, subTitle, icon, backButton }) => {
 	const navigate = useNavigate();
 
 	return (
 		<S.PageTitleContainer>
 			<S.PageHeader>
-				{/* <Button
-					typeStyle="back"
-					value={<ArrowFatLeft size={24} />}
-					onClick={() => navigate(-1)}
-				></Button> */}
+				{backButton && (
+					<Button
+						typeStyle="back"
+						value={<ArrowFatLeft size={24} />}
+						onClick={() => navigate(-1)}
+					></Button>
+				)}
 
-				<S.PageTitle>
-					{title}
+				<S.PageTitleBox>
+					<S.PageTitle>
+						<>{icon}</>
+						{title}
+					</S.PageTitle>
 					<S.PageSubTitle>{subTitle}</S.PageSubTitle>
-				</S.PageTitle>
+				</S.PageTitleBox>
 			</S.PageHeader>
 		</S.PageTitleContainer>
 	);

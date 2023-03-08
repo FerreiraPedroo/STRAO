@@ -171,6 +171,7 @@ const propsTheme = {
     border: 1px solid #C9C9C9;
   `
 };
+
 export const Button40x32 = styled.button`
 	width: ${({ width }) => (width ? `${width}px` : "40px")};
 	height: ${({ height }) => (height ? `${height}px` : "32px")};

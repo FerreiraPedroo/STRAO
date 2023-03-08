@@ -6,6 +6,7 @@
   font-size: 16px;
   box-sizing: border-box;
   color: #767676;
+  /* border: 1px solid red; */
 }
 body {
   height: 100vh;
