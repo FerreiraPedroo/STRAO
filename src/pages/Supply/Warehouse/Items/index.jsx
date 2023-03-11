@@ -107,9 +107,17 @@ export function SupplyWarehouseItems() {
 
 	const itemActions = [
 		{
+			title: "Novo material",
+			typeStyle: "add",
+			show: true,
+			action: (item) => {
+				navigate("/supply/warehouse/item/register");
+			}
+		},
+		{
 			title: "Editar",
 			typeStyle: "edit",
-			show: itemSelected && itemSelected.revised ? false : true,
+			show: itemSelected ? true : false,
 			action: (item) => {
 				navigate("/supply/warehouse/item/edit", {
 					state: item
@@ -143,7 +151,7 @@ export function SupplyWarehouseItems() {
 				loading={loading}
 			/>
 			<PageAction
-				actionsData={itemSelected && itemActions}
+				actionsData={itemActions}
 				dataSelected={itemSelected}
 				loading={loading}
 			/>

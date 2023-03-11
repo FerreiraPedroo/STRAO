@@ -22,7 +22,6 @@ import * as S from "./styles.jsx";
 // 		}
 // 	]/
 
-
 /**
  *
  */
@@ -37,14 +36,12 @@ export const PageAction = ({
 			{actionsData.map((action) => (
 				<S.ActionButtonBox
 					key={action.title}
-					disabled={!dataSelected || loading}
-					show={action.show}
+					show={action.show || dataSelected}
 				>
 					<Button
 						typeStyle={action.typeStyle}
 						title={action.title}
 						onClick={() => action.action(dataSelected)}
-						disable={!dataSelected || loading}
 					/>
 					{action.title}
 				</S.ActionButtonBox>

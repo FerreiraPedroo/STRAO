@@ -15,7 +15,7 @@ export function ModalEdit({title, subtitle, itemData, handleSaveItemData}) {
 		<S.Container>
 			<S.Modal theme={'theme'}>
 				<S.ModalClose theme={'theme'} onClick={'onClick'}>
-					X
+				☓
 				</S.ModalClose>
 				<S.ModalMessageTitle>{title}</S.ModalMessageTitle>
 				<S.ModalMessage>{'message'}</S.ModalMessage>

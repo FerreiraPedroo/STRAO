@@ -16,6 +16,7 @@ export const TitleText = styled.p`
 `;
 
 export const Select = styled.select`
+	${({ width }) => width && `width:${width};`}
 	min-width: 160px;
 	height: 32px;
 	padding: 0px 8px 2px 8px;

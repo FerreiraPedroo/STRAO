@@ -48,13 +48,13 @@ export const AdminUserList = () => {
 			{
 				title: "Excluir",
 				typeStyle: "remove",
-				show: true,
+				show: false,
 				action: () => {}
 			},
 			{
 				title: "Editar",
 				typeStyle: "edit",
-				show: true,
+				show: false,
 				action: (data) =>
 					navigate("/admin/user/edit", {
 						state: { userId: data._id }

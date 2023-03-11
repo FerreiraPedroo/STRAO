@@ -15,10 +15,24 @@ export async function getItemsFromFilters(filters) {
 	const data = await fetch(url, config).then((response) => {
 		return response.json();
 	});
-	console.log(data)
 
 	return data;
 }
+
+export async function getDataFromNewItem() {
+	const url = `http://localhost:8000/supply/warehouse/items/register/data`;
+	const config = {
+		method: "GET",
+		headers: loadHeaders()
+	};
+
+	const data = await fetch(url, config).then((response) => {
+		return response.json();
+	});
+
+	return data;
+}
+
 
 function loadHeaders() {
 	return {

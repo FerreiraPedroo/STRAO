@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import * as S from "./styles.jsx";
 
-import { getItemsFromFilters } from "../../../../services/Supply/Warehouse/itemAPI";
+import { getDataFromNewItem } from "../../../../services/Supply/Warehouse/itemAPI";
 import { PageTitle } from "../../../../component/PageTitle/index.jsx";
 import { PageAction } from "../../../../component/PageAction/index.jsx";
 
 import { NotificationModal } from "../../../../component/NotificationModal/index.jsx";
-import { useLocation, useNavigate } from "react-router-dom";
-import { NotePencil } from "phosphor-react";
+import { ItemSupplierInfo } from "../../../../component/WareHouse/Item/Supplier/index.jsx";
 
-export function SupplyWarehouseItemEdit() {
-	const navigate = useNavigate();
-	const location = useLocation();
-	const [item, setItem] = useState(location.state);
-	const [notification, setNotification] = useState();
+export function SupplyWarehouseItemRegister() {
+	const [itemInfo, serItemInfo] = useState({});
+	const [itemData, setItemData] = useState();
+
 	const [loading, setLoading] = useState(false);
+	const [notification, setNotification] = useState();
 
 	const itemActions = [
 		{
@@ -22,16 +21,22 @@ export function SupplyWarehouseItemEdit() {
 			typeStyle: "correct",
 			show: true,
 			action: (item) => {
-				navigate("/supply/warehouse/item/edit", {
+				navigate("", {
 					state: item
 				});
 			}
 		}
 	];
 
-	useEffect(() => {}, []);
-	console.log(item);
+	useEffect(() => {
+		const getData = async () => {
+			const data = await getDataFromNewItem();
+			setItemData(data);
+		};
+		getData();
+	}, []);
 
+	console.log("SupplyWarehouseItemRegister:", itemData);
 	return (
 		<S.Container>
 			{notification && (
@@ -43,18 +48,13 @@ export function SupplyWarehouseItemEdit() {
 					onClick={() => {}}
 				/>
 			)}
-			<PageTitle
-				title={item.title}
-				icon={<NotePencil size={32} />}
-				backButton={true}
-			/>
+			<PageTitle title={"Registro de item"} backButton={true} />
 			<PageAction
 				actionsData={itemActions}
 				dataSelected={true}
 				loading={loading}
 			/>
-			PÁGINA NÃO FUNCIONANDO
-			{/* <ItemSupplierInfo item={item.id} /> */}
+			{itemData && <ItemSupplierInfo itemData={itemData} />}
 		</S.Container>
 	);
 }

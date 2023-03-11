@@ -23,6 +23,7 @@ import { AdminUserRegister } from "../pages/Admin/UserRegister";
 import { Supply } from "../pages/Supply";
 import { SupplyWarehouseItems } from "../pages/Supply/Warehouse/Items";
 import { SupplyWarehouseItemEdit } from "../pages/Supply/Warehouse/ItemEdit";
+import { SupplyWarehouseItemRegister } from "../pages/Supply/Warehouse/ItemRegister";
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -55,6 +56,7 @@ export const router = createBrowserRouter(
 					<Route index element={<Supply />} />
 					<Route path="warehouse/items" element={<SupplyWarehouseItems />} />
 					<Route path="warehouse/item/edit" element={<SupplyWarehouseItemEdit />} />
+					<Route path="warehouse/item/register" element={<SupplyWarehouseItemRegister />} />
 
 				</Route>
 			</Route>

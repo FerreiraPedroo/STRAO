@@ -1,67 +1,67 @@
-import React from "react";
-import { InputDate } from "../../../../component/Input/Date";
+import React, { useEffect, useState } from "react";
 import { InputText } from "../../../../component/Input/Text";
+import { SelectAndDeselect } from "../../../SelectDeselect";
 
 import * as S from "./styles";
 
-export const ItemSupplierInfo = () => {
-	const handleOpen = () => {};
+export const ItemSupplierInfo = ({ itemData }) => {
+	const [supplierInfo, setSupplierInfo] = useState({
+		name: "",
+		address: "",
+		categories_id: [],
+		subCategories_id: [],
+		contacts: [],
+		items_id: []
+	});
 
-	const handleNotLicence = (e) => {
-		console.log(e);
+	const handleSupplier = (e) => {
+		setSupplierInfo({ ...supplierInfo, [e.target.name]: e.target.value });
 	};
+	const handleSelected = (name,e) => {
+		console.log(e)
 
+	}
+
+	console.log("ItemSupplierInfo:", itemData);
 	return (
-		<S.Container onClick={() => handleOpen} open={true}>
+		<S.Container open={true}>
 			<S.Title>
 				<S.TitleBox>Fornecedor</S.TitleBox>
 			</S.Title>
 			<S.DataContainer>
 				<InputText
-					inputId="driverLicense.register"
-					inputName="driverLicense.register"
-					inputPlaceholder="Registro CNH"
-					inputValue={"formik.values.driverLicense.register"}
-					inputOnChange={"formik.handleChange"}
-					inputShowInfo={true}
-				/>
-
-				<InputDate
-					inputId="driverLicense.expeditionDate"
-					inputName="driverLicense.expeditionDate"
-					inputPlaceholder="Data de expedição CNH"
-					inputValue={"formik.values.driverLicense.expeditionDate"}
-					inputOnChange={"formik.handleChange"}
-					inputShowInfo={true}
-				/>
-
-				<InputDate
-					inputId="driverLicense.expireDate"
-					inputName="driverLicense.expireDate"
-					inputPlaceholder="Data de validade CNH"
-					inputValue={"formik.values.driverLicense.expireDate"}
-					inputOnChange={"formik.handleChange"}
+					inputId="supplierId"
+					inputName="name"
+					inputPlaceholder="Nome do fornecedor"
+					inputValue={supplierInfo.name}
+					inputOnChange={handleSupplier}
 					inputShowInfo={true}
 				/>
 
 				<InputText
-					inputId="driverLicense.points"
-					inputName="driverLicense.points"
-					inputPlaceholder="Pontos de infração"
-					inputValue={"formik.values.driverLicense.points"}
-					inputOnChange={"formik.handleChange"}
+					inputId="addressId"
+					inputName="address"
+					inputPlaceholder="Endereço"
+					inputValue={supplierInfo.address}
+					inputOnChange={handleSupplier}
 					inputShowInfo={true}
 					inputWidth="160px"
 				/>
 
-				<InputText
-					inputId="driverLicense.photoDriverLicense"
-					inputname="driverLicense.photoDriverLicense"
-					inputValue={"formik.values.driverLicense.photoDriverLicense"}
-					inputOnChange={"formik.handleChange"}
-					inputPlaceholder="Documento CNH"
-					inputShowInfo={true}
-					inputWidth="128px"
+				<SelectAndDeselect
+					title="Adicionar categorias ao fornecedor"
+					name="categories_id"
+					placeHolder="Categorias"
+					getSelectedInfo={handleSelected}
+					data={itemData.categories}
+				/>
+				
+				<SelectAndDeselect
+					title="Adicionar sub-categorias ao fornecedor"
+					name="subCategories_id"
+					placeHolder="Sub-Categorias"
+					getSelectedInfo={handleSelected}
+					data={itemData.subCategories}
 				/>
 			</S.DataContainer>
 		</S.Container>

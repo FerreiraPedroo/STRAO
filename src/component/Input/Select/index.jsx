@@ -10,6 +10,7 @@ export const InputSelect = ({
 	selectShowInfo,
 	disabled,
 	readOnly,
+	width,
 	children
 }) => {
 	return (
@@ -26,6 +27,7 @@ export const InputSelect = ({
 				readOnly={readOnly}
 				onChange={selectOnChange}
 				placeholder={selectPlaceholder}
+				width={width}
 			>
 				{children}
 			</S.Select>
