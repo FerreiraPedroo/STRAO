@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { InputText } from "../../../../component/Input/Text";
 import { SelectAndDeselect } from "../../../SelectDeselect";
+import { SelectDeselectMultipleFields } from "../../../SelectDeselectMultipleFields";
 
 import * as S from "./styles";
 
@@ -17,12 +18,12 @@ export const ItemSupplierInfo = ({ itemData }) => {
 	const handleSupplier = (e) => {
 		setSupplierInfo({ ...supplierInfo, [e.target.name]: e.target.value });
 	};
-	const handleSelected = (name,e) => {
-		console.log(e)
+	const handleSelected = (name, value) => {
+		setSupplierInfo({ ...supplierInfo, [name]: value });
 
-	}
+	};
 
-	console.log("ItemSupplierInfo:", itemData);
+	console.log("supplierInfo:", supplierInfo);
 	return (
 		<S.Container open={true}>
 			<S.Title>
@@ -45,24 +46,26 @@ export const ItemSupplierInfo = ({ itemData }) => {
 					inputValue={supplierInfo.address}
 					inputOnChange={handleSupplier}
 					inputShowInfo={true}
-					inputWidth="160px"
+					inputWidth="320px"
 				/>
 
 				<SelectAndDeselect
-					title="Adicionar categorias ao fornecedor"
+					title="Categorias do fornecedor"
 					name="categories_id"
 					placeHolder="Categorias"
 					getSelectedInfo={handleSelected}
 					data={itemData.categories}
 				/>
-				
+
 				<SelectAndDeselect
-					title="Adicionar sub-categorias ao fornecedor"
+					title="Sub-categorias do fornecedor"
 					name="subCategories_id"
 					placeHolder="Sub-Categorias"
 					getSelectedInfo={handleSelected}
 					data={itemData.subCategories}
 				/>
+				<SelectDeselectMultipleFields />
+
 			</S.DataContainer>
 		</S.Container>
 	);
