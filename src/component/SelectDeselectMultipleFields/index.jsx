@@ -15,7 +15,7 @@ export const SelectDeselectMultipleFields = ({
 	const [fieldsData, setFieldsData] = useState();
 	const [selectData, setSelectData] = useState({});
 
-	const [filedsSelectedInfo, setFieldsSelectedInfo] = useState([]);
+	const [fieldsSelectedInfo, setFieldsSelectedInfo] = useState([]);
 
 	const handleSelectedData = (e) => {
 		// setSelectedData(e.target.value);
@@ -53,16 +53,6 @@ export const SelectDeselectMultipleFields = ({
 
 		getSelectedInfo(name, selectedIds);
 	}, [selectedInfo]);
-
-	
-	// useEffect(() => {
-	// 	const selectedIds = selectedInfo.reduce((prev, cur) => {
-	// 		prev.push(cur.id);
-	// 		return prev;
-	// 	}, []);
-
-	// 	getSelectedInfo(name, selectedIds);
-	// }, [selectedInfo]);
 
 	return (
 		<S.Container>
