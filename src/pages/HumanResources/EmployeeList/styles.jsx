@@ -7,8 +7,8 @@ export const Container = styled.div`
 	flex-wrap: wrap;
 	justify-content: start;
 	align-content: start;
-	padding: 16px 32px;
-	gap: 32px;
+	padding: 16px 16px;
+	gap: 8px;
 `;
 
 export const FindEmployeeList = styled.div`

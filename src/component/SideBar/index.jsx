@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { Users } from "phosphor-react";
-
 import * as S from "./styles";
+import { imgs } from "../../helper/indexImg";
+import { useState } from "react";
 
 export const SideBar = () => {
 	const location = useLocation();
@@ -11,33 +11,45 @@ export const SideBar = () => {
 
 	const navigate = useNavigate();
 
-	const menu = useSelector((state) => state.appData.dataInfo);
+	const menuDepartment = useSelector((state) => state.appData.dataInfo.departments[departmentLocation]);
+	const menuSectors = useSelector((state) => state.appData.dataInfo.departmentSectors[departmentLocation]);
+
+	const [sectorSelect, setSectorSelect] = useState("");
+	const [sectorActionSelect, setSectorActionSelect] = useState("");
 
 	if (location.pathname == "/home") return <></>;
 
 	return (
 		<S.Container>
 			<S.DepartmentTitle>
-				{menu.departments[departmentLocation].title}
+				{menuDepartment.title}
 			</S.DepartmentTitle>
-			{menu.departmentSectors[departmentLocation].map((sector) => (
-				<S.SectionContainer key={sector.title}>
-					<S.SectionHead>
-						<Users size={24} />
-						<S.SectionHeadTitle>{sector.title}</S.SectionHeadTitle>
-					</S.SectionHead>
-					<S.LineSeparation />
-					{sector.actions.map((action) => (
-						<S.Action
-							key={action.title}
-							onClick={() => navigate(action.path)}
-							selected={location.pathname == action.path}
-						>
-							<S.ActionTitle>+ {action.title}</S.ActionTitle>
-						</S.Action>
-					))}
+			{menuSectors.map((sector) => (
+				<S.SectionContainer key={sector.title}
+					selected={sector.title === sectorSelect}
+					onMouseEnter={() => setSectorSelect(sector.title)}
+					onMouseLeave={() => setSectorSelect("")}
+				>
+					<S.SectionImg src={imgs[sector.img]} />
+					<S.SectionTitle>{sector.title}</S.SectionTitle>
+					<S.ArrowDown selected={sector.title === sectorSelect} />
+					{sectorSelect === sector.title && (
+						sector.sectorActions.map((action) => (
+							<S.Action
+								key={action.title}
+								onClick={() => {
+									navigate(departmentLocation + sector.path + action.path)
+									setSectorSelect("")
+								}}
+							>
+								<S.ActionImg key={imgs[sector.img]} />
+								<S.ActionTitle>{action.title}</S.ActionTitle>
+							</S.Action>
+						))
+					)}
 				</S.SectionContainer>
-			))}
-		</S.Container>
+			))
+			}
+		</S.Container >
 	);
 };

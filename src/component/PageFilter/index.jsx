@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button } from "../../component/Button";
 import { InputText } from "../../component/Input/Text";
@@ -41,7 +41,8 @@ export const PageFilter = ({
 	const [filters, setFilters] = useState(
 		(() => {
 			const data = filtersData.reduce((acc, cur) => {
-				if (cur.type === "select") {
+				if (cur.type === "select" && cur.options.length) {
+
 					return {
 						...acc,
 						[cur.htmlName]: cur.options[0].value
@@ -57,6 +58,10 @@ export const PageFilter = ({
 		const newFilters = { ...filters, [event.target.name]: event.target.value };
 		setFilters(newFilters);
 	}
+
+	useEffect(() => {
+		getFiltersSelected(filters);
+	}, [])
 
 	function sendFiltersSelected() {
 		getFiltersSelected(filters);
@@ -77,14 +82,8 @@ export const PageFilter = ({
 								selectPlaceholder={filter.htmlPlaceholder}
 								disabled={loading}
 								selectShowInfo={filter.showInfo}
-							>
-								{filter.options &&
-									filter.options.map((option) => (
-										<option key={option.value} value={option.value}>
-											{option.title}
-										</option>
-									))}
-							</InputSelect>
+								options={filter.options}
+							/>
 						)}
 						{filter.type == "text" && (
 							<InputText

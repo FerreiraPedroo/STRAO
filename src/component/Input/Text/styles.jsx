@@ -12,13 +12,17 @@ export const TitleText = styled.p`
 	top: -1px;
 	left: 2px;
 	font-size: 14px;
+	color: #767676;
+	font-weight: 500;
 	${({ disabled }) => disabled && "color: #b6b6b6;"}
 `;
 export const Input = styled.input`
-	width: ${({width}) => width};
+	width: ${({ width }) => width};
 	height: 32px;
-	padding: 0px 8px 2px 8px;
+	color: #767676;
+	font-weight: 500;
 	background-color: #ffffff;
+	padding: 0px 8px 2px 8px;
 	border: 1px solid #808080;
 	border-radius: 4px;
 	outline: 0;

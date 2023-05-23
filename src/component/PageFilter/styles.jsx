@@ -21,11 +21,15 @@ export const FilterContainer = styled.div`
 `;
 export const FilterTitle = styled.div`
 	${props.headeTitle}
-	align-self: flex-end;
-	padding-bottom: 6px;
+	align-self: center;
+	padding-top: 6px;
+	font-size: 1.4rem;
+	font-weight: bolder;
+	color: #565656;
 `;
 export const FilterInputBox = styled.div`
 	display: flex;
+	flex-wrap: wrap;
 	height: 100%;
 	align-items: end;
 	gap: 16px;

@@ -42,7 +42,7 @@ export const router = createBrowserRouter(
 						path="employee/register"
 						element={<HumanResourcesEmployeeRegister />}
 					/>
-					<Route path="employee/all" element={<HumanResourcesEmployeeList />} />
+					<Route path="employee/list" element={<HumanResourcesEmployeeList />} />
 				</Route>
 
 				<Route path="admin">

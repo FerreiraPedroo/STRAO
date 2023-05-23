@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { api } from "../../../services/api";
 import { useSelector } from "react-redux";
 
@@ -35,7 +35,7 @@ import { PageList } from "../../../component/PageList";
 export const HumanResourcesEmployeeList = () => {
 	const userData = useSelector((state) => state.appData.dataInfo);
 
-	const [findStatus, setFindStatus] = useState(false);
+	const [findStatus, setFindStatus] = useState(true);
 	const [findEmployeeResponse, setFindEmployeeResponse] = useState([]);
 	const [employeeSelected, setEmployeeSelected] = useState();
 
@@ -98,8 +98,7 @@ export const HumanResourcesEmployeeList = () => {
 	return (
 		<S.Container>
 			<PageTitle
-				title="Lista de funcionários"
-				subTitle="pesquise pelos funcionários registrados"
+				title="Todos os funcionários"
 			/>
 
 			<PageFilter

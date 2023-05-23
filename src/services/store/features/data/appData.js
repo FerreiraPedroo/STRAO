@@ -5,6 +5,7 @@ export const appDataSlice = createSlice({
 	initialState: {
 		userInfo: (() => {
 			try {
+				console.log("INICIAL")
 				return JSON.parse(localStorage.getItem("strao-user-info"));
 			} catch (e) {
 				return null;
@@ -23,15 +24,15 @@ export const appDataSlice = createSlice({
 	reducers: {
 		appDataUpdate: (state, action) => {
 			return (state = {
+				token: action.payload.token,
 				userInfo: {
 					name: action.payload.userInfo.name,
 					avatar: action.payload.userInfo.avatar
 				},
-				token: action.payload.token,
 				dataInfo: action.payload.dataInfo,
 				dataVersion: action.payload.version
 			});
-		}
+		},
 	}
 });
 

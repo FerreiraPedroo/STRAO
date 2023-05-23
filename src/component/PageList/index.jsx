@@ -17,16 +17,20 @@ export const PageList = ({
 	listData,
 	columns = [],
 	setDataSelected,
-	loading = false
+	loading
 }) => {
 	const listRefHTML = useRef();
 	const [headerInfo, setHeaderInfo] = useState([]);
 	const [rowSelected, setRowSelected] = useState();
+	const [rowHover, setRowHover] = useState();
 	const [listChangeSize, setListChangeSize] = useState(false);
 
-	function handleDataSelected(data) {
-		setDataSelected(data);
-		setRowSelected(data);
+	function handleDataSelected(index) {
+		setDataSelected(listData[index]);
+		setRowSelected(index);
+	}
+	function handleRowHover(index) {
+		setRowHover(index);
 	}
 
 	useLayoutEffect(() => {
@@ -80,15 +84,16 @@ export const PageList = ({
 							))}
 					</S.ListUserHeaderBox>
 					{listData &&
-						listData.map((data) => (
+						listData.map((data, index) => (
 							<S.ListUserBox
 								key={JSON.stringify(data)}
 								reloadListSize={listChangeSize}
-								data-selected={data == rowSelected}
-								onClick={() => handleDataSelected(data)}
+								onClick={() => handleDataSelected(index)}
+								onMouseEnter ={()=>handleRowHover(index)}
+								onMouseLeave ={()=>handleRowHover()}
 							>
 								{headerInfo.map((column) => (
-									<S.UserText key={column.htmlName} w={column.size}>
+									<S.UserText key={column.htmlName} w={column.size} data-hover={index == rowHover} data-selected={index == rowSelected}>
 										{data[column.htmlName]}
 									</S.UserText>
 								))}
@@ -97,8 +102,8 @@ export const PageList = ({
 				</S.ListUserContainer>
 			</S.CenterContainer>
 
-			{!listData && <>Carregando...</>}
-			{listData && listData.length == 0 && <>Lista vazia</>}
+			{listData.length && loading && <>Carregando...</>}
+			{!listData && !loading && <>Sem registro...</>}
 		</S.Container>
 	);
 };

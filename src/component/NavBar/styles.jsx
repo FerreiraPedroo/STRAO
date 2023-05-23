@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	width: 100%;
-	height: 64px;
+	height: 44px;
 	display: flex;
 	justify-content: space-between;
 	place-items: center;
@@ -48,8 +48,8 @@ export const MenuButton = styled.img`
 `;
 export const MenuOptions = styled.div`
 	position: absolute;
-	top: 47px;
-	left: -9px;
+	top: 39px;
+	left: -7px;
 
 	display: flex;
 	justify-content: center;

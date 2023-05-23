@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { loginService } from "../../services/login";
@@ -11,6 +11,7 @@ import homebg2 from "./img/home-bg2.png";
 
 export const Login = () => {
 	const appData = useSelector((state) => state.appData);
+	console.log(appData)
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ export const Login = () => {
 		const data = await loginService(user, password, appData.dataVersion);
 
 		if (data.codStatus === 200) {
-			localStorage.setItem("strao-user-info", JSON.stringify({name: data.appData.userInfo.name, avatar: data.appData.userInfo.avatar}))
+			localStorage.setItem("strao-user-info", JSON.stringify({ name: data.appData.userInfo.name, avatar: data.appData.userInfo.avatar }))
 			localStorage.setItem("strao-token", data.appData.token)
 			localStorage.setItem("strao-data-info", JSON.stringify(data.appData.dataInfo))
 			localStorage.setItem("strao-data-version", data.appData.dataVersion)

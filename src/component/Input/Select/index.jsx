@@ -11,13 +11,14 @@ export const InputSelect = ({
 	disabled,
 	readOnly,
 	width,
-	children
+	options
 }) => {
 	return (
 		<S.Container>
 			<S.TitleText disabled={disabled}>
+				{console.log(options)}
 				{((selectValue && selectShowInfo) || selectShowInfo) &&
-					selectPlaceholder }
+					selectPlaceholder}
 			</S.TitleText>
 			<S.Select
 				id={selectId}
@@ -29,7 +30,12 @@ export const InputSelect = ({
 				placeholder={selectPlaceholder}
 				width={width}
 			>
-				{children}
+				{options &&
+					options.map((option) => (
+						<S.Option key={option.value} value={option.value}>
+							{option.title}
+						</S.Option>
+					))}
 			</S.Select>
 		</S.Container>
 	);

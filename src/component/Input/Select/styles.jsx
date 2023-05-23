@@ -9,6 +9,8 @@ export const Container = styled.div`
 export const TitleText = styled.p`
 	height: 14px;
 	position: relative;
+	color: #767676;
+	font-weight: 500;
 	top: -1px;
 	left: 2px;
 	font-size: 14px;
@@ -19,6 +21,8 @@ export const Select = styled.select`
 	${({ width }) => width && `width:${width};`}
 	min-width: 160px;
 	height: 32px;
+	color: #565656;
+	font-weight: 500;
 	padding: 0px 8px 2px 8px;
 	background-color: #ffffff;
 	border: 1px solid #808080;
@@ -34,4 +38,9 @@ export const Select = styled.select`
 		background-color: #e0e0e0;
 		color: #b6b6b6;
 	}
+`;
+
+export const Option = styled.option`
+	color: #565656;
+	font-weight: 500;
 `;
