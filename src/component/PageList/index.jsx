@@ -83,7 +83,7 @@ export const PageList = ({
 								</S.ListHeadText>
 							))}
 					</S.ListUserHeaderBox>
-					{listData &&
+					{listData && !loading &&
 						listData.map((data, index) => (
 							<S.ListUserBox
 								key={JSON.stringify(data)}

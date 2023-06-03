@@ -27,7 +27,7 @@ export const DepartmentTitle = styled.div`
 	color: #464646;
 `;
 export const SectionContainer = styled.div`
-	width: 90px;
+	width: 120px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -37,7 +37,6 @@ export const SectionContainer = styled.div`
 
 	&:hover {
 		background-color: #B0B0B0;
-		cursor: pointer;
 		border-top: 1px solid #747679;
 		border-left: 1px solid #747679;
 		border-right: 1px solid #747679;
@@ -54,12 +53,13 @@ export const SectionImg = styled.img`
 `;
 export const SectionTitle = styled.div`
 	font-style: italic;
-	font-size: 0.75rem;
-	font-weight: 700;
+	font-size: 0.9rem;
+	font-weight: 600;
 	color: #767676;
+	user-select: none;
 `;
 export const ArrowDown = styled.p`
-	${({ selected }) => selected ? "visibility: visible" : "visibility: hidden"};
+	${({ selected }) => !selected ? "visibility: visible" : "visibility: hidden"};
 	line-height: 4px;
 	
 	&::after {
@@ -70,7 +70,7 @@ export const ArrowDown = styled.p`
 
 export const Action = styled.div`
 	position: absolute;
-	top: 115px;
+	top: 114px;
 	align-self: start;
 	margin: 0 0 0 -1px;
 
@@ -93,13 +93,13 @@ export const Action = styled.div`
 `;
 
 export const ActionImg = styled.img`
-min-width: 32px;
-width: 32px;
-min-height: 32px;
-height: 32px;
+	min-width: 32px;
+	width: 32px;
+	min-height: 32px;
+	height: 32px;
 `;
 
 export const ActionTitle = styled.p`
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 0.9rem;
 `;

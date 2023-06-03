@@ -36,7 +36,7 @@ export const ListUserHeaderBox = styled.div`
 	display: flex;
 	justify-content: start;
 	box-sizing: content-box;
-	margin-bottom: 1.2px;
+	margin-bottom: 3px;
 `;
 export const ListHeadText = styled.p`
 	${({ w }) => `min-width:${w}px`};
@@ -83,14 +83,19 @@ export const UserText = styled.div`
 	}
 
 	${(props) => props["data-hover"] && !props["data-selected"] && `
-		border-top: 1px solid #aaa;
-		border-bottom: 1px solid #aaa;
-		border-left: 1px solid #aaa;
+		font-weight: 700;
+		border-top: 1px solid #000;
+		border-bottom: 1px solid #000;
+		border-left: 1px solid #000;
 		&:last-child{
-			border-right: 1px solid #aaa;
+			border-right: 1px solid #000;
 		}
 		z-index: 2;
 	`}
 
-	${(props) => props["data-selected"] && `background-color: #dddddd;`}
+${(props) => props["data-selected"] && `
+	background-color: #aaa;
+	color: #fff;
+	font-weight: 500;
+	`}
 `;

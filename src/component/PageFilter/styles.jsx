@@ -22,7 +22,7 @@ export const FilterContainer = styled.div`
 export const FilterTitle = styled.div`
 	${props.headeTitle}
 	align-self: center;
-	padding-top: 6px;
+	padding-top: 10px;
 	font-size: 1.4rem;
 	font-weight: bolder;
 	color: #565656;

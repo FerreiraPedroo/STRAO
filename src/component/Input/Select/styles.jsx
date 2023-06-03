@@ -23,7 +23,7 @@ export const Select = styled.select`
 	height: 32px;
 	color: #565656;
 	font-weight: 500;
-	padding: 0px 8px 2px 8px;
+	padding: 4px 8px 2px 8px;
 	background-color: #ffffff;
 	border: 1px solid #808080;
 	border-radius: 4px;
