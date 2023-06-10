@@ -2,18 +2,18 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	width: 100%;
-	height: 44px;
+	height: 48px;
 	display: flex;
 	justify-content: space-between;
 	place-items: center;
-	background-color: #c8c8c8;
-	border-bottom: 1px solid #747679;
-	padding: 8px;
+	padding: 16px 16px;
 `;
 
 /* TITLE */
 export const Title = styled.p`
-	font-size: 1.75rem;
+	width: 100%;
+	text-align: center;
+	font-size: 1.80rem;
 	font-weight: bold;
 	color: #464646;
 
@@ -24,6 +24,7 @@ export const Title = styled.p`
 
 /* LEFT CONTAINER */
 export const LeftContainer = styled.div`
+	width: 100%;
 	display: flex;
 	gap: 16px;
 `;
@@ -31,15 +32,14 @@ export const LeftContainer = styled.div`
 /* MENU */
 export const MenuContainer = styled.div`
 	position: relative;
-	width: 64px;
+	width: 2rem;
 	display: flex;
 	place-items: center;
 	justify-content: center;
 	z-index: 100;
 `;
 export const MenuButton = styled.img`
-	width: 32px;
-	height: 100%;
+	width: 36px;
 
 	&:hover {
 		cursor: pointer;
@@ -48,30 +48,32 @@ export const MenuButton = styled.img`
 `;
 export const MenuOptions = styled.div`
 	position: absolute;
-	top: 39px;
-	left: -7px;
+	top: 2.50rem;
+	left: -1.0rem;
+	min-width: 256px;
 
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-	padding: 8px 24px 24px 24px;
-	gap: 24px;
+	padding: 16px;
+	gap: 16px;
 
 	background: #c8c8c8;
 	border: 1px solid #747679;
-	border-radius: 0 0 4px 0;
-	border-top: 0;
+	/* border-radius: 0 0 4px 0; */
+	/* border-top: 0; */
 `;
 export const MenuCard = styled.div`
 	display: flex;
-	flex-direction: column;
+	/* flex-direction: column; */
 	align-items: center;
 	padding: 6px;
-	gap: 4px;
+	gap: 8px;
 	box-sizing: border-box;
 
-	width: 108px;
-	height: 100px;
+	width: 100%;
+	height: 5.25rem;
 
 	background: #b0b0b0;
 	border: 1px solid #747679;
@@ -83,17 +85,19 @@ export const MenuCard = styled.div`
 	}
 `;
 export const MenuCardImg = styled.img`
-	width: 56px;
-	height: 56px;
+	min-width: 3.5rem;
+	min-height: 3.5rem;
 `;
 export const MenuCardTitle = styled.p`
+	width:100%;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	font-family: "Courier New";
 	font-style: normal;
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 14px;
+	font-weight: 500;
+	font-size: 1.2rem;
+	line-height: 0.9rem;
 	text-align: center;
 	color: #000000;
 `;
@@ -111,7 +115,6 @@ export const NotificationBox = styled.div`
 	display: flex;
 	position: relative;
 `;
-
 export const NotificationNumber = styled.p`
 	width: 100%;
 	height: 100%;
@@ -124,7 +127,6 @@ export const NotificationNumber = styled.p`
 	font-weight: bold;
     cursor: pointer;
 `;
-
 export const Avatar = styled.img``;
 export const UserName = styled.p`
 	display: flex;

@@ -45,16 +45,17 @@ export const ButtonBack = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 20px;
+	font-size: 1.1rem;
+    font-weight: 500;
 	border-radius: 100%;
-	border: 1px solid #a9a9a9;
+	border: 1px solid #797979;
 	cursor: pointer;
 	background-color: #c9c9c9;
 	user-select: none;
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.55);
 
 	&:hover {
-		transform: scale(0.9);
+		transform: scale(0.95);
 	}
 `;
 

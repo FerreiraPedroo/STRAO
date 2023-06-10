@@ -40,12 +40,14 @@ export const NotificationTitleText = styled.div`
     background-color: #393;
     color: white;
   `}
+  
 	${({ theme }) =>
 		theme === "fail" &&
 		`
     background-color: #f77;
     color: white;
   `}
+
 `;
 export const NotificationText = styled.div`
 	width: 100%;
@@ -85,9 +87,12 @@ export const Modal = styled.div`
 	display: flex;
 	flex-direction: column;
 	background-color: #fff;
-	padding: 18px;
+	padding: 16px;
+	padding-top: 24px;
 	color: white;
 	border-radius: 12px;
+	gap: 24px;
+
 
 	${({ theme }) =>
 		theme === "success" &&
@@ -99,14 +104,26 @@ export const Modal = styled.div`
 		theme === "fail" &&
 		`
 		border: 3px solid #770000;
-		background-color: #f99;
+		background-color: #fbb;
   `};
+	${({ theme }) =>
+		theme === "confirmation" &&
+		`
+		border: 3px solid #AE7100;
+		background-color: #F0F060;
+  `};
+
 `;
 export const ModalClose = styled.div`
-	width: 30px;
-	font-size: 1.5rem;
+	position: absolute;
+	width: 35px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
 	align-self: end;
-	text-align: center;
+	place-self: end;
 	border-radius: 50%;
 	color: white;
 
@@ -131,6 +148,15 @@ export const ModalClose = styled.div`
 		background-color: #fbb;
 	}
 `};
+
+${({ theme }) =>
+		theme === "confirmation" &&
+		`
+	&:hover {
+		color: #fffa99;
+		background-color: #7f6b27;
+	}
+`};
 `;
 export const ModalMessage = styled.div`
 	width: 100%;
@@ -139,9 +165,30 @@ export const ModalMessage = styled.div`
 	align-items: center;
 	justify-content: center;
 	font-family: ${props.textFontFamily};
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	font-weight: bold;
-	padding: 14px;
+	padding: 16px;
+
+	${({ theme }) =>
+		theme === "success" &&
+		`
+		background-color: #393;
+		color: white;
+	`}
+
+	${({ theme }) =>
+		theme === "fail" &&
+		`
+		background-color: #f77;
+		color: white;
+	`}
+
+	${({ theme }) =>
+		theme === "confirmation" &&
+		`
+		background-color: #FFA500;
+		color: white;
+	`}
 `;
 export const ModalMessageTitle = styled.div`
 	width: 100%;
@@ -149,8 +196,27 @@ export const ModalMessageTitle = styled.div`
 	align-items: center;
 	justify-content: center;
 	font-family: ${props.textFontFamily};
-	font-size: 28px;
+	font-size: 2rem;
 	font-weight: bold;
+
+	
+	${({ theme }) =>
+		theme === "success" &&
+		`
+		color: white;
+	`}
+
+	${({ theme }) =>
+		theme === "fail" &&
+		`
+		color: white;
+	`}
+	
+	${({ theme }) =>
+		theme === "confirmation" &&
+		`
+		color: #AE7100;
+	`}
 `;
 export const ButtonFormSubmit = styled.button`
 	width: 128px;

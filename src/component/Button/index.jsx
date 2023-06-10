@@ -27,8 +27,8 @@ export const Button = ({
 		<>
 			{typeStyle === "back" && (
 				<S.ButtonBack
-					width={42}
-					height={42}
+					width={96}
+					height={48}
 					disabled={disable}
 					theme={theme}
 					onClick={onClick}

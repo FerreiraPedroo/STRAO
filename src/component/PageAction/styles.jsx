@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-const props = {
-	headeTitle: `
-  font-size: 20px;
-  font-style: italic;
-  font-weight: bold;  
-  `
-};
 
 export const ActionsContainer = styled.div`
 	display: flex;
@@ -21,8 +14,11 @@ export const ActionsContainer = styled.div`
 	border-radius: 8px;
 `;
 export const ActionsTitle = styled.div`
-	${props.headeTitle}
-	align-self: center;
+  	align-self: center;
+  	font-style: italic;
+  	font-size: 1.2rem;
+	font-weight: 600;
+  	color: #565656;
 `;
 export const ActionButtonBox = styled.div`
 	display: flex;

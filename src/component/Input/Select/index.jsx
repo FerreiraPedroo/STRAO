@@ -16,7 +16,6 @@ export const InputSelect = ({
 	return (
 		<S.Container>
 			<S.TitleText disabled={disabled}>
-				{console.log(options)}
 				{((selectValue && selectShowInfo) || selectShowInfo) &&
 					selectPlaceholder}
 			</S.TitleText>
@@ -31,11 +30,19 @@ export const InputSelect = ({
 				width={width}
 			>
 				{options &&
-					options.map((option) => (
-						<S.Option key={option.value} value={option.value}>
-							{option.title}
-						</S.Option>
-					))}
+					options.map((option, index) =>
+
+						option.type === 'optionGroup' ? (
+							<S.OptionGroup key={option.value +"-"+ index} label={option.value}>
+								{option.title}
+							</S.OptionGroup>
+						) : (
+							<S.Option key={option.value +"-"+ index} value={option.value}>
+								{option.title}
+							</S.Option>
+						)
+
+					)}
 			</S.Select>
 		</S.Container>
 	);

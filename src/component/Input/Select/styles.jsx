@@ -44,3 +44,7 @@ export const Option = styled.option`
 	color: #565656;
 	font-weight: 500;
 `;
+export const OptionGroup = styled.optgroup`
+	color: #565656;
+	font-weight: 500;
+`;

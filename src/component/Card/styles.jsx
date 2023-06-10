@@ -1,11 +1,6 @@
 import styled from "styled-components";
 
-const props = {
-  cardCategoryNameTextSize: "16px",
-};
-
 export const Container = styled.div`
-  /* Auto layout */
 
   display: flex;
   flex-direction: column;
@@ -39,24 +34,25 @@ export const Box = styled.div`
 `;
 
 export const Img = styled.img`
-  width: 64px;
-  height: 64px;
+  width: 4rem;
+  height: 4rem;
 `;
 
 export const CategoryNotification = styled.p`
-  width: 48px;
-  height: 24px;
+  width: 3rem;
+  height: 1.5rem;
   display: flex;
   align-self: center;
   align-items: center;
   justify-content: center;
-  font-size: ${props.cardCategoryNameTextSize};
-  margin-right: 16px;
+  font-size: 1rem;
+  margin-right: 1rem;
   border: 1px solid #a9a9a9;
 `;
 
 export const CategoryName = styled.p`
   width: 100%;
   text-align: center;
-  font-size: ${props.cardCategoryNameTextSize};
+  font-weight: 500;
+  font-size: 1.2rem;
 `;

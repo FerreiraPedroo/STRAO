@@ -5,25 +5,32 @@ import * as N from "./styled";
 export const NotificationModal = ({
 	type,
 	theme,
-	message,
 	messageTitle,
-	onClick
+	message,
+	onClick,
+	setNotification,
+	buttonTitle = "Voltar",
 }) => {
-	const [showModal, setShowModal] = useState();
+
+	const [typeModal] = useState(type);
+	const [modalTimeOut, setModalTimeOut] = useState()
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		setShowModal(type);
+		if (typeModal == "modal") {
+			setModalTimeOut(setTimeout(() => setNotification(false), 4000));
+		}
 	}, []);
 
-	useEffect(() => {
-		if (showModal == "modal") {
-			setTimeout(onClick, 4000);
-		}
-	}, [showModal]);
+	async function onClickFunction(){
+		setLoading(true);
+		await onClick();
+		setLoading(false);
+	}
 
 	return (
 		<>
-			{showModal === "modal" && (
+			{typeModal === "modal" && (
 				<N.Container theme={theme}>
 					<N.NotificationTitleText theme={theme}>
 						Notificação
@@ -31,15 +38,15 @@ export const NotificationModal = ({
 					<N.NotificationText theme={theme}>{message}</N.NotificationText>
 				</N.Container>
 			)}
-			{showModal === "full" && (
+			{typeModal === "full" && (
 				<N.ContainerFull>
 					<N.Modal theme={theme}>
-						<N.ModalClose theme={theme} onClick={onClick}>
+						<N.ModalClose theme={theme} onClick={() => setNotification(false)}>
 							X
 						</N.ModalClose>
-						<N.ModalMessageTitle>{messageTitle}</N.ModalMessageTitle>
-						<N.ModalMessage>{message}</N.ModalMessage>
-						<N.ButtonFormSubmit onClick={onClick}>Voltar</N.ButtonFormSubmit>
+						<N.ModalMessageTitle theme={theme}>{messageTitle}</N.ModalMessageTitle>
+						<N.ModalMessage theme={theme}>{message}</N.ModalMessage>
+						<N.ButtonFormSubmit disabled={loading} onClick={onClickFunction}>{buttonTitle}</N.ButtonFormSubmit>
 					</N.Modal>
 				</N.ContainerFull>
 			)}
