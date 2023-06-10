@@ -3,12 +3,11 @@ import styled from "styled-components";
 const props = {
 	textPageTitle: `
 		width: 100%;
-		font-family: Calibri;
-		font-size: 2rem;
+		font-size: 2.8rem;
 		font-style: italic;
 		font-weight: bolder;
 		color: #565656;
-		line-height: 0.8;
+		line-height: 1.1;
   	`
 };
 
@@ -30,7 +29,7 @@ export const PageHeader = styled.div`
 	gap: 16px;
 `;
 export const PageTitleBox = styled.div`
-	${props.textPageTitle}
+	width: 100%;
 `;
 export const PageTitle = styled.h1`
 	display: flex;
@@ -38,13 +37,19 @@ export const PageTitle = styled.h1`
 	overflow: hidden;
 	text-overflow: ellipsis;
 	align-items: center;
-	gap: 12px;
+	justify-content: center;
 	
 	${props.textPageTitle}
 `;
 export const PageSubTitle = styled.h1`
-	font-size: 1.2rem;
+	display: flex;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.0rem;
 `;
 export const PageIcon = styled.div`
-	font-size: 1.2rem;
+	font-size: 1.0rem;
 `;

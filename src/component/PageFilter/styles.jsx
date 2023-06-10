@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-const props = {
-	headeTitle: `
-  font-size: 20px;
-  font-style: italic;
-  font-weight: bold;  
-  `
-};
-
 export const FilterContainer = styled.div`
 	display: flex;
     width: 100%;
@@ -20,12 +12,12 @@ export const FilterContainer = styled.div`
 	border-radius: 8px;
 `;
 export const FilterTitle = styled.div`
-	${props.headeTitle}
-	align-self: center;
+  	align-self: center;
+  	font-style: italic;
+  	font-size: 1.2rem;
+	font-weight: 600;
+  	color: #565656;
 	padding-top: 10px;
-	font-size: 1.4rem;
-	font-weight: bolder;
-	color: #565656;
 `;
 export const FilterInputBox = styled.div`
 	display: flex;

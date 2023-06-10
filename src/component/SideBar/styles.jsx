@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const props = {
-	navMenuButtonTextSize: "16px",
+	navMenuButtonTextSize: "1rem",
 	navMenuButtonSizeWidth: "100px",
 	navMenuButtonSizeHeight: "96px",
 	navMenuButtonBackColor: "#C0C0C0",
@@ -11,45 +11,66 @@ const props = {
 
 export const Container = styled.div`
 	width: 100%;
-	height: 72px;
+	height: 100%;
 	display: flex;
+	flex-direction: column;
 	place-items: center;
-	padding: 6px 12px;
-	border-top: 1px solid #908E8E;
-	background-color: #C8C8C8;
-	gap: 8px;
+	padding: 6px 8px;
+	background-color: #f5f3f0;
+	gap:12px;
+`;
+/* HR SEPARATOR */
+export const HrLine = styled.hr`
+	margin: 0px 8px;
+	width: 100%;
+	border: 1px solid #c0c0c0;
 `;
 export const DepartmentTitle = styled.div`
-	font-size: 1.6rem;
+	width: 100%;
+	height: 56px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 1.4rem;
 	font-style: italic;
-	font-weight: 700;
-	line-height: 1.4rem;
+	font-weight: 600;
 	color: #464646;
 `;
 export const SectionContainer = styled.div`
-	width: 120px;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
 	align-items: center;
 	border: 1px solid transparent;
-	gap: 2px;
 
-	&:hover {
-		background-color: #B0B0B0;
-		border-top: 1px solid #747679;
-		border-left: 1px solid #747679;
-		border-right: 1px solid #747679;
+	&:hover{
+		cursor: pointer;
 	}
 
-	${({ selected }) => selected && "background-color: #B0B0B0;"}
+`;
+export const SectionTop = styled.div`
+	width: 100%;
+	display: flex;
+	align-items: center;
+	border: 1px solid transparent;
+	gap: 4px;
+
+	&:hover{
+		background-color: #e0e0e0;
+	}
+
+	${({ selected }) => selected && `
+		background-color: #e0e0e0;
+		border: 1px solid #C8C8C8;	
+	`};
 
 `;
 export const SectionImg = styled.img`
-	min-width: 48px;
-	width: 48px;
-	min-height: 44px;
-	height: 44px;
+	min-width: 2.5rem;
+	width: 2.5rem;
+	min-height: 2.5rem;
+	height:  2.5rem;
 `;
 export const SectionTitle = styled.div`
 	font-style: italic;
@@ -59,7 +80,7 @@ export const SectionTitle = styled.div`
 	user-select: none;
 `;
 export const ArrowDown = styled.p`
-	${({ selected }) => !selected ? "visibility: visible" : "visibility: hidden"};
+	${({ selected }) => selected ? "visibility: visible" : "visibility: hidden"};
 	line-height: 4px;
 	
 	&::after {
@@ -69,37 +90,39 @@ export const ArrowDown = styled.p`
 
 
 export const Action = styled.div`
-	position: absolute;
-	top: 114px;
-	align-self: start;
-	margin: 0 0 0 -1px;
-
+	width: 100%;
 	display: flex;
 	align-items: center;
-
-	border-radius: 0px 0px 4px 4px;
-	padding: 4px 8px;
-	background-color: #C8C8C8;
-	border: 1px solid #747679;
-
-	gap: 8px;
-
+	padding: 8px 6px;
+	border-left: 1px solid #C8C8C8;
+	border-right: 1px solid #C8C8C8;
+	gap: 6px;
+	
 	&:hover {
-		background-color: #B0B0B0;
-		cursor: pointer;
+		${({ selected }) => !selected && `
+			background-color: #e0e0e0;
+			cursor: pointer;
+		`}
 	}
 
-	z-index: 100;
+	&:last-child{
+		border-bottom: 1px solid #C8C8C8;
+	}
+	
+	${({ selected }) => selected && "background-color: #c0c0c0; color: #333; "};
+
 `;
 
 export const ActionImg = styled.img`
-	min-width: 32px;
-	width: 32px;
-	min-height: 32px;
-	height: 32px;
+	min-width: 2rem;
+	width:  2rem;
+	min-height: 2rem;
+	height: 2rem;
 `;
 
 export const ActionTitle = styled.p`
 	font-weight: 500;
 	font-size: 0.9rem;
+	color: inherit;
+
 `;

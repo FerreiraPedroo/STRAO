@@ -5,6 +5,7 @@ import { InputText } from "../../component/Input/Text";
 import { InputSelect } from "../Input/Select/index";
 
 import * as S from "./styles.jsx";
+import { PageTitle } from "../PageTitle";
 
 // exemplo
 // const [userListData] = [

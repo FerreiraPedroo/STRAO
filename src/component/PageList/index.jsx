@@ -17,6 +17,7 @@ export const PageList = ({
 	listData,
 	columns = [],
 	setDataSelected,
+	dataSelected,
 	loading
 }) => {
 	const listRefHTML = useRef();
@@ -29,6 +30,7 @@ export const PageList = ({
 		setDataSelected(listData[index]);
 		setRowSelected(index);
 	}
+
 	function handleRowHover(index) {
 		setRowHover(index);
 	}
@@ -64,7 +66,12 @@ export const PageList = ({
 			setListChangeSize((prevState) => !prevState);
 			setHeaderInfo(columnsInfo);
 		}
+		if (!dataSelected) {
+			setDataSelected(null)
+			setRowSelected(null)
+		}
 	}, [listData]);
+
 
 	return (
 		<S.Container>
@@ -82,6 +89,7 @@ export const PageList = ({
 									{header.title}
 								</S.ListHeadText>
 							))}
+
 					</S.ListUserHeaderBox>
 					{listData && !loading &&
 						listData.map((data, index) => (
@@ -89,8 +97,8 @@ export const PageList = ({
 								key={JSON.stringify(data)}
 								reloadListSize={listChangeSize}
 								onClick={() => handleDataSelected(index)}
-								onMouseEnter ={()=>handleRowHover(index)}
-								onMouseLeave ={()=>handleRowHover()}
+								onMouseEnter={() => handleRowHover(index)}
+								onMouseLeave={() => handleRowHover()}
 							>
 								{headerInfo.map((column) => (
 									<S.UserText key={column.htmlName} w={column.size} data-hover={index == rowHover} data-selected={index == rowSelected}>
