@@ -13,12 +13,12 @@ import { PageAction } from "../../../component/PageAction/index.jsx";
 export const AdminUserList = () => {
 	const navigate = useNavigate();
 	const [notification, setNotification] = useState();
-
 	const [loading, setLoading] = useState(true);
 
 	const [userList, setUserList] = useState([]);
 	const [userSelected, setUserSelected] = useState();
 	const [filtersSelected, setFiltersSelected] = useState({});
+
 	const [userPageData] = useState({
 		columns: [
 			{
@@ -49,7 +49,16 @@ export const AdminUserList = () => {
 				title: "Excluir",
 				typeStyle: "remove",
 				show: false,
-				action: () => {}
+				action: (data) =>
+					setNotification({
+						type: 'full',
+						theme: 'confirmation',
+						messageTitle: 'Excluir usuário',
+						message: `Deseja confirmar a exclusão do usuário: ${data.name}`,
+						setNotification: setNotification,
+						onClick: () => deleteUser(data._id),
+						buttonTitle: "Confirmar"
+					})
 			},
 			{
 				title: "Editar",
@@ -81,7 +90,7 @@ export const AdminUserList = () => {
 		]
 	});
 
-	const getUserList = (filters) => {
+	function getUserList(filters) {
 		const sanitizedFilters = {};
 		for (const [key, value] of Object.entries(filters)) {
 			if (value) {
@@ -113,6 +122,54 @@ export const AdminUserList = () => {
 		getData();
 	};
 
+	async function deleteUser(userId) {
+
+		try {
+			const { data } = await api.delete("/admin/user/delete", {
+				params: { userId }
+			});
+			setNotification({
+				type: 'full',
+				theme: 'success',
+				messageTitle: 'Usuário exluído',
+				message: `Usuário excluido com sucesso.`,
+				setNotification: setNotification,
+				onClick: () => setNotification(false),
+				buttonTitle: "Fechar"
+			})
+			setUserList(users => users.filter((user)=>(user._id !== userId)));
+			setUserSelected(null);
+
+		} catch (error) {
+			if (error.response && error.response.status === 401) {
+				error.response.data.url = removeLoginData();
+				setNotification({
+					type: 'full',
+					theme: 'fail',
+					messageTitle: 'Erro',
+					message: error.response.data.message,
+					setNotification: setNotification,
+					onClick: () => setNotification(false),
+					buttonTitle: "Fechar"
+				});
+				setUserList([]);
+			}
+			if (error.response && error.response.status === 422) {
+				console.log(error.response)
+				setNotification({
+					type: 'full',
+					theme: 'fail',
+					messageTitle: 'Erro',
+					message: `Não foi possivel excluir o usuário.`,
+					setNotification: setNotification,
+					onClick: () => setNotification(false),
+					buttonTitle: "Fechar"
+				});
+			}
+
+		}
+	}
+
 	useEffect(() => {
 		getUserList(filtersSelected);
 	}, [filtersSelected]);
@@ -121,11 +178,13 @@ export const AdminUserList = () => {
 		<S.Container>
 			{notification && (
 				<NotificationModal
-					type={"full"}
-					msg={notification.message}
-					onClick={() =>
-						notification.codStatus == 401 && navigate(notification.url)
-					}
+					type={notification.type}
+					theme={notification.theme}
+					message={notification.message}
+					messageTitle={notification.messageTitle}
+					onClick={notification.onClick}
+					setNotification={notification.setNotification}
+					buttonTitle={notification.buttonTitle}
 				/>
 			)}
 			<PageTitle
@@ -147,6 +206,7 @@ export const AdminUserList = () => {
 				listData={userList}
 				columns={userPageData.columns}
 				setDataSelected={setUserSelected}
+				dataSelected={userSelected}
 				loading={loading}
 			/>
 

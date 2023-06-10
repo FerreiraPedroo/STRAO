@@ -15,8 +15,8 @@ export const Container = styled.div`
 	flex-wrap: wrap;
 	justify-content: start;
 	align-content: start;
-	padding: 16px 32px;
-	gap: 16px;
+	padding: 16px 32px 32px 32px;
+	gap: 8px;
 `;
 
 export const CenterContainer = styled.main`
@@ -104,6 +104,7 @@ export const SubDepartmentActionsContainer = styled.div`
 `;
 
 export const DepartmentAction = styled.p`
+margin-top: 12px;
 
 
 `;

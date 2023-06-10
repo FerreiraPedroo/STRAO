@@ -24,6 +24,7 @@ import { Supply } from "../pages/Supply";
 import { SupplyWarehouseItems } from "../pages/Supply/Warehouse/Items";
 import { SupplyWarehouseItemEdit } from "../pages/Supply/Warehouse/ItemEdit";
 import { SupplyWarehouseItemRegister } from "../pages/Supply/Warehouse/ItemRegister";
+import { SectorIndex } from "../component/Sector/index";
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -38,18 +39,21 @@ export const router = createBrowserRouter(
 
 				<Route path="rh">
 					<Route index element={<HumanResources />} />
-					<Route
-						path="employee/register"
-						element={<HumanResourcesEmployeeRegister />}
-					/>
+					<Route path="employee" element={<SectorIndex />} />
+					<Route path="employee/register" element={<HumanResourcesEmployeeRegister />} />
 					<Route path="employee/list" element={<HumanResourcesEmployeeList />} />
 				</Route>
 
 				<Route path="admin">
 					<Route index element={<Admin />} />
+					<Route path="user" element={<SectorIndex />} />
 					<Route path="user/list" element={<AdminUserList />} />
 					<Route path="user/edit" element={<AdminUserEdit />} />
 					<Route path="user/register" element={<AdminUserRegister />} />
+
+					<Route path="centerscost" element={<SectorIndex />} />
+					<Route path="contract" element={<SectorIndex />} />
+
 				</Route>
 
 				<Route path="supply">

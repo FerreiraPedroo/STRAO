@@ -27,11 +27,12 @@ export function Root() {
 
 	return (
 		<S.Container>
-			<NavBar />
 			<S.CenterContainer>
+				<NavBar />
+				<S.HrLine />
 				<SideBar />
-				<Outlet />
 			</S.CenterContainer>
+			<Outlet />
 		</S.Container>
 	);
 }

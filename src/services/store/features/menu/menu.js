@@ -1,17 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const menuSlice = createSlice({
-    name: "menu",
-    initialState:{
-        value: []
+    name: "sidebar",
+    initialState: {
+        sectionSelected: "",
+        sectionActionSelected: ""
     },
     reducers: {
-        update : (state, action) => {
-            state = action.payload;
+        changeSectionSelected: (state, action) => {
+            return {
+                ...state,
+                sectionSelected: action.payload
+            };
+
+        },
+        changeSectionActionSelected: (state, action) => {
+            return {
+                ...state,
+                sectionActionSelected: action.payload
+            };
         }
     }
 })
 
-export const  { update } = menuSlice.actions;
+export const { changeSectionSelected, changeSectionActionSelected } = menuSlice.actions;
 
 export default menuSlice.reducer;

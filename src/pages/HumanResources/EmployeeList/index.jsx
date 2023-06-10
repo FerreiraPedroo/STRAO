@@ -11,6 +11,8 @@ import { InputSelect } from "../../../component/Input/Select";
 import { InputText } from "../../../component/Input/Text";
 import { PageFilter } from "../../../component/PageFilter";
 import { PageList } from "../../../component/PageList";
+import { PageAction } from "../../../component/PageAction";
+import { useNavigate } from "react-router-dom";
 
 // const filters = [
 // 	{
@@ -34,6 +36,7 @@ import { PageList } from "../../../component/PageList";
 
 export const HumanResourcesEmployeeList = () => {
 	const userData = useSelector((state) => state.appData.dataInfo);
+	const navigate = useNavigate();
 
 	const [findStatus, setFindStatus] = useState(true);
 	const [findEmployeeResponse, setFindEmployeeResponse] = useState([]);
@@ -49,7 +52,7 @@ export const HumanResourcesEmployeeList = () => {
 			options: Object.values(userData.contracts).reduce((acc, cur) => {
 				acc.push({ title: cur.title, value: cur._id });
 				return acc;
-			}, [])
+			}, [{ title: "Todos", value: "" }])
 		},
 		{
 			type: "select",
@@ -74,6 +77,18 @@ export const HumanResourcesEmployeeList = () => {
 		{ title: "Nome", htmlName: "fullName", minSize: 256, maxSize: 320 },
 		{ title: "E-mail", htmlName: "email", size: 0 }
 	]);
+	const [listActions] = useState([
+		{
+			title: "Editar",
+			typeStyle: "edit",
+			show: true,
+			action: (data) =>
+				navigate("/rh/employee/edit", {
+					state: { dataId: data._id }
+				})
+		}
+	]);
+
 
 	// const handleFilter = (filterName, filterData) => {
 	// 	const filter = { ...searchFilter, [filterName]: filterData };
@@ -106,6 +121,16 @@ export const HumanResourcesEmployeeList = () => {
 				getFiltersSelected={getEmployeeSearch}
 				loading={findStatus}
 			/>
+
+			{
+				employeeSelected &&
+				<PageAction
+					actionsData={listActions}
+					dataSelected={employeeSelected}
+					loading={findStatus}
+				/>
+
+			}
 
 			<PageList
 				listData={findEmployeeResponse}

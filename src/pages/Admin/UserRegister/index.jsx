@@ -60,16 +60,15 @@ export const AdminUserRegister = () => {
 
 			return errors;
 		},
-		onSubmit: async (values) => {
+		onSubmit: async (values, actions) => {
 			try {
 				const { data } = await api.post(
 					"admin/user/new",
 					{ ...values },
 					{ headers: { "x-access-token": localStorage.getItem("strao-token") } }
 				);
-				console.log(data)
+				resetForm()
 				setNotification(data);
-				formik.resetForm();
 			} catch (error) {
 				if (!error.response.status && !error.response.data) {
 					error.response.data = { message: error.message };
@@ -82,6 +81,10 @@ export const AdminUserRegister = () => {
 		}
 	});
 
+	function resetForm() {
+		console.log(formik.resetForm())
+
+	}
 	return (
 		<S.Container>
 			{notification && (

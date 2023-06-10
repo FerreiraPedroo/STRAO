@@ -184,11 +184,17 @@ const formikAditionalValues = {
 };
 
 export const HumanResourcesEmployeeRegister = () => {
-	const appData = useSelector((state) => state.appData.dataInfo);
-	const [contractSelected, setContractSelected] = useState();
 	const navigate = useNavigate();
 
-	const [messageModal, setMessageModal] = useState();
+	const [notification, setNotification] = useState();
+
+	const appData = useSelector((state) => state.appData.dataInfo);
+
+	const [contractSelected, setContractSelected] = useState();
+	const [departmentsOptions] = useState(departmentList())
+	const [contractOptions] = useState(contractList())
+	const [jobOptions, setJobOptions] = useState()
+	const [centerCostOptions, setCenterCostOptions] = useState()
 
 	const formik = useFormik({
 		initialValues: {
@@ -231,20 +237,21 @@ export const HumanResourcesEmployeeRegister = () => {
 			const result = await registerEmployee(values);
 
 			if (result) {
-				setMessageModal({
-					type: "full",
-					theme: "success",
-					messageTitle: "Sucesso",
-					message: "Funcionário registrado com sucesso."
-				});
+				setNotification({
+					type: 'full',
+					theme: 'success',
+					messageTitle: 'Sucesso',
+					message: `Funcionário registrado com sucesso.`,
+					setNotification: setNotification,
+					onClick: () => setNotification(""),
+					buttonTitle: "Fechar"
+				})
 				formik.resetForm();
 			}
 
 			return;
 		}
 	});
-
-	useEffect(() => {}, []);
 
 	const registerEmployee = async (values) => {
 		try {
@@ -261,16 +268,74 @@ export const HumanResourcesEmployeeRegister = () => {
 			} else {
 				errMessage = err.message;
 			}
-			setMessageModal({
-				type: "modal",
-				theme: "fail",
-				messageTitle: "Erro",
-				message: `Não foi possivel registrar o funcionario. ${errMessage}`,
-				onClick: onClick
-			});
+			setNotification({
+				type: 'modal',
+				theme: 'fail',
+				messageTitle: 'Erro',
+				message: `Não foi possivel registrar o funcionario. ${errMessage}.`,
+				setNotification: setNotification,
+				onClick: () => onClick ?? setNotification(""),
+				buttonTitle: "Fechar"
+			})
 			return false;
 		}
 	};
+
+
+	function departmentList() {
+		const list = [];
+		list.push({ value: "", title: "", type: "option" })
+		appData.hasOwnProperty("departments") &&
+		Object.values(appData.departments).map((department) =>{
+				list.push({ value: department._id, title: department.title, type: "option" })
+		})
+
+		return list
+	}
+
+	function contractList() {
+		const list = [];
+		list.push({ value: "", title: "", type: "option" })
+
+		appData.hasOwnProperty("contracts") &&
+			Object.values(appData.contracts).map((contract) => (
+				list.push({ value: contract._id, title: contract.title, type: "option" })
+			))
+
+		return list
+	}
+
+
+	useEffect(() => {
+			const list = [];
+			list.push({ value: "", title: "", type: "option" })
+
+			const contract = Object.values(appData.contracts).find((contract) => {
+				return contract._id === contractSelected
+			})
+
+			if (contract) {
+				Object.values(contract.jobs).map((job) => {
+					list.push({ value: job._id, title: job.title, type: "option" })
+				})
+			}
+			setJobOptions(list)
+	}, [contractSelected])
+	useEffect(() => {
+			const list = [];
+			list.push({ value: "", title: "", type: "option" })
+
+			const contract = Object.values(appData.contracts).find((contract) => {
+				return contract._id === contractSelected
+			})
+
+			if (contract) {
+				Object.values(contract.centersCost).map((centerCost) => {
+					list.push({ value: centerCost._id, title: centerCost.title, type: "option" })
+				})
+			}
+			setCenterCostOptions(list)
+	}, [jobOptions])
 
 	return (
 		<S.Container>
@@ -278,13 +343,15 @@ export const HumanResourcesEmployeeRegister = () => {
 				title="Registro de funcionário"
 				subTitle="registre um novo funcionário em um contrato."
 			/>
-			{messageModal && (
+			{notification && (
 				<NotificationModal
-					type={messageModal.type}
-					theme={messageModal.theme}
-					message={messageModal.message}
-					messageTitle={messageModal.messageTitle}
-					onClick={() => setMessageModal(false)}
+					type={notification.type}
+					theme={notification.theme}
+					message={notification.message}
+					messageTitle={notification.messageTitle}
+					setNotification={notification.setNotification}
+					buttonTitle={notification.buttonTitle}
+					onClick={notification.onClick}
 				/>
 			)}
 			{appData && appData.departments ? (
@@ -350,15 +417,8 @@ export const HumanResourcesEmployeeRegister = () => {
 									selectPlaceholder="Departamento"
 									selectShowInfo={true}
 									selectOnChange={formik.handleChange}
-								>
-									<option value=""></option>
-									{appData.hasOwnProperty("departments") &&
-										Object.values(appData.departments).map((department) => (
-											<option key={department.title} value={department._id}>
-												{department.title}
-											</option>
-										))}
-								</InputSelect>
+									options={departmentsOptions}
+								/>
 								<S.ErrorMessage>
 									{formik.touched.department_id && formik.errors.department_id}
 								</S.ErrorMessage>
@@ -372,30 +432,12 @@ export const HumanResourcesEmployeeRegister = () => {
 									selectPlaceholder="Contrato"
 									selectShowInfo={true}
 									selectOnChange={(e) => {
-										setContractSelected(
-											document.getElementById(e.target.value)
-												? document
-														.getElementById(e.target.value)
-														.attributes.getNamedItem("name").value
-												: ""
-										);
+										setContractSelected(e.target.value);
 										formik.handleChange(e);
 									}}
 									disabled={!formik.values.department_id}
-								>
-									<option value=""></option>
-									{appData.hasOwnProperty("contracts") &&
-										Object.values(appData.contracts).map((contract) => (
-											<option
-												key={contract.title}
-												id={contract._id}
-												name={contract.title}
-												value={contract._id}
-											>
-												{contract.title}
-											</option>
-										))}
-								</InputSelect>
+									options={contractOptions}
+								/>
 								<S.ErrorMessage>
 									{formik.touched.contract_id && formik.errors.contract_id}
 								</S.ErrorMessage>
@@ -410,15 +452,8 @@ export const HumanResourcesEmployeeRegister = () => {
 									selectShowInfo={true}
 									selectOnChange={formik.handleChange}
 									disabled={!contractSelected}
-								>
-									<option value=""></option>
-									{appData.contracts.hasOwnProperty(contractSelected) &&
-										appData.contracts[contractSelected].jobs.map((job) => (
-											<option key={job.title} value={job._id}>
-												{job.title}
-											</option>
-										))}
-								</InputSelect>
+									options={jobOptions}
+								/>
 								<S.ErrorMessage>
 									{formik.touched.job_id && formik.errors.job_id}
 								</S.ErrorMessage>
@@ -433,17 +468,8 @@ export const HumanResourcesEmployeeRegister = () => {
 									selectShowInfo={true}
 									selectOnChange={formik.handleChange}
 									disabled={!formik.values.job_id}
-								>
-									<option value=""></option>
-									{appData.contracts.hasOwnProperty(contractSelected) &&
-										appData.contracts[contractSelected].centerCosts.map(
-											(centerCost) => (
-												<option key={centerCost.title} value={centerCost._id}>
-													{centerCost.title}
-												</option>
-											)
-										)}
-								</InputSelect>
+									options={centerCostOptions}
+								/>
 								<S.ErrorMessage>
 									{formik.touched.centerCost_id && formik.errors.centerCost_id}
 								</S.ErrorMessage>

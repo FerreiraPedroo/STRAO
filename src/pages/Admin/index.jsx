@@ -14,9 +14,9 @@ export const Admin = () => {
 
 	return (
 		<S.Container>
-			{departmentSector.departments ? (
+			{departmentSector.length ? (
 				<>
-					{Object.values(departmentSector.departments).map((department) => (
+					{Object.values(departmentSector).map((department) => (
 						<Card key={department.title} data={department} />
 					))}
 				</>

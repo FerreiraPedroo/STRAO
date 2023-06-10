@@ -1,7 +1,7 @@
 const initailState = {};
 
 export const rootReducer = function (state = initailState, action) {
-    console.log(state)
+    console.log("ROOT REDUCER:",state)
 
     return state;
 }

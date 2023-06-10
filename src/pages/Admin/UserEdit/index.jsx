@@ -143,6 +143,52 @@ export const AdminUserEdit = () => {
 		}
 	}
 
+	function departmentSectionOptions() {
+		const options = []
+		options.push({ value: "", title: "Selecione a ação", type: "option" })
+
+		userData.allDepartmentSectors &&
+			userData.userDepartments &&
+			userData.userDepartments.map((department) => (
+				userData.allDepartmentSectors.map(
+					(action, index) => {
+
+						index === 0 &&
+							options.push({ value: `| -${department.title}`, title: `| -${department.title}`, type: "optionGroup" })
+
+						action.department_id === department.id &&
+							options.push({ value: action.id, title: action.title, type: "option" })
+
+					})
+			))
+
+		return options;
+	}
+
+	function departmentOptions() {
+		const options = []
+		options.push({ value: "", title: "Selecione o departamento", type: "option" })
+
+		userData.allDepartments &&
+			userData.allDepartments.map((department) =>
+				options.push({ value: department.id, title: department.title, type: "option" })
+			)
+
+		return options;
+	}
+
+	function contractOptions() {
+		const options = []
+		options.push({ value: "", title: "Selecione o contrato", type: "option" })
+
+		userData.allContracts &&
+			userData.allContracts.map((contract) =>
+				options.push({ value: contract.id, title: contract.title, type: "option" })
+			)
+
+		return options;
+	}
+
 	useEffect(() => {
 		const getUserInfo = async () => {
 			try {
@@ -151,7 +197,7 @@ export const AdminUserEdit = () => {
 				});
 				handleHiddenShowAction(data.status);
 				setUserData(data);
-			} catch (error) {}
+			} catch (error) { }
 			setLoading(false);
 		};
 		getUserInfo();
@@ -166,11 +212,6 @@ export const AdminUserEdit = () => {
 			/>
 			{userData ? (
 				<>
-					<PageTitle
-						title={userData.name}
-						subTitle={dataOptions.status[`${userData.status}SubTitle`]}
-					/>
-
 					<PageAction
 						actionsData={actionsPageData}
 						dataSelected={location.state.userId}
@@ -185,18 +226,21 @@ export const AdminUserEdit = () => {
 							<InputText
 								inputValue={userData.register}
 								inputName={"register"}
+								inputShowInfo={true}
 								inputPlaceholder={"Nº de registro"}
 								disabled={true}
 							/>
 							<InputText
 								inputValue={userData.email}
 								inputName="email"
+								inputShowInfo={true}
 								inputPlaceholder={"Email"}
 								disabled={true}
 							/>
 							<InputText
 								inputValue={userData.name}
 								inputName="name"
+								inputShowInfo={true}
 								inputPlaceholder={"Nome"}
 								disabled={true}
 							/>
@@ -204,6 +248,7 @@ export const AdminUserEdit = () => {
 								inputValue={userData.birthDate}
 								inputName="borthDate"
 								disabled={true}
+								inputShowInfo={true}
 								inputPlaceholder={"Data de nascimento"}
 							/>
 						</S.PrincipalData>
@@ -216,16 +261,8 @@ export const AdminUserEdit = () => {
 								<InputSelect
 									selectValue={contractSelect}
 									selectOnChange={(e) => setContractSelect(e.target.value)}
-								>
-									<option value={""}>Selecione o contrato</option>
-
-									{userData.allContracts &&
-										userData.allContracts.map((contract) => (
-											<option key={contract.id} value={contract.id}>
-												{contract.title}
-											</option>
-										))}
-								</InputSelect>
+									options={contractOptions()}
+								/>
 								<Button
 									typeStyle="correct"
 									disable={!contractSelect}
@@ -265,18 +302,8 @@ export const AdminUserEdit = () => {
 									<InputSelect
 										selectValue={departmentSelect}
 										selectOnChange={(e) => setDepartmentSelect(e.target.value)}
-									>
-										<>
-											<option value={""}>Selecione o departamento</option>
-
-											{userData.allDepartments &&
-												userData.allDepartments.map((department) => (
-													<option value={department.id} key={department.id}>
-														{department.title}
-													</option>
-												))}
-										</>
-									</InputSelect>
+										options={departmentOptions()}
+									/>
 
 									<Button
 										typeStyle="correct"
@@ -319,35 +346,10 @@ export const AdminUserEdit = () => {
 										selectOnChange={(e) =>
 											setDepartmentSectionSelect(e.target.value)
 										}
+										options={departmentSectionOptions()}
 									>
-										<option value="">Selecione a ação</option>
-										{userData.allDepartmentSectors &&
-											userData.userDepartments &&
-											userData.userDepartments.map((department) => (
-												<>
-													{userData.allDepartmentSectors.map(
-														(action, index) => (
-															<>
-																{index === 0 && (
-																	<optgroup
-																		key={department.title}
-																		label={"| " + department.title}
-																	/>
-																)}
-																{action.department_id === department.id && (
-																	<option value={action.id}>
-																		{action.title}
-																	</option>
-																)}
-																;
-															</>
-														)
-													)}
-													;
-												</>
-											))}
 									</InputSelect>
-									{console.log(departmentSectionSelect)}
+
 									<Button
 										typeStyle="correct"
 										disable={!departmentSectionSelect}
@@ -367,40 +369,30 @@ export const AdminUserEdit = () => {
 								{userData.userDepartmentSectors &&
 									userData.userDepartments &&
 									userData.userDepartments.map((department) => (
-										<>
+										<div key={department.title}>
+											<S.DepartmentAction>
+												{department.title}
+											</S.DepartmentAction>
+
 											{userData.userDepartmentSectors.map((action, index) => (
-												<>
-													{index === 0 &&
-														userData.userDepartmentSectors.find(
-															(av) => av.department === department.id
-														) && (
-															<S.DepartmentAction>
-																{department.title}
-															</S.DepartmentAction>
-														)}
-													{action.department_id === department.id && (
-														<S.InputBox key={action.department}>
-															<InputText
-																inputValue={action.title}
-																disabled={true}
-																readOnly={true}
-															/>
-															<Button
-																typeStyle="remove"
-																onClick={() =>
-																	changeUpdate(
-																		"departmentSectors",
-																		"remove",
-																		action.id
-																	)
-																}
-															/>
-														</S.InputBox>
-													)}
-												</>
+												action.department_id === department.id && (
+													<S.InputBox key={action.id}>
+														<InputText
+															inputValue={action.title}
+															disabled={true}
+															readOnly={true}
+														/>
+														<Button
+															typeStyle="remove"
+															onClick={() => changeUpdate("departmentSectors", "remove", action.id)}
+														/>
+													</S.InputBox>
+												)
+
 											))}
-										</>
-									))}
+										</div>
+									))
+								}
 							</S.RightContainer>
 						</S.SubDepartmentActionsContainer>
 					</S.DepartmentContainer>
