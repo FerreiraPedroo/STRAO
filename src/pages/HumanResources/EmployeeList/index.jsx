@@ -82,9 +82,9 @@ export const HumanResourcesEmployeeList = () => {
 			title: "Editar",
 			typeStyle: "edit",
 			show: true,
-			action: (data) =>
+			action: (employee) =>
 				navigate("/rh/employee/edit", {
-					state: { dataId: data._id }
+					state: { dataId: employee._id }
 				})
 		}
 	]);

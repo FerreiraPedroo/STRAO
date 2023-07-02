@@ -82,8 +82,7 @@ export const AdminUserRegister = () => {
 	});
 
 	function resetForm() {
-		console.log(formik.resetForm())
-
+		formik.resetForm()
 	}
 	return (
 		<S.Container>

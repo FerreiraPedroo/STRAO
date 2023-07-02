@@ -191,10 +191,10 @@ export const HumanResourcesEmployeeRegister = () => {
 	const appData = useSelector((state) => state.appData.dataInfo);
 
 	const [contractSelected, setContractSelected] = useState();
-	const [departmentsOptions] = useState(departmentList())
-	const [contractOptions] = useState(contractList())
-	const [jobOptions, setJobOptions] = useState()
-	const [centerCostOptions, setCenterCostOptions] = useState()
+	const [departmentsOptions] = useState(departmentList());
+	const [contractOptions] = useState(contractList());
+	const [jobOptions, setJobOptions] = useState();
+	const [centerCostOptions, setCenterCostOptions] = useState();
 
 	const formik = useFormik({
 		initialValues: {
@@ -238,14 +238,14 @@ export const HumanResourcesEmployeeRegister = () => {
 
 			if (result) {
 				setNotification({
-					type: 'full',
-					theme: 'success',
-					messageTitle: 'Sucesso',
+					type: "full",
+					theme: "success",
+					messageTitle: "Sucesso",
 					message: `Funcionário registrado com sucesso.`,
 					setNotification: setNotification,
 					onClick: () => setNotification(""),
 					buttonTitle: "Fechar"
-				})
+				});
 				formik.resetForm();
 			}
 
@@ -269,73 +269,110 @@ export const HumanResourcesEmployeeRegister = () => {
 				errMessage = err.message;
 			}
 			setNotification({
-				type: 'modal',
-				theme: 'fail',
-				messageTitle: 'Erro',
+				type: "modal",
+				theme: "fail",
+				messageTitle: "Erro",
 				message: `Não foi possivel registrar o funcionario. ${errMessage}.`,
 				setNotification: setNotification,
 				onClick: () => onClick ?? setNotification(""),
 				buttonTitle: "Fechar"
-			})
+			});
 			return false;
 		}
 	};
 
-
 	function departmentList() {
 		const list = [];
-		list.push({ value: "", title: "", type: "option" })
+		list.push({ value: "", title: "", type: "option" });
 		appData.hasOwnProperty("departments") &&
-		Object.values(appData.departments).map((department) =>{
-				list.push({ value: department._id, title: department.title, type: "option" })
-		})
+			Object.values(appData.departments).map((department) => {
+				list.push({
+					value: department._id,
+					title: department.title,
+					type: "option"
+				});
+			});
 
-		return list
+		return list;
 	}
 
 	function contractList() {
 		const list = [];
-		list.push({ value: "", title: "", type: "option" })
+		list.push({ value: "", title: "", type: "option" });
 
 		appData.hasOwnProperty("contracts") &&
-			Object.values(appData.contracts).map((contract) => (
-				list.push({ value: contract._id, title: contract.title, type: "option" })
-			))
+			Object.values(appData.contracts).map((contract) =>
+				list.push({
+					value: contract._id,
+					title: contract.title,
+					type: "option"
+				})
+			);
 
-		return list
+		return list;
 	}
 
+	useEffect(() => {
+		const list = [];
+		list.push({ value: "", title: "", type: "option" });
+
+		const contract = Object.values(appData.contracts).find((contract) => {
+			return contract._id === contractSelected;
+		});
+
+		if (contract) {
+			Object.values(contract.jobs).map((job) => {
+				list.push({ value: job._id, title: job.title, type: "option" });
+			});
+		}
+		setJobOptions(list);
+	}, [contractSelected]);
+	useEffect(() => {
+		const list = [];
+		list.push({ value: "", title: "", type: "option" });
+
+		const contract = Object.values(appData.contracts).find((contract) => {
+			return contract._id === contractSelected;
+		});
+
+		if (contract) {
+			Object.values(contract.centersCost).map((centerCost) => {
+				list.push({
+					value: centerCost._id,
+					title: centerCost.title,
+					type: "option"
+				});
+			});
+		}
+		setCenterCostOptions(list);
+	}, [jobOptions]);
 
 	useEffect(() => {
-			const list = [];
-			list.push({ value: "", title: "", type: "option" })
-
-			const contract = Object.values(appData.contracts).find((contract) => {
-				return contract._id === contractSelected
-			})
-
-			if (contract) {
-				Object.values(contract.jobs).map((job) => {
-					list.push({ value: job._id, title: job.title, type: "option" })
-				})
+		try {
+			
+		} catch (err) {
+			let errMessage = "";
+			let onClick = "";
+			if (err.response.data) {
+				errMessage = err.response.data.message;
+				if (err.response.data.codStatus == 401) {
+					onClick = () => navigate("/login");
+				}
+			} else {
+				errMessage = err.message;
 			}
-			setJobOptions(list)
-	}, [contractSelected])
-	useEffect(() => {
-			const list = [];
-			list.push({ value: "", title: "", type: "option" })
-
-			const contract = Object.values(appData.contracts).find((contract) => {
-				return contract._id === contractSelected
-			})
-
-			if (contract) {
-				Object.values(contract.centersCost).map((centerCost) => {
-					list.push({ value: centerCost._id, title: centerCost.title, type: "option" })
-				})
-			}
-			setCenterCostOptions(list)
-	}, [jobOptions])
+			setNotification({
+				type: "modal",
+				theme: "fail",
+				messageTitle: "Erro",
+				message: `Não foi possivel carregar os dados para registro. ${errMessage}.`,
+				setNotification: setNotification,
+				onClick: () => onClick ?? setNotification(""),
+				buttonTitle: "Fechar"
+			});
+			return false;
+		}
+	},[])
 
 	return (
 		<S.Container>

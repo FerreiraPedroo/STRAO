@@ -1,161 +1,196 @@
-import React, { useState, useContext } from "react";
-import { GlobalUseContext } from "../../../provider/app";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import findEmployee from "../../../assets/img/find-employee.svg";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { PageList } from "../../../component/PageList";
+import { PageTitle } from "../../../component/PageTitle";
+import { PageFilter } from "../../../component/PageFilter";
+import { PageAction } from "../../../component/PageAction";
+import { api } from "../../../services/api";
+
+import { monthList } from "../../../helper/defaultDataForm";
 
 import * as S from "./styles";
-import { useEffect } from "react";
 
-const yearData = ["2022", "2021", "2020"];
+export const HumanResourcesEmployeeSheet = () => {
+	const navigate = useNavigate();
+	const dataInfo = useSelector((state) => state.appData.dataInfo);
 
-export const RhEmployeeSheet = () => {
-  const navigate = useNavigate();
-  const { userData } = useContext(GlobalUseContext);
-  const [searchFilter, setSearchFilter] = useState({
-    month: "janeiro",
-    year: "2022",
-    contract: userData.contracts[0].name,
-  });
-  const [searchEmployeeSheet, setSearchEmployeeSheet] = useState([
-    {
-      employee_id: 12344,
-      employee_fullName: "Pedro Henrique de Assis Ferreira",
-      contract_id: "12345648",
-      contract_name: "Ministério da Econômia",
-      status: "Enviado",
-      month: "Janeiro",
-      year: "2022",
-      sheetFile: [],
-      documentFile: [],
-    },
-    {
-      employee_id: 12344,
-      employee_fullName: "Pedro Henrique de Assis Ferreira",
-      contract_id: "12345648",
-      contract_name: "Ministério da Econômia",
-      status: "Enviado",
-      month: "Janeiro",
-      year: "2022",
-      sheetFile: [],
-      documentFile: [],
-    },
-    {
-      employee_id: 12344,
-      employee_fullName: "Pedro Henrique de Assis Ferreira",
-      contract_id: "12345648",
-      contract_name: "Ministério da Econômia",
-      status: "Pendente",
-      month: "Janeiro",
-      year: "2022",
-      sheetFile: [],
-      documentFile: [],
-    },
-    {
-      employee_id: 12344,
-      employee_fullName: "Pedro Henrique de Assis Ferreira",
-      contract_id: "12345648",
-      contract_name: "Ministério da Econômia",
-      status: "Pendente",
-      month: "Janeiro",
-      year: "2022",
-      sheetFile: [],
-      documentFile: [],
-    },
-  ]);
+	const [searchFilter, setSearchFilter] = useState();
+	const [searchEmployeeSheet, setSearchEmployeeSheet] = useState([
+		{
+			employee_id: 12344,
+			employee_fullName: "Pedro Henrique de Assis Ferreira",
+			contract_id: "12345648",
+			contract_name: "Ministério da Econômia",
+			status: "Enviado",
+			month: "Janeiro",
+			year: "2022",
+			sheetFile: [],
+			documentFile: []
+		},
+		{
+			employee_id: 12344,
+			employee_fullName: "Pedro Henrique de Assis Ferreira",
+			contract_id: "12345648",
+			contract_name: "Ministério da Econômia",
+			status: "Enviado",
+			month: "Janeiro",
+			year: "2022",
+			sheetFile: [],
+			documentFile: []
+		},
+		{
+			employee_id: 12344,
+			employee_fullName: "Pedro Henrique de Assis Ferreira",
+			contract_id: "12345648",
+			contract_name: "Ministério da Econômia",
+			status: "Pendente",
+			month: "Janeiro",
+			year: "2022",
+			sheetFile: [],
+			documentFile: []
+		},
+		{
+			employee_id: 12344,
+			employee_fullName: "Pedro Henrique de Assis Ferreira",
+			contract_id: "12345648",
+			contract_name: "Ministério da Econômia",
+			status: "Pendente",
+			month: "Janeiro",
+			year: "2022",
+			sheetFile: [],
+			documentFile: []
+		}
+	]);
 
-  const handleFilter = (filterName, filterData) => {
-    const filter = { ...searchFilter, [filterName]: filterData };
-    setSearchFilter(filter);
-  };
+	const [findStatus, setFindStatus] = useState(true);
+	const [findSheetsResponse, setFindSheetsResponse] = useState([]);
+	const [sheetSelected, setSheetSelected] = useState(null);
 
-  useEffect(() => {}, []);
+	const [filters] = useState([
+		{
+			type: "select",
+			htmlName: "month",
+			htmlPlaceholder: "Mês",
+			showInfo: true,
+			defaultOption: 0,
+			options: Object.values(monthList).reduce(
+				(acc, cur) => {
+					acc.push({ title: cur.title, value: cur.id });
+					return acc;
+				},
+				[{ title: "Todos", value: "" }]
+			)
+		},
+		{
+			type: "select",
+			htmlName: "year",
+			htmlPlaceholder: "Ano",
+			showInfo: true,
+			defaultOption: 0,
+			options: [
+				{ title: "2023", value: "2023" },
+				{ title: "2022", value: "2022" },
+				{ title: "2021", value: "2021" },
+				{ title: "2020", value: "2020" }
+			]
+		},
+		{
+			type: "select",
+			htmlName: "contract",
+			htmlPlaceholder: "Contrato",
+			showInfo: true,
+			defaultOption: 0,
+			options: Object.values(dataInfo.contracts).map((contract) => {
+				return { title: contract.title, value: contract._id };
+			})
+		}
+	]);
+	const [listColumns] = useState([
+		{
+			title: "Status",
+			htmlName: "status",
+			minSize: 160,
+			maxSize: 160,
+			align: "center"
+		},
+		{ title: "Ano", htmlName: "year", minSize: 64, maxSize: 64 },
+		{ title: "Mês", htmlName: "month", minSize: 96, maxSize: 96 },
+		{
+			title: "Identificação",
+			htmlName: "identification",
+			minSize: 140,
+			maxSize: 140,
+			align: "center"
+		},
+		{ title: "Nome", htmlName: "fullName", minSize: 256 },
+		{
+			title: "Folha de ponto",
+			htmlName: "sheetFile",
+			minSize: 64,
+			maxSize: 320
+		},
+		{
+			title: "Documentos",
+			htmlName: "documentsFile",
+			minSize: 64,
+			maxSize: 320
+		}
+	]);
+	const [listActions] = useState([
+		{
+			title: "Editar",
+			typeStyle: "edit",
+			show: true,
+			action: (employee) =>
+				navigate("/rh/employee/sheet/edit", {
+					state: { employee }
+				})
+		}
+	]);
 
-  return (
-    <S.Container>
-      <S.Title>FOLHA DE PONTO</S.Title>
+	const getSheetSearch = async (filters) => {
+		setFindStatus(true);
+		try {
+			const { data } = await api.get("/rh/sheet/find", {
+				params: filters
+			});
+			// console.log(data);
+			setFindSheetsResponse(data);
+			setFindStatus(false);
+		} catch (error) {
+			console.log("ERROR: ", error);
+			setFindStatus(false);
+		}
+	};
 
-      <S.Box>
-        <S.InputBox>
-          <S.FindText>Contrato</S.FindText>
-          <S.FindSelect
-            onChange={(e) => handleFilter("contract", e.target.value)}
-          >
-            {userData.hasOwnProperty("contract") &&
-              userData.contract.map((contract) => (
-                <S.FindOption key={contract.name} value={contract.name}>
-                  {contract.name}
-                </S.FindOption>
-              ))}
-          </S.FindSelect>
-        </S.InputBox>
-        <S.InputBox w="256px">
-          <S.FindText>Mês</S.FindText>
-          <S.FindSelect onChange={(e) => handleFilter("month", e.target.value)}>
-            <S.FindOption value={"janeiro"}>Janeiro</S.FindOption>
-            <S.FindOption value={"fevereiro"}>Fevereiro</S.FindOption>
-            <S.FindOption value={"marco"}>Março</S.FindOption>
-            <S.FindOption value={"abril"}>Abril</S.FindOption>
-            <S.FindOption value={"maio"}>Maio</S.FindOption>
-            <S.FindOption value={"junho"}>Junho</S.FindOption>
-            <S.FindOption value={"julho"}>Julho</S.FindOption>
-            <S.FindOption value={"agosto"}>Agosto</S.FindOption>
-            <S.FindOption value={"setembro"}>Setembro</S.FindOption>
-            <S.FindOption value={"outubro"}>Outubro</S.FindOption>
-            <S.FindOption value={"novembro"}>Novembro</S.FindOption>
-            <S.FindOption value={"dezembro"}>Dezembro</S.FindOption>
-          </S.FindSelect>
-        </S.InputBox>
-        <S.InputBox w="256px">
-          <S.FindText>Ano</S.FindText>
-          <S.FindBoxFind>
-            <S.FindSelect
-              onChange={(e) => handleFilter("year", e.target.value)}
-            >
-              <S.FindOption value="2022">2022</S.FindOption>
-            </S.FindSelect>
-            <S.FindIcon
-              type="image"
-              src={findEmployee}
-              onClick={() => "sendFilter"}
-              disabled={false}
-            />
-          </S.FindBoxFind>
-        </S.InputBox>
-      </S.Box>
+	useEffect(() => {}, []);
 
-      <S.SheetHead>
-        <S.SheetHeadText>Registro</S.SheetHeadText>
-        <S.SheetHeadText>Nome</S.SheetHeadText>
-        <S.SheetHeadText>Ações</S.SheetHeadText>
-        <S.SheetHeadText>Status</S.SheetHeadText>
-      </S.SheetHead>
+	return (
+		<S.Container>
+			<PageTitle title="Folha de Ponto" />
 
-      {searchEmployeeSheet.length !== 0 ? (
-        searchEmployeeSheet.map((employee) => (
-          <S.FindEmployeeList key={employee.employee_id}>
-            <S.EmployeeRegister>{employee.employee_id}</S.EmployeeRegister>
-            <S.EmployeeName>{employee.employee_fullName}</S.EmployeeName>
-            <S.EmployeeAction>
-              {employee.status === "Pendente" && (
-                <S.EmployeeButton>Adicionar</S.EmployeeButton>
-              )}
-              {employee.status === "Enviado" && (
-                <>
-                  <S.EmployeeButton>Alterar</S.EmployeeButton>
-                  <S.EmployeeButton>Visualizar</S.EmployeeButton>
-                </>
-              )}
-              {/* {employee.sheetFile.length == 0 && <S.EmployeeButton>escaneado</S.EmployeeButton>} */}
-            </S.EmployeeAction>
-            <S.EmployeeStatus status={employee.status}>
-              {employee.status}
-            </S.EmployeeStatus>
-          </S.FindEmployeeList>
-        ))
-      ) : (
-        <>Não encontrado...</>
-      )}
-    </S.Container>
-  );
+			<PageFilter
+				filtersData={filters}
+				getFiltersSelected={getSheetSearch}
+				loading={findStatus}
+			/>
+
+			<PageAction
+				actionsData={sheetSelected ? listActions : []}
+				dataSelected={sheetSelected}
+				loading={findStatus}
+			/>
+
+			<PageList
+				listData={findSheetsResponse}
+				columns={listColumns}
+				setDataSelected={setSheetSelected}
+				dataSelected={sheetSelected}
+				loading={findStatus}
+			/>
+		</S.Container>
+	);
 };
