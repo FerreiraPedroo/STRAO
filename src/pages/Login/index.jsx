@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { loginService } from "../../services/login";
 import { useSelector, useDispatch } from "react-redux";
 
-import { appDataUpdate } from "../../services/store/features/data/appData"
+import { appDataUpdate, clearAllInfo } from "../../services/store/features/data/appData"
 
 import * as S from "./styles";
 import homebg2 from "./img/home-bg2.png";
 
 export const Login = () => {
 	const appData = useSelector((state) => state.appData);
-	console.log(appData)
+
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -42,6 +42,12 @@ export const Login = () => {
 		if (data.codStatus !== 200) {
 			setErrorLogin("Erro ao conectar.");
 			setErrorLogin(data.message);
+			
+			localStorage.removeItem("strao-user-info")
+			localStorage.removeItem("strao-token")
+			localStorage.removeItem("strao-data-info")
+			localStorage.removeItem("strao-data-version")
+			dispatch(clearAllInfo())
 		}
 	};
 

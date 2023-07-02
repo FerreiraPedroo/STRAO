@@ -25,6 +25,8 @@ import { SupplyWarehouseItems } from "../pages/Supply/Warehouse/Items";
 import { SupplyWarehouseItemEdit } from "../pages/Supply/Warehouse/ItemEdit";
 import { SupplyWarehouseItemRegister } from "../pages/Supply/Warehouse/ItemRegister";
 import { SectorIndex } from "../component/Sector/index";
+import { HumanResourcesEmployeeSheet } from "../pages/HumanResources/EmployeeSheet";
+import { HumanResourcesEmployeeSheetEdit } from "../pages/HumanResources/EmployeeSheetEdit";
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -40,8 +42,22 @@ export const router = createBrowserRouter(
 				<Route path="rh">
 					<Route index element={<HumanResources />} />
 					<Route path="employee" element={<SectorIndex />} />
-					<Route path="employee/register" element={<HumanResourcesEmployeeRegister />} />
-					<Route path="employee/list" element={<HumanResourcesEmployeeList />} />
+					<Route
+						path="employee/register"
+						element={<HumanResourcesEmployeeRegister />}
+					/>
+					<Route
+						path="employee/list"
+						element={<HumanResourcesEmployeeList />}
+					/>
+					<Route
+						path="employee/sheet"
+						element={<HumanResourcesEmployeeSheet />}
+					/>
+					<Route
+						path="employee/sheet/edit"
+						element={<HumanResourcesEmployeeSheetEdit />}
+					/>
 				</Route>
 
 				<Route path="admin">
@@ -53,15 +69,19 @@ export const router = createBrowserRouter(
 
 					<Route path="centerscost" element={<SectorIndex />} />
 					<Route path="contract" element={<SectorIndex />} />
-
 				</Route>
 
 				<Route path="supply">
 					<Route index element={<Supply />} />
 					<Route path="warehouse/items" element={<SupplyWarehouseItems />} />
-					<Route path="warehouse/item/edit" element={<SupplyWarehouseItemEdit />} />
-					<Route path="warehouse/item/register" element={<SupplyWarehouseItemRegister />} />
-
+					<Route
+						path="warehouse/item/edit"
+						element={<SupplyWarehouseItemEdit />}
+					/>
+					<Route
+						path="warehouse/item/register"
+						element={<SupplyWarehouseItemRegister />}
+					/>
 				</Route>
 			</Route>
 		</Route>
