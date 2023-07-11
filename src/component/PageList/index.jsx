@@ -91,7 +91,7 @@ export const PageList = ({
 							))}
 
 					</S.ListUserHeaderBox>
-					{listData && !loading &&
+					{(listData && !loading) &&
 						listData.map((data, index) => (
 							<S.ListUserBox
 								key={JSON.stringify(data)}
@@ -110,8 +110,8 @@ export const PageList = ({
 				</S.ListUserContainer>
 			</S.CenterContainer>
 
-			{listData.length && loading && <>Carregando...</>}
-			{!listData && !loading && <>Sem registro...</>}
+			{loading ? <>Carregando...</> : null}
+			{!listData.length && !loading ? <>Sem registro...</>: null}
 		</S.Container>
 	);
 };

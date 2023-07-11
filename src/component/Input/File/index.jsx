@@ -1,34 +1,36 @@
 import React from "react";
 import * as S from "./styles";
 
-export const InputText = ({
+export const InputFile = ({
 	inputId,
-	inputType = "text",
 	inputName,
 	inputValue,
 	inputOnChange,
 	inputPlaceholder,
 	inputShowInfo = false,
 	inputWidth = "256px",
+	inputAccept = ".jpg,.png,.bmp,.pdf",
 	disabled,
 	readOnly
 }) => {
 	return (
 		<S.Container width={inputWidth}>
-			<S.TitleText disabled={disabled}>
+			{/* <S.TitleText disabled={disabled}>
 				{((inputValue && inputShowInfo) || inputShowInfo) && inputPlaceholder}
-			</S.TitleText>
+			</S.TitleText> */}
 
 			<S.Input
 				id={inputId}
-				onChange={inputOnChange}
 				name={inputName}
-				type={inputType}
+				type="file"
+				onChange={inputOnChange}
 				defaultValue={inputValue}
 				placeholder={!inputShowInfo ? inputPlaceholder : ""}
 				disabled={disabled}
 				readOnly={readOnly}
 				width={inputWidth}
+				accept={inputAccept}
+				capture="camera"
 			/>
 		</S.Container>
 	);

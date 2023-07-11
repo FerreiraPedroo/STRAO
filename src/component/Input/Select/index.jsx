@@ -6,7 +6,7 @@ export const InputSelect = ({
 	selectName,
 	selectValue,
 	selectOnChange,
-	selectPlaceholder,
+	selectPlaceholder, 
 	selectShowInfo,
 	disabled,
 	readOnly,

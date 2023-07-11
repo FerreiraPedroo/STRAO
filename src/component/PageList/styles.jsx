@@ -16,10 +16,10 @@ export const Container = styled.div`
 	align-content: start;
 	background-color: #e5e5e5;
 	padding:12px;
+	padding-bottom: 64px;
 	border-radius: 8px;
 	border: 1px solid rgba(0, 0, 0, 0.25);
-	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
-	
+	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);	
 `;
 
 export const CenterContainer = styled.div`

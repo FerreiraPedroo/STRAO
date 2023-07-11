@@ -1,17 +1,24 @@
 import styled from "styled-components";
 import { Theme } from "../../theme";
 
-export const Button = styled.input`
+export const Button = styled.button`
 	width: ${({ width }) => (width ? `${width}px` : "160px")};
-	height: 32px;
-	font-size: 20px;
+	min-height: 32px;
+	max-height: 32px;
+	text-align: center;
+	font-size: 1rem;
+	font-weight: 500;
 	border-radius: 6px;
 	background-color: ${({ theme }) =>
 		Theme[theme] ? `${Theme[theme].buttonBgColor}` : "#dcdcdc"};
-	border: 1px solid
-		${({ theme }) =>
-			Theme[theme] ? `${Theme[theme].buttonBorderColor}` : "#555"};
+	border: 1px solid #555;
 	cursor: pointer;
+    outline: 0;
+
+	${({ theme }) =>
+		Theme[theme]
+			? `border: 1px solid ${Theme[theme].buttonBorderColor}`
+			 : "#555"};
 
 	&:active not(:disabled) {
 		border: 1px solid
@@ -32,7 +39,6 @@ export const Button = styled.input`
 
 	&:active {
 		color: #555;
-
 		border-color: ${({ theme }) =>
 			Theme[theme] ? `${Theme[theme].buttonActiveBorderColor}` : "#000"};
 		background-color: ${({ theme }) =>
@@ -46,13 +52,17 @@ export const ButtonBack = styled.button`
 	justify-content: center;
 	align-items: center;
 	font-size: 1.1rem;
-    font-weight: 500;
-	border-radius: 100%;
-	border: 1px solid #797979;
+	font-weight: 500;
+
 	cursor: pointer;
-	background-color: #c9c9c9;
+	color: white;
+	background-color: #666;
 	user-select: none;
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.55);
+
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	background-image: url("../../assets/icons/visualpharm-goback.svg");
 
 	&:hover {
 		transform: scale(0.95);
