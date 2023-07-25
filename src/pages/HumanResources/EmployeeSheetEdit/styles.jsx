@@ -78,7 +78,6 @@ export const HeaderBox = styled.div`
 	flex-direction: column;
 	justify-content: start;
 	gap: 12px;
-
 `;
 export const Head = styled.p`
 	display: flex;
@@ -160,7 +159,6 @@ export const SheetDataBox = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 
 	font-size: 1rem;
@@ -169,5 +167,11 @@ export const SheetDataBox = styled.div`
 	background-color: #e5e5e5;
 	border: 1px solid #c0c0c0;
 	border-radius: 6px;
-	padding: 2px;
+	padding: 12px;
+`;
+
+export const DocumentBox = styled.div`
+	width: 100%;
+	height: 100px;
+	border: 1px solid red;
 `;

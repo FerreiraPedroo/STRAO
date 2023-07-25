@@ -11,16 +11,18 @@ export const Supply = () => {
 	const departmentSector = useSelector(
 		(state) => state.appData.dataInfo.departmentSectors[`${pathname}`]
 	);
-	console.log(departmentSector);
+
 	return (
 		<S.Container>
-			{departmentSector &&
-				departmentSector.map((sector) =>
-					Object.values(sector.actions).map((action) => (
-						<Card key={action.title} data={action} />
-					))
-				)}
-			{!departmentSector && <S.NoAction>Sem ações.</S.NoAction>}
+			{departmentSector.length ? (
+				<>
+					{Object.values(departmentSector).map((department) => (
+						<Card key={department.title} data={department} />
+					))}
+				</>
+			) : (
+				<S.NoAction>Sem ações.</S.NoAction>
+			)}
 		</S.Container>
 	);
 };

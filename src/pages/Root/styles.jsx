@@ -4,7 +4,7 @@ export const Container = styled.div`
 	display: flex;
 	height: 100%;
     background-color: #f5f3f0;
-	gap: 16px;
+	gap: 10px;
 `;
 
 /* HR SEPARATOR */

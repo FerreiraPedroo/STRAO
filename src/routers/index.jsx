@@ -73,13 +73,14 @@ export const router = createBrowserRouter(
 
 				<Route path="supply">
 					<Route index element={<Supply />} />
-					<Route path="warehouse/items" element={<SupplyWarehouseItems />} />
+					<Route path="stock" element={<SectorIndex />} />
+					<Route path="stock/list" element={<SupplyWarehouseItems />} />
 					<Route
-						path="warehouse/item/edit"
+						path="item/edit"
 						element={<SupplyWarehouseItemEdit />}
 					/>
 					<Route
-						path="warehouse/item/register"
+						path="item/register"
 						element={<SupplyWarehouseItemRegister />}
 					/>
 				</Route>

@@ -120,12 +120,12 @@ export const HumanResourcesEmployeeSheet = () => {
 		{ title: "Mês", htmlName: "month", minSize: 96, maxSize: 96 },
 		{
 			title: "Identificação",
-			htmlName: "identification",
+			htmlName: "employee_identification",
 			minSize: 140,
 			maxSize: 140,
 			align: "center"
 		},
-		{ title: "Nome", htmlName: "fullName", minSize: 256 },
+		{ title: "Nome", htmlName: "employee_fullName", minSize: 256 },
 		{
 			title: "Folha de ponto",
 			htmlName: "sheetFile",
@@ -154,7 +154,7 @@ export const HumanResourcesEmployeeSheet = () => {
 	const getSheetSearch = async (filters) => {
 		setFindStatus(true);
 		try {
-			const { data } = await api.get("/rh/sheet/find", {
+			const { data } = await api.get("/rh/employee/sheet/find", {
 				params: filters
 			});
 			// console.log(data);

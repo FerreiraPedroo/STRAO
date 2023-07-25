@@ -1,7 +1,7 @@
 // RH
 import rh from "../assets/img/menu/rh.svg"
 import employees from "../assets/img/menu/icons8-member-48.png";
-import sheets from "../assets/img/menu/icons8-spreadsheet-48.png";
+import employeeSheet from "../assets/img/menu/icons8-spreadsheet-48.png";
 // RH - CARD
 import employeeList from "../assets/img/menu/icons8-employees-48.png";
 import employeeRegister from "../assets/img/menu/flaticon-employees-add-64.png";
@@ -10,7 +10,6 @@ import employeeRegister from "../assets/img/menu/flaticon-employees-add-64.png";
 
 // SUPPLY
 import supply from "../assets/img/menu/supply.svg"
-
 
 
 // ADMIN
@@ -26,7 +25,6 @@ import userRegister from "../assets/img/menu/icons8-account-add-48.png";
 import userDelete from "../assets/img/menu/icons8-account-delete-48.png";
 import userEdit from "../assets/img/menu/icons8-account-edit-48.png";
 
-
 export const navBarImgs = {
     rh,
     supply,
@@ -36,7 +34,7 @@ export const sideBarImgs = {
     employees,
     employeeList,
     employeeRegister,
-    sheets,
+    employeeSheet,
     users,
     userList,
     userRegister,
@@ -51,8 +49,7 @@ export const sectorActionsImgs = {
     employees,
     employeeList,
     employeeRegister,
-
-    sheets,
+    employeeSheet,
 
     users,
     userList,
