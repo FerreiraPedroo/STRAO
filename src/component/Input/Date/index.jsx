@@ -8,27 +8,30 @@ export const InputDate = ({
 	inputOnChange,
 	inputPlaceholder,
 	inputShowInfo = false,
-	inputWidth,
+	selectErrorMsg,
+	width,
 	disabled,
 	readOnly
 }) => {
 	return (
-		<S.Container>
+		<S.Container width={width}>
 			<S.TitleText disabled={disabled}>
 				{(inputValue || inputShowInfo) && inputPlaceholder}
 			</S.TitleText>
 
 			<S.Input
 				id={inputId}
-                type="date"
+				type="date"
 				onChange={inputOnChange}
 				name={inputName}
 				value={inputValue}
 				placeholder={!inputShowInfo ? inputPlaceholder : ""}
 				disabled={disabled}
 				readOnly={readOnly}
-				width={inputWidth}
+				width={width}
 			/>
+
+			<S.ErrorMsg>{selectErrorMsg}</S.ErrorMsg>
 		</S.Container>
 	);
 };

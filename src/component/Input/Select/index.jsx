@@ -8,13 +8,14 @@ export const InputSelect = ({
 	selectOnChange,
 	selectPlaceholder, 
 	selectShowInfo,
+	selectErrorMsg,
 	disabled,
 	readOnly,
-	width,
+	width = '164px',
 	options
 }) => {
 	return (
-		<S.Container>
+		<S.Container width={width}>
 			<S.TitleText disabled={disabled}>
 				{((selectValue && selectShowInfo) || selectShowInfo) &&
 					selectPlaceholder}
@@ -34,16 +35,19 @@ export const InputSelect = ({
 
 						option.type === 'optionGroup' ? (
 							<S.OptionGroup key={option.value +"-"+ index} label={option.value}>
-								{option.title}
+								{option.name}
 							</S.OptionGroup>
 						) : (
 							<S.Option key={option.value +"-"+ index} value={option.value}>
-								{option.title}
+								{option.name}
 							</S.Option>
 						)
 
 					)}
 			</S.Select>
+			<S.ErrorMsg>
+				{selectErrorMsg}
+			</S.ErrorMsg>
 		</S.Container>
 	);
 };

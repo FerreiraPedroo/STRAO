@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const props = {
 	headeTitle: `
-		font-size: 1.2rem;
+		font-size: 0.9rem;
 		font-style: italic;
 		font-weight: 600;  
 	`
@@ -17,7 +17,7 @@ export const Container = styled.div`
 	background-color: #e5e5e5;
 	padding:12px;
 	padding-bottom: 64px;
-	border-radius: 8px;
+	border-radius: 4px;
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);	
 `;
@@ -37,7 +37,7 @@ export const ListUserContainer = styled.div`
 	padding: 8px 0;	
 `;
 export const ListUserHeaderBox = styled.div`
-	height: 32px;
+	height: 28px;
 	display: flex;
 	justify-content: start;
 	box-sizing: content-box;
@@ -45,7 +45,7 @@ export const ListUserHeaderBox = styled.div`
 `;
 export const ListHeadText = styled.p`
 	${({ w }) => `min-width:${w}px`};
-	height: 32px;
+	height: 28px;
 	padding: 0 10px;
 	display: flex;
 	align-items: center;
@@ -70,12 +70,12 @@ export const ListUserBox = styled.div`
 	display: flex;
 	width: 100%;
 	justify-content: start;
-	margin-bottom: 1px;
 	cursor: pointer;
 	margin: 0px;
 	border-top: 1px solid #C0C0C0;
 	border-left: 1px solid #C0C0C0;
 	border-right: 1px solid #C0C0C0;
+	border-collapse: collapse;
 	
 	&:last-child{
 		border-bottom: 1px solid #C0C0C0;		
@@ -84,7 +84,8 @@ export const ListUserBox = styled.div`
 export const UserText = styled.div`
 	${({ w }) => `min-width:${w}px`};
 	${({ color }) => (color ? `color:${color}` : "#767676")};
-	padding: 8px 10px;
+	font-size: 0.8rem;
+	padding: 4px 10px;
 	background: #F8F8F8;
 	white-space: nowrap;
 	overflow: hidden;

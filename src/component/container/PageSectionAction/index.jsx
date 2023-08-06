@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Button } from "../Button";
+import { Button } from "../../Button";
 
 import * as S from "./styles.jsx";
 
@@ -25,22 +25,24 @@ import * as S from "./styles.jsx";
 /**
  *
  */
-export const PageAction = ({
+export const PageSectionAction = ({
 	actionsData = [],
 	dataSelected,
 	loading = false
 }) => {
+
+	const [action] = useState()
 	return (
 		<S.ActionsContainer>
 			<S.ActionsTitle>Ações</S.ActionsTitle>
 			{actionsData.map((action) => (
 				<S.ActionButtonBox
-					key={action.title}
+					key={action.name}
 					show={action.show || dataSelected}
 				>
 					<Button
 						typeStyle={action.typeStyle}
-						title={action.title}
+						title={action.name}
 						onClick={() => action.action(dataSelected)}
 					/>
 					{action.title}

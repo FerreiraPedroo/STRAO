@@ -61,8 +61,7 @@ export const ButtonBack = styled.button`
 
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
-	border-radius: 8px;
-	background-image: url("../../assets/icons/visualpharm-goback.svg");
+	border-radius: 6px;
 
 	&:hover {
 		transform: scale(0.95);
@@ -78,6 +77,7 @@ const propsTheme = {
         border: 2px solid #DEDEDE;
         background-color: #AFACAC;
         box-shadow: 0px 0px 0px #000000;
+        margin-top: 3px;
     }
     &:hover:disabled{
         cursor: default;
@@ -91,6 +91,7 @@ const propsTheme = {
         border: 2px solid #CC826D;
         background-color: #BF6E56;
         box-shadow: 0px 0px 0px #000000;
+        margin-top: 3px;
     }
     &:hover:disabled{
         cursor: default;
@@ -105,6 +106,7 @@ const propsTheme = {
         border: 2px solid #A5C2CC;
         background-color: #81ADD8;
         box-shadow: 0px 0px 0px #000000;
+        margin-top: 3px;
     }
     &:hover:disabled{
         cursor: default;
@@ -118,6 +120,7 @@ const propsTheme = {
         border: 2px solid #A5C2CC;
         background-color: #81ADD8;
         box-shadow: 0px 0px 0px #000000;
+        margin-top: 3px;
     }
     &:hover:disabled{
         cursor: default;
@@ -131,6 +134,7 @@ const propsTheme = {
         border: 2px solid #A5C2CC;
         background-color: #81ADD8;
         box-shadow: 0px 0px 0px #000000;
+        margin-top: 3px;
     }
     &:hover:disabled{
         cursor: default;
@@ -144,6 +148,7 @@ const propsTheme = {
         border: 2px solid #A5C2CC;
         background-color: #81ADD8;
         box-shadow: 0px 0px 0px #000000;
+        margin-top: 3px;
     }
     &:hover:disabled{
         cursor: default;
@@ -158,6 +163,7 @@ const propsTheme = {
         border: 2px solid #6BA76B;
         background-color: #4E744E;
         box-shadow: 0px 0px 0px #000000;
+        margin-top: 3px;
     }
     &:hover:disabled{
         cursor: default;
@@ -171,6 +177,7 @@ const propsTheme = {
         border: 2px solid #6BA76B;
         background-color: #4E744E;
         box-shadow: 0px 0px 0px #000000;
+        margin-top: 3px;
     }
     &:hover:disabled{
         cursor: default;

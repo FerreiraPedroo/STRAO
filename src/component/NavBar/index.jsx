@@ -1,22 +1,24 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as S from "./styles";
 
 import user_avatar from "../../assets/img/user_avatar.png";
 import icon_menu from "../../assets/icons/menu/menu.svg";
 
-import { navBarImgs } from "../../helper/indexImg"
+import { navBarImgs } from "../../helper/indexImg";
 
 export const NavBar = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const menuData = useSelector((state) => state.appData.dataInfo.departments);
 
 	const [showMenu, setShowMenu] = useState(false);
 
-	function menuNavigation(path) {
+	function menuNavigation(url_path) {
 		setShowMenu((prevState) => !prevState);
-		navigate(path);
+		dispatch({ payload: "", type: "sidebar/changeSectionSelected" });
+		navigate(url_path);
 	}
 
 	return (
@@ -31,11 +33,11 @@ export const NavBar = () => {
 						<S.MenuOptions>
 							{Object.values(menuData).map((card) => (
 								<S.MenuCard
-									key={card.title}
-									onClick={() => menuNavigation(card.path)}
+									key={card.name}
+									onClick={() => menuNavigation(card.url_path)}
 								>
-									<S.MenuCardImg src={navBarImgs[card.img]} />
-									<S.MenuCardTitle>{card.title}</S.MenuCardTitle>
+									<S.MenuCardImg src={navBarImgs[card.url_img]} />
+									<S.MenuCardTitle>{card.name}</S.MenuCardTitle>
 								</S.MenuCard>
 							))}
 						</S.MenuOptions>

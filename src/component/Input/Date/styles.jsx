@@ -1,23 +1,28 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-	height: 46px;
+	${({ width }) => width && `width:${width};`}
+	min-width: 128px;
+	height: 54px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 `;
 export const TitleText = styled.p`
-	height: 14px;
+	height: 12px;
 	position: relative;
+	color: #767676;
+	font-weight: 500;
 	top: -1px;
 	left: 2px;
-	font-size: 14px;
+	font-size: 0.8rem;
 	${({ disabled }) => disabled && "color: #b6b6b6;"}
 `;
 export const Input = styled.input`
-	width: ${({ width }) => width};
-	height: 32px;
-	padding: 0px 8px 2px 8px;
+	min-width: 160px;
+	min-height: 32px;
+	color: #767676;
+	padding: 3px 8px 2px 8px;
 	background-color: #ffffff;
 	border: 1px solid #808080;
 	border-radius: 4px;
@@ -35,8 +40,10 @@ export const Input = styled.input`
 `;
 
 export const ErrorMsg = styled.div`
-	width: 100%;
-	height: 12px;
-	font-size: 0.8rem;
-	border: 1 px solid red;
+	min-height: 10px;
+	font-size: 0.6rem;
+	white-space: nowrap; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: red;
 `;

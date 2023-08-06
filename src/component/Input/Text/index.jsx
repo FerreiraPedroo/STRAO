@@ -6,10 +6,14 @@ export const InputText = ({
 	inputType = "text",
 	inputName,
 	inputValue,
+	inputMin = 0,
+	inputMax,
 	inputOnChange,
 	inputPlaceholder,
 	inputShowInfo = false,
 	inputWidth = "256px",
+	inputErrorMsg,
+	inputOnBlur = () => "",
 	disabled,
 	readOnly
 }) => {
@@ -21,15 +25,20 @@ export const InputText = ({
 
 			<S.Input
 				id={inputId}
+				userSelect={false}
 				onChange={inputOnChange}
 				name={inputName}
 				type={inputType}
+				min={inputMin}
+				max={inputMax}
 				defaultValue={inputValue}
 				placeholder={!inputShowInfo ? inputPlaceholder : ""}
 				disabled={disabled}
 				readOnly={readOnly}
+				onBlur={(e) => inputOnBlur(e)}
 				width={inputWidth}
 			/>
+			<S.ErrorMsg>{inputErrorMsg}</S.ErrorMsg>
 		</S.Container>
 	);
 };

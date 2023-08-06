@@ -6,6 +6,7 @@ export const InputFile = ({
 	inputName,
 	inputValue,
 	inputOnChange,
+	inputOnBlur,
 	inputPlaceholder,
 	inputShowInfo = false,
 	inputWidth = "256px",
@@ -23,8 +24,9 @@ export const InputFile = ({
 				id={inputId}
 				name={inputName}
 				type="file"
-				onChange={inputOnChange}
+				onChange={(e) => inputOnChange(e)}
 				defaultValue={inputValue}
+				onBlur={inputOnBlur}
 				placeholder={!inputShowInfo ? inputPlaceholder : ""}
 				disabled={disabled}
 				readOnly={readOnly}

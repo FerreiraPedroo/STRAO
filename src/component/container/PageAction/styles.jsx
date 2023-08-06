@@ -11,17 +11,19 @@ export const ActionsContainer = styled.div`
 	gap: 16px;
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
-	border-radius: 8px;
+	border-radius: 4px;
 `;
 export const ActionsTitle = styled.div`
   	align-self: center;
   	font-style: italic;
-  	font-size: 1.2rem;
+  	font-size: 1rem;
 	font-weight: 600;
   	color: #565656;
 `;
 export const ActionButtonBox = styled.div`
 	display: flex;
+	font-size: 0.9rem;
+	font-weight: 500;
 	justify-content: center;
 	align-items: center;
 	gap: 6px;

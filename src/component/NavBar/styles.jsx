@@ -16,6 +16,7 @@ export const Title = styled.p`
 	font-size: 1.80rem;
 	font-weight: bold;
 	color: #464646;
+	padding-top: 2px;
 
 	&:hover {
 		cursor: pointer;
@@ -26,7 +27,7 @@ export const Title = styled.p`
 export const LeftContainer = styled.div`
 	width: 100%;
 	display: flex;
-	gap: 16px;
+	gap: 6px;
 `;
 
 /* MENU */

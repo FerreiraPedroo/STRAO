@@ -1,28 +1,31 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-	height: 46px;
+	${({ width }) => width && `width:${width};`}
+	min-width: 128px;
+	height: 50px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 `;
 export const TitleText = styled.p`
-	height: 14px;
+	height: 12px;
 	position: relative;
-	top: -1px;
-	left: 2px;
-	font-size: 14px;
 	color: #767676;
 	font-weight: 500;
+	top: -1px;
+	left: 2px;
+	font-size: 0.75rem;
 	${({ disabled }) => disabled && "color: #b6b6b6;"}
 `;
 export const Input = styled.input`
-	width: ${({ width }) => width};
-	height: 32px;
-	color: #767676;
+	min-width: 160px;
+	min-height: 28px;
+	color: #565656;
 	font-weight: 500;
+	font-size: 0.75rem;
+	padding: 4px 2px 2px 6px;
 	background-color: #ffffff;
-	padding: 3px 8px 2px 8px;
 	border: 1px solid #808080;
 	border-radius: 4px;
 	outline: 0;
@@ -38,9 +41,12 @@ export const Input = styled.input`
 	}
 `;
 
-export const ErrorMsg = styled.div`
-	width: 100%;
-	height: 12px;
-	font-size: 0.8rem;
-	border: 1 px solid red;
+export const ErrorMsg = styled.p` 
+	min-height: 10px;
+	font-size: 0.6rem;
+	font-weight: bold;
+	white-space: nowrap; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: red;
 `;

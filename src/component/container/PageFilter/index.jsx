@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import { Button } from "../../component/Button";
-import { InputText } from "../../component/Input/Text";
-import { InputSelect } from "../Input/Select/index";
+import { Button } from "../../Button";
+import { InputText } from "../../Input/Text";
+import { InputSelect } from "../../Input/Select/index";
 
 import * as S from "./styles.jsx";
 import { PageTitle } from "../PageTitle";
@@ -43,7 +43,6 @@ export const PageFilter = ({
 		(() => {
 			const data = filtersData.reduce((acc, cur) => {
 				if (cur.type === "select" && cur.options.length) {
-
 					return {
 						...acc,
 						[cur.htmlName]: cur.options[0].value
@@ -53,16 +52,16 @@ export const PageFilter = ({
 			}, {});
 			return data;
 		})()
-	);
+		);
 
-	function handleFilter(event) {
+		function handleFilter(event) {
 		const newFilters = { ...filters, [event.target.name]: event.target.value };
 		setFilters(newFilters);
 	}
 
 	useEffect(() => {
 		getFiltersSelected(filters);
-	}, [])
+	}, []);
 
 	function sendFiltersSelected() {
 		getFiltersSelected(filters);
