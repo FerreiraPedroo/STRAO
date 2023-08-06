@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { api } from "../../../services/api";
 import { NotificationModal } from "../../../component/NotificationModal";
-import { PageTitle } from "../../../component/PageTitle";
+import { PageTitle } from "../../../component/container/PageTitle";
 
 import * as S from "./styles.jsx";
 import { InputText } from "../../../component/Input/Text";

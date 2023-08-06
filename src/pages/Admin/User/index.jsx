@@ -1,16 +1,16 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api.js";
 
 import { NotificationModal } from "../../../component/NotificationModal";
-import { PageFilter } from "../../../component/PageFilter/index";
-import { PageList } from "../../../component/PageList/index";
-import { PageTitle } from "../../../component/PageTitle/index";
+import { PageFilter } from "../../../component/container/PageFilter";
+import { PageList } from "../../../component/container/PageList";
+import { PageTitle } from "../../../component/container/PageTitle";
+import { PageAction } from "../../../component/container/PageAction";
 
-import * as S from "./styles";
-import { PageAction } from "../../../component/PageAction/index.jsx";
+import * as S from "./styles.jsx";
 
-export const AdminUserList = () => {
+export const AdminUser = () => {
 	const navigate = useNavigate();
 	const [notification, setNotification] = useState();
 	const [loading, setLoading] = useState(true);
@@ -35,13 +35,6 @@ export const AdminUserList = () => {
 				size: 0,
 				minSize: 120,
 				maxSize: 320
-			},
-			{
-				title: "contrato",
-				htmlName: "contract",
-				size: 0,
-				minSize: 120,
-				maxSize: "50%"
 			}
 		],
 		actions: [
@@ -51,9 +44,9 @@ export const AdminUserList = () => {
 				show: false,
 				action: (data) =>
 					setNotification({
-						type: 'full',
-						theme: 'confirmation',
-						messageTitle: 'Excluir usuário',
+						type: "full",
+						theme: "confirmation",
+						messageTitle: "Excluir usuário",
 						message: `Deseja confirmar a exclusão do usuário: ${data.name}`,
 						setNotification: setNotification,
 						onClick: () => deleteUser(data._id),
@@ -64,10 +57,10 @@ export const AdminUserList = () => {
 				title: "Editar",
 				typeStyle: "edit",
 				show: false,
-				action: (data) =>
+				action: (data) =>{
 					navigate("/admin/user/edit", {
-						state: { userId: data._id }
-					})
+						state: { user: data }
+					})}
 			}
 		],
 		filters: [
@@ -120,33 +113,31 @@ export const AdminUserList = () => {
 			setLoading(false);
 		};
 		getData();
-	};
+	}
 
 	async function deleteUser(userId) {
-
 		try {
 			const { data } = await api.delete("/admin/user/delete", {
 				params: { userId }
 			});
 			setNotification({
-				type: 'full',
-				theme: 'success',
-				messageTitle: 'Usuário exluído',
+				type: "full",
+				theme: "success",
+				messageTitle: "Usuário exluído",
 				message: `Usuário excluido com sucesso.`,
 				setNotification: setNotification,
 				onClick: () => setNotification(false),
 				buttonTitle: "Fechar"
-			})
-			setUserList(users => users.filter((user)=>(user._id !== userId)));
+			});
+			setUserList((users) => users.filter((user) => user._id !== userId));
 			setUserSelected(null);
-
 		} catch (error) {
 			if (error.response && error.response.status === 401) {
 				error.response.data.url = removeLoginData();
 				setNotification({
-					type: 'full',
-					theme: 'fail',
-					messageTitle: 'Erro',
+					type: "full",
+					theme: "fail",
+					messageTitle: "Erro",
 					message: error.response.data.message,
 					setNotification: setNotification,
 					onClick: () => setNotification(false),
@@ -155,18 +146,17 @@ export const AdminUserList = () => {
 				setUserList([]);
 			}
 			if (error.response && error.response.status === 422) {
-				console.log(error.response)
+				console.log(error.response);
 				setNotification({
-					type: 'full',
-					theme: 'fail',
-					messageTitle: 'Erro',
+					type: "full",
+					theme: "fail",
+					messageTitle: "Erro",
 					message: `Não foi possivel excluir o usuário.`,
 					setNotification: setNotification,
 					onClick: () => setNotification(false),
 					buttonTitle: "Fechar"
 				});
 			}
-
 		}
 	}
 
@@ -209,7 +199,6 @@ export const AdminUserList = () => {
 				dataSelected={userSelected}
 				loading={loading}
 			/>
-
 		</S.Container>
 	);
 };

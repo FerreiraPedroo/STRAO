@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 const props = {
 	headeTitle: `
-  font-size: 20px;
-  font-style: italic;
-  font-weight: 700;  
+	font-style: italic;
+	font-size: 1.2rem;
+  	font-weight: 600;
+	color: #565656;  
   `
 };
 
@@ -15,7 +16,7 @@ export const Container = styled.div`
 	flex-wrap: wrap;
 	justify-content: start;
 	align-content: start;
-	padding: 16px 32px 32px 32px;
+	padding: 8px 8px 32px 8px;
 	gap: 8px;
 `;
 
@@ -25,86 +26,124 @@ export const CenterContainer = styled.main`
 	width: 100%;
 	align-items: center;
 	background-color: #e5e5e5;
-	padding: 16px;
+	padding: 8px 12px;
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
-	border-radius: 8px;
+	border-radius: 4px;
+	gap: 8px;
 `;
-
+export const PrincipalData = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 12px;
+`;
 export const HeaderCenter = styled.div`
 	width: 100%;
 `;
-
 export const HeaderTitle = styled.p`
 	${props.headeTitle}
 `;
 
-export const PrincipalData = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-	gap: 8px 12px;
-`;
 
-export const CategoryContainer = styled.div`
+export const DataContainer = styled.div`
+	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
-	width: 100%;
 	align-items: center;
 	background-color: #e5e5e5;
-	padding: 16px;
+	padding: 8px 12px;
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
-	border-radius: 8px;
-	gap: 32px;
+	border-radius: 4px;
+	gap: 8px;
 `;
-
-export const LeftContainer = styled.div`
+export const DataHeadContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
-
-export const RightContainer = styled.div`
+export const DataCenterContainer = styled.div`
+	width: 100%;
+	height: 100%;
 	display: flex;
-    height: 100%;
 	flex-direction: column;
+	border-top: 1px solid #767676;
+	padding-top: 8px;
 `;
 
 export const InputBox = styled.div`
 	display: flex;
-	align-items: flex-end;
+	align-items: center;
 	gap: 12px;
 `;
 
-export const DepartmentContainer = styled.div`
+export const DataBox = styled.div`
 	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
+	flex-direction: column;
+	justify-content: space-between;
 	align-items: center;
-	background-color: #e5e5e5;
-	padding: 16px;
-	border: 1px solid rgba(0, 0, 0, 0.25);
-	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
-	border-radius: 8px;
-	gap: 32px;
+	border: 1px solid #c6c6c6;
+	border-radius: 4px;
+	margin: 8px 0;
+	padding: 8px;
+	gap: 8px;
+	box-shadow: 0px 0px 8px 2px #b8b8b8;
 `;
-
-export const SubDepartmentContainer = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-    gap: 32px;
-`;
-
-export const SubDepartmentActionsContainer = styled.div`
+export const DataTitleBox = styled.div`
 	width: 100%;
 	display: flex;
-	flex-wrap: wrap;
-	border-top: 1px solid #767676;
-    padding-top: 16px;
-    gap: 32px;
+	justify-content: space-between;
+	align-items: center;
+`;
+export const DataTitle = styled.p`
+	display: flex;
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: #565656; 
 `;
 
-export const DepartmentAction = styled.p`
-margin-top: 12px;
-
-
+export const DepartmentSectorsBox = styled.div`
+	width: 100%;
+	display: flex;
+	align-items: start;
+	gap: 16px;
+`;
+export const SectorHead = styled.div`
+	width: 100%;
+	display: flex;
+	font-size: 0.8rem;
+	padding: 4px 0;
+	align-items: center;
+	border-bottom: 1px solid #c6c6c6;
+`;
+export const SectorAdded = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+`;
+export const SectorNotAdded = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+`;
+export const Sector = styled.div`
+	width: 100%;
+	display: flex;
+	font-size: 0.8rem;
+	padding: 6px 6px 6px 6px;
+	align-items: center;
+	background-color: white;
+	border-radius: 4px;
+`;
+export const SectorName = styled.div`
+	width: 100%;
+	display: flex;
+	font-size: 0.8rem;
+`;
+export const Empyt = styled.div`
+	width: 100%;
+	padding: 12px 0;
+	text-align: center;
+	font-size: 0.8rem;
 `;
