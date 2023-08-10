@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import * as S from "./styles.jsx";
 
 import { getItemsFromFilters } from "../../../../services/Supply/Warehouse/itemAPI";
-import { PageTitle } from "../../../../component/PageTitle/index.jsx";
-import { PageFilter } from "../../../../component/PageFilter/index.jsx";
-import { PageList } from "../../../../component/PageList/index.jsx";
-import { PageAction } from "../../../../component/PageAction/index.jsx";
+import { PageTitle } from "../../../../component/container/PageTitle";
+import { PageFilter } from "../../../../component/container/PageFilter";
+import { PageList } from "../../../../component/container/PageList";
+import { PageAction } from "../../../../component/container/PageAction";
 
-import { NotificationModal } from "../../../../component/NotificationModal/index.jsx";
+import { NotificationModal } from "../../../../component/NotificationModal";
 import { useNavigate } from "react-router-dom";
 
 const itemColumns = [

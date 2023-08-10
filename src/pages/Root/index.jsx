@@ -7,7 +7,7 @@ import { SideBar } from "../../component/SideBar";
 
 import * as S from "./styles.jsx";
 
-const verifyDataApp = (state) => {
+function verifyDataApp(state) {
 	if (
 		!state.appData.userInfo ||
 		!state.appData.token ||
@@ -16,7 +16,7 @@ const verifyDataApp = (state) => {
 		return false;
 	}
 	return true;
-};
+}
 
 export function Root() {
 	const result = useSelector(verifyDataApp);

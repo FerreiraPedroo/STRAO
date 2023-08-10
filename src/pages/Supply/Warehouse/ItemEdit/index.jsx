@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import * as S from "./styles.jsx";
 
 import { getItemsFromFilters } from "../../../../services/Supply/Warehouse/itemAPI";
-import { PageTitle } from "../../../../component/PageTitle/index.jsx";
-import { PageAction } from "../../../../component/PageAction/index.jsx";
+import { PageTitle } from "../../../../component/container/PageTitle/index.jsx";
+import { PageAction } from "../../../../component/container/PageAction/index.jsx";
 
 import { NotificationModal } from "../../../../component/NotificationModal/index.jsx";
 import { useLocation, useNavigate } from "react-router-dom";

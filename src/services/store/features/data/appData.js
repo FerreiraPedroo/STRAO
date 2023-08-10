@@ -16,22 +16,27 @@ try {
 	// console.log({token,dataVersion,userInfo,dataInfo,uiInfo})
 
 	if (!token) {
-		throw "Token não encontrado.";
+		console.log("[STORE]: Token não encontrado.");
+		throw "[STORE]: Token não encontrado.";
 	}
 	if (!dataVersion) {
-		throw "A versão da data não localizada.";
+		console.log("[STORE]: A versão da data não localizada.");
+		throw "[STORE]: A versão da data não localizada.";
 	}
 	if (!userInfo) {
-		throw "Informações do usuário não encontradas.";
+		console.log("[STORE]: Informações do usuário não encontradas.");
+		throw "[STORE]: Informações do usuário não encontradas.";
 	}
 	if (!dataInfo) {
-		throw "Os dados do aplicativo não foram encontrados.";
+		console.log("[STORE]: Os dados do aplicativo não foram encontrados.");
+		throw "[STORE]: Os dados do aplicativo não foram encontrados.";
 	}
 	if (!uiInfo) {
-		throw "Os dados da interface não foram encontrados.";
+		console.log("[STORE]: Os dados da interface não foram encontrados.");
+		throw "[STORE]: Os dados da interface não foram encontrados.";
 	}
 } catch (error) {
-	console.log("[STORE] Erro ao carregar a store: " + error);
+	console.log("[STORE]: Erro ao carregar a store > " + error);
 }
 
 export const appDataSlice = createSlice({
@@ -45,6 +50,12 @@ export const appDataSlice = createSlice({
 	},
 	reducers: {
 		clearAllInfo: (state, action) => {
+			localStorage.clear("strao-token");
+			localStorage.clear("strao-data-version");
+			localStorage.clear("strao-user-info");
+			localStorage.clear("strao-data-info");
+			localStorage.clear("strao-ui-info");
+
 			return {
 				token: null,
 				dataVersion: null,
@@ -54,7 +65,7 @@ export const appDataSlice = createSlice({
 			};
 		},
 		appDataUpdate: (state, action) => {
-			const previousData = {
+			const updateData = {
 				...state,
 				token: action.payload.token ?? null,
 				userInfo: action.payload.userInfo ?? null,
@@ -62,26 +73,27 @@ export const appDataSlice = createSlice({
 				dataInfo: action.payload.dataInfo ?? null,
 				dataVersion: action.payload.version ?? null
 			};
+			return updateData
 		},
 		tokenUpdate: (state, action) => {
-			const previousData = { ...state };
-			previousData.token = action.payload.token;
-			return previousData;
+			const updateData = { ...state };
+			updateData.token = action.payload.token;
+			return updateData;
 		},
 		userInfoUpdate: (state, action) => {
-			const previousData = { ...state };
-			previousData.userInfo = action.payload.userInfo;
-			return previousData;
+			const updateData = { ...state };
+			updateData.userInfo = action.payload.userInfo;
+			return updateData;
 		},
 		uiInfoUpdate: (state, action) => {
-			const previousData = { ...state };
-			previousData.uiInfo = action.payload.uiInfo;
-			return previousData;
+			const updateData = { ...state };
+			updateData.uiInfo = action.payload.uiInfo;
+			return updateData;
 		},
 		dataInfoUpdate: (state, action) => {
-			const previousData = { ...state };
-			previousData.dataInfo = action.payload.dataInfo;
-			return previousData;
+			const updateData = { ...state };
+			updateData.dataInfo = action.payload.dataInfo;
+			return updateData;
 		}
 	}
 });

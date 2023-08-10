@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import * as S from "./styles.jsx";
 
 import { getDataFromNewItem } from "../../../../services/Supply/Warehouse/itemAPI";
-import { PageTitle } from "../../../../component/PageTitle/index.jsx";
-import { PageAction } from "../../../../component/PageAction/index.jsx";
+import { PageTitle } from "../../../../component/container/PageTitle";
+import { PageAction } from "../../../../component/container/PageAction";
 
 import { NotificationModal } from "../../../../component/NotificationModal/index.jsx";
 import { ItemSupplierInfo } from "../../../../component/WareHouse/Item/Supplier/index.jsx";
