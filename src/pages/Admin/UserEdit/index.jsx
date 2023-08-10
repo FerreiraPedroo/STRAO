@@ -17,7 +17,7 @@ export function AdminUserEdit() {
 	const [notification, setNotification] = useState();
 	const [actionsPageData, setActionsPageData] = useState([
 		{
-			title: "Desativar",
+			name: "Desativar",
 			typeStyle: "hidden",
 			show: false,
 			action: (userId) => {
@@ -25,7 +25,7 @@ export function AdminUserEdit() {
 			}
 		},
 		{
-			title: "Ativar",
+			name: "Ativar",
 			typeStyle: "show",
 			show: false,
 			action: (userId) => {
@@ -36,7 +36,7 @@ export function AdminUserEdit() {
 
 	const [userData, setUserData] = useState();
 	const [departmentSelect, setDepartmentSelect] = useState("");
-
+	console.log(userData)
 	async function changeUpdate(type, action, action_id) {
 		const dataOptions = {
 			contract: {
@@ -162,7 +162,7 @@ export function AdminUserEdit() {
 		const options = [];
 		options.push({
 			value: "",
-			title: "Selecione o departamento",
+			name: "Selecione o departamento",
 			type: "option"
 		});
 
@@ -170,7 +170,7 @@ export function AdminUserEdit() {
 			userData.departments.all.map((department) =>
 				options.push({
 					value: department._id,
-					title: department.name,
+					name: department.name,
 					type: "option"
 				})
 			);
@@ -182,16 +182,16 @@ export function AdminUserEdit() {
 		if (actionsPageData) {
 			setActionsPageData((prev) => {
 				return prev.map((action) => {
-					if (status == "active" && action.title == "Ativar") {
+					if (status == "active" && action.name == "Ativar") {
 						action.show = false;
 					}
-					if (status == "active" && action.title == "Desativar") {
+					if (status == "active" && action.name == "Desativar") {
 						action.show = true;
 					}
-					if (status == "inactive" && action.title == "Desativar") {
+					if (status == "inactive" && action.name == "Desativar") {
 						action.show = false;
 					}
-					if (status == "inactive" && action.title == "Ativar") {
+					if (status == "inactive" && action.namw == "Ativar") {
 						action.show = true;
 					}
 					return action;

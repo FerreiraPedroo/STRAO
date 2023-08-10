@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { api } from "../../../services/api";
 
 import { Button } from "../../../component/Button";
-import { PageTitle } from "../../../component/PageTitle";
+import { PageTitle } from "../../../component/container/PageTitle";
 import { DocumentModal } from "./AddDocumentModal/index";
 
 import * as S from "./styles";

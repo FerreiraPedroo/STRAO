@@ -6,12 +6,11 @@ import findEmployee from "../../../assets/img/find-employee.svg";
 
 import * as S from "./styles";
 
-import { PageTitle } from "../../../component/PageTitle";
-import { InputSelect } from "../../../component/Input/Select";
-import { InputText } from "../../../component/Input/Text";
-import { PageFilter } from "../../../component/PageFilter";
-import { PageList } from "../../../component/PageList";
-import { PageAction } from "../../../component/PageAction";
+import { PageTitle } from "../../../component/container/PageTitle";
+import { PageSectionAction } from "../../../component/container/PageSectionAction";
+import { PageFilter } from "../../../component/container/PageFilter";
+import { PageList } from "../../../component/container/PageList";
+import { PageAction } from "../../../component/container/PageAction";
 import { useNavigate } from "react-router-dom";
 
 // const filters = [
@@ -34,7 +33,7 @@ import { useNavigate } from "react-router-dom";
 // 	}
 // ];
 
-export const HumanResourcesEmployeeList = () => {
+export const HumanResourcesEmployee = () => {
 	const userData = useSelector((state) => state.appData.dataInfo);
 	const navigate = useNavigate();
 
@@ -49,10 +48,13 @@ export const HumanResourcesEmployeeList = () => {
 			htmlPlaceholder: "Contrato",
 			showInfo: true,
 			defaultOption: 0,
-			options: Object.values(userData.contracts).reduce((acc, cur) => {
-				acc.push({ title: cur.title, value: cur._id });
-				return acc;
-			}, [{ title: "Todos", value: "" }])
+			options: Object.values(userData.contracts).reduce(
+				(acc, cur) => {
+					acc.push({ name: cur.name, value: cur._id });
+					return acc;
+				},
+				[{ name: "Todos", value: "" }]
+			)
 		},
 		{
 			type: "select",
@@ -61,8 +63,8 @@ export const HumanResourcesEmployeeList = () => {
 			showInfo: true,
 			defaultOption: 0,
 			options: [
-				{ title: "Nome", value: "fullName" },
-				{ title: "Identificação", value: "identification" }
+				{ name: "Nome", value: "fullName" },
+				{ name: "Identificação", value: "identification" }
 			]
 		},
 		{
@@ -73,13 +75,19 @@ export const HumanResourcesEmployeeList = () => {
 		}
 	]);
 	const [listColumns] = useState([
-		{ title: "Status", htmlName: "status", minSize: 96, maxSize: 128, align: "center" },
-		{ title: "Nome", htmlName: "fullName", minSize: 256, maxSize: 320 },
-		{ title: "E-mail", htmlName: "email", size: 0 }
+		{
+			name: "Status",
+			htmlName: "status",
+			minSize: 96,
+			maxSize: 128,
+			align: "center"
+		},
+		{ name: "Nome", htmlName: "fullName", minSize: 256, maxSize: 320 },
+		{ name: "E-mail", htmlName: "email", size: 0 }
 	]);
 	const [listActions] = useState([
 		{
-			title: "Editar",
+			name: "Editar",
 			typeStyle: "edit",
 			show: true,
 			action: (employee) =>
@@ -88,7 +96,6 @@ export const HumanResourcesEmployeeList = () => {
 				})
 		}
 	]);
-
 
 	// const handleFilter = (filterName, filterData) => {
 	// 	const filter = { ...searchFilter, [filterName]: filterData };
@@ -112,9 +119,7 @@ export const HumanResourcesEmployeeList = () => {
 
 	return (
 		<S.Container>
-			<PageTitle
-				title="Todos os funcionários"
-			/>
+			<PageTitle title="Todos os funcionários" />
 
 			<PageFilter
 				filtersData={filters}
@@ -122,15 +127,11 @@ export const HumanResourcesEmployeeList = () => {
 				loading={findStatus}
 			/>
 
-			{
-				employeeSelected &&
-				<PageAction
-					actionsData={listActions}
-					dataSelected={employeeSelected}
-					loading={findStatus}
-				/>
-
-			}
+			<PageSectionAction
+				actionsData={listActions}
+				dataSelected={employeeSelected}
+				loading={findStatus}
+			/>
 
 			<PageList
 				listData={findEmployeeResponse}

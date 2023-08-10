@@ -11,13 +11,13 @@ export const HumanResources = () => {
 	const departmentSector = useSelector(
 		(state) => state.appData.dataInfo.departmentSectors[`${pathname}`]
 	);
-
+	console.log(departmentSector)
 	return (
 		<S.Container>
 			{departmentSector.length ? (
 				<>
 					{departmentSector.map((card) => (
-						<Card key={card.title} data={card} />
+						<Card key={card.name} data={card} />
 					))}
 				</>
 			) : (

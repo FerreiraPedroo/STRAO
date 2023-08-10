@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { api } from "../../../services/api";
 import { useFormik } from "formik";
 
-import { PageTitle } from "../../../component/PageTitle";
+import { PageTitle } from "../../../component/container/PageTitle";
 import { InputText } from "../../../component/Input/Text";
 import { InputDate } from "../../../component/Input/Date";
 import { InputSelect } from "../../../component/Input/Select";
