@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { loginService } from "../../services/login";
 import { useSelector, useDispatch } from "react-redux";
 
-import { appDataUpdate, clearAllInfo } from "../../services/store/features/data/appData"
+import {
+	providerUpdateAppData,
+	providerClearAllInfo
+} from "../../services/store/features/data/appData";
 
 import * as S from "./styles";
 import homebg2 from "./img/home-bg2.png";
 
 export const Login = () => {
-	const appData = useSelector((state) => state.appData);
+	const { dataVersion } = useSelector((state) => state.appData);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -28,26 +31,33 @@ export const Login = () => {
 		setErrorLogin("");
 	};
 	const handleLogin = async () => {
-		const data = await loginService(user, password, appData.dataVersion);
+		const responseData = await loginService(user, password, dataVersion);
 
-		if (data.codStatus === 200) {
-			localStorage.setItem("strao-user-info", JSON.stringify({ name: data.appData.userInfo.name, avatar: data.appData.userInfo.avatar }))
-			localStorage.setItem("strao-token", data.appData.token)
-			localStorage.setItem("strao-data-info", JSON.stringify(data.appData.dataInfo))
-			localStorage.setItem("strao-data-version", data.appData.dataVersion)
-			dispatch(appDataUpdate(data.appData))
+		if (responseData.codStatus === 200) {
+			localStorage.setItem("strao-token", responseData.data.token);
+			localStorage.setItem("strao-data-version", responseData.data.dataVersion);
+			localStorage.setItem("strao-departments-info", JSON.stringify(responseData.data.departmentsInfo));
+			localStorage.setItem("strao-contracts-info", JSON.stringify(responseData.data.contractsInfo));
+			localStorage.setItem("strao-sectors-info", JSON.stringify(responseData.data.sectorsInfo));
+			localStorage.setItem("strao-user-info", JSON.stringify({ name: responseData.data.userInfo.name, avatar: responseData.data.userInfo.avatar }));
+			localStorage.setItem("strao-ui-info", JSON.stringify(responseData.data.uiInfo));
+
+			dispatch(providerUpdateAppData(responseData.data));
+
 			navigate("/home");
 		}
 
-		if (data.codStatus !== 200) {
+		if (responseData.codStatus !== 200) {
 			setErrorLogin("Erro ao conectar.");
-			setErrorLogin(data.message);
-			
-			localStorage.removeItem("strao-user-info")
-			localStorage.removeItem("strao-token")
-			localStorage.removeItem("strao-data-info")
-			localStorage.removeItem("strao-data-version")
-			dispatch(clearAllInfo())
+			localStorage.removeItem("strao-token");
+			localStorage.removeItem("strao-data-version");
+			localStorage.removeItem("strao-departments-info");
+			localStorage.removeItem("strao-contracts-info");
+			localStorage.removeItem("strao-sectors-info");
+			localStorage.removeItem("strao-user-info");
+			localStorage.removeItem("strao-ui-info");
+
+			dispatch(providerClearAllInfo());
 		}
 	};
 

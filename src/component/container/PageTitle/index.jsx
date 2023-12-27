@@ -15,13 +15,13 @@ export const PageTitle = ({ title, subTitle, icon, backButton }) => {
 	const dispatch = useDispatch();
 	const location = useLocation();
 	const departmentLocation = "/" + location.pathname.split("/")[1];
-	
+
 	function selectSection() {
 		dispatch({
 			payload: departmentLocation,
 			type: "sidebar/changeSectionSelected"
 		});
-		navigate(departmentLocation);
+		navigate(-1);
 	}
 
 	return (

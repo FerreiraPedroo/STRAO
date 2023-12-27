@@ -16,7 +16,10 @@ export const HrLine = styled.hr`
 export const CenterContainer = styled.div`
 	min-width: 224px;
 	width: 224px;
+	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	background-color: #f5f3f0;
+	border-right: 1px solid rgba(0,0,0,0.06);
+	box-shadow: 1px 2px 10px 1px rgba(0,0,0,0.05);
 `;

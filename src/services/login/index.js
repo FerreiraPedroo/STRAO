@@ -1,27 +1,26 @@
-import { api } from "../api";
+import { api } from "../api.js";
 
 export const loginService = async (_user, _password, _dataVersion) => {
 	try {
-		const { data } = await api({
+		const response = await api({
 			url: "/login",
 			method: "POST",
 			data: {
-				user: _user,
+				login: _user,
 				password: _password,
 				dataVersion: _dataVersion
 			},
 			withCredentials: true
 		});
+
+		const { data } = response;
+
 		return data;
 	} catch (err) {
-		if (err.response.data) {
-			return err.response.data;
-		}
 		return {
-			codStatus: 0,
-			codName: "",
+			codStatus: 500,
 			message: "Erro ao conectar.",
-			data: ""
+			data: err.response.data
 		};
 	}
 };

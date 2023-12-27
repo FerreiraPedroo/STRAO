@@ -35,15 +35,15 @@ export const PageAction = ({
 			<S.ActionsTitle>Ações</S.ActionsTitle>
 			{actionsData.map((action) => (
 				<S.ActionButtonBox
-					key={action.title}
+					key={action.name}
 					show={action.show || dataSelected}
 				>
 					<Button
 						typeStyle={action.typeStyle}
-						title={action.title}
+						title={action.name}
 						onClick={() => action.action(dataSelected)}
 					/>
-					{action.title}
+					{action.name}
 				</S.ActionButtonBox>
 			))}
 		</S.ActionsContainer>

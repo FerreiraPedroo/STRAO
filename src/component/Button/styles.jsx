@@ -9,24 +9,18 @@ export const Button = styled.button`
 	font-size: 1rem;
 	font-weight: 500;
 	border-radius: 6px;
-	background-color: ${({ theme }) =>
-		Theme[theme] ? `${Theme[theme].buttonBgColor}` : "#dcdcdc"};
+	background-color: ${({ theme }) => (Theme[theme] ? `${Theme[theme].buttonBgColor}` : "#dcdcdc")};
 	border: 1px solid #555;
 	cursor: pointer;
-    outline: 0;
+	outline: 0;
 
-	${({ theme }) =>
-		Theme[theme]
-			? `border: 1px solid ${Theme[theme].buttonBorderColor}`
-			 : "#555"};
+	${({ theme }) => (Theme[theme] ? `border: 1px solid ${Theme[theme].buttonBorderColor}` : "#555")};
 
-	&:active not(:disabled) {
-		border: 1px solid
-			${({ disable, theme }) =>
-				Theme[theme] && disable
-					? `${Theme[theme].buttonDisableBorderColor}`
-					: "silver"};
+	&:active :not(:disabled) {
+		border: 1px solid;
 		transform: scale(0.98);
+		${({ disable, theme }) =>
+			Theme[theme] && disable ? `${Theme[theme].buttonDisableBorderColor}` : "silver"};
 	}
 
 	&:hover {
@@ -40,11 +34,12 @@ export const Button = styled.button`
 	&:active {
 		color: #555;
 		border-color: ${({ theme }) =>
-			Theme[theme] ? `${Theme[theme].buttonActiveBorderColor}` : "#000"};
+			Theme[theme] ? `${Theme[theme].buttonActiveBorderColor};` : "#000"};
 		background-color: ${({ theme }) =>
-			Theme[theme] ? `${Theme[theme].buttonActiveBgColor}` : "#999"};
+			Theme[theme] ? `${Theme[theme].buttonActiveBgColor};` : "#999"};
 	}
 `;
+
 export const ButtonBack = styled.button`
 	min-width: ${({ width }) => (width ? `${width}px` : "32px")};
 	height: ${({ height }) => (height ? `${height}px` : "32px")};

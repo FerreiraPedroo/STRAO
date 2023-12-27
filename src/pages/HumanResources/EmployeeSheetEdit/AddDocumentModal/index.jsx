@@ -5,7 +5,7 @@ import { InputSelect } from "../../../../component/Input/Select/index";
 import { InputText } from "../../../../component/Input/Text/index";
 import { Button } from "../../../../component/Button";
 
-import closeModalButon from "../../../../assets/icons/close-modal-red-36x36.svg";
+// import closeModalButon from "../../../../assets/icons/close-modal-red-36x36.svg";
 
 import * as S from "./styles";
 import { InputFile } from "../../../../component/Input/File";
@@ -217,7 +217,7 @@ export function DocumentModal({ onClick }) {
 					.mixed()
 					.required("Por favor, selecione um arquivo")
 					.test("file", "O valor deve ser um arquivo", (value) => {
-						console.log({value})
+						console.log({ value })
 						return value instanceof File;
 					})
 			},

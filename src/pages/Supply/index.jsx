@@ -8,16 +8,17 @@ import * as S from "./styles.jsx";
 
 export const Supply = () => {
 	const { pathname } = useLocation();
-	const departmentSector = useSelector(
-		(state) => state.appData.dataInfo.departmentSectors[`${pathname}`]
+	console.log(pathname)
+	const sectors = useSelector(
+		(state) => state.appData.sectorsInfo
 	);
 
 	return (
 		<S.Container>
-			{departmentSector.length ? (
+			{sectors.length ? (
 				<>
-					{Object.values(departmentSector).map((department) => (
-						<Card key={department.title} data={department} />
+					{Object.values(sectors).map((sector) => (
+						<Card key={sector.name} data={sector} />
 					))}
 				</>
 			) : (

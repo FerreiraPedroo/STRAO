@@ -36,147 +36,17 @@ export function AdminUserEdit() {
 
 	const [userData, setUserData] = useState();
 	const [departmentSelect, setDepartmentSelect] = useState("");
-	console.log(userData)
-	async function changeUpdate(type, action, action_id) {
-		const dataOptions = {
-			contract: {
-				add: "all",
-				remove: "user",
-				addReverse: "user",
-				removeReverse: "all",
-				selectCategory: () => 'setContractSelect("")'
-			},
-			department: {
-				add: "all",
-				remove: "user",
-				addReverse: "user",
-				removeReverse: "all",
-				selectCategory: () => setDepartmentSelect("")
-			},
-			department_sector: {
-				path: "department",
-				add: "all",
-				remove: "user",
-				addReverse: "user",
-				removeReverse: "all",
-				selectCategory: () => 'setDepartmentSectionSelect("")'
-			},
-			status: {
-				add: "active",
-				remove: "inactive",
-				activeSubTitle: <div style={{ color: "#00dd00" }}>Ativo</div>,
-				inactiveSubTitle: <div style={{ color: "#dd0000" }}>Inativo</div>
-			}
-		};
 
-		try {
-			const { data } = await api.put("/admin/user/data/update", {
-				type: type,
-				action: action,
-				action_id: action_id,
-				user_id: location.state.user._id
-			});
-			if (data.codStatus === 200) {
-				if (type === "status") {
-					console.log("STATUS:", dataOptions[type][action]);
-					handleHiddenShowAction(dataOptions[type][action]);
-					setUserData((prev) => {
-						const prevData = { ...prev, status: dataOptions[type][action] };
-						return prevData;
-					});
-					return;
-				}
+	// if (category === "status") {
+	// 	handleHiddenShowAction(actionField[action]);
+	// 	setUserData((prev) => {
+	// 		const prevData = { ...prev };
+	// 		prevData.userInfo.status = actionField[action];
 
-				setUserData((prev) => {
-					const actual = { ...prev };
-
-					if (type === "contract") {
-						const contractToMove = actual.contracts[
-							dataOptions[type][action]
-						].find((value) => value._id === action_id);
-
-						if (contractToMove) {
-							actual.contracts[dataOptions[type][action]] = actual.contracts[
-								dataOptions[type][action]
-							].filter((value) => value._id !== action_id);
-
-							actual.contracts[dataOptions[type][action + "Reverse"]].push(
-								contractToMove
-							);
-						}
-					}
-					if (type === "department") {
-						const departmentToMove = actual.departments[
-							dataOptions[type][action]
-						].find((value) => value._id === action_id);
-
-						if (departmentToMove) {
-							actual.departments[dataOptions[type][action]] =
-								actual.departments[dataOptions[type][action]].filter(
-									(value) => value._id !== action_id
-								);
-
-							actual.departments[dataOptions[type][action + "Reverse"]].push(
-								departmentToMove
-							);
-						}
-					}
-					if (type === "department_sector") {
-						actual.departments.user = actual.departments.user.map(
-							(department) => {
-								const sectionToMove = department.sectors[
-									dataOptions[type][action]
-								].find((sector) => {
-									return sector._id === action_id;
-								});
-
-								if (sectionToMove) {
-									department.sectors[dataOptions[type][action]] =
-										department.sectors[dataOptions[type][action]].filter(
-											(sector) => {
-												return sector._id != action_id;
-											}
-										);
-
-									department.sectors[
-										dataOptions[type][action + "Reverse"]
-									].push(sectionToMove);
-									dataOptions[type].selectCategory();
-								}
-								return department;
-							}
-						);
-					}
-
-					return actual;
-				});
-			}
-		} catch (error) {
-			if (!error.response.status && !error.response.data) {
-				error.response.data = { message: error.message };
-			}
-		}
-	}
-
-	function departmentSelectOptions() {
-		const options = [];
-		options.push({
-			value: "",
-			name: "Selecione o departamento",
-			type: "option"
-		});
-
-		userData.departments.all.length &&
-			userData.departments.all.map((department) =>
-				options.push({
-					value: department._id,
-					name: department.name,
-					type: "option"
-				})
-			);
-
-		return options;
-	}
+	// 		return prevData;
+	// 	});
+	// 	return;
+	// }
 
 	function handleHiddenShowAction(status) {
 		if (actionsPageData) {
@@ -200,40 +70,128 @@ export function AdminUserEdit() {
 		}
 	}
 
+	async function changeUpdate(category, action, category_id) {
+		const dataOptions = {
+			status: {
+				add: "active",
+				remove: "inactive",
+				activeSubTitle: <div style={{ color: "#00dd00" }}>Ativo</div>,
+				inactiveSubTitle: <div style={{ color: "#dd0000" }}>Inativo</div>
+			}
+		};
+
+		const actionField = {
+			add: "available",
+			remove: "user",
+			addReverse: "user",
+			removeReverse: "available"
+		};
+
+		try {
+			const request = await api.put(
+				`admin/user/${location.state.user._id}/${category}/${category_id}/${action}`
+			);
+
+			if (request.data.codStatus === 200) {
+				setUserData((prevState) => {
+					const actualState = { ...prevState };
+
+					const sectorToMove = actualState[category + "sInfo"][actionField[action]].find(
+						(sector) => {
+							return sector._id === category_id;
+						}
+					);
+
+					if (sectorToMove) {
+						actualState[category + "sInfo"][actionField[action]] = actualState[category + "sInfo"][
+							actionField[action]
+						].filter((sector) => sector._id !== category_id);
+
+						actualState[category + "sInfo"][actionField[action + "Reverse"]].push(sectorToMove);
+					}
+
+					return actualState;
+				});
+			}
+		} catch (error) {
+			if (error.response) {
+				setNotification("Erro ao atualizar os dados do usuário, tente novamente.");
+			}
+		}
+	}
+
+	function departmentSelectOptions() {
+		const options = [];
+		options.push({
+			value: "",
+			name: "Selecione o departamento",
+			category: "option"
+		});
+
+		userData.departmentsInfo.available.length &&
+			userData.departmentsInfo.available.map((department) =>
+				options.push({
+					value: department._id,
+					name: department.name,
+					category: "option"
+				})
+			);
+
+		return options;
+	}
+
+	function userDepartmentSectorsElement(departmentId) {
+		return userData.sectorsInfo.user.reduce((prev, sector) => {
+			sector.department_id === departmentId &&
+				prev.push(
+					<S.Sector key={sector._id}>
+						<S.SectorName>{sector.name} </S.SectorName>
+						<Button
+							typeStyle="remove"
+							onClick={() => changeUpdate("sector", "remove", sector._id)}
+						/>
+					</S.Sector>
+				);
+			return prev;
+		}, []);
+	}
+	
+	function availableDepartmentSectorsElement(departmentId) {
+		return userData.sectorsInfo.available.reduce((prev, sector) => {
+			sector.department_id === departmentId &&
+				prev.push(
+					<S.Sector key={sector._id}>
+						<S.SectorName>{sector.name} </S.SectorName>
+						<Button typeStyle="add" onClick={() => changeUpdate("sector", "add", sector._id)} />
+					</S.Sector>
+				);
+			return prev;
+		}, []);
+	}
+
 	useEffect(() => {
 		const getUserInfo = async () => {
 			try {
-				const { data } = await api.get("admin/user/data", {
-					params: {
-						user_id: location.state.user._id,
-						branch: location.state.user.company_branch_selected
-					}
-				});
-				handleHiddenShowAction(data.status);
-				setUserData(data);
+				const request = await api.get(`admin/user/${location.state.user._id}`);
+
+				handleHiddenShowAction(request.data.data.userInfo.status);
+				setUserData(request.data.data);
 			} catch (error) {}
 			setLoading(false);
 		};
 		getUserInfo();
 	}, []);
 
-	/**
-	 * PODE COLOCAR UM PRE-SET PARA O ACESSO DE CADA USUÁRIO ADM/SUP/COOR
-	 */
-
 	return (
 		<S.Container>
 			<PageTitle
 				title="Editar usuário"
-				subTitle="adicione e remova permissões do usuário."
+				subTitle="adicione ou remova permissões do usuário."
 				loading={loading}
 			/>
 			{userData ? (
 				<>
-					<PageAction
-						actionsData={actionsPageData}
-						dataSelected={location.state.user._id}
-					/>
+					<PageAction actionsData={actionsPageData} dataSelected={location.state.user._id} />
 
 					<S.CenterContainer>
 						<S.HeaderCenter>
@@ -242,28 +200,28 @@ export function AdminUserEdit() {
 
 						<S.PrincipalData>
 							<InputText
-								inputValue={userData.register}
+								inputValue={userData.userInfo.register}
 								inputName={"register"}
 								inputShowInfo={true}
 								inputPlaceholder={"Nº de registro"}
 								disabled={true}
 							/>
 							<InputText
-								inputValue={userData.email}
+								inputValue={userData.userInfo.email}
 								inputName="email"
 								inputShowInfo={true}
 								inputPlaceholder={"Email"}
 								disabled={true}
 							/>
 							<InputText
-								inputValue={userData.name}
+								inputValue={userData.userInfo.name}
 								inputName="name"
 								inputShowInfo={true}
 								inputPlaceholder={"Nome"}
 								disabled={true}
 							/>
 							<InputText
-								inputValue={userData.birthDate}
+								inputValue={userData.userInfo.birth_date}
 								inputName="borthDate"
 								disabled={true}
 								inputShowInfo={true}
@@ -285,64 +243,32 @@ export function AdminUserEdit() {
 								<Button
 									typeStyle="correct"
 									disable={!departmentSelect}
-									onClick={() =>
-										changeUpdate("department", "add", departmentSelect)
-									}
+									onClick={() => changeUpdate("department", "add", departmentSelect)}
 								/>
 							</S.InputBox>
 						</S.DataHeadContainer>
 
 						<S.DataCenterContainer>
 							<S.HeaderTitle>Departamentos associados ao usuário</S.HeaderTitle>
-							{userData.departments.user.length ? (
-								userData.departments.user.map((department) => (
+							{userData.departmentsInfo.user.length ? (
+								userData.departmentsInfo.user.map((department) => (
 									<S.DataBox key={department._id}>
 										<S.DataTitleBox>
 											<S.DataTitle>{department.name}</S.DataTitle>
 											<Button
 												typeStyle="remove"
-												onClick={() =>
-													changeUpdate("department", "remove", department._id)
-												}
+												onClick={() => changeUpdate("department", "remove", department._id)}
 											/>
 										</S.DataTitleBox>
 
 										<S.DepartmentSectorsBox>
 											<S.SectorAdded>
 												<S.SectorHead>Setores adicionados</S.SectorHead>
-												{department.sectors.user.map((sector) => (
-													<S.Sector key={sector._id}>
-														<S.SectorName>{sector.name} </S.SectorName>
-														<Button
-															typeStyle="remove"
-															onClick={() =>
-																changeUpdate(
-																	"department_sector",
-																	"remove",
-																	sector._id
-																)
-															}
-														/>
-													</S.Sector>
-												))}
+												{userDepartmentSectorsElement(department._id)}
 											</S.SectorAdded>
 											<S.SectorNotAdded>
 												<S.SectorHead>Setores não adicionado</S.SectorHead>
-												{department.sectors.all.map((sector) => (
-													<S.Sector key={sector._id}>
-														<S.SectorName>{sector.name} </S.SectorName>
-														<Button
-															typeStyle="add"
-															onClick={() =>
-																changeUpdate(
-																	"department_sector",
-																	"add",
-																	sector._id
-																)
-															}
-														/>
-													</S.Sector>
-												))}
+												{availableDepartmentSectorsElement(department._id)}
 											</S.SectorNotAdded>
 										</S.DepartmentSectorsBox>
 									</S.DataBox>
@@ -358,33 +284,29 @@ export function AdminUserEdit() {
 							<S.HeaderTitle>Contratos</S.HeaderTitle>
 						</S.DataHeadContainer>
 						<S.DataCenterContainer>
-							{userData.contracts ? (
+							{userData.contractsInfo ? (
 								<S.DataBox>
 									<S.DepartmentSectorsBox>
 										<S.SectorAdded>
 											<S.SectorHead>Contratos adicionados</S.SectorHead>
-											{userData.contracts.user.map((contrato) => (
+											{userData.contractInfo.user.map((contrato) => (
 												<S.Sector key={contrato._id}>
 													<S.SectorName>{contrato.name} </S.SectorName>
 													<Button
 														typeStyle="remove"
-														onClick={() =>
-															changeUpdate("contract", "remove", contrato._id)
-														}
+														onClick={() => changeUpdate("contract", "remove", contrato._id)}
 													/>
 												</S.Sector>
 											))}
 										</S.SectorAdded>
 										<S.SectorNotAdded>
 											<S.SectorHead>Contratos não adicionado</S.SectorHead>
-											{userData.contracts.all.map((contrato) => (
+											{userData.contractsInfo.available.map((contrato) => (
 												<S.Sector key={contrato._id}>
 													<S.SectorName>{contrato.name} </S.SectorName>
 													<Button
 														typeStyle="add"
-														onClick={() =>
-															changeUpdate("contract", "add", contrato._id)
-														}
+														onClick={() => changeUpdate("contract", "add", contrato._id)}
 													/>
 												</S.Sector>
 											))}

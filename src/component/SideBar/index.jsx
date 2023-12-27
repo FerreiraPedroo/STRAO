@@ -13,18 +13,34 @@ export function SideBar() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch()
 
-	const menuDepartment = useSelector((state) => state.appData.dataInfo.departments[departmentLocation]);
-	const menuSectors = useSelector((state) => state.appData.dataInfo.departmentSectors[departmentLocation]);
+	const menuDepartment = useSelector((state) => {
+		return state.appData.departmentsInfo.find((department) => department.url_path === departmentLocation)
+	});
+
+	const menuSectors = useSelector((state) => {
+		const department = state.appData.departmentsInfo.find((department) => {
+			return department.url_path === departmentLocation
+		})
+
+		if (!department) {
+			return []
+		}
+
+		return state.appData.sectorsInfo.filter((sector) => sector.department_id === department._id)
+	});
+
 	const menuSectorSelected = useSelector((state) => state.menu.sectionSelected);
 	const menuSectorActionSelected = useSelector((state) => state.menu.sectionActionSelected);
-
+	console.log({ menuSectorSelected, menuSectorActionSelected })
+	
 	function selectSection(sector) {
-		dispatch(changeSectionSelected(sector.title));
-		navigate(departmentLocation + sector.path);
+		console.log(sector.name)
+		dispatch(changeSectionSelected(sector.name));
+		navigate(departmentLocation + sector.url_path);
 	}
 
-	function selectSectionAction(actionTitle) {
-		dispatch(changeSectionActionSelected(actionTitle));
+	function selectSectionAction(actionName) {
+		dispatch(changeSectionActionSelected(actionName));
 	}
 
 	useEffect(() => {
@@ -37,37 +53,37 @@ export function SideBar() {
 	return (
 		<S.Container>
 			<S.DepartmentTitle>
-				{menuDepartment.title}
+				{menuDepartment.name}
 			</S.DepartmentTitle>
 			<S.HrLine />
 			{menuSectors.map((sector) => (
-				<S.SectionContainer key={sector.title}
+				<S.SectionContainer key={sector.name}
 					onClick={() => selectSection(sector)}
-					hasActions={sector.sectorActions.length}
+					hasActions={sector.sector_actions.length}
 				>
-					<S.SectionTop selected={sector.title === menuSectorSelected}>
-						<S.SectionImg src={sideBarImgs[sector.img]} />
-						<S.SectionTitle>{sector.title}</S.SectionTitle>
-						{/* {
-							sector.sectorActions.length ? <S.ArrowDown selected={sector.title !== menuSectorSelected} /> : ''
-						} */}
+					<S.SectionTop selected={sector.name === menuSectorSelected}>
+						<S.SectionImg src={sideBarImgs[sector.url_img]} />
+						<S.SectionTitle>{sector.name}</S.SectionTitle>
+						{
+							sector.sector_actions.length ? <S.ArrowDown selected={sector.name !== menuSectorSelected} /> : ''
+						}
 					</S.SectionTop>
 
-					{/* {menuSectorSelected === sector.title && (
-						sector.sectorActions.map((action) => (
+					{menuSectorSelected === sector.name && (
+						sector.sector_actions.map((action) => (
 							<S.Action
-								key={action.title}
-								selected={action.title === menuSectorActionSelected}
+								key={action.name}
+								selected={action.name === menuSectorActionSelected}
 								onClick={() => {
-									selectSectionAction(action.title)
-									navigate(departmentLocation + sector.path + action.path)
+									selectSectionAction(action.name)
+									navigate(departmentLocation + sector.url_path + action.url_path)
 								}}
 							>
-								<S.ActionImg src={sideBarImgs[action.img]} />
-								<S.ActionTitle>{action.title}</S.ActionTitle>
+								<S.ActionImg src={sideBarImgs[action.url_img]} />
+								<S.ActionTitle>{action.name}</S.ActionTitle>
 							</S.Action>
 						))
-					)} */}
+					)}
 				</S.SectionContainer>
 			))
 			}

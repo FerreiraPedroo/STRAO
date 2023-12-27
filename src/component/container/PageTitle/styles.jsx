@@ -37,7 +37,8 @@ export const PageTitle = styled.h1`
 	overflow: hidden;
 	text-overflow: ellipsis;
 	align-items: center;
-	justify-content: center;
+	/* justify-content: center; */
+	padding-left: 16px;
 	
 	${props.textPageTitle}
 `;
@@ -47,7 +48,8 @@ export const PageSubTitle = styled.h1`
 	overflow: hidden;
 	text-overflow: ellipsis;
 	align-items: center;
-	justify-content: center;
+	/* justify-content: center; */
+	padding-left: 16px;
 	font-size: 1.0rem;
 `;
 export const PageIcon = styled.div`

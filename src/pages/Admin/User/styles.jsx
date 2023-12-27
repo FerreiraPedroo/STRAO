@@ -7,6 +7,6 @@ export const Container = styled.div`
 	flex-wrap: wrap;
 	justify-content: start;
 	align-content: start;
-	padding: 16px 32px;
+	padding: 8px;
 	gap: 16px;
 `;

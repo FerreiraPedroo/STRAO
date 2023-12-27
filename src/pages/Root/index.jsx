@@ -1,5 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { providerClearAllInfo } from "../../services/store/features/data/appData";
 
 import { Outlet, Navigate } from "react-router-dom";
 import { NavBar } from "../../component/NavBar";
@@ -9,9 +10,13 @@ import * as S from "./styles.jsx";
 
 function verifyDataApp(state) {
 	if (
+		!state.appData.uiInfo ||
+		!state.appData.dataVersion ||
+		!state.appData.departmentsInfo ||
+		!state.appData.contractsInfo ||
+		!state.appData.sectorsInfo ||
 		!state.appData.userInfo ||
-		!state.appData.token ||
-		!state.appData.dataInfo
+		!state.appData.token
 	) {
 		return false;
 	}
@@ -22,6 +27,10 @@ export function Root() {
 	const result = useSelector(verifyDataApp);
 
 	if (!result) {
+		const dispatch = useDispatch();
+		dispatch(providerClearAllInfo())
+
+		useSelector(verifyDataApp)
 		return <Navigate to="/login" replace={true} />;
 	}
 

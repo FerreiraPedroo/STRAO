@@ -39,22 +39,18 @@ export const PageFilter = ({
 	getFiltersSelected,
 	loading = false
 }) => {
-	const [filters, setFilters] = useState(
-		(() => {
-			const data = filtersData.reduce((acc, cur) => {
-				if (cur.type === "select" && cur.options.length) {
-					return {
-						...acc,
-						[cur.htmlName]: cur.options[0].value
-					};
-				}
-				return { ...acc, [cur.htmlName]: "" };
-			}, {});
-			return data;
-		})()
-		);
+	const [filters, setFilters] = useState(filtersData.reduce((acc, cur) => {
+		if (cur.type === "select" && cur.options.length) {
+			return {
+				...acc,
+				[cur.htmlName]: cur.options[0].value
+			};
+		}
+		return { ...acc, [cur.htmlName]: "" };
+	}, {})
+	);
 
-		function handleFilter(event) {
+	function handleFilter(event) {
 		const newFilters = { ...filters, [event.target.name]: event.target.value };
 		setFilters(newFilters);
 	}

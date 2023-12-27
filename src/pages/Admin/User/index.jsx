@@ -75,9 +75,9 @@ export const AdminUser = () => {
 				htmlPlaceholder: "Status",
 				defaultOption: 0,
 				options: [
-					{ title: "Todos", value: "" },
-					{ title: "Ativo", value: "active" },
-					{ title: "Inativo", value: "inactive" }
+					{ name: "Todos", value: "" },
+					{ name: "Ativo", value: "active" },
+					{ name: "Inativo", value: "inactive" }
 				]
 			}
 		]
@@ -97,11 +97,11 @@ export const AdminUser = () => {
 			setLoading(true);
 			setUserSelected("");
 			try {
-				const { data } = await api.get("/admin/user/list", {
+				const response = await api.get("/admin/users", {
 					params: { ...sanitizedFilters }
 				});
 
-				setUserList(data);
+				setUserList(response.data.data);
 			} catch (error) {
 				if (error.response && error.response.status === 401) {
 					error.response.data.url = removeLoginData();

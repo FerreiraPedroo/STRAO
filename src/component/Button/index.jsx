@@ -8,7 +8,8 @@ import {
 	NotePencil,
 	EyeSlash,
 	Eye,
-	Plus
+	Plus,
+	CircleNotch
 } from "phosphor-react";
 
 /**
@@ -21,7 +22,8 @@ export const Button = ({
 	typeStyle = "normal",
 	disable,
 	theme,
-	onClick
+	onClick,
+	loading = true
 }) => {
 	// 	export const EmployeeStatus = styled.p`
 	// 	min-width: 96px;
@@ -84,13 +86,7 @@ export const Button = ({
 	return (
 		<>
 			{typeStyle === "back" && (
-				<S.ButtonBack
-					width={72}
-					height={40}
-					disabled={disable}
-					theme={theme}
-					onClick={onClick}
-				>
+				<S.ButtonBack width={72} height={40} disabled={disable} theme={theme} onClick={onClick}>
 					{value}
 				</S.ButtonBack>
 			)}
@@ -100,11 +96,15 @@ export const Button = ({
 					value={value}
 					width={36}
 					height={28}
-					disabled={disable}
+					disabled={disable || loading}
 					theme={theme}
 					onClick={onClick}
 				>
-					<MagnifyingGlass size={24} color="#ffffff" />
+					{loading ? (
+						<CircleNotch size={24} color="#ffffff" />
+					) : (
+						<MagnifyingGlass size={24} color="#ffffff" />
+					)}
 				</S.Button40x32>
 			)}
 			{typeStyle === "remove" && (

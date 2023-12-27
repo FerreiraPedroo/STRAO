@@ -11,7 +11,7 @@ import { navBarImgs } from "../../helper/indexImg";
 export const NavBar = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const menuData = useSelector((state) => state.appData.dataInfo.departments);
+	const menuData = useSelector((state) => state.appData.departmentsInfo);
 
 	const [showMenu, setShowMenu] = useState(false);
 

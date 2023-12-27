@@ -1,32 +1,29 @@
 import React from "react";
-import {
-	createBrowserRouter,
-	createRoutesFromElements,
-	Route
-} from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 
 import { Root } from "../pages/Root";
-import { ErrorPage } from "../errorPage";
+// import { ErrorPage } from "../errorPage";
 
 import { Login } from "../pages/Login";
 import { Home } from "../pages/Home/index";
+import { Supply } from "../pages/Supply";
 
-import { HumanResources } from "../pages/HumanResources";
-import { HumanResourcesEmployee } from "../pages/HumanResources/Employee";
-import { HumanResourcesEmployeeRegister } from "../pages/HumanResources/EmployeeRegister";
+// import { HumanResources } from "../pages/HumanResources";
+// import { HumanResourcesEmployee } from "../pages/HumanResources/Employee";
+// import { HumanResourcesEmployeeRegister } from "../pages/HumanResources/EmployeeRegister";
 
 import { Admin } from "../pages/Admin";
 import { AdminUser } from "../pages/Admin/User";
 import { AdminUserEdit } from "../pages/Admin/UserEdit";
-import { AdminUserRegister } from "../pages/Admin/UserRegister";
+// import { AdminUserRegister } from "../pages/Admin/UserRegister";
 
-import { Supply } from "../pages/Supply";
-import { SupplyWarehouseItems } from "../pages/Supply/Warehouse/Items";
-import { SupplyWarehouseItemEdit } from "../pages/Supply/Warehouse/ItemEdit";
-import { SupplyWarehouseItemRegister } from "../pages/Supply/Warehouse/ItemRegister";
+// import { Supply } from "../pages/Supply";
+// import { SupplyWarehouseItems } from "../pages/Supply/Warehouse/Items";
+// import { SupplyWarehouseItemEdit } from "../pages/Supply/Warehouse/ItemEdit";
+// import { SupplyWarehouseItemRegister } from "../pages/Supply/Warehouse/ItemRegister";
 
-import { HumanResourcesEmployeeSheet } from "../pages/HumanResources/EmployeeSheet";
-import { HumanResourcesEmployeeSheetEdit } from "../pages/HumanResources/EmployeeSheetEdit";
+// import { HumanResourcesEmployeeSheet } from "../pages/HumanResources/EmployeeSheet";
+// import { HumanResourcesEmployeeSheetEdit } from "../pages/HumanResources/EmployeeSheetEdit";
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -41,15 +38,15 @@ export const router = createBrowserRouter(
 
 				<Route path="admin">
 					<Route index element={<Admin />} />
-					<Route path="user" element={<AdminUser />} />
+					<Route path="users" element={<AdminUser />} />
 					<Route path="user/edit" element={<AdminUserEdit />} />
-					<Route path="user/register" element={<AdminUserRegister />} />
+					{/*<Route path="user/register" element={<AdminUserRegister />} />
 
 					<Route path="centerscost" element={<></>} />
-					<Route path="contract" element={<></>} />
+					<Route path="contract" element={<></>} /> */}
 				</Route>
 
-				<Route path="rh">
+				{/* <Route path="rh">
 					<Route index element={<HumanResources />} />
 					<Route path="employee" element={<HumanResourcesEmployee />} />
 					<Route
@@ -65,17 +62,17 @@ export const router = createBrowserRouter(
 						path="employee/sheet"
 						element={<HumanResourcesEmployeeSheet />}
 					/>
-				</Route>
+				</Route> */}
 
 				<Route path="supply">
 					<Route index element={<Supply />} />
-					<Route path="stock" element={<></>} />
+					{/* <Route path="stock" element={<></>} />
 					<Route path="stock/list" element={<SupplyWarehouseItems />} />
 					<Route path="item/edit" element={<SupplyWarehouseItemEdit />} />
 					<Route
 						path="item/register"
 						element={<SupplyWarehouseItemRegister />}
-					/>
+					/> */}
 				</Route>
 			</Route>
 		</Route>

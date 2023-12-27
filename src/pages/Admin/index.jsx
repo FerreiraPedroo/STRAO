@@ -8,16 +8,25 @@ import * as S from "./styles.jsx";
 
 export const Admin = () => {
 	const { pathname } = useLocation();
-	const departmentSector = useSelector(
-		(state) => state.appData.dataInfo.departmentSectors[`${pathname}`]
-	);
+
+	const menuSectors = useSelector((state) => {
+		const department = state.appData.departmentsInfo.find((department) => {
+			return department.url_path === pathname
+		})
+
+		if (!department) {
+			return []
+		}
+
+		return state.appData.sectorsInfo.filter((sector) => sector.department_id === department._id)
+	});
 
 	return (
 		<S.Container>
-			{departmentSector.length ? (
+			{menuSectors.length ? (
 				<>
-					{Object.values(departmentSector).map((department) => (
-						<Card key={department.name} data={department} />
+					{Object.values(menuSectors).map((sector) => (
+						<Card key={sector.name} data={sector} />
 					))}
 				</>
 			) : (
