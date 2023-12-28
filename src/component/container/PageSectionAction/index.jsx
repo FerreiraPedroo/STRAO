@@ -23,7 +23,7 @@ import * as S from "./styles.jsx";
 // 	]/
 
 /**
- *
+ * 
  */
 export const PageSectionAction = ({
 	actionsData = [],
@@ -31,7 +31,8 @@ export const PageSectionAction = ({
 	loading = false
 }) => {
 
-	const [action] = useState()
+	const [action, setAction] = useState();
+
 	return (
 		<S.ActionsContainer>
 			<S.ActionsTitle>Ações</S.ActionsTitle>
@@ -45,9 +46,11 @@ export const PageSectionAction = ({
 						title={action.name}
 						onClick={() => action.action(dataSelected)}
 					/>
-					{action.title}
+					{action.name}
 				</S.ActionButtonBox>
 			))}
 		</S.ActionsContainer>
 	);
 };
+
+

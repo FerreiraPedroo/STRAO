@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { CaretDown, CaretUp } from "phosphor-react";
 
 import { Button } from "../../Button";
 import { InputText } from "../../Input/Text";
@@ -39,6 +40,7 @@ export const PageFilter = ({
 	getFiltersSelected,
 	loading = false
 }) => {
+	const [openContainer, setOpenContainer] = useState(false);
 	const [filters, setFilters] = useState(filtersData.reduce((acc, cur) => {
 		if (cur.type === "select" && cur.options.length) {
 			return {
@@ -55,6 +57,10 @@ export const PageFilter = ({
 		setFilters(newFilters);
 	}
 
+	function handleOpenStatus() {
+		setOpenContainer((prev) => !prev);
+	}
+
 	useEffect(() => {
 		getFiltersSelected(filters);
 	}, []);
@@ -65,41 +71,54 @@ export const PageFilter = ({
 
 	return (
 		<S.FilterContainer>
-			<S.FilterTitle>Filtros</S.FilterTitle>
-			<S.FilterInputBox>
-				{filtersData.map((filter) => (
-					<div key={filter.htmlName}>
-						{filter.type == "select" && (
-							<InputSelect
-								selectId={filter.htmlName}
-								selectName={filter.htmlName}
-								selectValue={filters[filter.htmlName]}
-								selectOnChange={handleFilter}
-								selectPlaceholder={filter.htmlPlaceholder}
-								disabled={loading}
-								selectShowInfo={filter.showInfo}
-								options={filter.options}
-							/>
-						)}
-						{filter.type == "text" && (
-							<InputText
-								inputId={filter.htmlName}
-								inputName={filter.htmlName}
-								inputValue={filters[filter.htmlName]}
-								inputOnChange={handleFilter}
-								inputPlaceholder={filter.htmlPlaceholder}
-								disabled={loading}
-								inputShowInfo={filter.showInfo}
-							/>
-						)}
-					</div>
-				))}
-				<Button
-					typeStyle="find"
-					disable={loading}
-					onClick={sendFiltersSelected}
-				/>
-			</S.FilterInputBox>
+			<S.FilterTitleBox>
+				<S.FilterTitle> Filtros</S.FilterTitle>
+				<S.FilterOpenButton>
+					{openContainer ? (
+						<CaretUp onClick={handleOpenStatus} size={24} />
+					) : (
+						<CaretDown onClick={handleOpenStatus} size={24} />
+					)}
+				</S.FilterOpenButton>
+			</S.FilterTitleBox>
+			{openContainer ? (
+				<S.FilterInputBox>
+					{filtersData.map((filter) => (
+						<div key={filter.htmlName}>
+							{filter.type == "select" && (
+								<InputSelect
+									selectId={filter.htmlName}
+									selectName={filter.htmlName}
+									selectValue={filters[filter.htmlName]}
+									selectOnChange={handleFilter}
+									selectPlaceholder={filter.htmlPlaceholder}
+									disabled={loading}
+									selectShowInfo={filter.showInfo}
+									options={filter.options}
+								/>
+							)}
+							{filter.type == "text" && (
+								<InputText
+									inputId={filter.htmlName}
+									inputName={filter.htmlName}
+									inputValue={filters[filter.htmlName]}
+									inputOnChange={handleFilter}
+									inputPlaceholder={filter.htmlPlaceholder}
+									disabled={loading}
+									inputShowInfo={filter.showInfo}
+								/>
+							)}
+						</div>
+					))}
+					<Button
+						typeStyle="find"
+						disable={loading}
+						onClick={sendFiltersSelected}
+					/>
+				</S.FilterInputBox>
+			) : (
+				<></>
+			)}
 		</S.FilterContainer>
 	);
 };

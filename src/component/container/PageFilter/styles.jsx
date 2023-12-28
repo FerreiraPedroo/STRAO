@@ -2,26 +2,40 @@ import styled from "styled-components";
 
 export const FilterContainer = styled.div`
 	display: flex;
-    width: 100%;
-	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	align-items: flex-start;
 	background-color: #e5e5e5;
-	padding: 6px 16px 4px 16px;
-	gap: 16px;
+	padding: 6px 12px 4px 12px;
+	gap: 6px;
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
 	border-radius: 4px;
 `;
+export const FilterTitleBox = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+`;
 export const FilterTitle = styled.div`
-  	align-self: center;
-  	font-style: italic;
-  	font-size: 1rem;
+	align-self: center;
+	font-style: italic;
+	font-size: 1rem;
 	font-weight: 600;
-  	color: #565656;
+	color: #565656;
+`;
+export const FilterOpenButton = styled.div`
+	font-style: italic;
+	line-height: 0px;
+
+	&:hover {
+		cursor: pointer;
+	}
 `;
 export const FilterInputBox = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	height: 100%;
 	align-items: center;
-	gap: 0 12px ;
+	gap: 0 12px;
 `;

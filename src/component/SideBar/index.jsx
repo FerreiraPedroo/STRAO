@@ -1,17 +1,20 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { changeSectionSelected, changeSectionActionSelected } from '../../services/store/features/menu/menu'
+import {
+	changeSectionSelected,
+	changeSectionActionSelected
+} from "../../services/store/features/menu/menu";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as S from "./styles";
 import { sideBarImgs } from "../../helper/indexImg";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export function SideBar() {
 	const location = useLocation();
 	const departmentLocation = "/" + location.pathname.split("/")[1];
 
 	const navigate = useNavigate();
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
 	const menuDepartment = useSelector((state) => {
 		return state.appData.departmentsInfo.find((department) => department.url_path === departmentLocation)
@@ -32,7 +35,7 @@ export function SideBar() {
 	const menuSectorSelected = useSelector((state) => state.menu.sectionSelected);
 	const menuSectorActionSelected = useSelector((state) => state.menu.sectionActionSelected);
 	console.log({ menuSectorSelected, menuSectorActionSelected })
-	
+
 	function selectSection(sector) {
 		console.log(sector.name)
 		dispatch(changeSectionSelected(sector.name));
@@ -85,8 +88,7 @@ export function SideBar() {
 						))
 					)}
 				</S.SectionContainer>
-			))
-			}
-		</S.Container >
+			))}
+		</S.Container>
 	);
-};
+}

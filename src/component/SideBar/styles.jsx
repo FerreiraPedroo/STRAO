@@ -17,7 +17,7 @@ export const Container = styled.div`
 	place-items: center;
 	padding: 6px 8px;
 	background-color: #f5f3f0;
-	gap:12px;
+	gap:6px;
 `;
 /* HR SEPARATOR */
 export const HrLine = styled.hr`
@@ -54,6 +54,7 @@ export const SectionTop = styled.div`
 	display: flex;
 	align-items: center;
 	border: 1px solid transparent;
+	padding: 4px 4px;
 	gap: 4px;
 
 	&:hover{

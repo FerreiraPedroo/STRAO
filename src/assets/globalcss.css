@@ -1,3 +1,26 @@
+:root {
+  box-sizing: border-box;
+  --card-shadow: hsl(221, 100%, 96%);
+  --card-bg-bottom: hsl(252, 100%, 67%);
+  --card-bg-top: hsl(241, 81%, 54%);
+  --result-bg-bottom: hsla(256, 72%, 46%, 1);
+  --result-bg-top: hsla(241, 72%, 46%, 0);
+
+  --text-red: hsl(0, 100%, 67%);
+  --bg-red: hsla(0, 100%, 67%,5%);
+  --text-yellow: hsl(39, 100%, 56%);
+  --bg-yellow: hsla(39, 100%, 56%,5%);
+  --text-teal: hsl(166, 100%, 37%);
+  --bg-teal: hsla(166, 100%, 37%,5%);
+  --text-blue: hsl(234, 85%, 45%);
+  --bg-blue: hsla(234, 85%, 45%,5%);
+
+  --button-bg: hsl(224, 30%, 27%);
+  --muted:hsl(241, 100%, 89%);
+
+  --border-radius: 2rem;
+  --card-gradient: linear-gradient(to bottom, var(--card-bg-bottom), var(--card-bg-top));
+}
 * {
   margin: 0px;
   border: 0px;

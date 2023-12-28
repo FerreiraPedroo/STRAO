@@ -4,10 +4,9 @@ import styled from "styled-components";
 export const ActionsContainer = styled.div`
 	display: flex;
 	width: 100%;
-	min-height: 46px;
 	align-items: center;
 	background-color: #e5e5e5;
-	padding: 6px 16px 6px 16px;
+	padding: 6px 12px 6px 12px;
 	gap: 16px;
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);

@@ -6,24 +6,23 @@ import { Root } from "../pages/Root";
 
 import { Login } from "../pages/Login";
 import { Home } from "../pages/Home/index";
-import { Supply } from "../pages/Supply";
 
 // import { HumanResources } from "../pages/HumanResources";
 // import { HumanResourcesEmployee } from "../pages/HumanResources/Employee";
 // import { HumanResourcesEmployeeRegister } from "../pages/HumanResources/EmployeeRegister";
+// import { HumanResourcesEmployeeSheet } from "../pages/HumanResources/EmployeeSheet";
+// import { HumanResourcesEmployeeSheetEdit } from "../pages/HumanResources/EmployeeSheetEdit";
 
 import { Admin } from "../pages/Admin";
 import { AdminUser } from "../pages/Admin/User";
 import { AdminUserEdit } from "../pages/Admin/UserEdit";
 // import { AdminUserRegister } from "../pages/Admin/UserRegister";
 
-// import { Supply } from "../pages/Supply";
+import { Supply } from "../pages/Supply";
+// import { SupplyStock } from "../pages/Supply/Stock";
 // import { SupplyWarehouseItems } from "../pages/Supply/Warehouse/Items";
 // import { SupplyWarehouseItemEdit } from "../pages/Supply/Warehouse/ItemEdit";
 // import { SupplyWarehouseItemRegister } from "../pages/Supply/Warehouse/ItemRegister";
-
-// import { HumanResourcesEmployeeSheet } from "../pages/HumanResources/EmployeeSheet";
-// import { HumanResourcesEmployeeSheetEdit } from "../pages/HumanResources/EmployeeSheetEdit";
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -66,13 +65,10 @@ export const router = createBrowserRouter(
 
 				<Route path="supply">
 					<Route index element={<Supply />} />
-					{/* <Route path="stock" element={<></>} />
+					<Route path="stock" element={<SupplyStock />} />
 					<Route path="stock/list" element={<SupplyWarehouseItems />} />
 					<Route path="item/edit" element={<SupplyWarehouseItemEdit />} />
-					<Route
-						path="item/register"
-						element={<SupplyWarehouseItemRegister />}
-					/> */}
+					<Route path="item/register" element={<SupplyWarehouseItemRegister />} />
 				</Route>
 			</Route>
 		</Route>
