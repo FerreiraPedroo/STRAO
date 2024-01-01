@@ -5,8 +5,7 @@
   },
   "extends": [
     "eslint:recommended",
-    "prettier",
-    "prettier/react"
+    "prettier"
   ],
   "overrides": [],
   "parserOptions": {

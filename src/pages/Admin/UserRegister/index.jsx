@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { api } from "../../../services/api";
-import { NotificationModal } from "../../../component/NotificationModal";
+import { NotificationModal } from "../../../component/Notification/modal.jsx";
 import { PageTitle } from "../../../component/container/PageTitle";
 
 import * as S from "./styles.jsx";
@@ -84,6 +84,7 @@ export const AdminUserRegister = () => {
 	function resetForm() {
 		formik.resetForm()
 	}
+	
 	return (
 		<S.Container>
 			{notification && (
@@ -96,6 +97,7 @@ export const AdminUserRegister = () => {
 			<PageTitle
 				title="Registro de usuário"
 				subTitle="registro de usuário para acesso ao sistema"
+				backUrl={"/admin/users"}
 				loading={loading}
 			/>
 

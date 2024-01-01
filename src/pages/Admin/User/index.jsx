@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api.js";
 
-import { NotificationModal } from "../../../component/NotificationModal";
+import { NotificationFull } from "../../../component/Notification/full.jsx";
 import { PageFilter } from "../../../component/container/PageFilter";
 import { PageList } from "../../../component/container/PageList";
 import { PageTitle } from "../../../component/container/PageTitle";
@@ -10,7 +10,7 @@ import { PageAction } from "../../../component/container/PageAction";
 
 import * as S from "./styles.jsx";
 
-export const AdminUser = () => {
+export const AdminUsers = () => {
 	const navigate = useNavigate();
 	const [notification, setNotification] = useState();
 	const [loading, setLoading] = useState(true);
@@ -39,7 +39,25 @@ export const AdminUser = () => {
 		],
 		actions: [
 			{
-				title: "Excluir",
+				name: "Novo usuário",
+				typeStyle: "add",
+				show: true,
+				action: () => {
+					navigate("/admin/user/register");
+				}
+			},
+			{
+				name: "Editar usuário",
+				typeStyle: "edit",
+				show: false,
+				action: (data) => {
+					navigate("/admin/user/edit", {
+						state: { user: data }
+					});
+				}
+			},
+			{
+				name: "Excluir usuário",
 				typeStyle: "remove",
 				show: false,
 				action: (data) =>
@@ -52,15 +70,6 @@ export const AdminUser = () => {
 						onClick: () => deleteUser(data._id),
 						buttonTitle: "Confirmar"
 					})
-			},
-			{
-				title: "Editar",
-				typeStyle: "edit",
-				show: false,
-				action: (data) =>{
-					navigate("/admin/user/edit", {
-						state: { user: data }
-					})}
 			}
 		],
 		filters: [
@@ -167,7 +176,7 @@ export const AdminUser = () => {
 	return (
 		<S.Container>
 			{notification && (
-				<NotificationModal
+				<NotificationFull
 					type={notification.type}
 					theme={notification.theme}
 					message={notification.message}
@@ -180,11 +189,7 @@ export const AdminUser = () => {
 			<PageTitle
 				title="Lista de usuários do sistema"
 				subTitle="administre o acesso ao sistema"
-				loading={loading}
-			/>
-			<PageFilter
-				filtersData={userPageData.filters}
-				getFiltersSelected={setFiltersSelected}
+				backUrl={"/admin"}
 				loading={loading}
 			/>
 			<PageAction
@@ -192,6 +197,12 @@ export const AdminUser = () => {
 				dataSelected={userSelected}
 				loading={loading}
 			/>
+			<PageFilter
+				filtersData={userPageData.filters}
+				getFiltersSelected={setFiltersSelected}
+				loading={loading}
+			/>
+
 			<PageList
 				listData={userList}
 				columns={userPageData.columns}

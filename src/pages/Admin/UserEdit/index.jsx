@@ -155,7 +155,7 @@ export function AdminUserEdit() {
 			return prev;
 		}, []);
 	}
-	
+
 	function availableDepartmentSectorsElement(departmentId) {
 		return userData.sectorsInfo.available.reduce((prev, sector) => {
 			sector.department_id === departmentId &&
@@ -187,6 +187,7 @@ export function AdminUserEdit() {
 			<PageTitle
 				title="Editar usuário"
 				subTitle="adicione ou remova permissões do usuário."
+				backUrl={"/admin/users"}
 				loading={loading}
 			/>
 			{userData ? (

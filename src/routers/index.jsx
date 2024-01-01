@@ -14,9 +14,12 @@ import { Home } from "../pages/Home/index";
 // import { HumanResourcesEmployeeSheetEdit } from "../pages/HumanResources/EmployeeSheetEdit";
 
 import { Admin } from "../pages/Admin";
-import { AdminUser } from "../pages/Admin/User";
+import { AdminUsers } from "../pages/Admin/User";
 import { AdminUserEdit } from "../pages/Admin/UserEdit";
-// import { AdminUserRegister } from "../pages/Admin/UserRegister";
+import { AdminUserRegister } from "../pages/Admin/UserRegister";
+
+import { Management } from "../pages/Management"
+import { ManagementCenterCost } from "../pages/Management/CenterCost";
 
 import { Supply } from "../pages/Supply";
 // import { SupplyStock } from "../pages/Supply/Stock";
@@ -37,12 +40,15 @@ export const router = createBrowserRouter(
 
 				<Route path="admin">
 					<Route index element={<Admin />} />
-					<Route path="users" element={<AdminUser />} />
+					<Route path="users" element={<AdminUsers />} />
 					<Route path="user/edit" element={<AdminUserEdit />} />
-					{/*<Route path="user/register" element={<AdminUserRegister />} />
+					<Route path="user/register" element={<AdminUserRegister />} />
+				</Route>
 
-					<Route path="centerscost" element={<></>} />
-					<Route path="contract" element={<></>} /> */}
+				<Route path="management">
+				<Route index element={<Management />} />
+					<Route path="centers-cost"  element={<ManagementCenterCost/>} />
+					{/* <Route path="contract" element={<></>} /> */}
 				</Route>
 
 				{/* <Route path="rh">
@@ -65,10 +71,10 @@ export const router = createBrowserRouter(
 
 				<Route path="supply">
 					<Route index element={<Supply />} />
-					<Route path="stock" element={<SupplyStock />} />
+					{/* <Route path="stock" element={<SupplyStock />} />
 					<Route path="stock/list" element={<SupplyWarehouseItems />} />
 					<Route path="item/edit" element={<SupplyWarehouseItemEdit />} />
-					<Route path="item/register" element={<SupplyWarehouseItemRegister />} />
+					<Route path="item/register" element={<SupplyWarehouseItemRegister />} /> */}
 				</Route>
 			</Route>
 		</Route>

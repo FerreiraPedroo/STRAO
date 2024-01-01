@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api";
-import { Notification } from "../../../component/Notification";
+import { Notification } from "../../../component/Notification/full.jsx";
 
 import * as S from "./styles.jsx";
 
