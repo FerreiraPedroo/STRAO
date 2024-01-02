@@ -186,8 +186,8 @@ const propsTheme = {
 };
 
 export const Button40x32 = styled.button`
-	width: ${({ width }) => (width ? `${width}px` : "40px")};
-	height: ${({ height }) => (height ? `${height}px` : "32px")};
+	min-width: ${({ width }) => (width ? `${width}px` : "40px")};
+	min-height: ${({ height }) => (height ? `${height}px` : "32px")};
 	position: relative;
 	top: -1px;
 	display: flex;

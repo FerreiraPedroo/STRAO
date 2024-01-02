@@ -7,7 +7,7 @@ import { InputText } from "../../../../component/Input/Text/index.jsx";
 import { InputSelect } from "../../../../component/Input/Select/index.jsx";
 import { InputTextArea } from "../../../../component/Input/TextArea/index.jsx";
 
-export function CreateCenterCostModal({ closeModal, setNotification }) {
+export function CreateCenterCostModal({ closeModal, setNotification, updateCenterCostList }) {
 	const [loading, setLoading] = useState(false);
 
 	const [itemInfo, setItemInfo] = useState({});
@@ -29,8 +29,8 @@ export function CreateCenterCostModal({ closeModal, setNotification }) {
 				theme: "success",
 				message: "Centro de custo criado com sucesso."
 			});
-
-			closeModal(true);
+			updateCenterCostList()
+			closeModal(null);
 		} catch (error) {
 			setNotification({
 				theme: "fail",
@@ -111,7 +111,6 @@ export function CreateCenterCostModal({ closeModal, setNotification }) {
 	function handleItemInfo(event) {
 		setItemInfo((prev) => {
 			prev[event.target.name] = event.target.value;
-			console.log(prev);
 			return prev;
 		});
 	}

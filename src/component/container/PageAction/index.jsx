@@ -25,27 +25,22 @@ import * as S from "./styles.jsx";
 /**
  *
  */
-export const PageAction = ({
-	actionsData = [],
-	dataSelected,
-	loading = false
-}) => {
+export const PageAction = ({ actionsData = [], dataSelected, loading = false }) => {
 	return (
-		<S.ActionsContainer>
+		<S.ActionsContainer key="pageAction">
 			<S.ActionsTitle>Ações</S.ActionsTitle>
-			{actionsData.map((action) => (
-				<S.ActionButtonBox
-					key={action.name}
-					show={action.show || dataSelected}
-				>
-					<Button
-						typeStyle={action.typeStyle}
-						title={action.name}
-						onClick={() => action.action(dataSelected)}
-					/>
-					{action.name}
-				</S.ActionButtonBox>
-			))}
+			<S.ActionsBox>
+				{actionsData.map((action) => (
+					<S.ActionButtonBox key={action.name} show={action.show || dataSelected}>
+						<Button
+							typeStyle={action.typeStyle}
+							title={action.name}
+							onClick={() => action.action(dataSelected)}
+						/>
+						<S.ActionText>{action.name}</S.ActionText>
+					</S.ActionButtonBox>
+				))}
+			</S.ActionsBox>
 		</S.ActionsContainer>
 	);
 };

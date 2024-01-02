@@ -33,20 +33,16 @@ export const PageTitleBox = styled.div`
 `;
 export const PageTitle = styled.h1`
 	display: flex;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+	white-space: wrap;
 	align-items: center;
 	/* justify-content: center; */
 	padding-left: 16px;
 	
 	${props.textPageTitle}
 `;
-export const PageSubTitle = styled.h1`
+export const PageSubTitle = styled.h2`
 	display: flex;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+	white-space: wrap;
 	align-items: center;
 	/* justify-content: center; */
 	padding-left: 16px;

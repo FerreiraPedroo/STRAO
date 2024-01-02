@@ -154,6 +154,10 @@ export const ManagementCenterCost = () => {
 		}
 	}
 
+	async function updateCenterCostList(){
+		getCenterCostList(filtersSelected);
+	}
+
 	useEffect(() => {
 		getCenterCostList(filtersSelected);
 	}, [filtersSelected]);
@@ -167,11 +171,11 @@ export const ManagementCenterCost = () => {
 					setNotification={setNotification}
 				/>
 			)}
-			{console.log(modalCreateCenterCost)}
 			{modalCreateCenterCost && (
 				<CreateCenterCostModal
 					closeModal={setModalCreateCenterCost}
 					setNotification={setNotification}
+					updateCenterCostList={updateCenterCostList}
 				/>
 			)}
 
@@ -180,6 +184,7 @@ export const ManagementCenterCost = () => {
 					closeModal={setModalEditCenterCost}
 					centerCostData={centerCostSelected}
 					setNotification={setNotification}
+					updateCenterCostList={updateCenterCostList}
 				/>
 			)}
 

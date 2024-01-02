@@ -6,24 +6,24 @@ export const InputSelect = ({
 	selectName,
 	selectValue,
 	selectOnChange,
-	selectPlaceholder, 
+	selectPlaceholder,
 	selectShowInfo,
 	selectErrorMsg,
 	disabled,
 	readOnly,
-	width = '164px',
+	width = "164px",
 	options
 }) => {
 	return (
 		<S.Container width={width}>
 			<S.TitleText disabled={disabled}>
-				{((selectValue && selectShowInfo) || selectShowInfo) &&
-					selectPlaceholder}
+				{((selectValue && selectShowInfo) || selectShowInfo) && selectPlaceholder}
 			</S.TitleText>
 			<S.Select
 				id={selectId}
 				name={selectName}
-				defaultValue={selectValue}
+				value={selectValue}
+				// defaultValue={selectValue}
 				disabled={disabled}
 				readOnly={readOnly}
 				onChange={selectOnChange}
@@ -32,22 +32,22 @@ export const InputSelect = ({
 			>
 				{options &&
 					options.map((option, index) =>
-
-						option.type === 'optionGroup' ? (
-							<S.OptionGroup key={option.value +"-"+ index} label={option.value}>
+						option.type === "optionGroup" ? (
+							<S.OptionGroup key={option.value + "-" + index} label={option.value}>
 								{option.name}
 							</S.OptionGroup>
 						) : (
-							<S.Option key={option.value +"-"+ index} value={option.value}>
+							<S.Option
+								key={option.value + "-" + index}
+								value={option.value}
+								// defaultValue={option.value}
+							>
 								{option.name}
 							</S.Option>
 						)
-
 					)}
 			</S.Select>
-			<S.ErrorMsg>
-				{selectErrorMsg}
-			</S.ErrorMsg>
+			<S.ErrorMsg>{selectErrorMsg}</S.ErrorMsg>
 		</S.Container>
 	);
 };

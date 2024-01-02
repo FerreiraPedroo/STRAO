@@ -14,8 +14,7 @@ export const Container = styled.div`
 	top: 0;
 	right: 0;
 
-	width: 240px;
-	// min-height: 24px;
+	width: 260px;
 
 	display: flex;
 	flex-direction: column;
@@ -23,6 +22,8 @@ export const Container = styled.div`
 	font-family: ${props.textFontFamily};
 
 	border: 1px solid #ddd;
+
+	z-index: 999;
 `;
 export const NotificationTitleText = styled.div`
 	width: 100%;
@@ -40,20 +41,19 @@ export const NotificationTitleText = styled.div`
     background-color: #393;
     color: white;
   `}
-  
+
 	${({ theme }) =>
 		theme === "fail" &&
 		`
     background-color: #f77;
     color: white;
   `}
-
 `;
 export const NotificationText = styled.div`
 	width: 100%;
-	// height: 24px;
 	text-align: center;
-	padding: 2px;
+	padding: 4px;
+	color: #fff;
 
 	${({ theme }) =>
 		theme === "success" &&
@@ -66,7 +66,6 @@ export const NotificationText = styled.div`
     background-color: #fbb;
   `};
 `;
-
 
 export const ContainerFull = styled.div`
 	position: absolute;
@@ -93,7 +92,6 @@ export const Modal = styled.div`
 	border-radius: 12px;
 	gap: 24px;
 
-
 	${({ theme }) =>
 		theme === "success" &&
 		`
@@ -112,12 +110,10 @@ export const Modal = styled.div`
 		border: 3px solid #AE7100;
 		background-color: #F0F060;
   `};
-
 `;
 export const ModalClose = styled.div`
 	position: absolute;
-	width: 35px;
-	height: 40px;
+	padding: 2px 10px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -149,7 +145,7 @@ export const ModalClose = styled.div`
 	}
 `};
 
-${({ theme }) =>
+	${({ theme }) =>
 		theme === "confirmation" &&
 		`
 	&:hover {
@@ -199,7 +195,6 @@ export const ModalMessageTitle = styled.div`
 	font-size: 2rem;
 	font-weight: bold;
 
-	
 	${({ theme }) =>
 		theme === "success" &&
 		`

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const ActionsContainer = styled.div`
 	display: flex;
 	width: 100%;
@@ -13,19 +12,36 @@ export const ActionsContainer = styled.div`
 	border-radius: 4px;
 `;
 export const ActionsTitle = styled.div`
-  	align-self: center;
-  	font-style: italic;
-  	font-size: 1rem;
+	align-self: center;
+	font-style: italic;
+	font-size: 1rem;
 	font-weight: 600;
-  	color: #565656;
+	color: #565656;
 `;
+
+export const ActionsBox = styled.div`
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: start;
+	gap: 12px;
+`;
+
 export const ActionButtonBox = styled.div`
 	display: flex;
-	font-size: 0.9rem;
-	font-weight: 500;
 	justify-content: center;
 	align-items: center;
-	gap: 6px;
+	gap: 10px;
+
 	${({ disabled }) => disabled && "color: #B6B6B6"};
 	${({ show }) => !show && "display: none"};
+
+`;
+
+export const ActionText = styled.div`
+	font-size: 0.9rem;
+	font-weight: 500;
+	white-space: wrap;
+	text-align: start;
+	line-height: 14px;
 `;

@@ -23,7 +23,7 @@ export const Button = ({
 	disable,
 	theme,
 	onClick,
-	loading = true
+	loading
 }) => {
 	// 	export const EmployeeStatus = styled.p`
 	// 	min-width: 96px;

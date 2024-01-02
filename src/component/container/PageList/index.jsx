@@ -13,13 +13,7 @@ import * as S from "./styles.jsx";
 /**
  *
  */
-export const PageList = ({
-	listData,
-	columns = [],
-	setDataSelected,
-	dataSelected,
-	loading
-}) => {
+export const PageList = ({ listData, columns = [], setDataSelected, dataSelected, loading }) => {
 	const listRefHTML = useRef();
 	const [headerInfo, setHeaderInfo] = useState([]);
 	const [rowSelected, setRowSelected] = useState();
@@ -46,7 +40,6 @@ export const PageList = ({
 				const row = rows[rowIndex].children;
 
 				for (let columnIndex = 0; columnIndex < row.length; columnIndex++) {
-
 					if (!columnsSize[columnIndex]) {
 						columnsSize[columnIndex] = row[columnIndex].offsetWidth;
 					}
@@ -67,11 +60,10 @@ export const PageList = ({
 			setHeaderInfo(columnsInfo);
 		}
 		if (!dataSelected) {
-			setDataSelected(null)
-			setRowSelected(null)
+			setDataSelected(null);
+			setRowSelected(null);
 		}
 	}, [listData]);
-
 
 	return (
 		<S.Container>
@@ -81,17 +73,13 @@ export const PageList = ({
 						{listData &&
 							listData.length != 0 &&
 							headerInfo.map((header) => (
-								<S.ListHeadText
-									key={header.htmlName}
-									id={header.htmlName}
-									w={header.size}
-								>
+								<S.ListHeadText key={header.htmlName} id={header.htmlName} w={header.size}>
 									{header.title}
 								</S.ListHeadText>
 							))}
-
 					</S.ListUserHeaderBox>
-					{(listData && !loading) &&
+					{listData &&
+						!loading &&
 						listData.map((data, index) => (
 							<S.ListUserBox
 								key={JSON.stringify(data)}
@@ -101,8 +89,15 @@ export const PageList = ({
 								onMouseLeave={() => handleRowHover()}
 							>
 								{headerInfo.map((column) => (
-									<S.UserText key={column.htmlName} w={column.size} data-hover={index == rowHover} data-selected={index == rowSelected}>
-										{data[column.htmlName]}
+									<S.UserText
+										key={column.htmlName}
+										w={column.size}
+										data-hover={index == rowHover}
+										data-selected={index == rowSelected}
+									>
+										{data[column.htmlName] instanceof Object
+											? data[column.htmlName].name
+											: data[column.htmlName]}
 									</S.UserText>
 								))}
 							</S.ListUserBox>
@@ -111,7 +106,7 @@ export const PageList = ({
 			</S.CenterContainer>
 
 			{loading ? <>Carregando...</> : null}
-			{!listData.length && !loading ? <>Sem registro...</>: null}
+			{!listData.length && !loading ? <>Sem registro...</> : null}
 		</S.Container>
 	);
 };

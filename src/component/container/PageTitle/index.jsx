@@ -5,12 +5,13 @@ import * as S from "./styles.jsx";
 import { Button } from "../../Button/index";
 import { useDispatch } from "react-redux";
 
+
 /**
  * @param title - String - Titulo principal da página.
  * @param subTitle - String - Sub titulo da página.
  * @returns
  */
-export const PageTitle = ({ title, subTitle, icon, backButton }) => {
+export const PageTitle = ({ title, subTitle, icon, backUrl}) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const location = useLocation();
@@ -21,22 +22,16 @@ export const PageTitle = ({ title, subTitle, icon, backButton }) => {
 			payload: departmentLocation,
 			type: "sidebar/changeSectionSelected"
 		});
-		navigate(-1);
+		navigate(backUrl);
 	}
 
 	return (
 		<S.PageTitleContainer>
 			<S.PageHeader>
-				<Button
-					typeStyle="back"
-					value={"Voltar"}
-					onClick={selectSection}
-				></Button>
+				<Button typeStyle="back" value={"Voltar"} onClick={selectSection}></Button>
 
 				<S.PageTitleBox>
-					<S.PageTitle>
-						{title}
-					</S.PageTitle>
+					<S.PageTitle>{title}</S.PageTitle>
 					<S.PageSubTitle>{subTitle}</S.PageSubTitle>
 				</S.PageTitleBox>
 			</S.PageHeader>

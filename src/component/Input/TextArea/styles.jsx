@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	${({ width }) => width && `width:${width};`}
+	${({ height }) => height && `height:${height};`}
 	min-width: 128px;
-	height: 50px;
+	min-height: 50px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
@@ -18,13 +19,14 @@ export const TitleText = styled.p`
 	font-size: 0.75rem;
 	${({ disabled }) => disabled && "color: #b6b6b6;"}
 `;
-export const Select = styled.select`
-	min-width: 160px;
+export const TextArea = styled.textarea`
+	${({ height }) => height && `height:${height};`}
+	min-width: 128px;
 	min-height: 28px;
 	color: #565656;
 	font-weight: 500;
 	font-size: 0.75rem;
-	padding: 4px 2px 2px 2px;
+	padding: 4px 2px 2px 6px;
 	background-color: #ffffff;
 	border: 1px solid #808080;
 	border-radius: 4px;
@@ -41,21 +43,11 @@ export const Select = styled.select`
 	}
 `;
 
-export const Option = styled.option`
-	color: #565656;
-	font-weight: 500;
-	font-size: 0.8rem;
-`;
-export const OptionGroup = styled.optgroup`
-	color: #868686;
-	font-weight: 500;
-	font-size: 1rem;
-`;
-export const ErrorMsg = styled.p`
+export const ErrorMsg = styled.p` 
 	min-height: 10px;
 	font-size: 0.6rem;
 	font-weight: bold;
-	white-space: nowrap;
+	white-space: nowrap; 
 	overflow: hidden;
 	text-overflow: ellipsis;
 	color: red;

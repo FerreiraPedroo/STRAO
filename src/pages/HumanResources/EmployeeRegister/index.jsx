@@ -16,7 +16,7 @@ import { Button } from "../../../component/Button";
 
 import * as S from "./styles";
 import { useSelector } from "react-redux";
-import { NotificationModal } from "../../../component/NotificationModal";
+import { NotificationModal } from "../../../component/Notification/full";
 import { useNavigate } from "react-router-dom";
 
 const formikAditionalValues = {

@@ -38,7 +38,7 @@ import { PageTitle } from "../PageTitle";
 export const PageFilter = ({
 	filtersData = [],
 	getFiltersSelected,
-	loading = false
+	loading
 }) => {
 	const [openContainer, setOpenContainer] = useState(false);
 	const [filters, setFilters] = useState(filtersData.reduce((acc, cur) => {
