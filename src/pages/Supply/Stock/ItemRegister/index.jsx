@@ -5,7 +5,7 @@ import { getDataFromNewItem } from "../../../../services/Supply/Warehouse/itemAP
 import { PageTitle } from "../../../../component/container/PageTitle";
 import { PageAction } from "../../../../component/container/PageAction";
 
-import { NotificationModal } from "../../../../component/NotificationModal/index.jsx";
+import { NotificationModal } from "../../../../component/Notification/full.jsx";
 import { ItemSupplierInfo } from "../../../../component/WareHouse/Item/Supplier/index.jsx";
 
 export function SupplyWarehouseItemRegister() {

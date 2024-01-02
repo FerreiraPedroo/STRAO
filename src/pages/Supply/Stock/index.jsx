@@ -102,11 +102,7 @@ export const SupplyStock = () => {
 				loading={findStatus}
 			/>
 
-			<PageFilter
-				filtersData={filters}
-				getFiltersSelected={getItemSearch}
-				loading={findStatus}
-			/>
+			<PageFilter filtersData={filters} getFiltersSelected={getItemSearch} loading={findStatus} />
 
 			<PageList
 				listData={findStockResponse}

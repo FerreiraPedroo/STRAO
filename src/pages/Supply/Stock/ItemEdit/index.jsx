@@ -5,7 +5,7 @@ import { getItemsFromFilters } from "../../../../services/Supply/Warehouse/itemA
 import { PageTitle } from "../../../../component/container/PageTitle/index.jsx";
 import { PageAction } from "../../../../component/container/PageAction/index.jsx";
 
-import { NotificationModal } from "../../../../component/NotificationModal/index.jsx";
+import { NotificationModal } from "../../../../component/Notification/full.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import { NotePencil } from "phosphor-react";
 

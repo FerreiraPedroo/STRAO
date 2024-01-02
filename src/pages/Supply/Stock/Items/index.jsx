@@ -7,7 +7,7 @@ import { PageFilter } from "../../../../component/container/PageFilter";
 import { PageList } from "../../../../component/container/PageList";
 import { PageAction } from "../../../../component/container/PageAction";
 
-import { NotificationModal } from "../../../../component/NotificationModal";
+import { NotificationModal } from "../../../../component/Notification/full.jsx";
 import { useNavigate } from "react-router-dom";
 
 const itemColumns = [

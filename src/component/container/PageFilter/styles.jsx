@@ -7,10 +7,9 @@ export const FilterContainer = styled.div`
 	align-items: flex-start;
 	background-color: #e5e5e5;
 	padding: 6px 12px 4px 12px;
-	gap: 6px;
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
-	border-radius: 4px;
+	border-radius: 4px;	
 `;
 export const FilterTitleBox = styled.div`
 	width: 100%;
@@ -33,9 +32,10 @@ export const FilterOpenButton = styled.div`
 	}
 `;
 export const FilterInputBox = styled.div`
+	height: 100%;
+	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
-	height: 100%;
 	align-items: center;
 	gap: 0 12px;
 `;
