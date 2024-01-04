@@ -15,8 +15,10 @@ export function EditCenterCostModal({
 }) {
 	const [loading, setLoading] = useState(false);
 
-	const [itemInfo, setItemInfo] = useState({ ...centerCostData });
-	// const [originalItemInfo, setOriginalItemInfo] = useState({ ...centerCostData });
+	const [itemInfo, setItemInfo] = useState({
+		...centerCostData,
+		category_id: centerCostData.category._id
+	});
 	const [itemInfoValidator, setItemInfoValidator] = useState({});
 
 	const [categories, setCategories] = useState(null);
@@ -54,6 +56,7 @@ export function EditCenterCostModal({
 
 		setLoading(false);
 	}
+
 	async function getTypesList() {
 		setLoading(true);
 
@@ -74,9 +77,9 @@ export function EditCenterCostModal({
 	async function updateCenterCost() {
 		try {
 			const response = await api.put(`/management/center-cost`, {
-				_id: itemInfo._id,
+				center_cost_id: itemInfo._id,
 				name: itemInfo.name,
-				category_id: itemInfo.category,
+				category_id: itemInfo.category_id,
 				type_id: itemInfo.type,
 				description: itemInfo.description
 			});
@@ -140,16 +143,14 @@ export function EditCenterCostModal({
 		getCategoriesList();
 		// getTypesList();
 	}, []);
-	{
-		console.log( itemInfo);
-	}
+
 	return (
 		<S.Container>
 			<S.Modal theme={""}>
 				<S.ModalClose theme={""} onClick={() => closeModal(false)}>
 					☓
 				</S.ModalClose>
-				<S.ModalMessageTitle>{"Editando Centro de Custo"}</S.ModalMessageTitle>
+				<S.ModalMessageTitle>{"Editando centro de custo"}</S.ModalMessageTitle>
 				<S.ModalContent>
 					<InputText
 						inputName={"name"}
@@ -195,8 +196,10 @@ export function EditCenterCostModal({
 						disabled={loading}
 					/>
 				</S.ModalContent>
-				<S.ButtonFormSubmit onClick={handleItemInfoValidation}>Registrar</S.ButtonFormSubmit>
-				<S.ButtonFormSubmit onClick={() => closeModal(false)}>Cancelar</S.ButtonFormSubmit>
+				<S.ButtonBox>
+					<S.ButtonFormSubmit onClick={handleItemInfoValidation}>Salvar</S.ButtonFormSubmit>
+					<S.ButtonFormSubmit onClick={() => closeModal(false)}>Cancelar</S.ButtonFormSubmit>
+				</S.ButtonBox>
 			</S.Modal>
 		</S.Container>
 	);

@@ -69,6 +69,12 @@ export const ModalContent = styled.div`
 	padding: 12px;
 `;
 
+export const ButtonBox = styled.div`
+	display: flex;
+	padding: 12px;
+	gap: 12px;
+`;
+
 export const ButtonFormSubmit = styled.button`
 	width: 128px;
 	border: 1px solid #555;

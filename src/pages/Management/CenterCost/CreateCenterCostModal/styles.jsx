@@ -21,12 +21,13 @@ export const Container = styled.div`
 `;
 export const Modal = styled.div`
 	position: absolute;
-	left: calc(50% - 340px);
-	top: calc(50% - 250px);
-	width: 680px;
-	height: 500px;
+	left: calc(50% - 240px);
+	top: calc(50% - 230px);
+	width: 480px;
+	height: 460px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	background-color: #fff;
 	padding: 18px;
 	border-radius: 12px;
@@ -64,9 +65,16 @@ export const ModalContent = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	/* align-items: center; */
+	align-items: center;
 	/* justify-content: center; */
+	gap: 8px;
 	padding: 12px;
+`;
+
+export const ButtonBox = styled.div`
+	display: flex;
+	padding: 12px;
+	gap: 12px;
 `;
 
 export const ButtonFormSubmit = styled.button`
@@ -87,5 +95,4 @@ export const ButtonFormSubmit = styled.button`
 		border-color: #000;
 		background-color: #999;
 	}
-
 `;

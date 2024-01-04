@@ -29,7 +29,7 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 				theme: "success",
 				message: "Centro de custo criado com sucesso."
 			});
-			updateCenterCostList()
+			updateCenterCostList();
 			closeModal(null);
 		} catch (error) {
 			setNotification({
@@ -126,7 +126,7 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 				<S.ModalClose theme={""} onClick={() => closeModal(false)}>
 					☓
 				</S.ModalClose>
-				<S.ModalMessageTitle>{"Registrar Centro de Custo"}</S.ModalMessageTitle>
+				<S.ModalMessageTitle>{"Novo Centro de Custo"}</S.ModalMessageTitle>
 				<S.ModalContent>
 					<InputText
 						inputName={"name"}
@@ -172,8 +172,10 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 						disabled={loading}
 					/>
 				</S.ModalContent>
-				<S.ButtonFormSubmit onClick={handleItemInfoValidation}>Registrar</S.ButtonFormSubmit>
-				<S.ButtonFormSubmit onClick={() => closeModal(false)}>Cancelar</S.ButtonFormSubmit>
+				<S.ButtonBox>
+					<S.ButtonFormSubmit onClick={handleItemInfoValidation}>Registrar</S.ButtonFormSubmit>
+					<S.ButtonFormSubmit onClick={() => closeModal(false)}>Cancelar</S.ButtonFormSubmit>
+				</S.ButtonBox>
 			</S.Modal>
 		</S.Container>
 	);

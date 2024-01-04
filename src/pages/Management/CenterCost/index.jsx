@@ -23,8 +23,6 @@ export const ManagementCenterCost = () => {
 	const [modalDeleteCenterCost, setModalDeleteCenterCost] = useState(false);
 	const [modalEditCenterCost, setModalEditCenterCost] = useState(false);
 
-	const [categoriesList, setCategoriesList] = useState([]);
-
 	const [centerCostList, setCenterCostList] = useState([]);
 	const [filtersSelected, setFiltersSelected] = useState({});
 	const [centerCostSelected, setCenterCostSelected] = useState();
@@ -66,13 +64,14 @@ export const ManagementCenterCost = () => {
 				typeStyle: "edit",
 				show: false,
 				action: () => setModalEditCenterCost(true)
-			},
-			{
-				name: "Excluir centro de custo",
-				typeStyle: "remove",
-				show: false,
-				action: () => setModalDeleteCenterCost(true)
 			}
+			// ,
+			// {
+			// 	name: "Excluir centro de custo",
+			// 	typeStyle: "remove",
+			// 	show: false,
+			// 	action: () => setModalDeleteCenterCost(true)
+			// }
 		],
 		filters: [
 			{
@@ -124,6 +123,10 @@ export const ManagementCenterCost = () => {
 		setLoading(false);
 	}
 
+	async function updateCenterCostList() {
+		getCenterCostList(filtersSelected);
+	}
+
 	async function deleteCenterCost(userId) {
 		try {
 			const { data } = await api.delete(`/management/center-cost/${userId}/delete`);
@@ -152,10 +155,6 @@ export const ManagementCenterCost = () => {
 				});
 			}
 		}
-	}
-
-	async function updateCenterCostList(){
-		getCenterCostList(filtersSelected);
 	}
 
 	useEffect(() => {
