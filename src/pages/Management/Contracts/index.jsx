@@ -5,7 +5,6 @@ import { api } from "../../../services/api.js";
 import { NotificationModal } from "../../../component/Notification/modal.jsx";
 import { CreateContractModal } from "./CreateContractModal/index.jsx";
 import { DeleteContractModal } from "./DeleteContractModal/index.jsx";
-import { EditContractModal } from "./EditContractModal/index.jsx";
 import { PageFilter } from "../../../component/container/PageFilter";
 import { PageAction } from "../../../component/container/PageAction";
 import { PageTitle } from "../../../component/container/PageTitle";
@@ -21,7 +20,6 @@ export const ManagementContract = () => {
 
 	const [modalCreateContract, setModalCreateContract] = useState(false);
 	const [modalDeleteContract, setModalDeleteContract] = useState(false);
-	const [modalEditContract, setModalEditContract] = useState(false);
 
 	const [contractList, setContractList] = useState([]);
 	const [filtersSelected, setFiltersSelected] = useState({});
@@ -63,7 +61,7 @@ export const ManagementContract = () => {
 				name: "Editar contrato",
 				typeStyle: "edit",
 				show: false,
-				action: () => setModalEditContract(true)
+				action: (state) => navigate("/management/contract/edit", { state })
 			}
 			// ,
 			// {
@@ -136,38 +134,38 @@ export const ManagementContract = () => {
 	}
 
 	async function deleteContract(userId) {
-		try {
-			const { data } = await api.delete(`/management/contract/${contractId}/delete`);
+		// try {
+		// 	const { data } = await api.delete(`/management/contract/${contractId}/delete`);
 
-			setNotification({
-				theme: "success",
-				message: `Contrato excluido com sucesso.`,
-				setNotification: setNotification
-			});
+		// 	setNotification({
+		// 		theme: "success",
+		// 		message: `Contrato excluido com sucesso.`,
+		// 		setNotification: setNotification
+		// 	});
 
-			setContractList((users) => users.filter((user) => user._id !== userId));
-			setContractSelected(null);
-		} catch (error) {
-			if (error.response && error.response.status === 401) {
-				setNotification({
-					theme: "fail",
-					message: error.response.data.message,
-					setNotification: setNotification
-				});
-			}
-			if (error.response && error.response.status === 422) {
-				setNotification({
-					theme: "fail",
-					message: error.response.data.message,
-					setNotification: setNotification
-				});
-			}
-		}
+		// 	setContractList((users) => users.filter((user) => user._id !== userId));
+		// 	setContractSelected(null);
+		// } catch (error) {
+		// 	if (error.response && error.response.status === 401) {
+		// 		setNotification({
+		// 			theme: "fail",
+		// 			message: error.response.data.message,
+		// 			setNotification: setNotification
+		// 		});
+		// 	}
+		// 	if (error.response && error.response.status === 422) {
+		// 		setNotification({
+		// 			theme: "fail",
+		// 			message: error.response.data.message,
+		// 			setNotification: setNotification
+		// 		});
+		// 	}
+		// }
 	}
 
 	useEffect(() => {
 		getContractList(filtersSelected);
-	}, [filtersSelected]);
+	}, []);
 
 	return (
 		<S.Container>
@@ -181,15 +179,6 @@ export const ManagementContract = () => {
 			{modalCreateContract && (
 				<CreateContractModal
 					closeModal={setModalCreateContract}
-					setNotification={setNotification}
-					updateContractList={updateContractList}
-				/>
-			)}
-
-			{modalEditContract && (
-				<EditContractModal
-					closeModal={setModalEditContract}
-					contractData={contractSelected}
 					setNotification={setNotification}
 					updateContractList={updateContractList}
 				/>

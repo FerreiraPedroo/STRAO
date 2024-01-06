@@ -20,9 +20,11 @@ import { AdminUserRegister } from "../pages/Admin/UserRegister";
 
 import { Management } from "../pages/Management";
 import { ManagementCenterCost } from "../pages/Management/CenterCost";
+import { ManagementContract } from "../pages/Management/Contracts";
+import { ManagementContractEdit } from "../pages/Management/ContractEdit";
+
 
 import { Supply } from "../pages/Supply";
-import { ManagementContract } from "../pages/Management/Contract";
 // import { SupplyStock } from "../pages/Supply/Stock";
 // import { SupplyWarehouseItems } from "../pages/Supply/Warehouse/Items";
 // import { SupplyWarehouseItemEdit } from "../pages/Supply/Warehouse/ItemEdit";
@@ -49,7 +51,8 @@ export const router = createBrowserRouter(
 				<Route path="management">
 					<Route index element={<Management />} />
 					<Route path="centers-cost" element={<ManagementCenterCost />} />
-					<Route path="contract" element={<ManagementContract />} />
+					<Route path="contracts" element={<ManagementContract />} />
+					<Route path="contract/edit" element={<ManagementContractEdit />} />
 				</Route>
 
 				{/* <Route path="rh">
