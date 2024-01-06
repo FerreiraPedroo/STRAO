@@ -17,7 +17,8 @@ export function EditCenterCostModal({
 
 	const [itemInfo, setItemInfo] = useState({
 		...centerCostData,
-		category_id: centerCostData.category._id
+		category_id: centerCostData.category._id,
+		type_id: centerCostData.type._id
 	});
 	const [itemInfoValidator, setItemInfoValidator] = useState({});
 
@@ -25,8 +26,6 @@ export function EditCenterCostModal({
 	const [types, setTypes] = useState(null);
 
 	async function getCategoriesList() {
-		setLoading(true);
-
 		try {
 			const response = await api.get("/management/categories");
 			const categoriesList = response.data.data.map((category) => {
@@ -44,7 +43,7 @@ export function EditCenterCostModal({
 				name: "Selecione a categoria"
 			});
 
-			setCategories(categoriesList);
+			return categoriesList;
 		} catch (error) {
 			setNotification({
 				theme: "fail",
@@ -52,26 +51,38 @@ export function EditCenterCostModal({
 					error.response ?? error.response.data.message ?? "Erro ao obter a lista de categorias.",
 				setNotification: setNotification
 			});
-		}
 
-		setLoading(false);
+			return false;
+		}
 	}
 
 	async function getTypesList() {
-		setLoading(true);
-
 		try {
 			const response = await api.get("/management/types");
-			setTypes(response.data.data);
+			const typesList = response.data.data.map((type) => {
+				const selected = itemInfo.type._id === type._id;
+
+				return {
+					value: type._id,
+					name: type.name,
+					selected: selected
+				};
+			});
+
+			typesList.unshift({
+				value: "",
+				name: "Seleciona um tipo"
+			});
+
+			return typesList;
 		} catch (error) {
 			setNotification({
 				theme: "fail",
-				message: error.response.data.message ?? "Erro ao obter a lista de tipos.",
+				message: error.response.data.message ?? "Erro ao obter a lista de tipos de categoria.",
 				setNotification: setNotification
 			});
+			return false;
 		}
-
-		setLoading(false);
 	}
 
 	async function updateCenterCost() {
@@ -80,7 +91,7 @@ export function EditCenterCostModal({
 				center_cost_id: itemInfo._id,
 				name: itemInfo.name,
 				category_id: itemInfo.category_id,
-				type_id: itemInfo.type,
+				type_id: itemInfo.type_id,
 				description: itemInfo.description
 			});
 
@@ -109,17 +120,19 @@ export function EditCenterCostModal({
 			errors.name = "Não pode estar vazio.";
 		}
 
-		if (itemInfo.category) {
-			if (itemInfo.category === "") errors.category = "Selecione a categoria.";
+		if (itemInfo.category_id) {
+			if (itemInfo.category_id === "") errors.category_id = "Selecione a categoria.";
 		} else {
-			errors.category = "Não pode estar vazio.";
+			errors.category_id = "Não pode estar vazio.";
 		}
 
-		// if (itemInfo === "type") {
-		// 	if (value == "") prev[key] = "Selecione o tipo.";
-		// }
+		if (itemInfo.type_id) {
+			if (itemInfo.type_id === "") errors.type_id = "Selecione um tipo.";
+		} else {
+			errors.type_id = "Não pode estar vazio.";
+		}
 
-		if (!errors.name && !errors.category) {
+		if (!errors.name && !errors.category_id && !errors.type_id) {
 			updateCenterCost();
 		} else {
 			setItemInfoValidator(errors);
@@ -134,14 +147,25 @@ export function EditCenterCostModal({
 		setItemInfo((prev) => {
 			const newItem = { ...prev };
 			newItem[event.target.name] = event.target.value;
-			console.log(event.target.value);
+			console.log(newItem);
 			return newItem;
 		});
 	}
 
 	useEffect(() => {
-		getCategoriesList();
-		// getTypesList();
+		async function getInitialData() {
+			setLoading(true);
+			const categoriesList = await getCategoriesList();
+			const typesList = await getTypesList();
+
+			if (categoriesList && typesList) {
+				setCategories(categoriesList);
+				setTypes(typesList);
+				setLoading(false);
+			}
+		}
+
+		getInitialData();
 	}, []);
 
 	return (
@@ -154,7 +178,7 @@ export function EditCenterCostModal({
 				<S.ModalContent>
 					<InputText
 						inputName={"name"}
-						inputValue={itemInfo.name}
+						inputValue={itemInfo.name ?? ""}
 						inputWidth={"256px"}
 						inputOnChange={handleItemInfo}
 						inputPlaceholder={"Nome"}
@@ -163,30 +187,30 @@ export function EditCenterCostModal({
 						disabled={loading}
 					/>
 					<InputSelect
-						selectName={"category"}
-						selectValue={itemInfo.category._id}
+						selectName={"category_id"}
+						selectValue={itemInfo.category_id ?? ""}
 						selectOnChange={handleItemInfo}
 						selectPlaceholder={"Categoria"}
 						selectShowInfo={true}
-						selectErrorMsg={itemInfoValidator.category}
+						selectErrorMsg={itemInfoValidator.category_id}
 						width={"256px"}
 						options={categories}
 						disabled={loading || !categories}
 					/>
 					<InputSelect
-						selectName={"type"}
-						selectValue={itemInfo.type}
+						selectName={"type_id"}
+						selectValue={itemInfo.type_id ?? ""}
 						selectOnChange={handleItemInfo}
 						selectPlaceholder={"Tipo"}
 						selectShowInfo={true}
-						selectErrorMsg={itemInfoValidator.type}
+						selectErrorMsg={itemInfoValidator.type_id}
 						width={"256px"}
 						options={types}
 						disabled={loading || !types}
 					/>
 					<InputTextArea
 						textAreaName={"description"}
-						textAreaValue={itemInfo.description}
+						textAreaValue={itemInfo.description ?? ""}
 						textAreaOnChange={handleItemInfo}
 						textAreaPlaceholder={"Descrição"}
 						textAreaShowInfo={true}

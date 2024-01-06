@@ -3,6 +3,7 @@ import * as S from "./styles.jsx";
 
 import { api } from "../../../../services/api.js";
 
+import { Button } from "../../../../component/Button/index.jsx";
 import { InputText } from "../../../../component/Input/Text/index.jsx";
 import { InputSelect } from "../../../../component/Input/Select/index.jsx";
 import { InputTextArea } from "../../../../component/Input/TextArea/index.jsx";
@@ -15,6 +16,59 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 
 	const [categories, setCategories] = useState(null);
 	const [types, setTypes] = useState(null);
+
+	async function getCategoriesList() {
+		try {
+			const response = await api.get("/management/categories");
+
+			const categoriesList = response.data.data.map((category) => {
+				return {
+					value: category._id,
+					name: category.name
+				};
+			});
+
+			categoriesList.unshift({
+				value: "",
+				name: "Seleciona uma categoria"
+			});
+
+			return categoriesList;
+		} catch (error) {
+			setNotification({
+				theme: "fail",
+				message: error.response.data.message ?? "Erro ao obter a lista de categorias.",
+				setNotification: setNotification
+			});
+		}
+	}
+
+	async function getTypesList() {
+		try {
+			const response = await api.get("/management/types");
+
+			const typesList = response.data.data.map((type) => {
+				return {
+					value: type._id,
+					name: type.name
+				};
+			});
+
+			typesList.unshift({
+				value: "",
+				name: "Seleciona um tipo"
+			});
+
+			return typesList;
+		} catch (error) {
+			setNotification({
+				theme: "fail",
+				message: error.response.data.message ?? "Erro ao obter a lista de categoria de tipos.",
+				setNotification: setNotification
+			});
+			return false;
+		}
+	}
 
 	async function createCenterCost() {
 		try {
@@ -39,47 +93,6 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 		}
 	}
 
-	async function getCategoriesList() {
-		setLoading(true);
-
-		try {
-			const response = await api.get("/management/categories");
-			const categoriesList = response.data.data.map((category) => {
-				return {
-					value: category._id,
-					name: category.name
-				};
-			});
-
-			setCategories(categoriesList);
-		} catch (error) {
-			setNotification({
-				theme: "fail",
-				message: error.response.data.message ?? "Erro ao obter a lista de categorias.",
-				setNotification: setNotification
-			});
-		}
-
-		setLoading(false);
-	}
-
-	async function getTypesList() {
-		setLoading(true);
-
-		try {
-			const response = await api.get("/management/types");
-			setTypes(response.data.data);
-		} catch (error) {
-			setNotification({
-				theme: "fail",
-				message: error.response.data.message ?? "Erro ao obter a lista de tipos.",
-				setNotification: setNotification
-			});
-		}
-
-		setLoading(false);
-	}
-
 	function handleItemInfoValidation() {
 		const errors = {};
 
@@ -92,16 +105,18 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 		}
 
 		if (itemInfo.category) {
-			if (itemInfo.category === "") errors.category = "Selecione a categoria.";
+			if (itemInfo.category === "") errors.category = "Selecione uma categoria.";
 		} else {
 			errors.category = "Não pode estar vazio.";
 		}
 
-		// if (itemInfo === "type") {
-		// 	if (value == "") prev[key] = "Selecione o tipo.";
-		// }
+		if (itemInfo.type) {
+			if (itemInfo.type === "") errors.type = "Selecione um tipo.";
+		} else {
+			errors.type = "Não pode estar vazio.";
+		}
 
-		if (!errors.name && !errors.category) {
+		if (!errors.name && !errors.category && !errors.type) {
 			createCenterCost();
 		} else {
 			setItemInfoValidator(errors);
@@ -110,14 +125,27 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 
 	function handleItemInfo(event) {
 		setItemInfo((prev) => {
-			prev[event.target.name] = event.target.value;
-			return prev;
+			const newItem = { ...prev };
+			newItem[event.target.name] = event.target.value;
+
+			return newItem;
 		});
 	}
 
 	useEffect(() => {
-		getCategoriesList();
-		// getTypesList();
+		async function getInitialData() {
+			setLoading(true);
+			const categoriesList = await getCategoriesList();
+			const typesList = await getTypesList();
+
+			if (categoriesList && typesList) {
+				setCategories(categoriesList);
+				setTypes(typesList);
+				setLoading(false);
+			}
+		}
+
+		getInitialData();
 	}, []);
 
 	return (
@@ -130,8 +158,8 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 				<S.ModalContent>
 					<InputText
 						inputName={"name"}
-						inputValue={itemInfo.name}
-						inputWidth={"256px"}
+						inputValue={itemInfo.name ?? ""}
+						inputWidth={"288px"}
 						inputOnChange={handleItemInfo}
 						inputPlaceholder={"Nome"}
 						inputShowInfo={true}
@@ -140,41 +168,51 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 					/>
 					<InputSelect
 						selectName={"category"}
-						selectValue={itemInfo.category}
+						selectValue={itemInfo.category ?? ""}
 						selectOnChange={handleItemInfo}
 						selectPlaceholder={"Categoria"}
 						selectShowInfo={true}
 						selectErrorMsg={itemInfoValidator.category}
-						width={"256px"}
+						width={"288px"}
 						options={categories}
 						disabled={loading || !categories}
 					/>
 					<InputSelect
 						selectName={"type"}
 						selectValue={itemInfo.type}
-						selectOnChange={handleItemInfo}
+						selectOnChange={handleItemInfo ?? ""}
 						selectPlaceholder={"Tipo"}
 						selectShowInfo={true}
 						selectErrorMsg={itemInfoValidator.type}
-						width={"256px"}
+						width={"288px"}
 						options={types}
 						disabled={loading || !types}
 					/>
 					<InputTextArea
 						textAreaName={"description"}
-						textAreaValue={itemInfo.description}
+						textAreaValue={itemInfo.description ?? ""}
 						textAreaOnChange={handleItemInfo}
 						textAreaPlaceholder={"Descrição"}
 						textAreaShowInfo={true}
 						textAreaErrorMsg={itemInfoValidator.description}
-						width={"256px"}
+						width={"288px"}
 						height={"92px"}
 						disabled={loading}
 					/>
 				</S.ModalContent>
 				<S.ButtonBox>
-					<S.ButtonFormSubmit onClick={handleItemInfoValidation}>Registrar</S.ButtonFormSubmit>
-					<S.ButtonFormSubmit onClick={() => closeModal(false)}>Cancelar</S.ButtonFormSubmit>
+					<Button
+						typeStyle={"normal"}
+						disabled={loading}
+						value="Registrar"
+						onClick={handleItemInfoValidation}
+					/>
+					<Button
+						typeStyle={"normal"}
+						disabled={loading}
+						value="Cancelar"
+						onClick={() => closeModal(false)}
+					/>
 				</S.ButtonBox>
 			</S.Modal>
 		</S.Container>

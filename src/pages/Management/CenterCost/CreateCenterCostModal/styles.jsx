@@ -68,31 +68,11 @@ export const ModalContent = styled.div`
 	align-items: center;
 	/* justify-content: center; */
 	gap: 8px;
-	padding: 12px;
+	padding: 12px 24px;
 `;
 
 export const ButtonBox = styled.div`
 	display: flex;
 	padding: 12px;
 	gap: 12px;
-`;
-
-export const ButtonFormSubmit = styled.button`
-	width: 128px;
-	border: 1px solid #555;
-	border-radius: 6px;
-	padding: 6px 12px;
-	align-self: center;
-
-	&:hover {
-		cursor: pointer;
-		border-color: #000;
-		background-color: #bbb;
-	}
-
-	&:active {
-		color: #555;
-		border-color: #000;
-		background-color: #999;
-	}
 `;

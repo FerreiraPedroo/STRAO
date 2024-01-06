@@ -94,6 +94,7 @@ export const ManagementCenterCost = () => {
 	});
 
 	async function getCenterCostList(filters) {
+		// SANITIZA O FILTRO PARA VALORES VAZIOS
 		const sanitizedFilters = {};
 		for (const [key, value] of Object.entries(filters)) {
 			if (value) {
@@ -170,6 +171,7 @@ export const ManagementCenterCost = () => {
 					setNotification={setNotification}
 				/>
 			)}
+			
 			{modalCreateCenterCost && (
 				<CreateCenterCostModal
 					closeModal={setModalCreateCenterCost}
