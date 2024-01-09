@@ -8,7 +8,7 @@ export const InputDate = ({
 	inputOnChange,
 	inputPlaceholder,
 	inputShowInfo = false,
-	selectErrorMsg,
+	inputErrorMsg,
 	width,
 	disabled,
 	readOnly
@@ -21,8 +21,8 @@ export const InputDate = ({
 
 			<S.Input
 				id={inputId}
-				type="date"
-				onChange={inputOnChange}
+				type={"date"}
+				onChange={(e)=>inputOnChange(e)}
 				name={inputName}
 				value={inputValue}
 				placeholder={!inputShowInfo ? inputPlaceholder : ""}
@@ -30,8 +30,7 @@ export const InputDate = ({
 				readOnly={readOnly}
 				width={width}
 			/>
-
-			<S.ErrorMsg>{selectErrorMsg}</S.ErrorMsg>
+			<S.ErrorMsg>{inputErrorMsg}</S.ErrorMsg>
 		</S.Container>
 	);
 };

@@ -21,6 +21,7 @@ export const TitleText = styled.p`
 export const Input = styled.input`
 	min-width: 160px;
 	min-height: 28px;
+	${({ width }) => width && `width:${width};`}
 	color: #565656;
 	font-weight: 500;
 	font-size: 0.75rem;

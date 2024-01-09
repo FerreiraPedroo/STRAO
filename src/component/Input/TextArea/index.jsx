@@ -31,7 +31,7 @@ export const InputTextArea = ({
 				onChange={textAreaOnChange}
 				onBlur={(e) => textAreaOnBlur(e)}
 				placeholder={!textAreaShowInfo ? textAreaPlaceholder : ""}
-				defaultValue={textAreaValue}
+				value={textAreaValue}
 				height={height}
 				width={width}
 				disabled={disabled}

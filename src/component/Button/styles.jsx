@@ -5,14 +5,21 @@ export const Button = styled.button`
 	width: ${({ width }) => (width ? `${width}px` : "160px")};
 	min-height: 32px;
 	max-height: 32px;
-	text-align: center;
+
+    padding: 0 8px;
+
 	font-size: 1rem;
 	font-weight: 500;
-	border-radius: 6px;
-	background-color: ${({ theme }) => (Theme[theme] ? `${Theme[theme].buttonBgColor}` : "#dcdcdc")};
+	text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+	
 	border: 1px solid #555;
-	cursor: pointer;
-	outline: 0;
+    border-radius: 6px;
+	background-color: ${({ theme }) => (Theme[theme] ? `${Theme[theme].buttonBgColor}` : "#dcdcdc")};
+	
+    cursor: pointer;
+    outline: 0;
 
 	${({ theme }) => (Theme[theme] ? `border: 1px solid ${Theme[theme].buttonBorderColor}` : "#555")};
 
@@ -77,6 +84,21 @@ const propsTheme = {
     &:hover:disabled{
         cursor: default;
     } 
+  `,
+	cancel: `
+    background: #DA532C;
+    border: 1px solid #FA734C;
+    &:disabled{
+        color: #D1D1D1;
+        border: 2px solid #CC826D;
+        background-color: #BF6E56;
+        box-shadow: 0px 0px 0px #000000;
+        margin-top: 3px;
+    }
+    &:hover:disabled{
+        cursor: default;
+    } 
+
   `,
 	remove: `
     background: #DA532C;
@@ -188,6 +210,10 @@ const propsTheme = {
 export const Button40x32 = styled.button`
 	min-width: ${({ width }) => (width ? `${width}px` : "40px")};
 	min-height: ${({ height }) => (height ? `${height}px` : "32px")};
+
+	width: ${({ width }) => (width ? `${width}px` : "40px")};
+	height: ${({ height }) => (height ? `${height}px` : "32px")};
+
 	position: relative;
 	top: -1px;
 	display: flex;

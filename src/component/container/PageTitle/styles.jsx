@@ -7,7 +7,7 @@ const props = {
 		font-style: italic;
 		font-weight: bolder;
 		color: #565656;
-		line-height: 1.1;
+		line-height: 1.0;
   	`
 };
 
@@ -18,14 +18,14 @@ export const PageTitleContainer = styled.div`
 	justify-content: center;
 	align-content: start;
 	background-color: #f5f3f0;
-	margin-bottom: 8px;
+	margin: 8px 0px;
 `;
 
 export const PageHeader = styled.div`
 	width: 100%;
 	display: flex;
-	justify-content: start;
-	align-items: center;
+	justify-content: flex-start;
+	align-items: flex-start;
 	gap: 16px;
 `;
 export const PageTitleBox = styled.div`

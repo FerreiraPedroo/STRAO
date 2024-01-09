@@ -35,21 +35,18 @@ import { PageTitle } from "../PageTitle";
  * @param subTitle - String - Sub titulo da página.
  * @returns
  */
-export const PageFilter = ({
-	filtersData = [],
-	getFiltersSelected,
-	loading
-}) => {
+export const PageFilter = ({ filtersData = [], getFiltersSelected, loading }) => {
 	const [openContainer, setOpenContainer] = useState(false);
-	const [filters, setFilters] = useState(filtersData.reduce((acc, cur) => {
-		if (cur.type === "select" && cur.options.length) {
-			return {
-				...acc,
-				[cur.htmlName]: cur.options[0].value
-			};
-		}
-		return { ...acc, [cur.htmlName]: "" };
-	}, {})
+	const [filters, setFilters] = useState(
+		filtersData.reduce((acc, cur) => {
+			if (cur.type === "select" && cur.options.length) {
+				return {
+					...acc,
+					[cur.htmlName]: cur.options[0].value
+				};
+			}
+			return { ...acc, [cur.htmlName]: "" };
+		}, {})
 	);
 
 	function handleFilter(event) {
@@ -61,13 +58,13 @@ export const PageFilter = ({
 		setOpenContainer((prev) => !prev);
 	}
 
-	useEffect(() => {
-		getFiltersSelected(filters);
-	}, []);
-
 	function sendFiltersSelected() {
 		getFiltersSelected(filters);
 	}
+
+	useEffect(() => {
+		getFiltersSelected(filters);
+	}, []);
 
 	return (
 		<S.FilterContainer>
@@ -110,11 +107,7 @@ export const PageFilter = ({
 							)}
 						</div>
 					))}
-					<Button
-						typeStyle="find"
-						disable={loading}
-						onClick={sendFiltersSelected}
-					/>
+					<Button typeStyle="find" disable={loading} onClick={sendFiltersSelected} />
 				</S.FilterInputBox>
 			) : (
 				<></>

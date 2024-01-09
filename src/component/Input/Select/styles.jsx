@@ -44,7 +44,7 @@ export const Select = styled.select`
 export const Option = styled.option`
 	color: #565656;
 	font-weight: 500;
-	font-size: 0.8rem;
+	font-size: 0.9rem;
 `;
 export const OptionGroup = styled.optgroup`
 	color: #868686;

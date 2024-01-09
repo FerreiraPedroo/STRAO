@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
 	${({ width }) => width && `width:${width};`}
 	min-width: 128px;
-	height: 54px;
+	height: 50px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
@@ -20,8 +20,10 @@ export const TitleText = styled.p`
 `;
 export const Input = styled.input`
 	min-width: 160px;
-	min-height: 32px;
-	color: #767676;
+	min-height: 30px;
+	color: #565656;
+	font-weight: 500;
+	font-size: 0.80rem;
 	padding: 3px 8px 2px 8px;
 	background-color: #ffffff;
 	border: 1px solid #808080;
@@ -42,6 +44,7 @@ export const Input = styled.input`
 export const ErrorMsg = styled.div`
 	min-height: 10px;
 	font-size: 0.6rem;
+	font-weight: bold;
 	white-space: nowrap; 
 	overflow: hidden;
 	text-overflow: ellipsis;

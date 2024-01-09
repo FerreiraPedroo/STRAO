@@ -10,6 +10,7 @@ export const FilterContainer = styled.div`
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
 	border-radius: 4px;	
+	gap: 6px;
 `;
 export const FilterTitleBox = styled.div`
 	width: 100%;

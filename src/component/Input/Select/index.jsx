@@ -23,7 +23,6 @@ export const InputSelect = ({
 				id={selectId}
 				name={selectName}
 				value={selectValue}
-				// defaultValue={selectValue}
 				disabled={disabled}
 				readOnly={readOnly}
 				onChange={selectOnChange}
@@ -40,7 +39,6 @@ export const InputSelect = ({
 							<S.Option
 								key={option.value + "-" + index}
 								value={option.value}
-								// defaultValue={option.value}
 							>
 								{option.name}
 							</S.Option>

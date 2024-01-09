@@ -9,7 +9,8 @@ import {
 	EyeSlash,
 	Eye,
 	Plus,
-	CircleNotch
+	CircleNotch,
+	X
 } from "phosphor-react";
 
 /**
@@ -17,14 +18,7 @@ import {
  * @param {typeStyle} typeStyle "normal-128x32 | back-32x32 | find-40x32 | remove-40x32 | correct-40x32 | document-40x32"
  * @returns
  */
-export const Button = ({
-	value,
-	typeStyle = "normal",
-	disable,
-	theme,
-	onClick,
-	loading
-}) => {
+export const Button = ({ value, typeStyle = "normal", disable, theme, onClick, loading, width }) => {
 	// 	export const EmployeeStatus = styled.p`
 	// 	min-width: 96px;
 	// 	width: 10%;
@@ -85,6 +79,11 @@ export const Button = ({
 
 	return (
 		<>
+			{typeStyle === "normal" && (
+				<S.Button width={width} height={40} disabled={disable} theme={theme} onClick={onClick}>
+					{value}
+				</S.Button>
+			)}
 			{typeStyle === "back" && (
 				<S.ButtonBack width={72} height={40} disabled={disable} theme={theme} onClick={onClick}>
 					{value}
@@ -105,6 +104,19 @@ export const Button = ({
 					) : (
 						<MagnifyingGlass size={24} color="#ffffff" />
 					)}
+				</S.Button40x32>
+			)}
+			{typeStyle === "cancel" && (
+				<S.Button40x32
+					typeStyle={typeStyle}
+					value={value}
+					width={36}
+					height={28}
+					disabled={disable}
+					theme={theme}
+					onClick={onClick}
+				>
+					<X size={24} color="#ffffff" />
 				</S.Button40x32>
 			)}
 			{typeStyle === "remove" && (
@@ -182,7 +194,11 @@ export const Button = ({
 					theme={theme}
 					onClick={onClick}
 				>
-					<Check size={24} color="#ffffff" />
+					{loading ? (
+						<CircleNotch size={24} color="#ffffff" />
+					) : (
+						<Check size={24} color="#ffffff" />
+					)}
 				</S.Button40x32>
 			)}
 			{typeStyle === "add" && (
@@ -197,20 +213,6 @@ export const Button = ({
 				>
 					<Plus size={24} color="#ffffff" />
 				</S.Button40x32>
-			)}
-			{typeStyle === "normal" && (
-				<S.Button
-					typeStyle={typeStyle}
-					value={value}
-					width={128}
-					height={28}
-					disabled={disable}
-					theme={theme}
-					onClick={onClick}
-					readonly
-				>
-					{value}
-				</S.Button>
 			)}
 		</>
 	);
