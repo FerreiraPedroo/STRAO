@@ -1,40 +1,41 @@
 import React, { useState, useContext, useEffect } from "react";
 import { api } from "../../../services/api";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import findEmployee from "../../../assets/img/find-employee.svg";
+import { NotificationModal } from "../../../component/Notification/modal";
+import { PageFilter } from "../../../component/container/PageFilter";
+import { PageTitle } from "../../../component/container/PageTitle";
+import { PageList } from "../../../component/container/PageList";
+import { PageAction } from "../../../component/container/PageAction";
 
 import * as S from "./styles";
 
-import { PageTitle } from "../../../component/container/PageTitle";
-import { PageSectionAction } from "../../../component/container/PageSectionAction";
-import { PageFilter } from "../../../component/container/PageFilter";
-import { PageList } from "../../../component/container/PageList";
-import { PageAction } from "../../../component/container/PageAction";
-import { useNavigate } from "react-router-dom";
-
 export const SupplyStock = () => {
-	const userData = useSelector((state) => state.appData.dataInfo);
 	const navigate = useNavigate();
 
-	const [findStatus, setFindStatus] = useState(true);
-	const [findStockResponse, setFindStockResponse] = useState([]);
-	const [itemSelected, setItemSelected] = useState();
+	const userData = useSelector((state) => state.appData);
+
+	const [notification, setNotification] = useState(null);
+
+	const [searchStatus, setSearchStatus] = useState(true);
+	const [stockList, setStockList] = useState([]);
+	const [itemSelected, setItemSelected] = useState(null);
 
 	const [filters] = useState([
 		// {
-		// 	type: "text",
-		// 	htmlName: "name",
-		// 	htmlPlaceholder: "Nome",
+		// 	type: "select",
+		// 	htmlName: "contract",
+		// 	htmlPlaceholder: "Contrato",
 		// 	showInfo: true,
 		// 	defaultOption: 0,
-		// 	// options: Object.values(userData.contracts).reduce(
-		// 	// 	(acc, cur) => {
-		// 	// 		acc.push({ name: cur.name, value: cur._id });
-		// 	// 		return acc;
-		// 	// 	},
-		// 	// 	[{ name: "Todos", value: "" }]
-		// 	// )
+		// 	options: Object.values(userData.contractsInfo).reduce(
+		// 		(acc, cur) => {
+		// 			acc.push({ name: cur.name, value: cur._id });
+		// 			return acc;
+		// 		},
+		// 		[{ name: "Todos", value: "" }]
+		// 	)
 		// },
 		{
 			type: "select",
@@ -43,7 +44,7 @@ export const SupplyStock = () => {
 			showInfo: true,
 			defaultOption: 0,
 			options: [
-				{ name: "Nome", value: "fullName" },
+				{ name: "Nome", value: "name" },
 				{ name: "Identificação", value: "identification" }
 			]
 		},
@@ -66,49 +67,66 @@ export const SupplyStock = () => {
 		{ name: "E-mail", htmlName: "email", size: 0 }
 	]);
 	const [listActions] = useState([
-		// {
-		// 	name: "Editar",
-		// 	typeStyle: "edit",
-		// 	show: true,
-		// 	action: (employee) =>
-		// 		navigate("/rh/employee/edit", {
-		// 			state: { dataId: employee._id }
-		// 		})
-		// }
+		{
+			name: "Novo item",
+			typeStyle: "add",
+			show: true,
+			action: () => navigate("/supply/item/register")
+		},
+		{
+			name: "Editar",
+			typeStyle: "edit",
+			show: true,
+			action: (employee) =>
+				navigate("/rh/employee/edit", {
+					state: { dataId: employee._id }
+				})
+		}
 	]);
 
 	const getItemSearch = async (filters) => {
-		setFindStatus(true);
+		setSearchStatus(true);
+
 		try {
-			const { data } = await api.get("/supply/stock/items", {
+			const response = await api.get("/supply/warehouse/items", {
 				params: filters
 			});
 
-			setFindStockResponse(data.data);
-			setFindStatus(false);
+			setSearchStockResponse(response.data.data);
+			setSearchStatus(false);
 		} catch (error) {
-			console.log("ERROR: ", error);
-			setFindStatus(false);
+			setNotification({
+				theme: "fail",
+				message:
+					(error.response && error.response.data.message) ?? "Erro ao obter os dados do estoque.",
+				setNotification: setNotification
+			});
+
+			setSearchStatus(false);
 		}
 	};
 
 	return (
 		<S.Container>
-			<PageTitle title="Estoque" subTitle={"Todos os items do estoque"} />
+			{notification && (
+				<NotificationModal
+					theme={notification.theme}
+					message={notification.message}
+					setNotification={setNotification}
+				/>
+			)}
 
-			<PageSectionAction
-				actionsData={listActions}
-				dataSelected={itemSelected}
-				loading={findStatus}
-			/>
+			<PageTitle title="Estoque" backUrl={"/supply"} subTitle={"Todos os items do estoque"} />
 
-			<PageFilter filtersData={filters} getFiltersSelected={getItemSearch} loading={findStatus} />
+			<PageAction actionsData={listActions} dataSelected={itemSelected} loading={searchStatus} />
+
+			<PageFilter filtersData={filters} getFiltersSelected={getItemSearch} loading={searchStatus} />
 
 			<PageList
-				listData={findStockResponse}
+				listData={stockList}
 				columns={listColumns}
 				setDataSelected={setItemSelected}
-				loading={findStatus}
+				loading={searchStatus}
 			/>
 		</S.Container>
 	);

@@ -2,22 +2,30 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-import { Card } from "../../component/Card/index.jsx";
+import { Card } from "../../component/Cards/Card/index.jsx";
 
 import * as S from "./styles.jsx";
 
 export const Supply = () => {
 	const { pathname } = useLocation();
-	console.log(pathname)
-	const sectors = useSelector(
-		(state) => state.appData.sectorsInfo
-	);
+
+	const menuSectors = useSelector((state) => {
+		const department = state.appData.departmentsInfo.find((department) => {
+			return department.url_path === pathname;
+		});
+
+		if (!department) {
+			return [];
+		}
+
+		return state.appData.sectorsInfo.filter((sector) => sector.department_id === department._id);
+	});
 
 	return (
 		<S.Container>
-			{sectors.length ? (
+			{menuSectors.length ? (
 				<>
-					{Object.values(sectors).map((sector) => (
+					{Object.values(menuSectors).map((sector) => (
 						<Card key={sector.name} data={sector} />
 					))}
 				</>

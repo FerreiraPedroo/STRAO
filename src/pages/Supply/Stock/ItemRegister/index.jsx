@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import * as S from "./styles.jsx";
 
-import { getDataFromNewItem } from "../../../../services/Supply/Warehouse/itemAPI";
 import { PageTitle } from "../../../../component/container/PageTitle";
 import { PageAction } from "../../../../component/container/PageAction";
 
-import { NotificationModal } from "../../../../component/Notification/full.jsx";
+import { NotificationModal } from "../../../../component/Notification/modal.jsx";
 import { ItemSupplierInfo } from "../../../../component/WareHouse/Item/Supplier/index.jsx";
 
 export function SupplyWarehouseItemRegister() {
 	const [itemInfo, serItemInfo] = useState({});
-	const [itemData, setItemData] = useState();
+	const [itemData, setItemData] = useState(null);
 
 	const [loading, setLoading] = useState(false);
 	const [notification, setNotification] = useState();
 
 	const itemActions = [
 		{
+			name: "Salvar",
 			title: "Salvar",
 			typeStyle: "correct",
 			show: true,
@@ -29,11 +29,26 @@ export function SupplyWarehouseItemRegister() {
 	];
 
 	useEffect(() => {
-		const getData = async () => {
-			const data = await getDataFromNewItem();
-			setItemData(data);
-		};
-		getData();
+		async function getData() {
+			setLoading(true);
+
+			try {
+				const response = await api.get(`/supply/warehouse/items`);
+
+				setItemData(response.data.data);
+				setLoading(false);
+			} catch (error) {
+				setNotification({
+					theme: "fail",
+					message:
+						(error.response && error.response.data.message) ??
+						"Erro ao obter os dados para criação do item.",
+					setNotification: setNotification
+				});
+			}
+		}
+
+		// getData();
 	}, []);
 
 	console.log("SupplyWarehouseItemRegister:", itemData);
@@ -49,11 +64,7 @@ export function SupplyWarehouseItemRegister() {
 				/>
 			)}
 			<PageTitle title={"Registro de item"} backButton={true} />
-			<PageAction
-				actionsData={itemActions}
-				dataSelected={true}
-				loading={loading}
-			/>
+			<PageAction actionsData={itemActions} dataSelected={true} loading={loading} />
 			{itemData && <ItemSupplierInfo itemData={itemData} />}
 		</S.Container>
 	);

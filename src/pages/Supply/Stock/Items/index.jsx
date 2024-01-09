@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import * as S from "./styles.jsx";
 
-import { getItemsFromFilters } from "../../../../services/Supply/Warehouse/itemAPI";
 import { PageTitle } from "../../../../component/container/PageTitle";
 import { PageFilter } from "../../../../component/container/PageFilter";
 import { PageList } from "../../../../component/container/PageList";
 import { PageAction } from "../../../../component/container/PageAction";
 
-import { NotificationModal } from "../../../../component/Notification/full.jsx";
+import { NotificationModal } from "../../../../component/Notification/modal.jsx";
 import { useNavigate } from "react-router-dom";
 
 const itemColumns = [
@@ -95,13 +94,13 @@ export function SupplyWarehouseItems() {
 		setLoading(true);
 		setItemSelected();
 
-		const data = await getItemsFromFilters(filters);
-		if (data.codStatus === 401) {
-			setNotification({ message: data.response.statusText });
-			setItems([]);
-		} else {
-			setItems(data);
-		}
+		// const data = await getItemsFromFilters(filters);
+		// if (data.codStatus === 401) {
+		// 	setNotification({ message: data.response.statusText });
+		// 	setItems([]);
+		// } else {
+		// 	setItems(data);
+		// }
 		setLoading(false);
 	}
 
