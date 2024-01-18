@@ -8,9 +8,16 @@
         "strictNullChecks": true,
         "strictFunctionTypes": true,
         "baseUrl": ".",
+        "paths": {
+            "component/*": ["./src/component/*"],
+            "pages/*": ["./src/pages/*"],
+            "services/*": ["./src/services/*"],
+            "helper/*": ["./src/helper/*"],
+        }
     },
     "exclude": [
         "node_modules",
         "**/node_modules/*"
     ],
+
 }
