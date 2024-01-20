@@ -250,7 +250,7 @@ export function ContractValues({ contractId, contractValuesList = [], loading })
 			<InputText
 				inputName={"name"}
 				inputValue={newItem.name ?? ""}
-				inputWidth={"256px"}
+				inputWidth={"288px"}
 				inputOnChange={handleItemInfo}
 				inputPlaceholder={"Nome"}
 				inputShowInfo={true}
@@ -261,7 +261,7 @@ export function ContractValues({ contractId, contractValuesList = [], loading })
 			<InputText
 				inputName={"value"}
 				inputValue={newItem.value ?? "0.00"}
-				inputWidth={"256px"}
+				inputWidth={"288px"}
 				inputOnChange={handleItemInfo}
 				inputPlaceholder={"Valor R$"}
 				inputShowInfo={true}
@@ -288,7 +288,7 @@ export function ContractValues({ contractId, contractValuesList = [], loading })
 				textAreaPlaceholder={"Descrição"}
 				textAreaShowInfo={true}
 				textAreaErrorMsg={itemValidator.description}
-				width={"256px"}
+				width={"288px"}
 				height={"92px"}
 				disabled={loading || internalLoading}
 			/>

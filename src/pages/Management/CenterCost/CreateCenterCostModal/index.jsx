@@ -37,7 +37,10 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 		} catch (error) {
 			setNotification({
 				theme: "fail",
-				message: error.response.data.message ?? "Erro ao obter a lista de categorias.",
+				message:
+					error.response.data && error.response.data.message
+						? error.response.statusText
+						: error.message,
 				setNotification: setNotification
 			});
 		}
@@ -88,7 +91,11 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 		} catch (error) {
 			setNotification({
 				theme: "fail",
-				message: "Não foi possivel criar o centro de custo, tentar novamente."
+				message:
+					error.response.data && error.response.data.message
+						? error.response.statusText
+						: error.message,
+				setNotification: setNotification
 			});
 		}
 	}

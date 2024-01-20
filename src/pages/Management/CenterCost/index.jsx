@@ -116,7 +116,10 @@ export const ManagementCenterCost = () => {
 		} catch (error) {
 			setNotification({
 				theme: "fail",
-				message: error.response.data.message ?? error.response.statusText,
+				message:
+					error.response.data && error.response.data.message
+						? error.response.statusText
+						: error.message,
 				setNotification: setNotification
 			});
 		}
@@ -141,20 +144,14 @@ export const ManagementCenterCost = () => {
 			setCenterCostList((users) => users.filter((user) => user._id !== userId));
 			setCenterCostSelected(null);
 		} catch (error) {
-			if (error.response && error.response.status === 401) {
-				setNotification({
-					theme: "fail",
-					message: error.response.data.message,
-					setNotification: setNotification
-				});
-			}
-			if (error.response && error.response.status === 422) {
-				setNotification({
-					theme: "fail",
-					message: error.response.data.message,
-					setNotification: setNotification
-				});
-			}
+			setNotification({
+				theme: "fail",
+				message:
+					error.response.data && error.response.data.message
+						? error.response.statusText
+						: error.message,
+				setNotification: setNotification
+			});
 		}
 	}
 
@@ -171,7 +168,7 @@ export const ManagementCenterCost = () => {
 					setNotification={setNotification}
 				/>
 			)}
-			
+
 			{modalCreateCenterCost && (
 				<CreateCenterCostModal
 					closeModal={setModalCreateCenterCost}
