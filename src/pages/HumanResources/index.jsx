@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { Card } from "../../component/Card/index.jsx";
+import { Card } from "../../component/Cards/Card/index.jsx";
 
 import * as S from "./styles.jsx";
 

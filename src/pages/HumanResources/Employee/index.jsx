@@ -7,7 +7,6 @@ import findEmployee from "../../../assets/img/find-employee.svg";
 import * as S from "./styles";
 
 import { PageTitle } from "../../../component/container/PageTitle";
-import { PageSectionAction } from "../../../component/container/PageSectionAction";
 import { PageFilter } from "../../../component/container/PageFilter";
 import { PageList } from "../../../component/container/PageList";
 import { PageAction } from "../../../component/container/PageAction";
@@ -127,7 +126,7 @@ export const HumanResourcesEmployee = () => {
 				loading={findStatus}
 			/>
 
-			<PageSectionAction
+			<PageAction
 				actionsData={listActions}
 				dataSelected={employeeSelected}
 				loading={findStatus}
