@@ -24,8 +24,8 @@ import * as S from "./styles.jsx";
 
 /**
  * @param {{actionData: [{name:string, typeStyle: string, show: boolean, action: function}], dataSelected: string, loading: boolean}}
- * actionData - RECEBE UM ARRAY DE OBJETOS QUE SERÁ OS BOTÕES DAS AÇÕES
- * dataSelected - UMA STRING PARA QUE OS BOTÕES FIQUE HABILITADOS OU DESABILITADOS
+ * actionData - RECEBE UM ARRAY DE OBJETOS QUE SERÁ OS BOTÕES DAS AÇÕES //
+ * dataSelected - UMA STRING PARA QUE OS BOTÕES FIQUE HABILITADOS OU DESABILITADOS //
  * loading - SE O COMPONENTE PAI ESTÁ ESPERANDO ALGUM DADO PARA PODE HABILITAR AS AÇÕES.
  * @returns
  */
@@ -40,6 +40,7 @@ export const PageAction = ({ actionsData = [], dataSelected, loading = false }) 
 							typeStyle={action.typeStyle}
 							title={action.name}
 							onClick={() => action.action(dataSelected)}
+							disable={loading}
 						/>
 						<S.ActionText>{action.name}</S.ActionText>
 					</S.ActionButtonBox>

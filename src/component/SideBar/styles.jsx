@@ -125,5 +125,20 @@ export const ActionTitle = styled.p`
 	font-weight: 500;
 	font-size: 0.9rem;
 	color: inherit;
+`;
 
+export const GroupContainer = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+`;
+
+export const GroupTitle = styled.div`
+	width: 100%;
+	text-align: center;
+	background-color: #ddd;
+	border-bottom: 1px solid #ddd;
 `;

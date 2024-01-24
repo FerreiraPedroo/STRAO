@@ -22,12 +22,12 @@ export const InputSelect = ({
 			<S.Select
 				id={selectId}
 				name={selectName}
+				width={width}
 				value={selectValue}
-				disabled={disabled}
-				readOnly={readOnly}
 				onChange={selectOnChange}
 				placeholder={selectPlaceholder}
-				width={width}
+				disabled={disabled}
+				readOnly={readOnly}
 			>
 				{options &&
 					options.map((option, index) =>

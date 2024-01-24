@@ -20,10 +20,9 @@ export const ItemSupplierInfo = ({ itemData }) => {
 	};
 	const handleSelected = (name, value) => {
 		setSupplierInfo({ ...supplierInfo, [name]: value });
-
 	};
 
-	console.log("supplierInfo:", supplierInfo);
+	console.log("supplierInfo:", itemData);
 	return (
 		<S.Container open={true}>
 			<S.Title>
@@ -65,7 +64,6 @@ export const ItemSupplierInfo = ({ itemData }) => {
 					data={itemData.subCategories}
 				/>
 				<SelectDeselectMultipleFields />
-
 			</S.DataContainer>
 		</S.Container>
 	);

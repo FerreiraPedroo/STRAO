@@ -8,8 +8,8 @@ export const Container = styled.div`
 	gap: 10px;
 
 	position: relative;
-	width: 256px;
-	height: 130px;
+	width: 100%;
+	height: auto;
 
 	background: #dddddd;
 	border: 1px solid #a9a9a9;
@@ -26,32 +26,40 @@ export const Container = styled.div`
 `;
 
 export const Box = styled.div`
-	display: flex;
 	width: 100%;
-	justify-content: space-between;
+	display: flex;
 	gap: 8px;
 `;
 
 export const Img = styled.img`
-	min-width: 3.5rem;
-	min-height: 3.5rem;
-	width: 3.5rem;
-	height: 3.5rem;
+	min-width: 4rem;
+	min-height: 4rem;
+	width: 4rem;
+	height: 4rem;
 `;
 
-export const Name = styled.p`
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 3;
+export const TextBox = styled.div`
 	width: 100%;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	text-align: start;
-	font-weight: 500;
-	font-size: 0.9rem;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
 `;
 
-export const Description = styled(Name)`
-	-webkit-line-clamp: 3;
-	font-size: 0.7rem;
+export const NameTitle = styled.span`
+	width: 100%;
+
+	font-size: 1rem;
+	font-weight: 700;
+`;
+
+export const NameText = styled.span`
+	text-align: start;
+	font-weight: 700;
+	color: #333;
+	font-size: 1rem;
+`;
+
+export const Description = styled.span`
+	text-align: justify;
+	font-size: 1rem;
 `;

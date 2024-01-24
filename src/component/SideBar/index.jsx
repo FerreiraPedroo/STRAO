@@ -31,7 +31,24 @@ export function SideBar() {
 			return [];
 		}
 
-		return state.appData.sectorsInfo.filter((sector) => sector.department_id === department._id);
+		const sectorNoGroup = state.appData.sectorsInfo.nogroup.filter(
+			(sector) => sector.department_id === department._id
+		);
+		const sectorGroup = Object.entries(state.appData.sectorsInfo.group).reduce(
+			(prev, [sectorKey, sectorValue]) => {
+				const sectorFilteres = sectorValue.filter((sector) => {
+					return sector.department_id === department._id;
+				});
+
+				if (sectorFilteres.length) {
+					prev[sectorKey] = sectorFilteres;
+				}
+				return prev;
+			},
+			{}
+		);
+
+		return [sectorNoGroup, sectorGroup];
 	});
 
 	const menuSectorSelected = useSelector((state) => state.menu.sectionSelected);
@@ -57,35 +74,30 @@ export function SideBar() {
 		<S.Container>
 			<S.DepartmentTitle>{menuDepartment.name}</S.DepartmentTitle>
 			<S.HrLine />
-			{menuSectors.map((sector) => (
-				<S.SectionContainer key={sector.name} onClick={() => selectSection(sector)}>
-					<S.SectionTop selected={sector.name === menuSectorSelected}>
-						<S.SectionImg src={sideBarImgs[sector.url_img]} />
-						<S.SectionTitle>{sector.name}</S.SectionTitle>
-
-						{/* {sector.sector_actions.length ? (
-							<S.ArrowDown selected={sector.name !== menuSectorSelected} />
-						) : (
-							""
-						)} */}
-					</S.SectionTop>
-
-					{/* {menuSectorSelected === sector.name &&
-						sector.sector_actions.map((action) => (
-							<S.Action
-								key={action.name}
-								selected={action.name === menuSectorActionSelected}
-								onClick={() => {
-									selectSectionAction(action.name);
-									navigate(action.url_path);
-								}}
-							>
-								<S.ActionImg src={sideBarImgs[action.url_img]} />
-								<S.ActionTitle>{action.name}</S.ActionTitle>
-							</S.Action>
-						))} */}
-				</S.SectionContainer>
-			))}
+			{menuSectors.map((sector) =>
+				sector instanceof Array
+					? sector.map((sec, index) => (
+							<S.SectionContainer key={sec.name + index} onClick={() => selectSection(sec)}>
+								<S.SectionTop selected={sec.name === menuSectorSelected}>
+									<S.SectionImg src={sideBarImgs[sec.url_img]} />
+									<S.SectionTitle>{sec.name}</S.SectionTitle>
+								</S.SectionTop>
+							</S.SectionContainer>
+					  ))
+					: Object.entries(sector).map(([groupKey, group], index) => (
+							<S.GroupContainer key={groupKey + index}>
+								<S.GroupTitle>{groupKey}</S.GroupTitle>
+								{group.map((sec, index) => (
+									<S.SectionContainer key={sec.name + index} onClick={() => selectSection(sec)}>
+										<S.SectionTop selected={sec.name === menuSectorSelected}>
+											<S.SectionImg src={sideBarImgs[sec.url_img]} />
+											<S.SectionTitle>{sec.name}</S.SectionTitle>
+										</S.SectionTop>
+									</S.SectionContainer>
+								))}
+							</S.GroupContainer>
+					  ))
+			)}
 		</S.Container>
 	);
 }
