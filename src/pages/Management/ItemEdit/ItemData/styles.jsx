@@ -15,15 +15,6 @@ const props = {
   `
 };
 
-export const Container = styled.div`
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: start;
-	align-content: start;
-	gap: 16px;
-`;
-
 export const InnerContainer = styled.main`
 	display: flex;
 	flex-direction: column;

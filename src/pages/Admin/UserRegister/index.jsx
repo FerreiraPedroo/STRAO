@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { api } from "../../../services/api";
-import { NotificationModal } from "../../../component/Notification/modal.jsx";
-import { PageTitle } from "../../../component/container/PageTitle";
+import { api } from "services/api";
+
+import { NotificationModal } from "component/Notification/modal.jsx";
+import { InputText } from "component/Input/Text";
+import { InputDate } from "component/Input/Date";
+
+import { PageTitle } from "component/container/PageTitle";
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
 import * as S from "./styles.jsx";
-import { InputText } from "../../../component/Input/Text";
-import { InputDate } from "../../../component/Input/Date";
 
 export const AdminUserRegister = () => {
 	const navigate = useNavigate();
@@ -86,7 +89,7 @@ export const AdminUserRegister = () => {
 	}
 	
 	return (
-		<S.Container>
+		<PageContainer>
 			{notification && (
 				<NotificationModal
 					type="full"
@@ -193,6 +196,6 @@ export const AdminUserRegister = () => {
 
 				<S.ButtonFormSubmit type="submit">ENVIAR</S.ButtonFormSubmit>
 			</S.Form>
-		</S.Container>
+		</PageContainer>
 	);
 };

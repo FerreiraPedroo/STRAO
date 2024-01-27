@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { api } from "services/api.js";
+
 import * as S from "./styles.jsx";
 
-import { api } from "../../../../services/api.js";
-
-import { InputText } from "../../../../component/Input/Text/index.jsx";
-import { InputTextArea } from "../../../../component/Input/TextArea/index.jsx";
-import { InputDate } from "../../../../component/Input/Date/index.jsx";
+import { InputTextArea } from "component/Input/TextArea/index.jsx";
+import { ButtonText } from "component/ButtonText/index.jsx";
+import { InputText } from "component/Input/Text/index.jsx";
+import { InputDate } from "component/Input/Date/index.jsx";
 
 export function CreateContractModal({ closeModal, setNotification, updateContractList }) {
 	const [loading, setLoading] = useState(false);
@@ -131,8 +132,18 @@ export function CreateContractModal({ closeModal, setNotification, updateContrac
 					/>
 				</S.ModalContent>
 				<S.ButtonBox>
-					<S.ButtonFormSubmit onClick={handleItemInfoValidation}>Registrar</S.ButtonFormSubmit>
-					<S.ButtonFormSubmit onClick={() => closeModal(false)}>Cancelar</S.ButtonFormSubmit>
+					<ButtonText
+						typeStyle={"normal"}
+						disabled={loading}
+						value="Registrar"
+						onClick={handleItemInfoValidation}
+					/>
+					<ButtonText
+						typeStyle={"normal"}
+						disabled={loading}
+						value="Cancelar"
+						onClick={() => closeModal(false)}
+					/>
 				</S.ButtonBox>
 			</S.Modal>
 		</S.Container>

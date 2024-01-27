@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import * as S from "./styles.jsx";
 
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
+
 export function DeleteContractModal({ contractData, closeModal }) {
 	const [itemInfo, setItemInfo] = useState(contractData);
 
@@ -9,7 +11,7 @@ export function DeleteContractModal({ contractData, closeModal }) {
 	}, []);
 
 	return (
-		<S.Container>
+		<PageContainer>
 			<S.Modal theme={"theme"}>
 				<S.ModalClose theme={"theme"} onClick={() => closeModal(false)}>
 					☓
@@ -18,6 +20,6 @@ export function DeleteContractModal({ contractData, closeModal }) {
 				<S.ModalContent>{"message"}</S.ModalContent>
 				<S.ButtonFormSubmit onClick={() => closeModal(false)}>Voltar</S.ButtonFormSubmit>
 			</S.Modal>
-		</S.Container>
+		</PageContainer>
 	);
 }

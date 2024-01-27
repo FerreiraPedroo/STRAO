@@ -1,18 +1,23 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import * as Yup from "yup";
-import * as S from "./styles.jsx";
 
-import { api } from "../../../services/api.js";
 
-import { PageTitle } from "../../../component/container/PageTitle/index.jsx";
-import { NotificationModal } from "../../../component/Notification/modal.jsx";
-import { InputTextArea } from "../../../component/Input/TextArea/index.jsx";
-import { InputSelect } from "../../../component/Input/Select/index.jsx";
-import { InputDate } from "../../../component/Input/Date/index.jsx";
-import { InputText } from "../../../component/Input/Text/index.jsx";
+import { api } from "services/api.js";
+
+import { PageTitle } from "component/container/PageTitle/index.jsx";
+import { NotificationModal } from "component/Notification/modal.jsx";
+import { InputTextArea } from "component/Input/TextArea/index.jsx";
+import { InputSelect } from "component/Input/Select/index.jsx";
+import { InputDate } from "component/Input/Date/index.jsx";
+import { InputText } from "component/Input/Text/index.jsx";
+import { ButtonIcon } from "component/ButtonIcon/index.jsx";
+
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
+
 import { ContractValues } from "./ContractValues/index.jsx";
-import { Button } from "../../../component/Button/index.jsx";
+
+import * as S from "./styles.jsx";
 
 const editContractSchema = Yup.object().shape({
 	name: Yup.string()
@@ -173,7 +178,7 @@ export function ManagementContractEdit() {
 	}, []);
 
 	return (
-		<S.Container>
+		<PageContainer>
 			{notification && (
 				<NotificationModal
 					theme={notification.theme}
@@ -240,7 +245,7 @@ export function ManagementContractEdit() {
 					<S.ButtonContainer width={"256px"}>
 						{!editingContractInfo && (
 							<>
-								<Button
+								<ButtonIcon
 									value="Editar"
 									typeStyle="edit"
 									onClick={enableEditContract}
@@ -252,7 +257,7 @@ export function ManagementContractEdit() {
 
 						{editingContractInfo && (
 							<>
-								<Button
+								<ButtonIcon
 									value="Salvar"
 									typeStyle="correct"
 									onClick={handleContractInfoValidation}
@@ -260,7 +265,7 @@ export function ManagementContractEdit() {
 								/>
 								<S.ActionText>Salvar</S.ActionText>
 
-								<Button
+								<ButtonIcon
 									value="Cancelar"
 									typeStyle="cancel"
 									onClick={cancelEditContract}
@@ -278,6 +283,6 @@ export function ManagementContractEdit() {
 				loading={loading}
 				contractValuesList={contractInfo.contract_month_values}
 			/>
-		</S.Container>
+		</PageContainer>
 	);
 }

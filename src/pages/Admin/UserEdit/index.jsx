@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { api } from "../../../services/api.js";
 
-import { Button } from "../../../component/Button";
+import { ButtonIcon } from "../../../component/ButtonIcon/index.jsx";
 import { InputText } from "../../../component/Input/Text";
 import { InputSelect } from "../../../component/Input/Select";
 import { PageTitle } from "../../../component/container/PageTitle";
 import { PageAction } from "../../../component/container/PageAction";
 
 import * as S from "./styles.jsx";
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
 export function AdminUserEdit() {
 	const location = useLocation();
@@ -146,7 +147,7 @@ export function AdminUserEdit() {
 				prev.push(
 					<S.Sector key={sector._id}>
 						<S.SectorName>{sector.name} </S.SectorName>
-						<Button
+						<ButtonIcon
 							typeStyle="remove"
 							onClick={() => changeUpdate("sector", "remove", sector._id)}
 						/>
@@ -162,7 +163,7 @@ export function AdminUserEdit() {
 				prev.push(
 					<S.Sector key={sector._id}>
 						<S.SectorName>{sector.name} </S.SectorName>
-						<Button typeStyle="add" onClick={() => changeUpdate("sector", "add", sector._id)} />
+						<ButtonIcon typeStyle="add" onClick={() => changeUpdate("sector", "add", sector._id)} />
 					</S.Sector>
 				);
 			return prev;
@@ -183,7 +184,7 @@ export function AdminUserEdit() {
 	}, []);
 
 	return (
-		<S.Container>
+		<PageContainer>
 			<PageTitle
 				title="Editar usuário"
 				subTitle="adicione ou remova permissões do usuário."
@@ -241,7 +242,7 @@ export function AdminUserEdit() {
 									selectOnChange={(e) => setDepartmentSelect(e.target.value)}
 									options={departmentSelectOptions()}
 								/>
-								<Button
+								<ButtonIcon
 									typeStyle="correct"
 									disable={!departmentSelect}
 									onClick={() => changeUpdate("department", "add", departmentSelect)}
@@ -256,7 +257,7 @@ export function AdminUserEdit() {
 									<S.DataBox key={department._id}>
 										<S.DataTitleBox>
 											<S.DataTitle>{department.name}</S.DataTitle>
-											<Button
+											<ButtonIcon
 												typeStyle="remove"
 												onClick={() => changeUpdate("department", "remove", department._id)}
 											/>
@@ -293,7 +294,7 @@ export function AdminUserEdit() {
 											{userData.contractInfo.user.map((contrato) => (
 												<S.Sector key={contrato._id}>
 													<S.SectorName>{contrato.name} </S.SectorName>
-													<Button
+													<ButtonIcon
 														typeStyle="remove"
 														onClick={() => changeUpdate("contract", "remove", contrato._id)}
 													/>
@@ -305,7 +306,7 @@ export function AdminUserEdit() {
 											{userData.contractsInfo.available.map((contrato) => (
 												<S.Sector key={contrato._id}>
 													<S.SectorName>{contrato.name} </S.SectorName>
-													<Button
+													<ButtonIcon
 														typeStyle="add"
 														onClick={() => changeUpdate("contract", "add", contrato._id)}
 													/>
@@ -323,6 +324,6 @@ export function AdminUserEdit() {
 			) : (
 				<>Carregando...</>
 			)}
-		</S.Container>
+		</PageContainer>
 	);
 }

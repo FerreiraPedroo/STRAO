@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CaretDown, CaretUp } from "phosphor-react";
 
-import { Button } from "../../Button";
+import { ButtonIcon } from "../../ButtonIcon/index.jsx";
 import { InputText } from "../../Input/Text";
 import { InputSelect } from "../../Input/Select/index";
 
@@ -107,7 +107,7 @@ export const PageFilter = ({ filtersData = [], getFiltersSelected, loading }) =>
 							)}
 						</div>
 					))}
-					<Button typeStyle="find" disable={loading} onClick={sendFiltersSelected} />
+					<ButtonIcon typeStyle="find" disable={loading} onClick={sendFiltersSelected} />
 				</S.FilterInputBox>
 			) : (
 				<></>

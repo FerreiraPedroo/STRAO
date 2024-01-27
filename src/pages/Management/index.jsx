@@ -2,7 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-import { Card } from "../../component/Cards/Card/index.jsx";
+import { Card } from "component/Cards/Card/index.jsx";
+
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
 import * as S from "./styles.jsx";
 
@@ -39,7 +41,7 @@ export const Management = () => {
 	});
 
 	return (
-		<S.Container>
+		<PageContainer>
 			{menuSectors.map((sector) =>
 				sector instanceof Array
 					? sector.map((sec) => <Card key={sec.name} data={sec} />)
@@ -56,6 +58,6 @@ export const Management = () => {
 			)}
 
 			{!menuSectors.length && <S.NoAction>Sem ações.</S.NoAction>}
-		</S.Container>
+		</PageContainer>
 	);
 };

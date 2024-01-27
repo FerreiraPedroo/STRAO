@@ -100,13 +100,13 @@ export function CreateStockModal({ closeModal, setNotification, updateStockList 
 					/>
 				</S.ModalContent>
 				<S.ButtonBox>
-					<Button
+					<ButtonIcon
 						typeStyle={"normal"}
 						disabled={loading}
 						value="Registrar"
 						onClick={itemInfoValid}
 					/>
-					<Button
+					<ButtonIcon
 						typeStyle={"normal"}
 						disabled={loading}
 						value="Cancelar"

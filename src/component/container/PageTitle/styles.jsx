@@ -1,15 +1,5 @@
 import styled from "styled-components";
-
-const props = {
-	textPageTitle: `
-		width: 100%;
-		font-size: 2.8rem;
-		font-style: italic;
-		font-weight: bolder;
-		color: #565656;
-		line-height: 1.0;
-  	`
-};
+import { PageTitleTheme } from "styles/container";
 
 export const PageTitleContainer = styled.div`
 	width: 100%;
@@ -17,8 +7,10 @@ export const PageTitleContainer = styled.div`
 	flex-wrap: wrap;
 	justify-content: center;
 	align-content: start;
-	background-color: #f5f3f0;
+	background-color: var(--background-color);
 	margin: 8px 0px;
+
+	${PageTitleTheme["normal"]}
 `;
 
 export const PageHeader = styled.div`
@@ -26,28 +18,32 @@ export const PageHeader = styled.div`
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
-	gap: 16px;
+	gap: 20px;
 `;
 export const PageTitleBox = styled.div`
 	width: 100%;
 `;
 export const PageTitle = styled.h1`
+	width: 100%;
+
 	display: flex;
-	white-space: wrap;
 	align-items: center;
-	/* justify-content: center; */
-	padding-left: 16px;
-	
-	${props.textPageTitle}
+
+	font-size: 2.8rem;
+	font-style: italic;
+	font-weight: bolder;
+	color: #283b72;
+	line-height: 1;
+	white-space: wrap;
+
+	${PageTitleTheme["normal"]}
 `;
 export const PageSubTitle = styled.h2`
 	display: flex;
 	white-space: wrap;
 	align-items: center;
-	/* justify-content: center; */
-	padding-left: 16px;
-	font-size: 1.0rem;
-`;
-export const PageIcon = styled.div`
-	font-size: 1.0rem;
+	color: #283b72;
+	font-size: 1rem;
+
+	${PageTitleTheme["normal"]}
 `;

@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
+import { api } from "services/api.js";
 
 import * as Yup from "yup";
+
+import { InputTextArea } from "component/Input/TextArea/index.jsx";
+import { InputSelect } from "component/Input/Select/index.jsx";
+import { InputDate } from "component/Input/Date/index.jsx";
+import { InputText } from "component/Input/Text/index.jsx";
+import { ButtonIcon } from "component/ButtonIcon/index.jsx";
+
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
+
 import * as S from "./styles.jsx";
-
-import { api } from "../../../../services/api.js";
-
-import { InputTextArea } from "../../../../component/Input/TextArea/index.jsx";
-import { InputSelect } from "../../../../component/Input/Select/index.jsx";
-import { InputDate } from "../../../../component/Input/Date/index.jsx";
-import { InputText } from "../../../../component/Input/Text/index.jsx";
-import { Button } from "../../../../component/Button/index.jsx";
 
 const editDataSchema = Yup.object().shape({
 	name: Yup.string()
@@ -149,7 +151,7 @@ export function ManagementItemEditData({ infoData, loading }) {
 	}, []);
 
 	return (
-		<S.Container>
+		<PageContainer>
 			<S.InnerContainer>
 				<S.HeaderInner>
 					<S.HeaderInnerTitle>Dados do Item</S.HeaderInnerTitle>
@@ -192,7 +194,7 @@ export function ManagementItemEditData({ infoData, loading }) {
 					<S.ButtonContainer width={"256px"}>
 						{!editingDataInfo && (
 							<>
-								<Button
+								<ButtonIcon
 									value="Editar"
 									typeStyle="edit"
 									onClick={enableEditData}
@@ -204,7 +206,7 @@ export function ManagementItemEditData({ infoData, loading }) {
 
 						{editingDataInfo && (
 							<>
-								<Button
+								<ButtonIcon
 									value="Salvar"
 									typeStyle="correct"
 									onClick={handleDataInfoValidation}
@@ -225,6 +227,6 @@ export function ManagementItemEditData({ infoData, loading }) {
 				</S.UserDataContent>
 
 			</S.InnerContainer>
-		</S.Container>
+		</PageContainer>
 	);
 }

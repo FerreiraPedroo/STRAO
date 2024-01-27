@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import * as S from "./styles.jsx";
 
-import { api } from "../../../../services/api.js";
+import { api } from "services/api.js";
 
-import { Button } from "../../../../component/Button/index.jsx";
-import { InputText } from "../../../../component/Input/Text/index.jsx";
-import { InputTextArea } from "../../../../component/Input/TextArea/index.jsx";
+import { InputTextArea } from "component/Input/TextArea/index.jsx";
+import { ButtonText } from "component/ButtonText/index.jsx";
+import { InputText } from "component/Input/Text/index.jsx";
 
 export function CreateStockModal({ closeModal, setNotification, updateStockList }) {
 	const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ export function CreateStockModal({ closeModal, setNotification, updateStockList 
 		}
 	}
 
-	function itemInfoValid() {
+	function handleItemInfoValidation() {
 		const errors = {};
 
 		if (itemInfo.name) {
@@ -100,13 +100,13 @@ export function CreateStockModal({ closeModal, setNotification, updateStockList 
 					/>
 				</S.ModalContent>
 				<S.ButtonBox>
-					<Button
+					<ButtonText
 						typeStyle={"normal"}
 						disabled={loading}
 						value="Registrar"
-						onClick={itemInfoValid}
+						onClick={handleItemInfoValidation}
 					/>
-					<Button
+					<ButtonText
 						typeStyle={"normal"}
 						disabled={loading}
 						value="Cancelar"

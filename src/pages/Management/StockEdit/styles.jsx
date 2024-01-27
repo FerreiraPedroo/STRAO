@@ -24,6 +24,7 @@ export const Container = styled.div`
 	align-content: start;
 	padding: 8px;
 	gap: 16px;
+	background-color: var(--background-color);
 `;
 
 export const InnerContainer = styled.main`
@@ -31,7 +32,6 @@ export const InnerContainer = styled.main`
 	flex-direction: column;
 	width: 100%;
 	align-items: center;
-	background-color: #e5e5e5;
 	padding: 8px 12px 12px 12px;
 	border: 1px solid rgba(0, 0, 0, 0.25);
 	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);

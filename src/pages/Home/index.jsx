@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useContext } from "react";
-import * as S from "./styles.jsx";
+import React, { useEffect, useState } from "react";
+
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
 export const Home = () => {
   const [cards, setCards] = useState();
 
   useEffect(() => {}, []);
 
-  return <S.Container></S.Container>;
+  return <PageContainer></PageContainer>;
 };

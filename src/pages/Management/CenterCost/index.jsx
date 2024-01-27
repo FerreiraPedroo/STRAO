@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../../services/api.js";
+import { api } from "services/api.js";
 
-import { NotificationModal } from "../../../component/Notification/modal.jsx";
+import { NotificationModal } from "component/Notification/modal.jsx";
+import { PageFilter } from "component/container/PageFilter";
+import { PageAction } from "component/container/PageAction";
+import { PageTitle } from "component/container/PageTitle";
+import { PageList } from "component/container/PageList";
+
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
+
 import { CreateCenterCostModal } from "./CreateCenterCostModal/index.jsx";
 import { DeleteCenterCostModal } from "./DeleteCenterCostModal/index.jsx";
 import { EditCenterCostModal } from "./EditCenterCostModal/index.jsx";
-import { PageFilter } from "../../../component/container/PageFilter";
-import { PageAction } from "../../../component/container/PageAction";
-import { PageTitle } from "../../../component/container/PageTitle";
-import { PageList } from "../../../component/container/PageList";
-
-import * as S from "./styles.jsx";
 
 export const ManagementCenterCost = () => {
 	const navigate = useNavigate();
@@ -160,7 +161,7 @@ export const ManagementCenterCost = () => {
 	}, [filtersSelected]);
 
 	return (
-		<S.Container>
+		<PageContainer>
 			{notification && (
 				<NotificationModal
 					theme={notification.theme}
@@ -219,6 +220,6 @@ export const ManagementCenterCost = () => {
 				dataSelected={centerCostSelected}
 				loading={loading}
 			/>
-		</S.Container>
+		</PageContainer>
 	);
 };

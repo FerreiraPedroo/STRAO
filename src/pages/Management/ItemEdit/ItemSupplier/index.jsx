@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { api } from "../../../../services/api.js";
+import { api } from "services/api.js";
 
-import { Button } from "../../../../component/Button/index.jsx";
+import { ButtonIcon } from "component/ButtonIcon/index.jsx";
+
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
+
+import { ItemSupplierModal } from "../ItemSupplierModal/index.jsx";
 
 import * as S from "./styles.jsx";
-import { ItemSupplierModal } from "../ItemSupplierModal/index.jsx";
 
 export function ManagementItemEditSupplier({ itemId, infoData, loading }) {
 	const [pageLoading, setPageLoading] = useState(loading);
@@ -18,7 +21,7 @@ export function ManagementItemEditSupplier({ itemId, infoData, loading }) {
 	}, [infoData]);
 
 	return (
-		<S.Container>
+		<PageContainer>
 			{newSupplierModal && (
 				<ItemSupplierModal itemId={itemId} showModal={setNewSupplierModal} />
 			)}
@@ -67,7 +70,7 @@ export function ManagementItemEditSupplier({ itemId, infoData, loading }) {
 					<S.ButtonContainer width={"256px"}>
 						{
 							<>
-								<Button
+								<ButtonIcon
 									value="add"
 									typeStyle="add"
 									onClick={() => setNewSupplierModal(true)}
@@ -79,7 +82,7 @@ export function ManagementItemEditSupplier({ itemId, infoData, loading }) {
 
 						{selectedReference && (
 							<>
-								<Button
+								<ButtonIcon
 									value="remove"
 									typeStyle="remove"
 									onClick={() => null}
@@ -91,6 +94,6 @@ export function ManagementItemEditSupplier({ itemId, infoData, loading }) {
 					</S.ButtonContainer>
 				</S.UserDataContent>
 			</S.InnerContainer>
-		</S.Container>
+		</PageContainer>
 	);
 }

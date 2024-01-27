@@ -8,7 +8,7 @@ import { PageList } from "../../../component/container/PageList";
 import { PageTitle } from "../../../component/container/PageTitle";
 import { PageAction } from "../../../component/container/PageAction";
 
-import * as S from "./styles.jsx";
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
 export const AdminUsers = () => {
 	const navigate = useNavigate();
@@ -174,7 +174,7 @@ export const AdminUsers = () => {
 	}, [filtersSelected]);
 
 	return (
-		<S.Container>
+		<PageContainer>
 			{notification && (
 				<NotificationFull
 					type={notification.type}
@@ -210,6 +210,6 @@ export const AdminUsers = () => {
 				dataSelected={userSelected}
 				loading={loading}
 			/>
-		</S.Container>
+		</PageContainer>
 	);
 };

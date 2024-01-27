@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { Card } from "../../component/Cards/Card/index.jsx";
 
 import * as S from "./styles.jsx";
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
 export const Admin = () => {
 	const { pathname } = useLocation();
@@ -39,7 +40,7 @@ export const Admin = () => {
 	});
 
 	return (
-		<S.Container>
+		<PageContainer>
 			{menuSectors.map((sector) =>
 				sector instanceof Array
 					? sector.map((sec) => <Card key={sec.name} data={sec} />)
@@ -56,6 +57,6 @@ export const Admin = () => {
 			)}
 
 			{!menuSectors.length && <S.NoAction>Sem ações.</S.NoAction>}
-		</S.Container>
+		</PageContainer>
 	);
 };

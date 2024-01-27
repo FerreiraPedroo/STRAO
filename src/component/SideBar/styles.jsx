@@ -16,7 +16,7 @@ export const Container = styled.div`
 	flex-direction: column;
 	place-items: center;
 	padding: 6px 8px;
-	background-color: #f5f3f0;
+	background-color: #F6F6F6;
 	gap:6px;
 `;
 /* HR SEPARATOR */

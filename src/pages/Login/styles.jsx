@@ -2,15 +2,6 @@ import styled from "styled-components";
 
 import homebg from "./img/home-bg.png";
 
-export const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  background-image: url("${homebg}");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  user-select: none;
-`;
 export const LoginContainer = styled.div`
   position: relative;
   top: 50%;

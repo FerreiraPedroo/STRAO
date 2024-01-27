@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
-import { NotificationModal } from "component/Notification/modal.jsx";
-import { PageTitle } from "component/container/PageTitle/index.jsx";
 import { api } from "services/api.js";
 
+import { NotificationModal } from "component/Notification/modal.jsx";
+
+import { PageTitle } from "component/container/PageTitle/index.jsx";
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
+
 import { ManagementItemEditData } from "./ItemData/index.jsx";
+import { ManagementItemEditSupplier } from "./ItemSupplier/index.jsx";
 
 import * as S from "./styles.jsx";
-import { ManagementItemEditSupplier } from "./ItemSupplier/index.jsx";
 
 export function ManagementItemEdit() {
 	const navigate = useNavigate();
@@ -60,7 +62,7 @@ export function ManagementItemEdit() {
 	}, []);
 	// console.log(dataInfo);
 	return (
-		<S.Container>
+		<PageContainer>
 			{notification && (
 				<NotificationModal
 					theme={notification.theme}
@@ -84,6 +86,6 @@ export function ManagementItemEdit() {
 			<ManagementItemEditData infoData={dataInfo} loading={loading} />
 			
 			<ManagementItemEditSupplier itemId={dataInfo._id} infoData={dataInfo.supply_reference} loading={loading} />
-		</S.Container>
+		</PageContainer>
 	);
 }

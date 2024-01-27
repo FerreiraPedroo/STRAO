@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "../Button";
+import { ButtonIcon } from "../ButtonIcon";
 import { InputSelect } from "../Input/Select";
 import { InputText } from "../Input/Text";
 
@@ -82,7 +82,7 @@ export const SelectDeselectMultipleFields = ({
 									</option>
 								))} */}
 						</InputSelect>
-						<Button
+						<ButtonIcon
 							typeStyle="correct"
 							title="Adicionar"
 							onClick={handleAddSelectedData}
@@ -97,7 +97,7 @@ export const SelectDeselectMultipleFields = ({
 						selectedInfo.map((selected) => (
 							<S.SelectedBox key={selected.id}>
 								<InputText inputValue={selected.title} disabled={true} />
-								<Button
+								<ButtonIcon
 									typeStyle="remove"
 									title="Remover"
 									onClick={() => handleRemoveSelectedData(selected)}

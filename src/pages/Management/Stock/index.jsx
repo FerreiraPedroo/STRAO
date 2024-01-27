@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../../services/api.js";
+import { api } from "services/api.js";
 
-import { NotificationModal } from "../../../component/Notification/modal.jsx";
+import { NotificationModal } from "component/Notification/modal.jsx";
 
-import { PageAction } from "../../../component/container/PageAction/index.jsx";
-import { PageCardList } from "../../../component/container/PageCardList/index.jsx";
-import { PageTitle } from "../../../component/container/PageTitle";
+import { PageCardList } from "component/container/PageCardList/index.jsx";
+import { PageAction } from "component/container/PageAction/index.jsx";
+import { PageTitle } from "component/container/PageTitle";
 
-import * as S from "./styles.jsx";
 import { CreateStockModal } from "./CreateStockModal/index.jsx";
+
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
 export const ManagementStock = () => {
 	const navigate = useNavigate();
@@ -46,7 +47,9 @@ export const ManagementStock = () => {
 			setNotification({
 				theme: "fail",
 				message:
-					error.response && error.response.data.message ? error.response.statusText : error.message,
+					error.response && error.response.data.message
+						? error.response.statusText
+						: error.message,
 				setNotification: setNotification
 			});
 		}
@@ -59,12 +62,11 @@ export const ManagementStock = () => {
 	}
 
 	useEffect(() => {
-
 		getStockList();
 	}, []);
 
 	return (
-		<S.Container>
+		<PageContainer>
 			{notification && (
 				<NotificationModal
 					theme={notification.theme}
@@ -91,6 +93,6 @@ export const ManagementStock = () => {
 			<PageAction actionsData={listActions} />
 
 			<PageCardList stockListData={stockList} pageLoading={pageLoading} />
-		</S.Container>
+		</PageContainer>
 	);
 };

@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { api } from "../../../services/api";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useFormik } from "formik";
+import { api } from "services/api";
 
-import { PageTitle } from "../../../component/container/PageTitle";
-import { InputText } from "../../../component/Input/Text";
-import { InputDate } from "../../../component/Input/Date";
-import { InputSelect } from "../../../component/Input/Select";
+import { NotificationModal } from "component/Notification/full";
+import { PageTitle } from "component/container/PageTitle";
+import { InputText } from "component/Input/Text";
+import { InputDate } from "component/Input/Date";
+import { InputSelect } from "component/Input/Select";
+import { ButtonIcon } from "component/ButtonIcon";
+
+import { PageContainer } from "component/container/PageContainer/styles";
 
 import { DriverLicense } from "./DriverLicense";
 import { Occupation } from "./Occupation";
 import { Uniform } from "./Uniform";
 import { Address } from "./Address";
 
-import { Button } from "../../../component/Button";
 
 import * as S from "./styles";
-import { useSelector } from "react-redux";
-import { NotificationModal } from "../../../component/Notification/full";
-import { useNavigate } from "react-router-dom";
 
 const formikAditionalValues = {
 	uniform: {
@@ -375,7 +377,7 @@ export const HumanResourcesEmployeeRegister = () => {
 	},[])
 
 	return (
-		<S.Container>
+		<PageContainer>
 			<PageTitle
 				title="Registro de funcionário"
 				subTitle="registre um novo funcionário em um contrato."
@@ -397,9 +399,9 @@ export const HumanResourcesEmployeeRegister = () => {
 						<S.PhotoBox>
 							<S.EmployeePhoto />
 							<S.PhotoButtons>
-								<Button typeStyle="add" disable={true} />
-								<Button typeStyle="remove" disable={true} />
-								<Button typeStyle="edit" disable={true} />
+								<ButtonIcon typeStyle="add" disable={true} />
+								<ButtonIcon typeStyle="remove" disable={true} />
+								<ButtonIcon typeStyle="edit" disable={true} />
 							</S.PhotoButtons>
 						</S.PhotoBox>
 						<S.InputContainer>
@@ -532,6 +534,6 @@ export const HumanResourcesEmployeeRegister = () => {
 			) : (
 				"Não disponivel"
 			)}
-		</S.Container>
+		</PageContainer>
 	);
 };

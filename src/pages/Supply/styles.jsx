@@ -8,7 +8,7 @@ export const Container = styled.div`
 	align-content: start;
 	flex-wrap: wrap;
 	gap: 16px;
-	background-color: #f5f3f0;
+	background-color: var(--background-color);
 `;
 
 export const NoAction = styled.div`

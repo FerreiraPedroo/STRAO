@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button } from "../../Button";
+import { ButtonIcon } from "../../ButtonIcon/index.jsx";
 
 import * as S from "./styles.jsx";
 
@@ -36,7 +36,7 @@ export const PageAction = ({ actionsData = [], dataSelected, loading = false }) 
 			<S.ActionsBox>
 				{actionsData.map((action) => (
 					<S.ActionButtonBox key={action.name} show={action.show || dataSelected}>
-						<Button
+						<ButtonIcon
 							typeStyle={action.typeStyle}
 							title={action.name}
 							onClick={() => action.action(dataSelected)}

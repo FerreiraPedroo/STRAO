@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { api } from "services/api";
+
 import { NotificationModal } from "component/Notification/modal";
 
-import { PageList } from "component/container/PageList";
+import { PageContainer } from "component/container/PageContainer/styles";
 import { PageAction } from "component/container/PageAction";
 import { PageTitle } from "component/container/PageTitle";
-import * as S from "./styles";
+import { PageList } from "component/container/PageList";
 
 export function ManagementItem() {
 	const navigate = useNavigate();
@@ -63,8 +63,7 @@ export function ManagementItem() {
 			name: "Edit material",
 			typeStyle: "edit",
 			show: false,
-			action: (materialData) =>
-				navigate(`/management/warehouse/item/edit`, { state: materialData })
+			action: (materialData) => navigate(`/management/warehouse/item/edit`, { state: materialData })
 		}
 	]);
 
@@ -94,7 +93,7 @@ export function ManagementItem() {
 	}, []);
 
 	return (
-		<S.Container>
+		<PageContainer>
 			{notification && (
 				<NotificationModal
 					theme={notification.theme}
@@ -109,11 +108,7 @@ export function ManagementItem() {
 				subTitle={"Registre e edite materiais utitizados no almoxarifado."}
 			/>
 
-			<PageAction
-				actionsData={listActions}
-				dataSelected={itemSelected}
-				loading={pageLoading}
-			/>
+			<PageAction actionsData={listActions} dataSelected={itemSelected} loading={pageLoading} />
 
 			{/* <PageFilter filtersData={filters} getFiltersSelected={getItems} loading={searchStatus} /> */}
 
@@ -123,6 +118,6 @@ export function ManagementItem() {
 				setDataSelected={setItemSelected}
 				loading={pageLoading}
 			/>
-		</S.Container>
+		</PageContainer>
 	);
 }

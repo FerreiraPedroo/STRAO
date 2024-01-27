@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import { api } from "services/api.js";
+
 import * as S from "./styles.jsx";
 
-import { api } from "../../../../services/api.js";
-
-import { Button } from "../../../../component/Button/index.jsx";
-import { InputText } from "../../../../component/Input/Text/index.jsx";
-import { InputSelect } from "../../../../component/Input/Select/index.jsx";
-import { InputTextArea } from "../../../../component/Input/TextArea/index.jsx";
+import { InputTextArea } from "component/Input/TextArea/index.jsx";
+import { InputSelect } from "component/Input/Select/index.jsx";
+import { ButtonText } from "component/ButtonText/index.jsx";
+import { InputText } from "component/Input/Text/index.jsx";
 
 export function CreateCenterCostModal({ closeModal, setNotification, updateCenterCostList }) {
 	const [loading, setLoading] = useState(false);
@@ -208,13 +208,13 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 					/>
 				</S.ModalContent>
 				<S.ButtonBox>
-					<Button
+					<ButtonText
 						typeStyle={"normal"}
 						disabled={loading}
 						value="Registrar"
 						onClick={handleItemInfoValidation}
 					/>
-					<Button
+					<ButtonText
 						typeStyle={"normal"}
 						disabled={loading}
 						value="Cancelar"

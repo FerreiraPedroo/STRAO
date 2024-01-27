@@ -2,7 +2,8 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { Card } from "../../component/Cards/Card/index.jsx";
+import { Card } from "component/Cards/Card/index.jsx";
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
 import * as S from "./styles.jsx";
 
@@ -11,9 +12,9 @@ export const HumanResources = () => {
 	const departmentSector = useSelector(
 		(state) => state.appData.dataInfo.departmentSectors[`${pathname}`]
 	);
-	console.log(departmentSector)
+
 	return (
-		<S.Container>
+		<PageContainer>
 			{departmentSector.length ? (
 				<>
 					{departmentSector.map((card) => (
@@ -23,6 +24,6 @@ export const HumanResources = () => {
 			) : (
 				<S.NoAction>Sem ações.</S.NoAction>
 			)}
-		</S.Container>
+		</PageContainer>
 	);
 };

@@ -2,19 +2,22 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import * as S from "./styles.jsx";
-import { Button } from "../../Button/index";
+import { ButtonText } from "../../ButtonText/index";
 import { useDispatch } from "react-redux";
-
 
 /**
  * @param title - String - Titulo principal da página.
  * @param subTitle - String - Sub titulo da página.
+ * @param backUrl - String - Url para ser direcionado quando clicar no botão.
+ * @param pageIndex - String - Se a página é index, não temo como voltar pelo botão.
+ *
  * @returns
  */
-export const PageTitle = ({ title, subTitle, icon, backUrl}) => {
+export const PageTitle = ({ title, subTitle, backUrl, pageIndex = false }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const location = useLocation();
+
 	const departmentLocation = "/" + location.pathname.split("/")[1];
 
 	function selectSection() {
@@ -28,7 +31,14 @@ export const PageTitle = ({ title, subTitle, icon, backUrl}) => {
 	return (
 		<S.PageTitleContainer>
 			<S.PageHeader>
-				<Button typeStyle="back" value={"Voltar"} onClick={selectSection}></Button>
+				{!pageIndex && (
+					<ButtonText
+						disabled={!backUrl}
+						typeStyle="back"
+						value={"Voltar"}
+						onClick={selectSection}
+					/>
+				)}
 
 				<S.PageTitleBox>
 					<S.PageTitle>{title}</S.PageTitle>

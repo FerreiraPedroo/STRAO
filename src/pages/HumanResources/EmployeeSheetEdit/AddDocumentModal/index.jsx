@@ -3,7 +3,7 @@ import * as yup from "yup";
 
 import { InputSelect } from "../../../../component/Input/Select/index";
 import { InputText } from "../../../../component/Input/Text/index";
-import { Button } from "../../../../component/Button";
+import { ButtonIcon } from "../../../../component/ButtonIcon";
 
 // import closeModalButon from "../../../../assets/icons/close-modal-red-36x36.svg";
 
@@ -409,7 +409,7 @@ export function DocumentModal({ onClick }) {
 					{documentTypeInputs()}
 
 					{documentData.hasOwnProperty("type") && documentData.type != "" ? (
-						<Button
+						<ButtonIcon
 							typeStyle="normal"
 							value="Salvar"
 							onClick={() => sendDocument()}

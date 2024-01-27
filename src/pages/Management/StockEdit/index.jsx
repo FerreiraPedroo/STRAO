@@ -11,7 +11,7 @@ import { InputTextArea } from "../../../component/Input/TextArea/index.jsx";
 import { InputSelect } from "../../../component/Input/Select/index.jsx";
 import { InputDate } from "../../../component/Input/Date/index.jsx";
 import { InputText } from "../../../component/Input/Text/index.jsx";
-import { Button } from "../../../component/Button/index.jsx";
+import { ButtonIcon } from "../../../component/ButtonIcon/index.jsx";
 
 const editStockSchema = Yup.object().shape({
 	name: Yup.string()
@@ -206,7 +206,7 @@ export function ManagementStockEdit() {
 			<PageTitle
 				title="Editando estoque"
 				subTitle="altere os dados do estoque, opcionalmente pode adicionar um contrato ao estoque."
-				backUrl={"/management/warehouse/stock"}
+				backUrl={"/management/warehouse/stocks"}
 				loading={pageLoading}
 			/>
 
@@ -253,7 +253,7 @@ export function ManagementStockEdit() {
 					<S.ButtonContainer width={"320px"}>
 						{!editingStockInfo && (
 							<>
-								<Button
+								<ButtonIcon
 									value="Editar"
 									typeStyle="edit"
 									onClick={enableEditStock}
@@ -265,7 +265,7 @@ export function ManagementStockEdit() {
 
 						{editingStockInfo && (
 							<>
-								<Button
+								<ButtonIcon
 									value="Salvar"
 									typeStyle="correct"
 									onClick={handleStockInfoValidation}
@@ -273,7 +273,7 @@ export function ManagementStockEdit() {
 								/>
 								<S.ActionText>Salvar</S.ActionText>
 
-								<Button
+								<ButtonIcon
 									value="Cancelar"
 									typeStyle="cancel"
 									onClick={cancelEditStock}

@@ -1,16 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
-import { api } from "../../../services/api";
-import { useSelector } from "react-redux";
-
-import findEmployee from "../../../assets/img/find-employee.svg";
-
-import * as S from "./styles";
-
-import { PageTitle } from "../../../component/container/PageTitle";
-import { PageFilter } from "../../../component/container/PageFilter";
-import { PageList } from "../../../component/container/PageList";
-import { PageAction } from "../../../component/container/PageAction";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { api } from "services/api";
+
+import { PageTitle } from "component/container/PageTitle";
+import { PageFilter } from "component/container/PageFilter";
+import { PageList } from "component/container/PageList";
+import { PageAction } from "component/container/PageAction";
+import { PageContainer } from "component/container/PageContainer/styles";
 
 // const filters = [
 // 	{
@@ -117,7 +114,7 @@ export const HumanResourcesEmployee = () => {
 	};
 
 	return (
-		<S.Container>
+		<PageContainer>
 			<PageTitle title="Todos os funcionários" />
 
 			<PageFilter
@@ -138,6 +135,6 @@ export const HumanResourcesEmployee = () => {
 				setDataSelected={setEmployeeSelected}
 				loading={findStatus}
 			/>
-		</S.Container>
+		</PageContainer>
 	);
 };

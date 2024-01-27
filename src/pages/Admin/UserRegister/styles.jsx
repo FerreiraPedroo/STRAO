@@ -9,17 +9,6 @@ const props = {
 	inputBgColorDisable: "#ddd"
 };
 
-export const Container = styled.div`
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-content: start;
-	padding: 16px 32px;
-	gap: 8px;
-`;
-
 export const Form = styled.form`
 	width: 320px;
 	display: flex;

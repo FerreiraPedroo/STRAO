@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { api } from "services/api.js";
+
 import * as S from "./styles.jsx";
 
-import { api } from "../../../../services/api.js";
-
-import { InputText } from "../../../../component/Input/Text/index.jsx";
-import { InputSelect } from "../../../../component/Input/Select/index.jsx";
-import { InputTextArea } from "../../../../component/Input/TextArea/index.jsx";
+import { InputTextArea } from "component/Input/TextArea/index.jsx";
+import { InputSelect } from "component/Input/Select/index.jsx";
+import { ButtonText } from "component/ButtonText/index.jsx";
+import { InputText } from "component/Input/Text/index.jsx";
 
 export function EditCenterCostModal({
 	centerCostData,
@@ -221,8 +222,18 @@ export function EditCenterCostModal({
 					/>
 				</S.ModalContent>
 				<S.ButtonBox>
-					<S.ButtonFormSubmit onClick={handleItemInfoValidation}>Salvar</S.ButtonFormSubmit>
-					<S.ButtonFormSubmit onClick={() => closeModal(false)}>Cancelar</S.ButtonFormSubmit>
+					<ButtonText
+						typeStyle={"normal"}
+						disabled={loading}
+						value="Registrar"
+						onClick={handleItemInfoValidation}
+					/>
+					<ButtonText
+						typeStyle={"normal"}
+						disabled={loading}
+						value="Cancelar"
+						onClick={() => closeModal(false)}
+					/>
 				</S.ButtonBox>
 			</S.Modal>
 		</S.Container>

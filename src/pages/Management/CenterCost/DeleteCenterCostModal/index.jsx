@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import * as S from "./styles.jsx";
 
 export function DeleteCenterCostModal({ centerCostData, closeModal }) {

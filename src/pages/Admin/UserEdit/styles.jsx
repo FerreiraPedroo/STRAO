@@ -9,17 +9,6 @@ const props = {
   `
 };
 
-export const Container = styled.div`
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: start;
-	align-content: start;
-	padding: 8px 8px 32px 8px;
-	gap: 8px;
-`;
-
 export const CenterContainer = styled.main`
 	display: flex;
 	flex-direction: column;

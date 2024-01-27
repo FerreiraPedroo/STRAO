@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
 	display: flex;
 	height: 100%;
-    background-color: #f5f3f0;
-	gap: 10px;
+	background-color: var(--background-color);
+	gap: 8px;
 `;
 
 /* HR SEPARATOR */
@@ -19,7 +19,7 @@ export const CenterContainer = styled.div`
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
-	background-color: #f5f3f0;
-	border-right: 1px solid rgba(0,0,0,0.06);
+	background-color: #F6F6F6;
+	border-right: 1px solid rgba(0,0,0,0.08);
 	box-shadow: 1px 2px 10px 1px rgba(0,0,0,0.05);
 `;

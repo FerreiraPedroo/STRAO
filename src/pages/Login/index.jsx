@@ -9,8 +9,10 @@ import {
 	providerClearAllInfo
 } from "../../services/store/features/data/appData";
 
-import * as S from "./styles";
 import homebg2 from "./img/home-bg2.png";
+
+import { PageContainer } from "component/container/PageContainer/styles";
+import * as S from "./styles";
 
 export const Login = () => {
 	const { dataVersion } = useSelector((state) => state.appData);
@@ -62,7 +64,7 @@ export const Login = () => {
 	};
 
 	return (
-		<S.Container>
+		<PageContainer>
 			<S.LoginContainer>
 				<S.InputBox>
 					<S.Text size="2">usuário</S.Text>
@@ -82,6 +84,6 @@ export const Login = () => {
 					<S.Button type="image" src={homebg2} onClick={handleLogin} />
 				</S.ButtonBox>
 			</S.LoginContainer>
-		</S.Container>
+		</PageContainer>
 	);
 };

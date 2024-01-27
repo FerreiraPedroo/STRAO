@@ -19,6 +19,7 @@ export const Container = styled.div`
 	z-index: 100;
 	user-select: none;
 `;
+
 export const Modal = styled.div`
 	position: absolute;
 	left: calc(50% - 240px);

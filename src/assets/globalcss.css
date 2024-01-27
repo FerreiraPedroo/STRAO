@@ -1,5 +1,49 @@
 :root {
+  
   box-sizing: border-box;
+  --background-color: #ECEEF4;
+
+  /*################################################*/
+  /* PAGE TITLE THEMES */
+  /*LIGHT*/
+  --page-title-text-color-light: #283B72;
+  --page-title-background-color-light: #ECEEF4;
+  /*NIGHT*/
+  --page-title-text-color-night: #FFF;
+  --page-title-background-color-night: #000;
+  /*################################################*/
+  
+  
+  /*################################################*/
+  /* BUTTON TEXT THEMES */
+  /*LIGHT*/
+  --button-text-color-light: #4E5F8F;
+  --button-text-border-light: 1px solid #4E5F8F;
+  --button-text-box-shadow-light: 2px 2px 0px rgba(78, 95, 143, 0.9);
+  --button-text-background-color-light: #FFF;
+  /*NIGHT*/
+  --button-text-color-night: #FFF;
+  --button-text-border-night: 1px solid #FFF;
+  --button-text-box-shadow-night: 2px 2px 0px rgba(255, 255, 255, 0.5);
+  --button-text-background-color-night: #000;
+  /*################################################*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   --card-shadow: hsl(221, 100%, 96%);
   --card-bg-bottom: hsl(252, 100%, 67%);
   --card-bg-top: hsl(241, 81%, 54%);
@@ -35,8 +79,9 @@
 }
 body {
   height: 100%;
+  background-color: #ECEEF4;
 }
 html {
   height: 100%;
-  background-color: #f5f3f0;
+  background-color: #ECEEF4;
 }

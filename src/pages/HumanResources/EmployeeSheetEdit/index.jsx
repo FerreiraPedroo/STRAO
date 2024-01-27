@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { api } from "../../../services/api";
 
-import { Button } from "../../../component/Button";
+import { ButtonIcon } from "../../../component/ButtonIcon";
 import { PageTitle } from "../../../component/container/PageTitle";
 import { DocumentModal } from "./AddDocumentModal/index";
 
@@ -101,7 +101,7 @@ export const HumanResourcesEmployeeSheetEdit = () => {
 				</S.HeaderBox>
 				<S.SheetDataBox>
 					<S.DocumentBox>
-						<Button
+						<ButtonIcon
 							typeStyle="add"
 							onClick={() => setDocumentModalShow(true)}
 						/>
