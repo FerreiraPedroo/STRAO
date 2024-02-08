@@ -1,17 +1,17 @@
 import styled from "styled-components";
+import { PageStyle } from "styles/container";
 
 export const Container = styled.div`
 	width: 100%;
 	display: flex;
+	align-items: center;
 	flex-wrap: wrap;
 	justify-content: start;
 	align-content: start;
-	background-color: #e5e5e5;
-	padding: 18px;
-	padding-bottom: 64px;
-	border-radius: 4px;
-	border: 1px solid rgba(0, 0, 0, 0.25);
-	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
+
+	${({ theme }) => PageStyle.container(theme)};
+
+	padding-top: 16px;
+	padding-bottom: 32px;
 	gap: 18px;
 `;
-

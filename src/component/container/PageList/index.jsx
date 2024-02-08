@@ -18,7 +18,8 @@ export const PageList = ({
 	columns = [],
 	setDataSelected,
 	dataSelected,
-	loading
+	loading,
+	theme = "normal"
 }) => {
 	const [pageListData, setPageListData] = useState(null);
 
@@ -50,14 +51,14 @@ export const PageList = ({
 		setPageListData(data);
 	}, [listData]);
 	return (
-		<S.Container>
+		<S.Container theme={theme}>
 			<S.CenterContainer>
-				<S.ListUserContainer>
-					<S.ListUserHeaderBox>
+				<S.RowListContainer>
+					<S.RowHeaderBox>
 						{pageListData &&
 							pageListData.length != 0 &&
 							headerInfo.map((header) => (
-								<S.ListHeadText
+								<S.RowHeadText
 									key={header.htmlName}
 									id={header.htmlName}
 									minWidth={header.minSize}
@@ -66,20 +67,20 @@ export const PageList = ({
 									width={header.size}
 								>
 									{header.name}
-								</S.ListHeadText>
+								</S.RowHeadText>
 							))}
-					</S.ListUserHeaderBox>
+					</S.RowHeaderBox>
 					{listData &&
 						!loading &&
 						pageListData.map((data, index) => (
-							<S.ListUserBox
+							<S.RowBox
 								key={JSON.stringify(data)}
 								onClick={() => handleDataSelected(index)}
 								onMouseEnter={() => handleRowHover(index)}
 								onMouseLeave={() => handleRowHover()}
 							>
 								{headerInfo.map((column) => (
-									<S.UserText
+									<S.RowText
 										key={column.htmlName}
 										minWidth={column.minSize}
 										maxWidth={column.maxSize}
@@ -91,17 +92,15 @@ export const PageList = ({
 										{data[column.htmlName] instanceof Object
 											? data[column.htmlName].name
 											: data[column.htmlName]}
-									</S.UserText>
+									</S.RowText>
 								))}
-							</S.ListUserBox>
+							</S.RowBox>
 						))}
-				</S.ListUserContainer>
+				</S.RowListContainer>
 			</S.CenterContainer>
 
 			{loading ? <S.LoadingBox>Carregando...</S.LoadingBox> : null}
-			{!listData.length && !loading ? (
-				<S.LoadingBox>Sem registro</S.LoadingBox>
-			) : null}
+			{!listData.length && !loading ? <S.LoadingBox>Sem registro</S.LoadingBox> : null}
 		</S.Container>
 	);
 };

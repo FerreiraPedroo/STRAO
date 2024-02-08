@@ -29,13 +29,23 @@ import * as S from "./styles.jsx";
  * loading - SE O COMPONENTE PAI ESTÁ ESPERANDO ALGUM DADO PARA PODE HABILITAR AS AÇÕES.
  * @returns
  */
-export const PageAction = ({ actionsData = [], dataSelected, loading = false }) => {
+export const PageAction = ({
+	theme = "normal",
+	actionsData = [],
+	dataSelected,
+	loading = false
+}) => {
 	return (
-		<S.ActionsContainer key="pageAction">
-			<S.ActionsTitle>Ações</S.ActionsTitle>
-			<S.ActionsBox>
+		<S.ActionsContainer theme={theme} key="pageAction">
+			<S.ActionsTitle theme={theme}>Ações</S.ActionsTitle>
+			<S.ActionsBox theme={theme}>
 				{actionsData.map((action) => (
-					<S.ActionButtonBox key={action.name} show={action.show || dataSelected}>
+					<S.ActionButtonBox
+						theme={theme}
+						disabled={null}
+						key={action.name}
+						show={action.show || dataSelected}
+					>
 						<ButtonIcon
 							typeStyle={action.typeStyle}
 							title={action.name}

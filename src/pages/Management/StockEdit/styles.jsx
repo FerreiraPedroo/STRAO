@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { CardStyle } from "styles/cards";
+import { PageStyle } from "styles/container";
 
 const props = {
 	textFontFamily: "Arial",
@@ -15,18 +17,6 @@ const props = {
   `
 };
 
-export const Container = styled.div`
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: start;
-	align-content: start;
-	padding: 8px;
-	gap: 16px;
-	background-color: var(--background-color);
-`;
-
 export const InnerContainer = styled.main`
 	display: flex;
 	flex-direction: column;
@@ -37,6 +27,10 @@ export const InnerContainer = styled.main`
 	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
 	border-radius: 4px;
 	gap: 8px;
+
+${({ theme }) => PageStyle.container(theme)};
+
+	
 `;
 
 export const HeaderInner = styled.div`

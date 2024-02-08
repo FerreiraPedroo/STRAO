@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { api } from "services/api.js";
+
 import * as Yup from "yup";
 import * as S from "./styles.jsx";
 
-import { api } from "../../../services/api.js";
+import { NotificationModal } from "component/Notification/modal.jsx";
 
-import { PageTitle } from "../../../component/container/PageTitle/index.jsx";
-import { NotificationModal } from "../../../component/Notification/modal.jsx";
-import { InputTextArea } from "../../../component/Input/TextArea/index.jsx";
-import { InputSelect } from "../../../component/Input/Select/index.jsx";
-import { InputDate } from "../../../component/Input/Date/index.jsx";
-import { InputText } from "../../../component/Input/Text/index.jsx";
-import { ButtonIcon } from "../../../component/ButtonIcon/index.jsx";
+import { PageTitle } from "component/container/PageTitle/index.jsx";
+
+import { InputTextArea } from "component/Input/TextArea/index.jsx";
+import { InputSelect } from "component/Input/Select/index.jsx";
+import { ButtonIcon } from "component/ButtonIcon/index.jsx";
+import { InputDate } from "component/Input/Date/index.jsx";
+import { InputText } from "component/Input/Text/index.jsx";
+import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
 const editStockSchema = Yup.object().shape({
 	name: Yup.string()
@@ -194,7 +197,7 @@ export function ManagementStockEdit() {
 	}, []);
 
 	return (
-		<S.Container>
+		<PageContainer>
 			{notification && (
 				<NotificationModal
 					theme={notification.theme}
@@ -210,7 +213,7 @@ export function ManagementStockEdit() {
 				loading={pageLoading}
 			/>
 
-			<S.InnerContainer>
+			<S.InnerContainer theme={'normal'}>
 				<S.HeaderInner>
 					<S.HeaderInnerTitle>Dados do estoque</S.HeaderInnerTitle>
 				</S.HeaderInner>
@@ -285,6 +288,6 @@ export function ManagementStockEdit() {
 					</S.ButtonContainer>
 				</S.UserDataContent>
 			</S.InnerContainer>
-		</S.Container>
+		</PageContainer>
 	);
 }

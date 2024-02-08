@@ -64,14 +64,10 @@ export const ButtonBack = styled.input`
 	font-size: 1.1rem;
 	font-weight: 500;
 
-	cursor: pointer;
-	color: white;
-	background-color: #666;
-	user-select: none;
-
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
 	border-radius: 6px;
+	
+	cursor: pointer;
+	user-select: none;
 
 	&:hover {
 		box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);

@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { sectorActionsImgs } from "../../../helper/indexImg.js";
+import { sectorActionsImgs } from "helper/indexImg.js";
 
 import * as S from "./styles.jsx";
 
-export function CardInfo({ data }) {
+export function CardInfo({ theme, data }) {
 	const navigate = useNavigate();
 
 	function goTo(url_path) {
@@ -13,7 +13,7 @@ export function CardInfo({ data }) {
 	}
 
 	return (
-		<S.Container onClick={() => goTo(data.url_path)}>
+		<S.Container theme={"normal"} onClick={() => goTo(data.url_path)}>
 			<S.Box>
 				<S.Img src={sectorActionsImgs[data.url_img]} />
 				<S.TextBox>

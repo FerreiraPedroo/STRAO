@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { CardStockStyle } from "styles/cards";
 
 export const Container = styled.div`
 	display: flex;
@@ -11,9 +12,6 @@ export const Container = styled.div`
 	width: 100%;
 	height: auto;
 
-	background: #dddddd;
-	border: 1px solid #a9a9a9;
-	box-shadow: 0px 1px 1px #767676, inset 1px 1px 2px #ffffff;
 	border-radius: 2px;
 
 	cursor: pointer;
@@ -21,8 +19,10 @@ export const Container = styled.div`
 	overflow: hidden;
 
 	&:hover {
-		border: 1px solid black;
+		border: 1px solid #4E5F8F;
 	}
+
+	${({theme}) => CardStockStyle.container(theme)}
 `;
 
 export const Box = styled.div`
@@ -36,6 +36,7 @@ export const Img = styled.img`
 	min-height: 4rem;
 	width: 4rem;
 	height: 4rem;
+	border: 1px solid #FFF;
 `;
 
 export const TextBox = styled.div`
@@ -49,12 +50,12 @@ export const NameTitle = styled.span`
 	width: 100%;
 
 	font-size: 1rem;
-	font-weight: 700;
+	font-weight: 500;
 `;
 
 export const NameText = styled.span`
 	text-align: start;
-	font-weight: 700;
+	font-weight: 500;
 	color: #333;
 	font-size: 1rem;
 `;

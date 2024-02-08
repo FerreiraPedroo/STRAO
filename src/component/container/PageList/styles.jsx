@@ -1,12 +1,5 @@
 import styled from "styled-components";
-
-const props = {
-	headeTitle: `
-		font-size: 0.9rem;
-		font-style: italic;
-		font-weight: 600;  
-	`
-};
+import { PageStyle } from "styles/container";
 
 export const Container = styled.div`
 	width: 100%;
@@ -14,12 +7,10 @@ export const Container = styled.div`
 	flex-wrap: wrap;
 	justify-content: start;
 	align-content: start;
-	background-color: #e5e5e5;
-	padding: 12px;
-	padding-bottom: 64px;
-	border-radius: 4px;
-	border: 1px solid rgba(0, 0, 0, 0.25);
-	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
+
+	${({ theme }) => PageStyle.container(theme)};
+
+	padding-bottom: 32px;
 `;
 
 export const CenterContainer = styled.div`
@@ -29,14 +20,14 @@ export const CenterContainer = styled.div`
 	gap: 8px;
 `;
 
-export const ListUserContainer = styled.div`
+export const RowListContainer = styled.div`
 	display: flex;
 	width: 100%;
 	align-self: start;
 	flex-direction: column;
 	padding: 8px 0;
 `;
-export const ListUserHeaderBox = styled.div`
+export const RowHeaderBox = styled.div`
 	width: 100%;
 	height: 28px;
 	display: flex;
@@ -44,22 +35,27 @@ export const ListUserHeaderBox = styled.div`
 	box-sizing: content-box;
 	margin-bottom: 0px;
 `;
-export const ListHeadText = styled.p`
+export const RowHeadText = styled.p`
 	${({ width }) => width && `width:${width}px`};
 	${({ minWidth }) => minWidth && `min-width:${minWidth}px`};
 	${({ maxWidth }) => maxWidth && `max-width:${maxWidth}px`};
 	${({ align }) => (align ? `text-align:${align}` : `text-align: start;`)};
 	height: 28px;
-	padding: 0 10px;
+
 	display: flex;
 	align-items: center;
+	flex-grow: 1;
+
+	font-size: 0.9rem;
+	font-style: italic;
+	font-weight: 600;
+
+	padding: 0 10px;
+
 	background-color: #e5e5e5;
 	color: #767676;
 	border-top: 1px solid #c0c0c0;
 	border-bottom: 1px solid #c0c0c0;
-	flex-grow: 1;
-
-	${props.headeTitle}
 
 	&:first-child {
 		justify-content: center;
@@ -71,7 +67,7 @@ export const ListHeadText = styled.p`
 	}
 `;
 
-export const ListUserBox = styled.div`
+export const RowBox = styled.div`
 	display: flex;
 	width: 100%;
 	justify-content: start;
@@ -86,7 +82,7 @@ export const ListUserBox = styled.div`
 		border-bottom: 1px solid #c0c0c0;
 	}
 `;
-export const UserText = styled.p`
+export const RowText = styled.p`
 	${({ width }) => width && `width:${width}px`};
 	${({ minWidth }) => minWidth && `min-width:${minWidth}px`};
 	${({ maxWidth }) => maxWidth && `max-width:${maxWidth}px`};

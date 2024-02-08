@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PageTitleTheme } from "styles/container";
+import { PageTitleStyle } from "styles/container";
 
 export const PageTitleContainer = styled.div`
 	width: 100%;
@@ -7,10 +7,9 @@ export const PageTitleContainer = styled.div`
 	flex-wrap: wrap;
 	justify-content: center;
 	align-content: start;
-	background-color: var(--background-color);
 	margin: 8px 0px;
 
-	${PageTitleTheme["normal"]}
+	${PageTitleStyle["normal"]}
 `;
 
 export const PageHeader = styled.div`
@@ -32,18 +31,16 @@ export const PageTitle = styled.h1`
 	font-size: 2.8rem;
 	font-style: italic;
 	font-weight: bolder;
-	color: #283b72;
 	line-height: 1;
 	white-space: wrap;
 
-	${PageTitleTheme["normal"]}
+	${PageTitleStyle["normal"]}
 `;
 export const PageSubTitle = styled.h2`
 	display: flex;
 	white-space: wrap;
 	align-items: center;
-	color: #283b72;
 	font-size: 1rem;
 
-	${PageTitleTheme["normal"]}
+	${PageTitleStyle["normal"]}
 `;

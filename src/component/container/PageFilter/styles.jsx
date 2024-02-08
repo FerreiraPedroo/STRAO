@@ -1,16 +1,14 @@
 import styled from "styled-components";
+import { PageStyle } from "styles/container";
 
 export const FilterContainer = styled.div`
+	width: 100%;
 	display: flex;
 	flex-direction: column;
-	width: 100%;
 	align-items: flex-start;
-	background-color: #e5e5e5;
-	padding: 6px 12px 4px 12px;
-	border: 1px solid rgba(0, 0, 0, 0.25);
-	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
-	border-radius: 4px;	
 	gap: 6px;
+
+	${({ theme }) => PageStyle.container(theme)};
 `;
 export const FilterTitleBox = styled.div`
 	width: 100%;
@@ -18,12 +16,9 @@ export const FilterTitleBox = styled.div`
 	justify-content: space-between;
 `;
 export const FilterTitle = styled.div`
-	align-self: center;
-	font-style: italic;
-	font-size: 1rem;
-	font-weight: 600;
-	color: #565656;
+	${({ theme }) => PageStyle.containerTitle(theme)};
 `;
+
 export const FilterOpenButton = styled.div`
 	font-style: italic;
 	line-height: 0px;

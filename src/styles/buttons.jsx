@@ -1,14 +1,14 @@
 export const ButtonTextTheme = {
 	normal: `
-  color: var(--button-text-color-light);
-  border: var(--button-text-border-light);
-  box-shadow: var(--button-text-box-shadow-light);
-  background-color: var(--button-text-background-color-light);
+  color: var(--button-text-color-normal);
+  border: var(--button-text-border-normal);
+  box-shadow: var(--button-text-box-shadow-normal);
+  background-color: var(--button-text-background-color-normal);
   `,
-	night: `
-  color: var(--button-text-color-night);
-  border: var(--button-text-border-night);
-  box-shadow: var(--button-text-box-shadow-night);
-  background-color: var(--button-text-background-color-night);
+	dark: `
+  color: var(--button-text-color-dark);
+  border: var(--button-text-border-dark);
+  box-shadow: var(--button-text-box-shadow-dark);
+  background-color: var(--button-text-background-color-dark);
   `
 };

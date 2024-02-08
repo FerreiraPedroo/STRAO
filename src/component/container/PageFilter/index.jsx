@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { CaretDown, CaretUp } from "phosphor-react";
 
-import { ButtonIcon } from "../../ButtonIcon/index.jsx";
-import { InputText } from "../../Input/Text";
-import { InputSelect } from "../../Input/Select/index";
-
 import * as S from "./styles.jsx";
-import { PageTitle } from "../PageTitle";
+
+import { ButtonIcon } from "component/ButtonIcon/index.jsx";
+import { InputSelect } from "component/Input/Select/index";
+import { InputText } from "component/Input/Text";
+
 
 // exemplo
 // const [userListData] = [
@@ -35,7 +35,7 @@ import { PageTitle } from "../PageTitle";
  * @param subTitle - String - Sub titulo da página.
  * @returns
  */
-export const PageFilter = ({ filtersData = [], getFiltersSelected, loading }) => {
+export const PageFilter = ({ theme = 'normal',filtersData = [], getFiltersSelected, loading }) => {
 	const [openContainer, setOpenContainer] = useState(false);
 	const [filters, setFilters] = useState(
 		filtersData.reduce((acc, cur) => {
@@ -67,9 +67,9 @@ export const PageFilter = ({ filtersData = [], getFiltersSelected, loading }) =>
 	}, []);
 
 	return (
-		<S.FilterContainer>
+		<S.FilterContainer theme={theme}>
 			<S.FilterTitleBox>
-				<S.FilterTitle> Filtros</S.FilterTitle>
+				<S.FilterTitle theme={theme}> Filtros</S.FilterTitle>
 				<S.FilterOpenButton>
 					{openContainer ? (
 						<CaretUp onClick={handleOpenStatus} size={24} />
