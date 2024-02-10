@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CardStockStyle } from "styles/cards";
+import { CardStyle } from "styles/cards";
 
 export const Container = styled.div`
 	display: flex;
@@ -22,7 +22,7 @@ export const Container = styled.div`
 		border: 1px solid #4E5F8F;
 	}
 
-	${({theme}) => CardStockStyle.container(theme)}
+	${({theme}) => CardStyle.container(theme)}
 `;
 
 export const Box = styled.div`
@@ -49,7 +49,7 @@ export const TextBox = styled.div`
 export const NameTitle = styled.span`
 	width: 100%;
 
-	font-size: 1rem;
+	font-size: 0.9rem;
 	font-weight: 500;
 `;
 
@@ -57,7 +57,7 @@ export const NameText = styled.span`
 	text-align: start;
 	font-weight: 500;
 	color: #333;
-	font-size: 1rem;
+	font-size: 0.9rem;
 `;
 
 export const Description = styled.span`

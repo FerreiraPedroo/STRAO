@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { PageStyle } from "styles/container";
 
-export const ActionsContainer = styled.div`
+export const Container = styled.div`
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -9,11 +9,11 @@ export const ActionsContainer = styled.div`
 
 	${({ theme }) => PageStyle.container(theme)};
 `;
-export const ActionsTitle = styled.div`
+export const ContainerTitle = styled.div`
 	${({ theme }) => PageStyle.containerTitle(theme)};
 `;
 
-export const ActionsBox = styled.div`
+export const Box = styled.div`
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
@@ -21,16 +21,16 @@ export const ActionsBox = styled.div`
 	gap: 12px;
 `;
 
-export const ActionButtonBox = styled.div`
+export const ButtonBox = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
-	${({ disabled, theme }) => disabled && PageStyle.buttonBoxText(theme)};
+	${({ disabled, theme }) => disabled && PageStyle.buttonIconText(theme)};
 	${({ show }) => !show && "display: none"};
 `;
 
-export const ActionText = styled.div`
+export const ButtonText = styled.div`
 	font-size: 0.9rem;
 	font-weight: 500;
 	white-space: wrap;

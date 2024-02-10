@@ -29,7 +29,7 @@ import { ManagementCenterCost } from "pages/Management/CenterCost";
 import { ManagementContract } from "pages/Management/Contracts";
 import { ManagementContractEdit } from "pages/Management/ContractEdit";
 // INTEGRAÇÃO SUPPLY
-import { ManagementStock } from "pages/Management/Stock";
+import { ManagementStock } from "pages/Management/Stocks";
 import { ManagementStockEdit } from "pages/Management/StockEdit";
 import { ManagementItem } from "pages/Management/Item";
 import { ManagementItemEdit } from "pages/Management/ItemEdit";

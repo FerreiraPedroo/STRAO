@@ -43,8 +43,7 @@ export function ManagementItemEditData({ infoData, loading }) {
 			setNotification({
 				theme: "fail",
 				message:
-					(error.response && error.response.data.message) ??
-					"Erro ao obter os dados do item.",
+					(error.response && error.response.data.message) ?? "Erro ao obter os dados do item.",
 				setNotification: setNotification
 			});
 
@@ -74,12 +73,9 @@ export function ManagementItemEditData({ infoData, loading }) {
 	async function updateData() {
 		try {
 			setDataSaveLoading(true);
-			const response = await api.put(
-				`/management/warehouse/item/${dataInfo._id}/item`,
-				{
-					...editDataInfo
-				}
-			);
+			const response = await api.put(`/management/warehouse/item/${dataInfo._id}/item`, {
+				...editDataInfo
+			});
 
 			setDataInfo((prev) => {
 				Object.entries(editDataInfo).forEach(([name, value]) => {
@@ -99,8 +95,7 @@ export function ManagementItemEditData({ infoData, loading }) {
 		} catch (error) {
 			setNotification({
 				theme: "fail",
-				message:
-					"Não foi possivel atualizar os dados do contrato, tente novamente."
+				message: "Não foi possivel atualizar os dados do contrato, tente novamente."
 			});
 			setDataSaveLoading(false);
 		}
@@ -152,9 +147,9 @@ export function ManagementItemEditData({ infoData, loading }) {
 
 	return (
 		<PageContainer>
-			<S.InnerContainer>
+			<S.InnerContainer theme={"normal"}>
 				<S.HeaderInner>
-					<S.HeaderInnerTitle>Dados do Item</S.HeaderInnerTitle>
+					<S.HeaderInnerTitle theme={"normal"}>Dados do Item</S.HeaderInnerTitle>
 				</S.HeaderInner>
 
 				<S.UserDataContent>
@@ -214,7 +209,7 @@ export function ManagementItemEditData({ infoData, loading }) {
 								/>
 								<S.ActionText>Salvar</S.ActionText>
 
-								<Button
+								<ButtonIcon
 									value="Cancelar"
 									typeStyle="cancel"
 									onClick={cancelEditData}
@@ -225,7 +220,6 @@ export function ManagementItemEditData({ infoData, loading }) {
 						)}
 					</S.ButtonContainer>
 				</S.UserDataContent>
-
 			</S.InnerContainer>
 		</PageContainer>
 	);

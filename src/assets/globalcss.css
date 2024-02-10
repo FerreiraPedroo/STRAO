@@ -1,69 +1,112 @@
 :root {
   
-  box-sizing: border-box;
+  --box-sizing: border-box;
   --background-color: #ECEEF4;
 
   /*################################################*/
-  /* PAGE TITLE THEMES */
+  /**** components/container/pageTitle THEMES *******/
+  /*################################################*/
   /*LIGHT*/
-  --page-title-text-color-light: #283B72;
-  --page-title-background-color-light: #ECEEF4;
+  --page-title-text-color-normal: #283B72;
+  --page-title-background-color-normal: #ECEEF4;
   /*NIGHT*/
-  --page-title-text-color-night: #FFF;
-  --page-title-background-color-night: #000;
+  --page-title-text-color-dark: #FFF;
+  --page-title-background-color-dark: #000;
   /*################################################*/
   
   
   /*################################################*/
-  /* BUTTON TEXT THEMES */
+  /**** components/container/ButtonText THEMES ******/
+  /*################################################*/
   /*LIGHT*/
-  --button-text-color-light: #4E5F8F;
-  --button-text-border-light: 1px solid #4E5F8F;
-  --button-text-box-shadow-light: 2px 2px 0px rgba(78, 95, 143, 0.9);
-  --button-text-background-color-light: #FFF;
-  /*NIGHT*/
-  --button-text-color-night: #FFF;
-  --button-text-border-night: 1px solid #FFF;
-  --button-text-box-shadow-night: 2px 2px 0px rgba(255, 255, 255, 0.5);
-  --button-text-background-color-night: #000;
+  --button-text-color-normal: #4E5F8F;
+  --button-text-border-normal: 1px solid #4E5F8F;
+  --button-text-box-shadow-normal: 2px 2px 0px rgba(78, 95, 143, 0.9);
+  --button-text-background-color-normal: #FFF;
+  /*DARK*/
+  --button-text-color-dark: #FFF;
+  --button-text-border-dark: 1px solid #FFF;
+  --button-text-box-shadow-dark: rgba(255, 255, 255, 0.5);
+  --button-text-background-color-dark: #000;
+  /*################################################*/
+ 
+
+  /*################################################*/
+  /**** components/cards/Card* THEMES ******/
+  /*################################################*/
+  /*LIGHT*/
+  --card-text-color-normal: #4E5F8F;
+  --card-text-color-disabled-normal: rgba(78, 95, 143, 0.5);
+  --card-border-normal: 1px solid #DEE2E6;
+  --card-background-color-normal: #fefefe;
+  /* --card-box-shadow-normal: 2px 2px 0px rgba(78, 95, 143, 0.9); */
+  /*DARK*/
+  --card-text-color-dark: #FFF;
+  --card-text-color-disabled-dark: rgba(78, 95, 143, 0.5);
+  --card-border-dark: 1px solid #4E5F8F;
+  --card-background-color-dark: #222;
+  --card-box-shadow-dark: 2px 2px 0px rgba(78, 95, 143, 0.9);
+  /*################################################*/
+  
+
+
+  /*################################################*/
+  /**** components/Input/* THEMES ******/
+  /*################################################*/
+  /*LIGHT*/
+  --input-text-color-normal: #4E5F8F;
+  --input-border-normal: 1px solid #888888;
+  --input-background-color-normal: #fff;
+  /*DARK*/
+  --input-text-color-dark: #FFF;
+  --input-border-dark: 1px solid #4E5F8F;
+  --input-background-color-dark: #222;
+  /*################################################*/
+  /* INPUT SUPERIOR TEXT*/
+  /*LIGHT*/
+  --input-title-text-color-normal: #1B1464;
+  --input-title-border-normal: 1px solid #888888;
+  --input-title-background-color-normal: #fff;
+  /*DARK*/
+  --input-title-text-color-dark: #FFF;
+  --input-title-border-dark: 1px solid #4E5F8F;
+  --input-title-background-color-dark: #222;
   /*################################################*/
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   
-  --card-shadow: hsl(221, 100%, 96%);
-  --card-bg-bottom: hsl(252, 100%, 67%);
-  --card-bg-top: hsl(241, 81%, 54%);
-  --result-bg-bottom: hsla(256, 72%, 46%, 1);
-  --result-bg-top: hsla(241, 72%, 46%, 0);
 
-  --text-red: hsl(0, 100%, 67%);
-  --bg-red: hsla(0, 100%, 67%,5%);
-  --text-yellow: hsl(39, 100%, 56%);
-  --bg-yellow: hsla(39, 100%, 56%,5%);
-  --text-teal: hsl(166, 100%, 37%);
-  --bg-teal: hsla(166, 100%, 37%,5%);
-  --text-blue: hsl(234, 85%, 45%);
-  --bg-blue: hsla(234, 85%, 45%,5%);
 
-  --button-bg: hsl(224, 30%, 27%);
-  --muted:hsl(241, 100%, 89%);
 
-  --border-radius: 2rem;
-  --card-gradient: linear-gradient(to bottom, var(--card-bg-bottom), var(--card-bg-top));
+  /*################################################*/
+  /********************* PAGE THEMES ****************/
+  /*################################################*/
+  /*----------------------CONTAINER-----------------*/
+  /*LIGHT*/
+  --page-container-text-color-normal: #4E5F8F;
+  --page-container-text-color-disabled-normal: rgba(78, 95, 143, 0.5);
+  --page-container-border-normal: 1px solid #4E5F8F;
+  --page-container-background-color-normal: #D3D9E1;
+  --page-container-box-shadow-normal: 2px 2px 0px rgba(78, 95, 143, 0.9);
+  /*DARK*/
+  --page-container-text-color-dark: #FFF;
+  --page-container-text-color-disabled-dark: rgba(78, 95, 143, 0.5);
+  --page-container-border-dark: 1px solid #4E5F8F;
+  --page-container-background-color-dark: #222;
+  --page-container-box-shadow-dark: 2px 2px 0px rgba(78, 95, 143, 0.9);
+  
+  /*-------------------CONTAINER TITLE--------------*/
+  /*LIGHT*/
+  --page-container-title-text-color-normal: #1B1464;
+  --page-container-title-text-size: 1rem;
+  /*DARK*/
+  --page-container-title-text-color-dark: #FFF;
+  /*################################################*/
+
+
+
 }
 * {
   margin: 0px;
@@ -72,7 +115,6 @@
   font-family: 'Roboto';
   font-size: 16px;
   box-sizing: border-box;
-  color: #767676;
   letter-spacing: 1px;
   /* border: 1px solid blue; */
 

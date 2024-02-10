@@ -36,11 +36,11 @@ export const PageAction = ({
 	loading = false
 }) => {
 	return (
-		<S.ActionsContainer theme={theme} key="pageAction">
-			<S.ActionsTitle theme={theme}>Ações</S.ActionsTitle>
-			<S.ActionsBox theme={theme}>
+		<S.Container theme={theme} key="pageAction">
+			<S.ContainerTitle theme={theme}>Ações</S.ContainerTitle>
+			<S.Box theme={theme}>
 				{actionsData.map((action) => (
-					<S.ActionButtonBox
+					<S.ButtonBox
 						theme={theme}
 						disabled={null}
 						key={action.name}
@@ -52,10 +52,10 @@ export const PageAction = ({
 							onClick={() => action.action(dataSelected)}
 							disable={loading}
 						/>
-						<S.ActionText>{action.name}</S.ActionText>
-					</S.ActionButtonBox>
+						<S.ButtonText>{action.name}</S.ButtonText>
+					</S.ButtonBox>
 				))}
-			</S.ActionsBox>
-		</S.ActionsContainer>
+			</S.Box>
+		</S.Container>
 	);
 };

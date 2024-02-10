@@ -7,7 +7,6 @@ import { ButtonIcon } from "component/ButtonIcon/index.jsx";
 import { InputSelect } from "component/Input/Select/index";
 import { InputText } from "component/Input/Text";
 
-
 // exemplo
 // const [userListData] = [
 // 		{
@@ -35,7 +34,7 @@ import { InputText } from "component/Input/Text";
  * @param subTitle - String - Sub titulo da página.
  * @returns
  */
-export const PageFilter = ({ theme = 'normal',filtersData = [], getFiltersSelected, loading }) => {
+export const PageFilter = ({ theme = "normal", filtersData = [], getFiltersSelected, loading }) => {
 	const [openContainer, setOpenContainer] = useState(false);
 	const [filters, setFilters] = useState(
 		filtersData.reduce((acc, cur) => {
@@ -67,19 +66,19 @@ export const PageFilter = ({ theme = 'normal',filtersData = [], getFiltersSelect
 	}, []);
 
 	return (
-		<S.FilterContainer theme={theme}>
-			<S.FilterTitleBox>
-				<S.FilterTitle theme={theme}> Filtros</S.FilterTitle>
-				<S.FilterOpenButton>
+		<S.Container theme={theme}>
+			<S.TitleBox>
+				<S.Title theme={theme}>Filtros</S.Title>
+				<S.OpenButton>
 					{openContainer ? (
 						<CaretUp onClick={handleOpenStatus} size={24} />
 					) : (
 						<CaretDown onClick={handleOpenStatus} size={24} />
 					)}
-				</S.FilterOpenButton>
-			</S.FilterTitleBox>
+				</S.OpenButton>
+			</S.TitleBox>
 			{openContainer ? (
-				<S.FilterInputBox>
+				<S.InputBox>
 					{filtersData.map((filter) => (
 						<div key={filter.htmlName}>
 							{filter.type == "select" && (
@@ -108,10 +107,10 @@ export const PageFilter = ({ theme = 'normal',filtersData = [], getFiltersSelect
 						</div>
 					))}
 					<ButtonIcon typeStyle="find" disable={loading} onClick={sendFiltersSelected} />
-				</S.FilterInputBox>
+				</S.InputBox>
 			) : (
 				<></>
 			)}
-		</S.FilterContainer>
+		</S.Container>
 	);
 };

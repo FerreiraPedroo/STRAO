@@ -213,16 +213,16 @@ export function ManagementStockEdit() {
 				loading={pageLoading}
 			/>
 
-			<S.InnerContainer theme={'normal'}>
+			<S.InnerContainer theme={"normal"}>
 				<S.HeaderInner>
-					<S.HeaderInnerTitle>Dados do estoque</S.HeaderInnerTitle>
+					<S.HeaderInnerTitle theme={"normal"}>Dados do estoque</S.HeaderInnerTitle>
 				</S.HeaderInner>
 
 				<S.UserDataContent>
 					<InputText
 						inputName={"name"}
 						inputValue={editStockInfo.name ?? ""}
-						inputWidth={"288px"}
+						inputWidth={"320px"}
 						inputOnChange={handleStockInfo}
 						inputPlaceholder={"Nome"}
 						inputShowInfo={true}
@@ -236,7 +236,7 @@ export function ManagementStockEdit() {
 						selectPlaceholder={"Contrato"}
 						selectShowInfo={true}
 						selectErrorMsg={stockInfoValidator.contract_id}
-						width={"288px"}
+						width={"320px"}
 						options={contractsOptionInfo}
 						disabled={pageLoading || !editingStockInfo}
 					/>

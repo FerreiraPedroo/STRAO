@@ -22,12 +22,10 @@ export function ManagementItemEditSupplier({ itemId, infoData, loading }) {
 
 	return (
 		<PageContainer>
-			{newSupplierModal && (
-				<ItemSupplierModal itemId={itemId} showModal={setNewSupplierModal} />
-			)}
-			<S.InnerContainer>
+			{newSupplierModal && <ItemSupplierModal itemId={itemId} showModal={setNewSupplierModal} />}
+			<S.InnerContainer theme={"normal"}>
 				<S.HeaderInner>
-					<S.HeaderInnerTitle>Referencia de Fornecedores</S.HeaderInnerTitle>
+					<S.HeaderInnerTitle theme={"normal"}>Referencia de Fornecedores</S.HeaderInnerTitle>
 				</S.HeaderInner>
 				{dataInfo &&
 					dataInfo.map((data) => (
@@ -40,27 +38,19 @@ export function ManagementItemEditSupplier({ itemId, infoData, loading }) {
 							<S.ReferenceBox>
 								<S.ReferenceText>
 									Nome do item:
-									<S.ReferenceNameText>
-										{data.supplier_item_name}
-									</S.ReferenceNameText>
+									<S.ReferenceNameText>{data.supplier_item_name}</S.ReferenceNameText>
 								</S.ReferenceText>
 								<S.ReferenceText>
 									Nome do fornecedor:
-									<S.ReferenceNameText>
-										{data.supplier_name}
-									</S.ReferenceNameText>
+									<S.ReferenceNameText>{data.supplier_name}</S.ReferenceNameText>
 								</S.ReferenceText>
 								<S.ReferenceText>
 									Referência:
-									<S.ReferenceNameText>
-										{data.supplier_item_reference}
-									</S.ReferenceNameText>
+									<S.ReferenceNameText>{data.supplier_item_reference}</S.ReferenceNameText>
 								</S.ReferenceText>
 								<S.ReferenceText>
 									Descrição:
-									<S.ReferenceNameText>
-										{data.supplier_item_description}
-									</S.ReferenceNameText>
+									<S.ReferenceNameText>{data.supplier_item_description}</S.ReferenceNameText>
 								</S.ReferenceText>
 							</S.ReferenceBox>
 						</S.ReferenceContainer>

@@ -15,15 +15,16 @@ export const InputTextArea = ({
 	textAreaErrorMsg,
 	textAreaOnBlur = () => "",
 	disabled,
-	readOnly
+	readOnly,
+	theme = "normal"
 }) => {
 	return (
-		<S.Container width={width} height={height}>
-			<S.TitleText disabled={disabled}>
+		<S.Container width={width} height={height} theme={theme}>
+			<S.TitleText disabled={disabled} theme={theme}>
 				{((textAreaValue && textAreaShowInfo) || textAreaShowInfo) && textAreaPlaceholder}
 			</S.TitleText>
 
-			<S.TextArea
+			<S.TextArea theme={theme}
 				id={textAreaId}
 				name={textAreaName}
 				min={textAreaMin}

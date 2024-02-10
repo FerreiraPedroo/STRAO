@@ -12,14 +12,16 @@ export const InputSelect = ({
 	disabled,
 	readOnly,
 	width = "164px",
-	options
+	options,
+	theme = "normal"
 }) => {
 	return (
-		<S.Container width={width}>
-			<S.TitleText disabled={disabled}>
+		<S.Container width={width} theme={theme}>
+			<S.TitleText disabled={disabled} theme={theme}>
 				{((selectValue && selectShowInfo) || selectShowInfo) && selectPlaceholder}
 			</S.TitleText>
 			<S.Select
+				theme={theme}
 				id={selectId}
 				name={selectName}
 				width={width}
@@ -36,10 +38,7 @@ export const InputSelect = ({
 								{option.name}
 							</S.OptionGroup>
 						) : (
-							<S.Option
-								key={option.value + "-" + index}
-								value={option.value}
-							>
+							<S.Option key={option.value + "-" + index} value={option.value} theme={theme}>
 								{option.name}
 							</S.Option>
 						)

@@ -23,9 +23,8 @@ export const Container = styled.div`
 export const Modal = styled.div`
 	position: absolute;
 	left: calc(50% - 300px);
-	top: calc(50% - 250px);
+	top: calc(50% - 300px);
 	width: 600px;
-	height: 500px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

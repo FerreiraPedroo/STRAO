@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 	${({ theme }) => PageStyle.container(theme)};
 
-	padding-top: 16px;
-	padding-bottom: 32px;
-	gap: 18px;
+	padding-top: 12px;
+	padding-bottom: 16px;
+	gap: 8px;
 `;

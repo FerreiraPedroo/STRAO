@@ -132,7 +132,7 @@ export function SupplyWarehouseStock() {
 
 			<PageTitle
 				title="Estoque"
-				backUrl={"/supply/warehouse/stock/list"}
+				backUrl={"/supply/warehouse/stocks"}
 				subTitle={"Todos os items do estoque"}
 			/>
 

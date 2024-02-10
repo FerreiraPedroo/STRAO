@@ -33,6 +33,7 @@ export const InputFile = ({
 				width={inputWidth}
 				accept={inputAccept}
 				capture="camera"
+				theme={theme}
 			/>
 		</S.Container>
 	);

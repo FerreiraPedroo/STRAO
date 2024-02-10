@@ -1,30 +1,18 @@
 import styled from "styled-components";
-
-const props = {
-	textFontFamily: "Arial",
-	titleTextColor: "#999",
-	errorTextColor: "#f66",
-	successTextColor: "#6f6",
-	bgColor: "",
-	inputBgColorDisable: "#ddd",
-	headerTitle: `
-	font-style: italic;
-	font-size: 1.2rem;
-  	font-weight: 600;
-	color: #565656;  
-  `
-};
+import { PageStyle } from "styles/container";
 
 export const InnerContainer = styled.main`
-	display: flex;
-	flex-direction: column;
 	width: 100%;
+	display: flex;
 	align-items: center;
-	background-color: #e5e5e5;
-	padding: 8px 12px;
-	border: 1px solid rgba(0, 0, 0, 0.25);
-	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
-	border-radius: 4px;
+	flex-wrap: wrap;
+	justify-content: start;
+	align-content: start;
+
+	${({ theme }) => PageStyle.container(theme)};
+
+	padding-top: 12px;
+	padding-bottom: 16px;
 	gap: 8px;
 `;
 
@@ -33,7 +21,7 @@ export const HeaderInner = styled.div`
 `;
 
 export const HeaderInnerTitle = styled.p`
-	${props.headerTitle}
+	${({ theme }) => PageStyle.containerTitle(theme)};
 `;
 
 export const UserDataContent = styled.div`

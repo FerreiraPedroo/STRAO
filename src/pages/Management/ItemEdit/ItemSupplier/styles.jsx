@@ -1,31 +1,19 @@
 import styled from "styled-components";
-
-const props = {
-	textFontFamily: "Arial",
-	titleTextColor: "#999",
-	errorTextColor: "#f66",
-	successTextColor: "#6f6",
-	bgColor: "",
-	inputBgColorDisable: "#ddd",
-	headerTitle: `
-	font-style: italic;
-	font-size: 1.2rem;
-  	font-weight: 600;
-	color: #565656;  
-  `
-};
+import { PageStyle } from "styles/container";
 
 export const InnerContainer = styled.main`
-	display: flex;
-	flex-direction: column;
 	width: 100%;
-	align-items: flex-start;
-	background-color: #e5e5e5;
-	padding: 8px 12px;
-	border: 1px solid rgba(0, 0, 0, 0.25);
-	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);
-	border-radius: 4px;
-	gap: 16px;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: start;
+	align-content: start;
+
+	${({ theme }) => PageStyle.container(theme)};
+
+	padding-top: 12px;
+	padding-bottom: 16px;
+	gap: 8px;
 `;
 
 export const HeaderInner = styled.div`
@@ -33,7 +21,7 @@ export const HeaderInner = styled.div`
 `;
 
 export const HeaderInnerTitle = styled.p`
-	${props.headerTitle}
+	${({ theme }) => PageStyle.containerTitle(theme)};
 `;
 
 export const UserDataContent = styled.div`
@@ -41,6 +29,7 @@ export const UserDataContent = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
+	padding: 8px 0 0 0;
 
 `;
 
@@ -65,7 +54,7 @@ export const ReferenceContainer = styled.div`
 	display: flex;
 	width: 100%;
 	padding: 8px;
-	background: #dddddd;
+	background: #f1f1f1;
 	border: 1px solid #a9a9a9;
 	box-shadow: 0px 1px 1px #767676, inset 1px 1px 2px #ffffff;
 	border-radius: 2px;
@@ -74,7 +63,7 @@ export const ReferenceContainer = styled.div`
 	cursor: pointer;
 	user-select: none;
 	overflow: hidden;
-	${({selected}) => selected && "border: 1px solid black;"}
+	${({selected}) => selected && "border: 1px solid blue;"}
 	&:hover {
 		border: 1px solid black;
 	}
@@ -92,17 +81,20 @@ export const ReferenceBox = styled.div`
 export const ReferenceImg = styled.img`
 	min-width: 128px;
 	min-height: 96px;
+	width: 128px;
+	height: 96px;
+	border: 1px solid #ccc;
 `;
 
 export const ReferenceText = styled.span`
-	font-size: 0.9rem;
-	font-weight: 700;
+	font-size: 0.85rem;
+	font-weight: 600;
 `;
 
 export const ReferenceNameText = styled.span`
 	text-align: start;
-	font-weight: 700;
+	font-weight: 600;
 	color: #333;
-	font-size: 0.9rem;
+	font-size: 0.85rem;
 	padding: 0 6px;
 `;
