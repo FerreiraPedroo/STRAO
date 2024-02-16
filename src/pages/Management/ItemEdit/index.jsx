@@ -8,9 +8,10 @@ import { PageTitle } from "component/container/PageTitle/index.jsx";
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
 import { ManagementItemEditData } from "./ItemData/index.jsx";
-import { ManagementItemEditSupplier } from "./ItemSupplier/index.jsx";
+import { ManagementReferenceSupplier } from "./ItemReferenceSupplier/index.jsx";
 
 import * as S from "./styles.jsx";
+import { Loading } from "component/Loading/index.jsx";
 
 export function ManagementItemEdit() {
 	const navigate = useNavigate();
@@ -39,20 +40,16 @@ export function ManagementItemEdit() {
 			setLoading(true);
 
 			try {
-				const response = await api.get(
-					`/management/warehouse/item/${location.state._id}`
-				);
+				const response = await api.get(`/management/warehouse/item/${location.state._id}`);
 
 				setDataInfo(response.data.data);
 
 				setLoading(false);
 			} catch (error) {
-
 				setNotification({
 					theme: "fail",
 					message:
-						(error.response && error.response.data.message) ??
-						"Erro ao obter os dados do item.",
+						(error.response && error.response.data.message) ?? "Erro ao obter os dados do item.",
 					setNotification: setNotification
 				});
 			}
@@ -60,7 +57,7 @@ export function ManagementItemEdit() {
 
 		loadInitialData();
 	}, []);
-	// console.log(dataInfo);
+
 	return (
 		<PageContainer>
 			{notification && (
@@ -82,10 +79,20 @@ export function ManagementItemEdit() {
 				dataSelected={true}
 				loading={loading}
 			/> */}
-
-			<ManagementItemEditData infoData={dataInfo} loading={loading} />
 			
-			<ManagementItemEditSupplier itemId={dataInfo._id} infoData={dataInfo.supply_reference} loading={loading} />
+			{loading ? (
+				<Loading size={96} text="Carregando os dados" />
+			) : (
+				<>
+					<ManagementItemEditData infoData={dataInfo} setNotification={setNotification} />
+
+					<ManagementReferenceSupplier
+						itemId={dataInfo._id}
+						infoData={dataInfo.supply_reference}
+						setNotification={setNotification}
+					/>
+				</>
+			)}
 		</PageContainer>
 	);
 }

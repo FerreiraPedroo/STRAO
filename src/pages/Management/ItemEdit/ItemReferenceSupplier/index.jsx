@@ -5,12 +5,11 @@ import { ButtonIcon } from "component/ButtonIcon/index.jsx";
 
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
-import { ItemSupplierModal } from "../ItemSupplierModal/index.jsx";
+import { ItemSupplierModal } from "../ItemReferenceSupplierModal/index.jsx";
 
 import * as S from "./styles.jsx";
 
-export function ManagementItemEditSupplier({ itemId, infoData, loading }) {
-	const [pageLoading, setPageLoading] = useState(loading);
+export function ManagementReferenceSupplier({ itemId, infoData, setNotification }) {
 	const [dataInfo, setDataInfo] = useState();
 
 	const [selectedReference, setSelectedReference] = useState(null);
@@ -22,7 +21,13 @@ export function ManagementItemEditSupplier({ itemId, infoData, loading }) {
 
 	return (
 		<PageContainer>
-			{newSupplierModal && <ItemSupplierModal itemId={itemId} showModal={setNewSupplierModal} />}
+			{newSupplierModal && (
+				<ItemSupplierModal
+					itemId={itemId}
+					showModal={setNewSupplierModal}
+					setNotification={setNotification}
+				/>
+			)}
 			<S.InnerContainer theme={"normal"}>
 				<S.HeaderInner>
 					<S.HeaderInnerTitle theme={"normal"}>Referencia de Fornecedores</S.HeaderInnerTitle>
@@ -57,14 +62,14 @@ export function ManagementItemEditSupplier({ itemId, infoData, loading }) {
 					))}
 
 				<S.UserDataContent>
-					<S.ButtonContainer width={"256px"}>
+					<S.ButtonContainer width={"100%"}>
 						{
 							<>
 								<ButtonIcon
 									value="add"
 									typeStyle="add"
 									onClick={() => setNewSupplierModal(true)}
-									disable={pageLoading}
+									disable={''}
 								/>
 								<S.ActionText>Adicionar referência</S.ActionText>
 							</>
@@ -76,7 +81,7 @@ export function ManagementItemEditSupplier({ itemId, infoData, loading }) {
 									value="remove"
 									typeStyle="remove"
 									onClick={() => null}
-									disable={pageLoading}
+									disable={''}
 								/>
 								<S.ActionText>Excluir</S.ActionText>
 							</>

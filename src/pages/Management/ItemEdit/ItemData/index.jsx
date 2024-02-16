@@ -21,8 +21,7 @@ const editDataSchema = Yup.object().shape({
 	status: Yup.mixed().oneOf(["active", "inactive"], "Status inválido")
 });
 
-export function ManagementItemEditData({ infoData, loading }) {
-	const [pageLoading, setPageLoading] = useState(loading);
+export function ManagementItemEditData({ infoData, setNotification }) {
 
 	const [dataInfo, setDataInfo] = useState(infoData);
 	const [editDataInfo, setEditDataInfo] = useState({});
@@ -143,7 +142,7 @@ export function ManagementItemEditData({ infoData, loading }) {
 				selected: infoData.status === "inactive"
 			}
 		]);
-	}, []);
+	}, [infoData]);
 
 	return (
 		<PageContainer>
@@ -151,16 +150,15 @@ export function ManagementItemEditData({ infoData, loading }) {
 				<S.HeaderInner>
 					<S.HeaderInnerTitle theme={"normal"}>Dados do Item</S.HeaderInnerTitle>
 				</S.HeaderInner>
-
 				<S.UserDataContent>
 					<InputText
 						inputName={"name"}
-						inputWidth={"256px"}
+						inputWidth={"480px"}
 						inputPlaceholder={"Nome"}
 						inputValue={editDataInfo.name ?? ""}
 						inputOnChange={handleDataInfo}
 						inputErrorMsg={dataInfoValidator.name}
-						disabled={pageLoading || !editingDataInfo}
+						disabled={!editingDataInfo}
 						inputShowInfo={true}
 					/>
 					<InputSelect
@@ -172,28 +170,28 @@ export function ManagementItemEditData({ infoData, loading }) {
 						selectErrorMsg={dataInfoValidator.status}
 						width={"256px"}
 						options={statusOptions}
-						disabled={pageLoading || !editingDataInfo}
+						disabled={!editingDataInfo}
 					/>
 					<InputTextArea
 						textAreaName={"description"}
 						textAreaValue={editDataInfo.description ?? ""}
-						width={"256px"}
-						height={"92px"}
+						width={"480px"}
+						height={"96px"}
 						textAreaPlaceholder={"Descrição"}
 						textAreaOnChange={handleDataInfo}
 						textAreaErrorMsg={dataInfoValidator.description}
-						disabled={pageLoading || !editingDataInfo}
+						disabled={!editingDataInfo}
 						textAreaShowInfo={true}
 					/>
 
-					<S.ButtonContainer width={"256px"}>
+					<S.ButtonContainer>
 						{!editingDataInfo && (
 							<>
 								<ButtonIcon
 									value="Editar"
 									typeStyle="edit"
 									onClick={enableEditData}
-									disable={pageLoading}
+									disable={''}
 								/>
 								<S.ActionText>Editar</S.ActionText>
 							</>

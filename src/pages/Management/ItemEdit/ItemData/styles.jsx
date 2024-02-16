@@ -26,16 +26,14 @@ export const HeaderInnerTitle = styled.p`
 
 export const UserDataContent = styled.div`
 	width: 100%;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
 `;
 
 export const ButtonContainer = styled.div`
-	${({ width }) => width && `width:${width};`}
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	align-items: center;
 	gap: 8px;
 `;
@@ -46,4 +44,11 @@ export const ActionText = styled.div`
 	white-space: wrap;
 	text-align: start;
 	line-height: 14px;
+`;
+
+export const Loading = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	text-align: center;
 `;

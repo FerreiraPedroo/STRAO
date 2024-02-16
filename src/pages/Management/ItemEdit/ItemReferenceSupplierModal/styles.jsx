@@ -81,3 +81,10 @@ export const InputBox = styled.div`
 	gap: 8px;
 	padding: 12px;
 `;
+
+export const ButtonBox = styled.div`
+	height: 100%;
+	display: flex;
+	gap: 16px;
+	padding: 12px;
+`;

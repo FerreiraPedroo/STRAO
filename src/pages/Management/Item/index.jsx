@@ -9,6 +9,7 @@ import { PageContainer } from "component/container/PageContainer/styles";
 import { PageAction } from "component/container/PageAction";
 import { PageTitle } from "component/container/PageTitle";
 import { PageList } from "component/container/PageList";
+import { PageFilter } from "component/container/PageFilter";
 
 export function ManagementItem() {
 	const navigate = useNavigate();
@@ -23,7 +24,7 @@ export function ManagementItem() {
 
 	const [listColumns] = useState([
 		{
-			name: "Status",
+			title: "Status",
 			htmlName: "status",
 			size: 96,
 			minSize: 96,
@@ -31,21 +32,21 @@ export function ManagementItem() {
 			align: "center"
 		},
 		{
-			name: "Id",
+			title: "Id",
 			htmlName: "_id",
 			minSize: 128,
 			maxSize: 128,
 			align: "center"
 		},
 		{
-			name: "Nome",
+			title: "Nome",
 			htmlName: "name",
 			size: 256,
 			minSize: 256,
 			maxSize: "auto"
 		},
 		{
-			name: "Categoria",
+			title: "Categoria",
 			htmlName: "category",
 			size: 256,
 			minSize: 128,
