@@ -25,25 +25,25 @@ export function SupplyWarehouseStock() {
 	const [itemSelected, setItemSelected] = useState(null);
 
 	const [listColumns] = useState([
-			{
-				title: "ID",
-				htmlName: "_id",
-				size: 128,
-				minSize: 128,
-				maxSize: 220,
-				align: "center"
-			},
-			{ title: "nome", htmlName: "name", size: 128, minSize: 128, maxSize: "100%", align: "start" },
-			{
-				title: "Quantidade",
-				htmlName: "amount",
-				size: 104,
-				minSize: 104,
-				maxSize: 104,
-				align: "center"
-			}
+		{
+			title: "ID",
+			htmlName: "_id",
+			size: 128,
+			minSize: 128,
+			maxSize: 220,
+			align: "center"
+		},
+		{ title: "nome", htmlName: "name", size: 128, minSize: 128, maxSize: "100%", align: "start" },
+		{
+			title: "Quantidade",
+			htmlName: "amount",
+			size: 104,
+			minSize: 104,
+			maxSize: 104,
+			align: "center"
+		}
 	]);
-	
+
 	// const [listActions] = useState([
 	// 	{
 	// 		name: "Ultimas movimentações",
@@ -96,7 +96,6 @@ export function SupplyWarehouseStock() {
 	// 	}
 	// ]);
 
-
 	useEffect(() => {
 		async function getItems() {
 			setPageLoading(true);
@@ -136,9 +135,16 @@ export function SupplyWarehouseStock() {
 				subTitle={"Todos os items do estoque"}
 			/>
 
-			<S.StockName>
-			{location.state.name}
-			</S.StockName>
+			<S.StockContainer theme={"normal"}>
+				<S.StockBox>
+					<S.StockTitle>Nome:</S.StockTitle>
+					<S.StockName>{location.state.name}</S.StockName>
+				</S.StockBox>
+				<S.StockBox>
+					<S.StockTitle>Contrato:</S.StockTitle>
+					<S.StockName>{location.state.contract.name}</S.StockName>
+				</S.StockBox>
+			</S.StockContainer>
 
 			{/* <PageAction actionsData={listActions} dataSelected={null} loading={pageLoading} /> */}
 

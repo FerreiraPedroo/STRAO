@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { PageStyle } from "styles/container";
 
 export const Container = styled.div`
 	width: 100%;
@@ -11,14 +12,23 @@ export const Container = styled.div`
 	gap: 8px;
 `;
 
-export const StockName = styled.div`
+export const StockContainer = styled.div`
 	width: 100%;
-	font-size: 1.5rem;
-	font-weight: 700;
-	color: #333;
-	background-color: #e5e5e5;
-	padding: 8px 16px;
-	border-radius: 4px;
-	border: 1px solid rgba(0, 0, 0, 0.25);
-	box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.25);	
+	display: flex;
+	justify-content: flex-start;
+	font-weight: 600;
+	${({theme}) => theme && PageStyle.container(theme)}
+	gap: 32px;
+`;
+
+export const StockBox = styled.div`
+`;
+
+export const StockTitle = styled.div`
+	font-weight: 500;
+	font-size: 0.8rem;
+`;
+
+export const StockName = styled.div`
+	font-size: 1.2rem;
 `;

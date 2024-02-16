@@ -37,7 +37,7 @@ import { ManagementItemEdit } from "pages/Management/ItemEdit";
 //
 
 import { Supply } from "pages/Supply";
-import { SupplyWarehouseReceipt } from "pages/Supply/Warehouse/Receipt";
+import { SupplyWarehouseShipping } from "pages/Supply/Warehouse/Shipping";
 import { SupplyWarehouseStock } from "pages/Supply/Warehouse/Stock";
 import { SupplyWarehouseItems } from "pages/Supply/Warehouse/Stock/Items";
 import { SupplyWarehouseItemEdit } from "pages/Supply/Warehouse/Stock/ItemEdit";
@@ -88,8 +88,8 @@ export const router = createBrowserRouter(
 					<Route path="warehouse/stock" element={<SupplyWarehouseStock />} />
 
 					<Route
-						path="warehouse/receipt"
-						element={<SupplyWarehouseReceipt />}
+						path="warehouse/shipping"
+						element={<SupplyWarehouseShipping />}
 					/>
 
 					{/* <Route path="stock/items" element={<SupplyWarehouseItems />} />

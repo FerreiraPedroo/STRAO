@@ -11,7 +11,7 @@ import { PageAction } from "component/container/PageAction";
 import { PageTitle } from "component/container/PageTitle";
 import * as S from "./styles";
 
-export function SupplyWarehouseReceipt() {
+export function SupplyWarehouseShipping() {
 	const navigate = useNavigate();
 
 	const [notification, setNotification] = useState(null);
@@ -37,10 +37,10 @@ export function SupplyWarehouseReceipt() {
 	
 	const [listActions] = useState([
 		{
-			name: "Novo recebimento",
+			name: "Expedir material",
 			typeStyle: "add",
 			show: true,
-			action: () => navigate("/supply/warehouse/shipping/receive")
+			action: () => navigate("/supply/warehouse/shipping/send")
 		},
 	]);
 
@@ -78,9 +78,9 @@ export function SupplyWarehouseReceipt() {
 			)}
 
 			<PageTitle
-				title="Recebimento"
+				title="Expedição"
 				backUrl={"/supply"}
-				subTitle={"Registre o recebimento de materiais selecionando o estoque e a origem do material."}
+				subTitle={"Registre a liberação de material para um funcionario."}
 			/>
 
 			<PageAction actionsData={listActions} dataSelected={null} loading={pageLoading} />
