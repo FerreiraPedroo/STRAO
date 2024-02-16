@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { InputTheme } from "styles/input";
 
 export const Container = styled.div`
-	${({ width }) => width && `width:${width};`}
-	${({ height }) => height && `height:${height};`}
+	${({ width }) => width && `max-width:${width};`}
+	width: 100%;
 	min-width: 128px;
 	min-height: 50px;
 	display: flex;
@@ -26,9 +26,9 @@ export const TitleText = styled.p`
 
 `;
 export const TextArea = styled.textarea`
-	${({ height }) => height && `height:${height};`}
 	min-width: 128px;
 	min-height: 28px;
+	${({ height }) => height && `height:${height};`}
 
 	&::placeholder {
 		color: #c9c9c9;

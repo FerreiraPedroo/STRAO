@@ -13,7 +13,8 @@ export const InputSelect = ({
 	readOnly,
 	width = "164px",
 	options,
-	theme = "normal"
+	theme = "normal",
+	disableErrorMsg = false
 }) => {
 	return (
 		<S.Container width={width} theme={theme}>
@@ -44,7 +45,7 @@ export const InputSelect = ({
 						)
 					)}
 			</S.Select>
-			<S.ErrorMsg>{selectErrorMsg}</S.ErrorMsg>
+			{!disableErrorMsg &&<S.ErrorMsg>{selectErrorMsg}</S.ErrorMsg>}
 		</S.Container>
 	);
 };

@@ -27,8 +27,8 @@ import contracts from "../assets/img/menu/management/default_contract_96.png";
 import stock from "../assets/img/menu/supply/default_stock.png";
 import inventory from "../assets/img/menu/supply/default_inventory.png";
 import receipt from "../assets/img/menu/supply/default_receipt.png";
+import shipping from "../assets/img/menu/supply/default_shipping.png";
 import supplier from "../assets/img/menu/supply/default_supplier.png";
-import expedition from "../assets/img/menu/supply/default_expedition.png";
 import invoice from "../assets/img/menu/supply/default_invoice.png";
 import material from "../assets/img/menu/supply/default_material.png";
 
@@ -40,11 +40,11 @@ export const navBarImgs = {
 };
 export const sideBarImgs = {
 	default_centercost: centersCost,
-	default_expedition: expedition,
 	default_inventory: inventory,
 	default_contract: contracts,
 	default_supplier: supplier,
 	default_invoice: invoice,
+	default_shipping: shipping,
 	default_receipt: receipt,
 	default_users: users,
 	default_stock: stock,

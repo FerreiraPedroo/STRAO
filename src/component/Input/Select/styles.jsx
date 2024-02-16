@@ -2,9 +2,11 @@ import styled from "styled-components";
 import { InputTheme } from "styles/input";
 
 export const Container = styled.div`
-	${({ width }) => width && `width:${width};`}
+	/* height: 58px; */
+	${({ width }) => width && `max-width:${width};`}
 	min-width: 128px;
-	height: 58px;
+	width: 100%;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
@@ -26,7 +28,6 @@ export const TitleText = styled.p`
 export const Select = styled.select`
 	min-width: 160px;
 	min-height: 30px;
-	${({ width }) => width && `width:${width};`}
 
 	&::placeholder {
 		color: #c9c9c9;
