@@ -23,26 +23,26 @@ export const TitleText = styled.p`
 	${({ theme }) => InputTheme.text(theme)}
 
 	${({ disabled }) => disabled && "color: #b6b6b6;"}
-
 `;
 export const TextArea = styled.textarea`
-	min-width: 128px;
+	${({ theme }) => InputTheme.input(theme)}
+
+	width: 100%;
 	min-height: 28px;
+	${({ min }) => min && `min-width:${min};`}
+	${({ max }) => max && `max-width:${max};`}
 	${({ height }) => height && `height:${height};`}
+	
+	padding: 8px;
 
 	&::placeholder {
 		color: #c9c9c9;
 	}
-	
-	${({ theme }) => InputTheme.input(theme)}
-
 	&:disabled {
 		border: 1px solid #c0c0c0;
 		background-color: #e0e0e0;
 		color: #b6b6b6;
 	}
-
-
 `;
 
 export const ErrorMsg = styled.p`

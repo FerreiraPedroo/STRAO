@@ -10,7 +10,7 @@ export const Loading = ({ size = 48, text = "" }) => {
 	return (
 		<S.LoadingContainer>
 			<S.LoadingIcon>
-				<CircleNotch className="animate-spin" size={size} color="#ffffff">
+				<CircleNotch className="animate-spin" size={size} color="#000">
 					<animateTransform
 						attributeName="transform"
 						attributeType="XML"

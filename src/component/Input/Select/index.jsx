@@ -26,7 +26,7 @@ export const InputSelect = ({
 				id={selectId}
 				name={selectName}
 				width={width}
-				value={selectValue}
+				defaultValue=""
 				onChange={selectOnChange}
 				placeholder={selectPlaceholder}
 				disabled={disabled}
@@ -39,7 +39,8 @@ export const InputSelect = ({
 								{option.name}
 							</S.OptionGroup>
 						) : (
-							<S.Option key={option.value + "-" + index} value={option.value} theme={theme}>
+							/* eslint-disable-next-line */
+							<S.Option key={option.value + "-" + index} selected={option.selected} value={option.value} theme={theme}>
 								{option.name}
 							</S.Option>
 						)

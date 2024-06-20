@@ -16,23 +16,16 @@ export const InputFile = ({
 }) => {
 	const [files, setFiles] = useState([]);
 
-	function blur(e) {
+	function change(e) {
 		const newBlobImg = new Blob([e.target.files[0]]);
 
-		// const imgUrl = URL.createObjectURL(newImg);
+		const newImgs = [...files];
+		newImgs.push(newBlobImg);
 
-		setFiles((prev) => {
-			const newImg = [...prev];
-
-			newImg.push(newBlobImg);
-
-			return newImg;
-		});
-
-		onChange({ target: { value: files , name: name} });
+		setFiles(newImgs);
+		onChange({ target: { value: newImgs, name: name } });
 	}
 
-	console.log({ files });
 	return (
 		<S.Container width={width}>
 			<S.TitleText disabled={disabled}>
@@ -47,7 +40,7 @@ export const InputFile = ({
 					name={name}
 					// value={value}
 					accept="image/*"
-					onChange={blur}
+					onChange={change}
 					onBlur={onBlur}
 					placeholder={!showInfo ? placeholder : ""}
 					disabled={disabled}
@@ -59,7 +52,7 @@ export const InputFile = ({
 				<S.FilesContainer>
 					{files.map((file, index) => (
 						<S.FileLoadedImgBox key={index}>
-							<S.FileLoadedImg src={file} />
+							<S.FileLoadedImg src={URL.createObjectURL(file)} />
 							<S.DeleteFile />
 						</S.FileLoadedImgBox>
 					))}

@@ -30,25 +30,12 @@ export function SideBar() {
 		if (!department) {
 			return [];
 		}
-
-		const sectorNoGroup = state.appData.sectorsInfo.nogroup.filter(
+		
+		const sector = state.appData.sectorsInfo.filter(
 			(sector) => sector.department_id === department._id
 		);
-		const sectorGroup = Object.entries(state.appData.sectorsInfo.group).reduce(
-			(prev, [sectorKey, sectorValue]) => {
-				const sectorFilteres = sectorValue.filter((sector) => {
-					return sector.department_id === department._id;
-				});
 
-				if (sectorFilteres.length) {
-					prev[sectorKey] = sectorFilteres;
-				}
-				return prev;
-			},
-			{}
-		);
-
-		return [sectorNoGroup, sectorGroup];
+		return sector;
 	});
 
 	const menuSectorSelected = useSelector((state) => state.menu.sectionSelected);
@@ -74,30 +61,14 @@ export function SideBar() {
 		<S.Container>
 			<S.DepartmentTitle>{menuDepartment.name}</S.DepartmentTitle>
 			<S.HrLine />
-			{menuSectors.map((sector) =>
-				sector instanceof Array
-					? sector.map((sec, index) => (
-							<S.SectionContainer key={sec.name + index} onClick={() => selectSection(sec)}>
-								<S.SectionTop selected={sec.name === menuSectorSelected}>
-									<S.SectionImg src={sideBarImgs[sec.url_img]} />
-									<S.SectionTitle>{sec.name}</S.SectionTitle>
-								</S.SectionTop>
-							</S.SectionContainer>
-					  ))
-					: Object.entries(sector).map(([groupKey, group], index) => (
-							<S.GroupContainer key={groupKey + index}>
-								<S.GroupTitle>{groupKey}</S.GroupTitle>
-								{group.map((sec, index) => (
-									<S.SectionContainer key={sec.name + index} onClick={() => selectSection(sec)}>
-										<S.SectionTop selected={sec.name === menuSectorSelected}>
-											<S.SectionImg src={sideBarImgs[sec.url_img]} />
-											<S.SectionTitle>{sec.name}</S.SectionTitle>
-										</S.SectionTop>
-									</S.SectionContainer>
-								))}
-							</S.GroupContainer>
-					  ))
-			)}
+			{menuSectors.map((sec) => (
+				<S.SectionContainer key={sec.name} onClick={() => selectSection(sec)}>
+					<S.SectionTop selected={sec.name === menuSectorSelected}>
+						<S.SectionImg src={sideBarImgs[sec.url_img]} />
+						<S.SectionTitle>{sec.name}</S.SectionTitle>
+					</S.SectionTop>
+				</S.SectionContainer>
+			))}
 		</S.Container>
 	);
 }

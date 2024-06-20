@@ -41,6 +41,10 @@ export const Input = styled.input`
 		background-color: #e0e0e0;
 		color: #b6b6b6;
 	}
+
+	&:read-only {
+		cursor: default;
+	}
 `;
 
 export const ErrorMsg = styled.p`
