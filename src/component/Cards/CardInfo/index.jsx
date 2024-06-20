@@ -30,7 +30,7 @@ export function CardInfo({ theme, data }) {
 			{data.description && (
 				<S.Description>
 					<S.NameTitle>Descrição: </S.NameTitle>
-					{data.description}
+					<S.NameText>{data.description}</S.NameText>					
 				</S.Description>
 			)}
 		</S.Container>

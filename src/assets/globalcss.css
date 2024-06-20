@@ -38,7 +38,7 @@
   --card-text-color-normal: #4E5F8F;
   --card-text-color-disabled-normal: rgba(78, 95, 143, 0.5);
   --card-border-normal: 1px solid #DEE2E6;
-  --card-background-color-normal: #fefefe;
+  --card-background-color-normal: #eee;
   /* --card-box-shadow-normal: 2px 2px 0px rgba(78, 95, 143, 0.9); */
   /*DARK*/
   --card-text-color-dark: #FFF;
@@ -116,6 +116,7 @@
   font-size: 16px;
   box-sizing: border-box;
   letter-spacing: 1px;
+  /* max-width: 1440px; */
   /* border: 1px solid blue; */
 
 }

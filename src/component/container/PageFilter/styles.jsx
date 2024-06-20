@@ -34,6 +34,6 @@ export const InputBox = styled.div`
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
+	align-items: end;
 	gap: 0 12px;
 `;

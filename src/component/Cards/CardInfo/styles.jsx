@@ -62,5 +62,6 @@ export const NameText = styled.span`
 
 export const Description = styled.span`
 	text-align: justify;
-	font-size: 1rem;
+	font-size: 0.9rem;
+	font-weight: 500;
 `;

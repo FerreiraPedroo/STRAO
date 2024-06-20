@@ -8,5 +8,5 @@ export const PageContainer = styled.div`
 	justify-content: start;
 	align-content: start;
 	padding: 8px;
-	gap: 8px;	
+	gap: 8px;
 `;

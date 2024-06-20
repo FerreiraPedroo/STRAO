@@ -63,8 +63,9 @@ export const FileLoadedImgBox = styled.div`
 export const FileLoadedImg = styled.img`
 	width: 96px;
 	height: 96px;
-	border: 2px solid #ccc;
-	border-radius: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 4px;
 `;
 
 export const DeleteFile = styled.div`
@@ -86,7 +87,7 @@ export const DeleteFile = styled.div`
 		color: white;
 		border-radius: 50%;
 	}
-	
+
 	&:hover {
 		cursor: pointer;
 		border: 1px solid #000;

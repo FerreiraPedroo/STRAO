@@ -50,6 +50,8 @@ export const PageList = ({
 
 		setPageListData(data);
 	}, [listData]);
+
+
 	return (
 		<S.Container theme={theme}>
 			<S.CenterContainer>
@@ -66,7 +68,7 @@ export const PageList = ({
 									align={header.align}
 									width={header.size}
 								>
-									{header.name}
+									{header.title}
 								</S.RowHeadText>
 							))}
 					</S.RowHeaderBox>

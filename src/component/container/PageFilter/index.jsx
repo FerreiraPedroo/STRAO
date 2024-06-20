@@ -91,6 +91,7 @@ export const PageFilter = ({ theme = "normal", filtersData = [], getFiltersSelec
 									disabled={loading}
 									selectShowInfo={filter.showInfo}
 									options={filter.options}
+									disableErrorMsg={true}
 								/>
 							)}
 							{filter.type == "text" && (
@@ -102,6 +103,7 @@ export const PageFilter = ({ theme = "normal", filtersData = [], getFiltersSelec
 									inputPlaceholder={filter.htmlPlaceholder}
 									disabled={loading}
 									inputShowInfo={filter.showInfo}
+									disableErrorMsg={true}
 								/>
 							)}
 						</div>
