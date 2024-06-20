@@ -29,9 +29,9 @@ export function EditCenterCostModal({
 	async function getCategoriesList() {
 		try {
 			const response = await api.get("/management/categories");
+			
 			const categoriesList = response.data.data.map((category) => {
 				const selected = itemInfo.category._id === category._id;
-
 				return {
 					value: category._id,
 					name: category.name,
@@ -57,12 +57,12 @@ export function EditCenterCostModal({
 		}
 	}
 
-	async function getTypesList() {
+	async function getCostTypesList() {
 		try {
-			const response = await api.get("/management/types");
+			const response = await api.get("/management/cost-types");
+
 			const typesList = response.data.data.map((type) => {
 				const selected = itemInfo.type._id === type._id;
-
 				return {
 					value: type._id,
 					name: type.name,
@@ -148,7 +148,6 @@ export function EditCenterCostModal({
 		setItemInfo((prev) => {
 			const newItem = { ...prev };
 			newItem[event.target.name] = event.target.value;
-			console.log(newItem);
 			return newItem;
 		});
 	}
@@ -157,7 +156,7 @@ export function EditCenterCostModal({
 		async function getInitialData() {
 			setLoading(true);
 			const categoriesList = await getCategoriesList();
-			const typesList = await getTypesList();
+			const typesList = await getCostTypesList();
 
 			if (categoriesList && typesList) {
 				setCategories(categoriesList);

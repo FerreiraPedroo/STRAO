@@ -22,12 +22,13 @@ export const Container = styled.div`
 
 export const Modal = styled.div`
 	position: absolute;
-	left: calc(50% - 340px);
+	left: calc(50% - 250px);
 	top: calc(50% - 250px);
-	width: 680px;
+	width: 500px;
 	height: 500px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	background-color: #fff;
 	padding: 18px;
 	border-radius: 12px;
@@ -65,8 +66,8 @@ export const ModalContent = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	/* align-items: center; */
-	/* justify-content: center; */
+	align-items: center;
+	justify-content: center;
 	padding: 12px;
 `;
 

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "services/api.js";
 
 import { NotificationModal } from "component/Notification/modal.jsx";
-import { PageFilter } from "component/container/PageFilter";
+// import { PageFilter } from "component/container/PageFilter";
 import { PageAction } from "component/container/PageAction";
 import { PageTitle } from "component/container/PageTitle";
 import { PageList } from "component/container/PageList";
@@ -26,27 +26,27 @@ export const ManagementCenterCost = () => {
 
 	const [centerCostList, setCenterCostList] = useState([]);
 	const [filtersSelected, setFiltersSelected] = useState({});
-	const [centerCostSelected, setCenterCostSelected] = useState();
+	const [centerCostSelected, setCenterCostSelected] = useState(null);
 
 	const [pageData] = useState({
 		columns: [
 			{
-				title: "status",
+				title: "STATUS",
 				htmlName: "status",
 				size: 0,
 				minSize: 96,
 				maxSize: 96
 			},
-			{ title: "nome", htmlName: "name", size: 0, minSize: 120, maxSize: "100%;" },
+			{ title: "NOME", htmlName: "name", size: 0, minSize: 120, maxSize: "100%;" },
 			{
-				title: "categoria",
+				title: "CATEGORIA",
 				htmlName: "category",
 				size: 0,
 				minSize: 96,
 				maxSize: "25%;"
 			},
 			{
-				title: "tipo",
+				title: "TIPO",
 				htmlName: "type",
 				size: 0,
 				minSize: 96,
@@ -66,10 +66,9 @@ export const ManagementCenterCost = () => {
 				show: false,
 				action: () => setModalEditCenterCost(true)
 			}
-			// ,
 			// {
-			// 	name: "Excluir centro de custo",
-			// 	typeStyle: "remove",
+			// 	name: "Desativar centro de custo",
+			// 	typeStyle: "hidden",
 			// 	show: false,
 			// 	action: () => setModalDeleteCenterCost(true)
 			// }
@@ -128,13 +127,11 @@ export const ManagementCenterCost = () => {
 		setLoading(false);
 	}
 
-	async function updateCenterCostList() {
-		getCenterCostList(filtersSelected);
-	}
-
-	async function deleteCenterCost(userId) {
+	async function deleteCenterCost() {
 		try {
-			const { data } = await api.delete(`/management/center-cost/${userId}/delete`);
+			const { data } = await api.delete(`/management/center-cost/change-status`, {
+				params: { center_cost_id: centerCostSelected }
+			});
 
 			setNotification({
 				theme: "success",
@@ -142,7 +139,6 @@ export const ManagementCenterCost = () => {
 				setNotification: setNotification
 			});
 
-			setCenterCostList((users) => users.filter((user) => user._id !== userId));
 			setCenterCostSelected(null);
 		} catch (error) {
 			setNotification({
@@ -158,7 +154,7 @@ export const ManagementCenterCost = () => {
 
 	useEffect(() => {
 		getCenterCostList(filtersSelected);
-	}, [filtersSelected]);
+	}, []);
 
 	return (
 		<PageContainer>
@@ -174,7 +170,7 @@ export const ManagementCenterCost = () => {
 				<CreateCenterCostModal
 					closeModal={setModalCreateCenterCost}
 					setNotification={setNotification}
-					updateCenterCostList={updateCenterCostList}
+					updateCenterCostList={() => getCenterCostList(filtersSelected)}
 				/>
 			)}
 
@@ -183,7 +179,7 @@ export const ManagementCenterCost = () => {
 					closeModal={setModalEditCenterCost}
 					centerCostData={centerCostSelected}
 					setNotification={setNotification}
-					updateCenterCostList={updateCenterCostList}
+					updateCenterCostList={() => getCenterCostList(filtersSelected)}
 				/>
 			)}
 
@@ -207,11 +203,12 @@ export const ManagementCenterCost = () => {
 				dataSelected={centerCostSelected}
 				loading={loading}
 			/>
-			<PageFilter
+
+			{/* <PageFilter
 				filtersData={pageData.filters}
 				getFiltersSelected={setFiltersSelected}
 				loading={loading}
-			/>
+			/> */}
 
 			<PageList
 				listData={centerCostList}

@@ -35,6 +35,7 @@ export function ManagementStockEdit() {
 	const [editStockInfo, setEditStockInfo] = useState({});
 
 	const [contractsOptionInfo, setContractsOptionInfo] = useState([]);
+	const [statusOptionInfo, setStatusOptionInfo] = useState([]);
 	const [stockInfoValidator, setStockInfoValidator] = useState({});
 
 	async function getStock(stockId) {
@@ -74,11 +75,13 @@ export function ManagementStockEdit() {
 	async function updateStock() {
 		try {
 			setStockSaveLoading(true);
-
+			console.log(editStockInfo)
 			const newStockInfo = {
 				name: editStockInfo.name,
 				description: editStockInfo.description,
-				contract_id: editStockInfo.contract_id || null
+				status: editStockInfo.status,
+				contract_id: editStockInfo.contract_id || null,
+
 			};
 
 			const response = await api.put(
@@ -128,6 +131,7 @@ export function ManagementStockEdit() {
 	}
 
 	function handleStockInfo(event) {
+		
 		setStockInfoValidator(() => {
 			const handleValid = delete stockInfoValidator[event.target.name];
 			return handleValid;
@@ -166,13 +170,13 @@ export function ManagementStockEdit() {
 
 				const stockInfo = {
 					name: stockData.name,
-					contract_id: stockData.contract && stockData.contract._id,
+					contract_id: stockData.contract,
+					status: stockData.status,
 					description: stockData.description
 				};
 
-				const contractsOption = contractsData.map((contract) => {
+				const contractsOptions = contractsData.map((contract) => {
 					const selected = stockInfo.contract_id === contract._id;
-
 					return {
 						value: contract._id,
 						name: contract.name,
@@ -180,13 +184,30 @@ export function ManagementStockEdit() {
 					};
 				});
 
-				contractsOption.unshift({
+				contractsOptions.unshift({
 					value: "",
 					name: "Selecione um contrato"
 				});
 
-				setContractsOptionInfo(contractsOption);
+				const statusOptions = [
+					{
+						value: "",
+						name: "Selecione um status"
+					},
+					{
+						value: "active",
+						name: "Ativo",
+						selected: stockInfo.status === "active"
+					},
+					{
+						value: "inactive",
+						name: "Inativo",
+						selected: stockInfo.status === "inactive"
+					}
+				];
 
+				setContractsOptionInfo(contractsOptions);
+				setStatusOptionInfo(statusOptions);
 				setEditStockInfo(stockInfo);
 
 				setPageLoading(false);
@@ -238,6 +259,17 @@ export function ManagementStockEdit() {
 						selectErrorMsg={stockInfoValidator.contract_id}
 						width={"320px"}
 						options={contractsOptionInfo}
+						disabled={pageLoading || !editingStockInfo}
+					/>
+					<InputSelect
+						selectName={"status"}
+						selectValue={editStockInfo.status ?? ""}
+						selectOnChange={handleStockInfo}
+						selectPlaceholder={"Status"}
+						selectShowInfo={true}
+						selectErrorMsg={stockInfoValidator.status}
+						width={"320px"}
+						options={statusOptionInfo}
 						disabled={pageLoading || !editingStockInfo}
 					/>
 

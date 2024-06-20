@@ -9,52 +9,31 @@ import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
 export const Admin = () => {
 	const { pathname } = useLocation();
+	const departmentLocation = location.pathname.split("/")[1];
 
 	const menuSectors = useSelector((state) => {
 		const department = state.appData.departmentsInfo.find((department) => {
-			return department.url_path === pathname;
+			return department.url_path === "/" + departmentLocation;
 		});
 
 		if (!department) {
 			return [];
 		}
 
-		const sectorNoGroup = state.appData.sectorsInfo.nogroup.filter(
+		const sector = state.appData.sectorsInfo.filter(
 			(sector) => sector.department_id === department._id
 		);
-		const sectorGroup = Object.entries(state.appData.sectorsInfo.group).reduce(
-			(prev, [sectorKey, sectorValue]) => {
-				const sectorFilteres = sectorValue.filter((sector) => {
-					return sector.department_id === department._id;
-				});
 
-				if (sectorFilteres.length) {
-					prev[sectorKey] = sectorFilteres;
-				}
-				return prev;
-			},
-			{}
-		);
-
-		return [sectorNoGroup, sectorGroup];
+		return sector;
 	});
 
 	return (
 		<PageContainer>
-			{menuSectors.map((sector) =>
-				sector instanceof Array
-					? sector.map((sec) => <Card key={sec.name} data={sec} />)
-					: Object.entries(sector).map(([groupKey, group]) => (
-							<S.GroupContainer key={groupKey}>
-								<S.GroupTitle>{groupKey}</S.GroupTitle>
-								<S.SectionContainer onClick={() => selectSection(sec)}>
-									{group.map((sec) => (
-										<Card key={sec.name} data={sec} />
-									))}
-								</S.SectionContainer>
-							</S.GroupContainer>
-					  ))
-			)}
+			{menuSectors.map((sec) => (
+				<S.SectionContainer onClick={() => selectSection(sec)}>
+					<Card key={sec.name} data={sec} />
+				</S.SectionContainer>
+			))}
 
 			{!menuSectors.length && <S.NoAction>Sem ações.</S.NoAction>}
 		</PageContainer>

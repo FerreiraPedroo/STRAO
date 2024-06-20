@@ -8,7 +8,6 @@ import { PageCardList } from "component/container/PageCardList/index.jsx";
 import { PageAction } from "component/container/PageAction/index.jsx";
 import { PageTitle } from "component/container/PageTitle";
 
-import { CreateStockModal } from "./CreateStockModal/index.jsx";
 
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
@@ -27,7 +26,7 @@ export const ManagementStock = () => {
 			name: "Novo estoque",
 			typeStyle: "add",
 			show: true,
-			action: () => setModalCreateStock(true)
+			action: () => navigate("/management/warehouse/stock/new")
 		}
 	]);
 
@@ -75,13 +74,13 @@ export const ManagementStock = () => {
 				/>
 			)}
 
-			{modalCreateStock && (
+			{/* {modalCreateStock && (
 				<CreateStockModal
 					updateStockList={updateStockList}
 					setNotification={setNotification}
 					closeModal={setModalCreateStock}
 				/>
-			)}
+			)} */}
 
 			<PageTitle
 				title="Lista de estoque"

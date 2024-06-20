@@ -7,9 +7,11 @@ import { InputTextArea } from "component/Input/TextArea/index.jsx";
 import { InputSelect } from "component/Input/Select/index.jsx";
 import { ButtonText } from "component/ButtonText/index.jsx";
 import { InputText } from "component/Input/Text/index.jsx";
+import { Loading } from "component/Loading/index.jsx";
 
 export function CreateCenterCostModal({ closeModal, setNotification, updateCenterCostList }) {
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
+	const [modalStep, setModalStep] = useState(0);
 
 	const [itemInfo, setItemInfo] = useState({});
 	const [itemInfoValidator, setItemInfoValidator] = useState({});
@@ -48,7 +50,7 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 
 	async function getTypesList() {
 		try {
-			const response = await api.get("/management/types");
+			const response = await api.get("/management/cost-types");
 
 			const typesList = response.data.data.map((type) => {
 				return {
@@ -124,13 +126,23 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 		}
 
 		if (!errors.name && !errors.category && !errors.type) {
-			createCenterCost();
+			if (modalStep == 0) {
+				setModalStep(1);
+			} else {
+				createCenterCost();
+			}
 		} else {
 			setItemInfoValidator(errors);
 		}
 	}
 
 	function handleItemInfo(event) {
+		setItemInfoValidator((prev) => {
+			const newItem = { ...prev };
+			delete newItem[event.target.name];
+
+			return newItem;
+		});
 		setItemInfo((prev) => {
 			const newItem = { ...prev };
 			newItem[event.target.name] = event.target.value;
@@ -158,69 +170,126 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 	return (
 		<S.Container>
 			<S.Modal theme={""}>
-				<S.ModalClose theme={""} onClick={() => closeModal(false)}>
-					☓
-				</S.ModalClose>
-				<S.ModalMessageTitle>{"Novo Centro de Custo"}</S.ModalMessageTitle>
-				<S.ModalContent>
-					<InputText
-						inputName={"name"}
-						inputValue={itemInfo.name ?? ""}
-						inputWidth={"288px"}
-						inputOnChange={handleItemInfo}
-						inputPlaceholder={"Nome"}
-						inputShowInfo={true}
-						inputErrorMsg={itemInfoValidator.name}
-						disabled={loading}
-					/>
-					<InputSelect
-						selectName={"category"}
-						selectValue={itemInfo.category ?? ""}
-						selectOnChange={handleItemInfo}
-						selectPlaceholder={"Categoria"}
-						selectShowInfo={true}
-						selectErrorMsg={itemInfoValidator.category}
-						width={"288px"}
-						options={categories}
-						disabled={loading || !categories}
-					/>
-					<InputSelect
-						selectName={"type"}
-						selectValue={itemInfo.type}
-						selectOnChange={handleItemInfo ?? ""}
-						selectPlaceholder={"Tipo"}
-						selectShowInfo={true}
-						selectErrorMsg={itemInfoValidator.type}
-						width={"288px"}
-						options={types}
-						disabled={loading || !types}
-					/>
-					<InputTextArea
-						textAreaName={"description"}
-						textAreaValue={itemInfo.description ?? ""}
-						textAreaOnChange={handleItemInfo}
-						textAreaPlaceholder={"Descrição"}
-						textAreaShowInfo={true}
-						textAreaErrorMsg={itemInfoValidator.description}
-						width={"288px"}
-						height={"92px"}
-						disabled={loading}
-					/>
-				</S.ModalContent>
-				<S.ButtonBox>
-					<ButtonText
-						typeStyle={"normal"}
-						disabled={loading}
-						value="Registrar"
-						onClick={handleItemInfoValidation}
-					/>
-					<ButtonText
-						typeStyle={"normal"}
-						disabled={loading}
-						value="Cancelar"
-						onClick={() => closeModal(false)}
-					/>
-				</S.ButtonBox>
+				<S.ModalHeader>
+					<S.ModalMessageTitle>{"Novo Centro de Custo"}</S.ModalMessageTitle>
+					<S.ModalClose theme={""} onClick={() => closeModal(false)}>
+						☓
+					</S.ModalClose>
+				</S.ModalHeader>
+				{loading ? (
+					<>
+						<Loading />
+					</>
+				) : (
+					<>
+						{modalStep == 0 && (
+							<S.ModalContent>
+								<S.InputBox>
+									<InputText
+										inputName={"name"}
+										inputValue={itemInfo.name ?? ""}
+										inputWidth={"288px"}
+										inputOnChange={handleItemInfo}
+										inputPlaceholder={"Nome"}
+										inputShowInfo={true}
+										inputErrorMsg={itemInfoValidator.name}
+										disabled={loading}
+									/>
+									<InputSelect
+										selectName={"category"}
+										selectValue={itemInfo.category ?? ""}
+										selectOnChange={handleItemInfo}
+										selectPlaceholder={"Categoria"}
+										selectShowInfo={true}
+										selectErrorMsg={itemInfoValidator.category}
+										width={"288px"}
+										options={categories}
+										disabled={loading || !categories}
+									/>
+									<InputSelect
+										selectName={"type"}
+										selectValue={itemInfo.type}
+										selectOnChange={handleItemInfo ?? ""}
+										selectPlaceholder={"Tipo"}
+										selectShowInfo={true}
+										selectErrorMsg={itemInfoValidator.type}
+										width={"288px"}
+										options={types}
+										disabled={loading || !types}
+									/>
+									<InputTextArea
+										textAreaName={"description"}
+										textAreaValue={itemInfo.description ?? ""}
+										textAreaOnChange={handleItemInfo}
+										textAreaPlaceholder={"Descrição"}
+										textAreaShowInfo={true}
+										textAreaErrorMsg={itemInfoValidator.description}
+										width={"288px"}
+										height={"92px"}
+										disabled={loading}
+									/>
+								</S.InputBox>
+								<S.ButtonBox>
+									<ButtonText
+										typeStyle={"normal"}
+										disabled={loading}
+										value="AVANÇAR"
+										onClick={handleItemInfoValidation}
+									/>
+								</S.ButtonBox>
+							</S.ModalContent>
+						)}
+						{modalStep == 1 && (
+							<S.ConfirmContent>
+								<S.ModalConfirmText>
+									ATENÇÃO! DEPOIS DE CADASTRADO O CENTRO DE CUSTO NÃO PODERÁ SER ALTERADO APENAS
+									DESABILITADO.
+								</S.ModalConfirmText>
+								<S.ModalConfirmText>
+									CONFIRME OS DADOS DO CENTRO DE CUSTO E CLIQUE EM REGISTRAR
+								</S.ModalConfirmText>
+
+								<S.ModalConfirm>
+									<S.ModalAttribute>Nome:</S.ModalAttribute>
+									<S.ModalAttributeValue>{itemInfo.name}</S.ModalAttributeValue>
+									<S.ModalAttribute>Categoria:</S.ModalAttribute>
+									<S.ModalAttributeValue>
+										{
+											categories.filter((category) => {
+												return category.value === itemInfo.category;
+											})[0].name
+										}
+									</S.ModalAttributeValue>
+									<S.ModalAttribute>Tipo:</S.ModalAttribute>
+									<S.ModalAttributeValue>
+										{
+											types.filter((type) => {
+												return type.value === itemInfo.type;
+											})[0].name
+										}
+									</S.ModalAttributeValue>
+									<S.ModalAttribute>Descrição:</S.ModalAttribute>
+									<S.ModalAttributeValue>{itemInfo.description}</S.ModalAttributeValue>
+								</S.ModalConfirm>
+
+								<S.ButtonBox>
+									<ButtonText
+										typeStyle={"normal"}
+										disabled={loading}
+										value="VOLTAR"
+										onClick={() => setModalStep(0)}
+									/>
+									<ButtonText
+										typeStyle={"normal"}
+										disabled={loading}
+										value="Registrar"
+										onClick={handleItemInfoValidation}
+									/>
+								</S.ButtonBox>
+							</S.ConfirmContent>
+						)}
+					</>
+				)}
 			</S.Modal>
 		</S.Container>
 	);

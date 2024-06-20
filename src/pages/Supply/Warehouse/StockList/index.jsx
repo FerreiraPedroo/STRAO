@@ -31,7 +31,6 @@ export function SupplyWarehouseStockList() {
 					url_path: "/supply/warehouse/stock"
 				};
 			});
-			console.log(itemList)
 
 			setItemList(itemList);
 		} catch (error) {

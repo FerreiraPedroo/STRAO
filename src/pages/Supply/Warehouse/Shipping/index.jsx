@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { api } from "services/api";
 import { NotificationModal } from "component/Notification/modal";
@@ -17,7 +17,6 @@ export function SupplyWarehouseShipping() {
 	const [notification, setNotification] = useState(null);
 
 	const [pageLoading, setPageLoading] = useState(true);
-	const [searchLoading, setSearchLoading] = useState(true);
 
 	const [itemsList, setItemsList] = useState([]);
 	const [itemSelected, setItemSelected] = useState(null);
@@ -40,7 +39,7 @@ export function SupplyWarehouseShipping() {
 			name: "Expedir material",
 			typeStyle: "add",
 			show: true,
-			action: () => navigate("/supply/warehouse/shipping/send")
+			action: () => navigate("/supply/warehouse/shipping/new")
 		},
 	]);
 
@@ -49,7 +48,7 @@ export function SupplyWarehouseShipping() {
 			setPageLoading(true);
 
 			try {
-				const response = await api.get(`/supply/warehouse/shippings`);
+				const response = await api.get(`/supply/warehouse/shipping/list`);
 
 				setItemsList(response.data.data);
 				setPageLoading(false);
@@ -80,7 +79,7 @@ export function SupplyWarehouseShipping() {
 			<PageTitle
 				title="Expedição"
 				backUrl={"/supply"}
-				subTitle={"Registre a liberação de material para um funcionario."}
+				subTitle={"Registre a liberação de material."}
 			/>
 
 			<PageAction actionsData={listActions} dataSelected={null} loading={pageLoading} />
