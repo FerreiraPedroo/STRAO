@@ -1,6 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { api } from "services/api";
@@ -102,7 +101,6 @@ export function SupplyWarehouseStock() {
 
 			try {
 				const response = await api.get(`/supply/warehouse/stock/${location.state._id}/items`);
-
 				setItemsList(response.data.data);
 				setPageLoading(false);
 			} catch (error) {
@@ -121,13 +119,13 @@ export function SupplyWarehouseStock() {
 
 	return (
 		<S.Container>
-			{notification && (
+			{/* {notification && (
 				<NotificationModal
 					theme={notification.theme}
 					message={notification.message}
 					setNotification={setNotification}
 				/>
-			)}
+			)} */}
 
 			<PageTitle
 				title="Estoque"
@@ -140,10 +138,12 @@ export function SupplyWarehouseStock() {
 					<S.StockTitle>Nome:</S.StockTitle>
 					<S.StockName>{location.state.name}</S.StockName>
 				</S.StockBox>
-				<S.StockBox>
-					<S.StockTitle>Contrato:</S.StockTitle>
-					<S.StockName>{location.state.contract.name}</S.StockName>
-				</S.StockBox>
+				{location.state.contract && (
+					<S.StockBox>
+						<S.StockTitle>Contrato:</S.StockTitle>
+						<S.StockName>{location.state.contract.name}</S.StockName>
+					</S.StockBox>
+				)}
 			</S.StockContainer>
 
 			{/* <PageAction actionsData={listActions} dataSelected={null} loading={pageLoading} /> */}
