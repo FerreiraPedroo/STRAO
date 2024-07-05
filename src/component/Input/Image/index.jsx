@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import * as S from "./styles";
 
-export const InputFile = ({
+export const InputImages = ({
 	id,
 	name,
-	value = null,
 	onChange,
 	placeholder,
 	showInfo = false,
@@ -12,7 +11,8 @@ export const InputFile = ({
 	errorMsg,
 	onBlur = () => "",
 	disabled,
-	readOnly
+	readOnly,
+	theme = "normal"
 }) => {
 	const [files, setFiles] = useState([]);
 
@@ -28,8 +28,8 @@ export const InputFile = ({
 
 	return (
 		<S.Container width={width}>
-			<S.TitleText disabled={disabled}>
-				{((value && showInfo) || showInfo) && placeholder}
+			<S.TitleText disabled={disabled} theme={theme}>
+				{showInfo && placeholder}
 			</S.TitleText>
 
 			<S.ContainerImg width={width}>
@@ -38,7 +38,6 @@ export const InputFile = ({
 					width={width}
 					type="file"
 					name={name}
-					// value={value}
 					accept="image/*"
 					onChange={change}
 					onBlur={onBlur}
@@ -46,6 +45,7 @@ export const InputFile = ({
 					disabled={disabled}
 					readOnly={readOnly}
 					userSelect={false}
+					theme={theme}
 				/>
 				<S.ErrorMsg>{errorMsg}</S.ErrorMsg>
 

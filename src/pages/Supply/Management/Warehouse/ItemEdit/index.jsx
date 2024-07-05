@@ -13,7 +13,7 @@ import { ManagementReferenceSupplier } from "./ItemReferenceSupplier/index.jsx";
 import * as S from "./styles.jsx";
 import { Loading } from "component/Loading/index.jsx";
 
-export function ManagementItemEdit() {
+export function SupplyManagementItemEdit() {
 	const navigate = useNavigate();
 	const location = useLocation();
 

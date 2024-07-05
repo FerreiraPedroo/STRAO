@@ -1,8 +1,13 @@
 import styled from "styled-components";
+import { InputTheme } from "styles/input";
 
 export const Container = styled.div`
 	${({ width }) => width && `width:${width};`}
 	min-width: 128px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding-bottom: 12px;	
 `;
 
 export const ContainerImg = styled.div`
@@ -10,16 +15,21 @@ export const ContainerImg = styled.div`
 	border: 1px solid #808080;
 	border-radius: 4px;
 	padding: 8px 6px 4px 6px;
+	background-color: #fff;
 `;
 
 export const TitleText = styled.p`
-	height: 12px;
+	height: 16px;
+
 	position: relative;
-	color: #767676;
+	top: -2px;
+	left: 1px;
+
 	font-weight: 500;
-	top: -1px;
-	left: 2px;
-	font-size: 0.75rem;
+	font-size: 0.85rem;
+
+	${({ theme }) => InputTheme.text(theme)}
+
 	${({ disabled }) => disabled && "color: #b6b6b6;"}
 `;
 
@@ -73,8 +83,8 @@ export const DeleteFile = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	top: -4px;
-	right: -4px;
+	top: -8px;
+	right: -6px;
 	width: 18px;
 	height: 18px;
 	padding: 8px 7px 7px 8px;
@@ -83,7 +93,7 @@ export const DeleteFile = styled.div`
 
 	&::before {
 		content: "X";
-		font-size: 0.7rem;
+		font-size: 0.5rem;
 		color: white;
 		border-radius: 50%;
 	}
@@ -95,7 +105,7 @@ export const DeleteFile = styled.div`
 		&::after {
 			content: "Remover";
 			position: absolute;
-			top: -22px;
+			top: -24px;
 			left: 14px;
 			color: #fff;
 			background-color: red;

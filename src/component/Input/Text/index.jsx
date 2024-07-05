@@ -6,8 +6,6 @@ export const InputText = ({
 	inputType = "text",
 	inputName,
 	inputValue,
-	inputMin = 0,
-	inputMax,
 	inputOnChange,
 	inputPlaceholder,
 	inputShowInfo = false,
@@ -31,8 +29,6 @@ export const InputText = ({
 				onChange={inputOnChange}
 				name={inputName}
 				type={inputType}
-				min={inputMin}
-				max={inputMax}
 				value={inputValue}
 				placeholder={!inputShowInfo ? inputPlaceholder : ""}
 				disabled={disabled}

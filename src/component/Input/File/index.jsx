@@ -4,7 +4,6 @@ import * as S from "./styles";
 export const InputFile = ({
 	inputId,
 	inputName,
-	inputValue,
 	inputOnChange,
 	inputOnBlur,
 	inputPlaceholder,
@@ -12,20 +11,20 @@ export const InputFile = ({
 	inputWidth = "256px",
 	inputAccept = ".jpg,.png,.bmp,.pdf",
 	disabled,
-	readOnly
+	readOnly,
+	theme = "normal"
 }) => {
 	return (
 		<S.Container width={inputWidth}>
-			{/* <S.TitleText disabled={disabled}>
-				{((inputValue && inputShowInfo) || inputShowInfo) && inputPlaceholder}
-			</S.TitleText> */}
+			<S.TitleText disabled={disabled}  theme={theme}>
+				{(inputShowInfo || inputShowInfo) && inputPlaceholder}
+			</S.TitleText>
 
 			<S.Input
 				id={inputId}
 				name={inputName}
 				type="file"
 				onChange={(e) => inputOnChange(e)}
-				defaultValue={inputValue}
 				onBlur={inputOnBlur}
 				placeholder={!inputShowInfo ? inputPlaceholder : ""}
 				disabled={disabled}

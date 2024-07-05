@@ -23,7 +23,7 @@ const editStockSchema = Yup.object().shape({
 		.max(50, "Maximo de caracteres é 50")
 });
 
-export function ManagementStockEdit() {
+export function SupplyManagementStockEdit() {
 	const location = useLocation();
 	const [notification, setNotification] = useState(null);
 

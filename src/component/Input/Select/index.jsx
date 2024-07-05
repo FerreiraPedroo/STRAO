@@ -32,7 +32,8 @@ export const InputSelect = ({
 				disabled={disabled}
 				readOnly={readOnly}
 			>
-				{options &&
+
+				{options instanceof Array &&
 					options.map((option, index) =>
 						option.type === "optionGroup" ? (
 							<S.OptionGroup key={option.value + "-" + index} label={option.value}>

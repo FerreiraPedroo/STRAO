@@ -8,7 +8,7 @@ import { PageAction } from "component/container/PageAction/index.jsx";
 import { ItemSupplierInfo } from "component/WareHouse/Item/Supplier/index.jsx";
 
 
-export function SupplyWarehouseItemRegister() {
+export function SupplyWarehouseShippingItemRegister() {
 	const [itemInfo, serItemInfo] = useState({});
 	const [itemData, setItemData] = useState(null);
 

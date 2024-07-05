@@ -5,7 +5,7 @@ import { api } from "services/api.js";
 
 import { ButtonText } from "component/ButtonText/index.jsx";
 import { InputSelect } from "component/Input/Select/index.jsx";
-import { InputFile } from "component/Input/Image/index.jsx";
+import { InputImages } from "component/Input/Image/index.jsx";
 import { InputText } from "component/Input/Text/index.jsx";
 
 import * as S from "./styles.jsx";
@@ -170,7 +170,7 @@ export function ItemSupplierModal({ itemId, showModal, setNotification }) {
 						disabled={pageLoading || saveDataStatus}
 					/>
 
-					<InputFile
+					<InputImages
 						name="supplier_item_image"
 						width="448px"
 						value={dataInfo.supplier_item_image ?? ""}

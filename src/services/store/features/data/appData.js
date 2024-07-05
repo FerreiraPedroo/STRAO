@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 let token = null;
 let dataVersion = null;
 let departmentsInfo = null;
-let contractsInfo = null;
 let sectorsInfo = null;
 let userInfo = null;
 let uiInfo = null;
@@ -12,7 +11,6 @@ try {
 	token = localStorage.getItem("strao-token");
 	dataVersion = localStorage.getItem("strao-data-version");
 	departmentsInfo = JSON.parse(localStorage.getItem("strao-departments-info"));
-	contractsInfo = JSON.parse(localStorage.getItem("strao-contracts-info"));
 	sectorsInfo = JSON.parse(localStorage.getItem("strao-sectors-info"));
 	userInfo = JSON.parse(localStorage.getItem("strao-user-info"));
 	uiInfo = JSON.parse(localStorage.getItem("strao-ui-info"));
@@ -29,15 +27,13 @@ try {
 	if (!sectorsInfo) {
 		throw "[STORE]: Os dados dos setores não foram encontrados.";
 	}
-	if (!contractsInfo) {
-		throw "[STORE]: Os dados dos contratos não foram encontrados.";
-	}
 	if (!userInfo) {
 		throw "[STORE]: Os dados do usuário não foram encontrados.";
 	}
 	if (!uiInfo) {
 		throw "[STORE]: Os dados da interface não foram encontrados.";
 	}
+	console.log("OK")
 } catch (error) {
 	console.log(error);
 }
@@ -48,7 +44,6 @@ export const appDataSlice = createSlice({
 		token,
 		dataVersion,
 		departmentsInfo,
-		contractsInfo,
 		sectorsInfo,
 		userInfo,
 		uiInfo
@@ -60,7 +55,6 @@ export const appDataSlice = createSlice({
 				token: action.payload.token ?? null,
 				dataVersion: action.payload.dataVersion ?? null,
 				departmentsInfo: action.payload.departmentsInfo ?? null,
-				contractsInfo: action.payload.contractsInfo ?? null,
 				sectorsInfo: action.payload.sectorsInfo ?? null,
 				userInfo: action.payload.userInfo ?? null,
 				uiInfo: action.payload.uiInfo ?? null
@@ -95,11 +89,6 @@ export const appDataSlice = createSlice({
 			updateData.departmentsInfo = action.payload.departmentsInfo;
 			return updateData;
 		},
-		providerUpdateContractsInfo: (state, action) => {
-			const updateData = { ...state };
-			updateData.contractsInfo = action.payload.contractsInfo;
-			return updateData;
-		},
 		providerUpdateSectorsInfo: (state, action) => {
 			const updateData = { ...state };
 			updateData.sectorsInfo = action.payload.sectorsInfo;
@@ -118,7 +107,6 @@ export const appDataSlice = createSlice({
 	}
 });
 
-export const { providerUpdateAppData, providerClearAllInfo } =
-	appDataSlice.actions;
+export const { providerUpdateAppData, providerClearAllInfo } = appDataSlice.actions;
 
 export default appDataSlice.reducer;

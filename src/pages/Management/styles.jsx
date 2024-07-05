@@ -5,17 +5,6 @@ export const NoAction = styled.div`
 	text-align: center;
 `;
 
-export const GroupContainer = styled.div`
-	width: auto;
-	align-items: center;
-	border: 1px solid #ddd;
-`;
-
-export const GroupTitle = styled.div`
-	text-align: center;
-	background-color: #ddd;
-	border-bottom: 1px solid #ddd;
-`;
 
 export const SectionContainer = styled.div`
 	display: flex;

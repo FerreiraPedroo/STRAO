@@ -11,7 +11,7 @@ import { PageTitle } from "component/container/PageTitle";
 
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
-export const ManagementStock = () => {
+export const SupplyManagementStock = () => {
 	const navigate = useNavigate();
 
 	const [pageLoading, setPageLoading] = useState(true);

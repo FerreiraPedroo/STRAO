@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { InputTheme } from "styles/input";
 
 export const Container = styled.div`
 	height: 58px;
@@ -7,7 +8,7 @@ export const Container = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-end;
+	justify-content: flex-start;	
 `;
 export const TitleText = styled.p`
 	height: 16px;
@@ -23,6 +24,7 @@ export const TitleText = styled.p`
 
 	${({ disabled }) => disabled && "color: #b6b6b6;"}
 `;
+
 export const Input = styled.input`
 	min-width: 160px;
 	min-height: 30px;

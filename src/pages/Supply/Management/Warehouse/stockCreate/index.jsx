@@ -12,7 +12,7 @@ import { ButtonIcon } from "component/ButtonIcon/index.jsx";
 import { InputSelect } from "component/Input/Select/index.jsx";
 import { ModalSearch } from "component/ModalSearch/index.jsx";
 
-export function ManagementStockCreate() {
+export function SupplyManagementStockCreate() {
 	const [loading, setLoading] = useState(false);
 
 	const [itemInfo, setItemInfo] = useState({});

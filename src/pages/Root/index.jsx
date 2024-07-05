@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { providerClearAllInfo } from "../../services/store/features/data/appData";
+import { providerClearAllInfo } from "services/store/features/data/appData";
 
 import { Outlet, Navigate } from "react-router-dom";
-import { NavBar } from "../../component/NavBar";
-import { SideBar } from "../../component/SideBar";
+import { NavBar } from "component/NavBar";
+import { SideBar } from "component/SideBar";
 
 import * as S from "./styles.jsx";
 
@@ -13,7 +13,6 @@ function verifyDataApp(state) {
 		!state.appData.uiInfo ||
 		!state.appData.dataVersion ||
 		!state.appData.departmentsInfo ||
-		!state.appData.contractsInfo ||
 		!state.appData.sectorsInfo ||
 		!state.appData.userInfo ||
 		!state.appData.token

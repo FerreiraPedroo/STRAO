@@ -11,7 +11,7 @@ import { PageTitle } from "component/container/PageTitle";
 import { PageList } from "component/container/PageList";
 import { PageFilter } from "component/container/PageFilter";
 
-export function ManagementItem() {
+export function SupplyManagementItems() {
 	const navigate = useNavigate();
 
 	const [notification, setNotification] = useState(null);
@@ -55,7 +55,7 @@ export function ManagementItem() {
 	]);
 	const [listActions] = useState([
 		{
-			name: "Novo Item'rr4e",
+			name: "Novo Item",
 			typeStyle: "add",
 			show: true,
 			action: () => navigate("/management/warehouse/item/new")
@@ -104,9 +104,9 @@ export function ManagementItem() {
 			)}
 
 			<PageTitle
-				title="Items"
+				title="Itens"
 				backUrl={"/management"}
-				subTitle={"Registre e edite items utitizados no almoxarifado."}
+				subTitle={"Registre e edite itens utitizados no almoxarifado."}
 			/>
 
 			<PageAction actionsData={listActions} dataSelected={itemSelected} loading={pageLoading} />

@@ -5,10 +5,10 @@ export const Container = styled.div`
 	${({ width }) => width && `max-width:${width};`}
 	width: 100%;
 	min-width: 128px;
-	/* height: 58px; */
+	height: 58px;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-end;
+	/* justify-content: flex-end; */
 `;
 
 export const TitleText = styled.p`
