@@ -24,6 +24,7 @@ export const InputImages = ({
 
 		setFiles(newImgs);
 		onChange({ target: { value: newImgs, name: name } });
+		console.log(newImgs)
 	}
 
 	return (

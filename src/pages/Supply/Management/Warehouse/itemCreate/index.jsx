@@ -24,60 +24,102 @@ export function SupplyManagementItemCreate() {
 
 	const [notification, setNotification] = useState(null);
 	const [pageLoading, setPageLoading] = useState(true);
-	const [handleData, setHandleData] = useState({});
 
+	const [handleData, setHandleData] = useState({});
 	function handleDataState(event) {
 		const data = { ...handleData };
 		data[event.target.name] = event.target.value;
 		setHandleData(data);
 	}
 
-	const [categoryList, setCategoryList] = useState([]);
-	const categorySelectOptions = useMemo(
-		() => {
-			let optionsInfo = [];
+	async function createItem() {
+		try {
+			const formData = new FormData();
+			Object.entries(handleData).forEach((element) => {
+				if (element[0] == "photos") {
+					const photos = element[1].map((p) => {
+						formData.append(element[0], p);
 
-			if (categoryList instanceof Array) {
-				optionsInfo = categoryList.map((option) => {
-					return {
-						value: option._id,
-						name: option.name,
-						type: "option"
-					};
-				});
-			}
-
-			optionsInfo.unshift({
-				value: "",
-				name: "Selecione o estoque",
-				type: "option"
+					});
+				} else {
+					formData.append(element[0], element[1]);
+				}
+			});
+			console.log({ formData });
+			const response = await api.post(`/management/warehouse/item`, formData, {
+				headers: {
+					"Content-Type": "multipart/form-data"
+				}
 			});
 
-			return optionsInfo;
-		},
-		[categoryList]
-	);
+			setNotification({
+				theme: "success",
+				message: "Estoque criado com sucesso."
+			});
+		} catch (error) {
+			setNotification({
+				theme: "fail",
+				message:
+					error.response && error.response.data.message ? error.response.statusText : error.message,
+				setNotification: setNotification
+			});
+		}
+	}
+
+	const [itemInfoValidation, setItemInfoValidation] = useState({});
+	function handleItemValidation() {
+		const errors = {};
+
+		if (handleData.name) {
+			if (handleData.name === "") errors.name = "Não pode estar vazio.";
+			if (handleData.name.length > 0 && handleData.name.length < 3)
+				errors.name = "Deve ter no minimo 4 caracteres.";
+		} else {
+			errors.name = "Não pode estar vazio.";
+		}
+
+		if (handleData.category) {
+			if (handleData.category === "") errors.category = "Selecione uma categoria.";
+		} else {
+			errors.category = "Selecione uma categoria.";
+		}
+
+		if (!Object.keys(errors).length) {
+			createItem();
+		} else {
+			setItemInfoValidation(errors);
+		}
+	}
+
+	const [categoryList, setCategoryList] = useState([]);
+	const categorySelectOptions = useMemo(() => {
+		let optionsInfo = [];
+
+		if (categoryList instanceof Array) {
+			optionsInfo = categoryList.map((option) => {
+				return {
+					value: option._id,
+					name: option.name,
+					type: "option"
+				};
+			});
+		}
+
+		optionsInfo.unshift({
+			value: "",
+			name: "Selecione o estoque",
+			type: "option"
+		});
+
+		return optionsInfo;
+	}, [categoryList]);
 
 	useEffect(() => {
 		async function getCategories() {
 			try {
 				const response = await api.get(`management/categories`);
 				setCategoryList(response.data.data);
-				setPageLoading(false)
-			} catch (error) {
-				setNotification({
-					theme: "fail",
-					message:
-						(error.response && error.response.data.message) ??
-						"Erro ao obter os dados dos recebimentos.",
-					setNotification: setNotification
-				});
-			}
-		}
-		async function getSubCategories() {
-			try {
-				const response = await api.get(`management/sub-categories`);
-				// setSubCategoryList(response.data.data);
+				setPageLoading(false);
 			} catch (error) {
 				setNotification({
 					theme: "fail",
@@ -89,10 +131,7 @@ export function SupplyManagementItemCreate() {
 			}
 		}
 		getCategories();
-		// getSubCategories();
 	}, []);
-
-	console.log(handleData);
 
 	return (
 		<PageContainer>
@@ -118,13 +157,12 @@ export function SupplyManagementItemCreate() {
 								name: "Salvar",
 								typeStyle: "add",
 								show: true,
-								action: () => ""
+								action: () => handleItemValidation()
 							}
 						]}
 						dataSelected={false}
 						loading={false}
 					/>
-
 					<S.BlockInfoContainer theme="normal">
 						<S.BlockInfoTitle>Informações</S.BlockInfoTitle>
 						<S.DataContainer>
@@ -170,12 +208,12 @@ export function SupplyManagementItemCreate() {
 									inputPlaceholder="Nome"
 									inputShowInfo={true}
 									inputWidth="524px"
-									inputErrorMsg=""
+									inputErrorMsg={itemInfoValidation.name}
 									inputOnBlur={() => ""}
 									disabled={pageLoading}
 									readOnly=""
 									theme="normal"
-									disableErrorMsg={"true"}
+									disableErrorMsg={false}
 								/>
 							</S.InputBox>
 
@@ -189,6 +227,8 @@ export function SupplyManagementItemCreate() {
 									selectOnChange={handleDataState}
 									options={categorySelectOptions}
 									disabled={pageLoading}
+									selectErrorMsg={itemInfoValidation.category}
+									disableErrorMsg={false}
 								/>
 								{/* <InputSelect
 									width="256px"
@@ -202,18 +242,20 @@ export function SupplyManagementItemCreate() {
 								/> */}
 							</S.InputBox>
 
-							<S.InputBox>
-								<InputSelect
-									width="256px"
-									inputValue={handleData.unit_base ?? ""}
-									selectName={"unit_base"}
-									selectShowInfo={true}
-									selectPlaceholder={"Unidade de medida"}
-									selectOnChange={handleDataState}
-									options={pageLoading}
-									disabled={""}
-								/>
-							</S.InputBox>
+							{/* <S.InputBox>
+									<InputSelect
+										width="256px"
+										inputValue={handleData.unit_base ?? ""}
+										selectName={"unit_base"}
+										selectShowInfo={true}
+										selectPlaceholder={"Unidade de medida"}
+										selectOnChange={handleDataState}
+										options={[]}
+										disabled={pageLoading}
+										selectErrorMsg={itemInfoValidation.unit_base}
+										disableErrorMsg={false}
+									/>
+								</S.InputBox> */}
 
 							<S.InputBox>
 								<InputTextArea
@@ -233,55 +275,54 @@ export function SupplyManagementItemCreate() {
 								/>
 							</S.InputBox>
 						</S.DataContainer>
-						
 					</S.BlockInfoContainer>
 
 					<S.BlockInfoContainer theme="normal">
 						<S.BlockInfoTitle>Identificação</S.BlockInfoTitle>
 						<S.DataContainer>
-								<InputText
-									inputId="bar_code"
-									inputName="bar_code"
-									textAreaValue={handleData.bar_code ?? null}
-									inputOnChange={() => ""}
-									inputPlaceholder="Código de barras"
-									inputShowInfo={true}
-									inputWidth="320px"
-									inputErrorMsg=""
-									inputOnBlur={() => ""}
-									disabled={pageLoading}
-									readOnly=""
-									theme="normal"
-									disableErrorMsg={true}
-								/>
+							<InputText
+								inputId="bar_code"
+								inputName="bar_code"
+								textAreaValue={handleData.bar_code ?? null}
+								inputOnChange={() => ""}
+								inputPlaceholder="Código de barras"
+								inputShowInfo={true}
+								inputWidth="320px"
+								inputErrorMsg=""
+								inputOnBlur={() => ""}
+								disabled={pageLoading}
+								readOnly=""
+								theme="normal"
+								disableErrorMsg={true}
+							/>
 
-								<InputFile
-									inputId="qr_code"
-									inputName="qr_code"
-									inputOnChange="QR Code"
-									inputOnBlur={() => ""}
-									inputPlaceholder="QR Code"
-									inputShowInfo={true}
-									inputWidth="320px"
-									inputAccept=""
-									disabled={pageLoading}
-									readOnly={false}
-									theme="normal"
-								/>
+							<InputFile
+								inputId="qr_code"
+								inputName="qr_code"
+								inputOnChange="QR Code"
+								inputOnBlur={() => ""}
+								inputPlaceholder="QR Code"
+								inputShowInfo={true}
+								inputWidth="320px"
+								inputAccept=""
+								disabled={pageLoading}
+								readOnly={false}
+								theme="normal"
+							/>
 
-								<InputImages
-									id="photos"
-									name="photos"
-									onChange={() => ""}
-									placeholder="Fotos"
-									showInfo={true}
-									width="320px"
-									errorMsg=""
-									onBlur={() => ""}
-									disabled={pageLoading}
-									readOnly={false}
-									theme="normal"
-								/>
+							<InputImages
+								id="photos"
+								name="photos"
+								onChange={handleDataState}
+								placeholder="Fotos"
+								showInfo={true}
+								width="320px"
+								errorMsg=""
+								onBlur={() => ""}
+								disabled={pageLoading}
+								readOnly={false}
+								theme="normal"
+							/>
 						</S.DataContainer>
 					</S.BlockInfoContainer>
 				</>
