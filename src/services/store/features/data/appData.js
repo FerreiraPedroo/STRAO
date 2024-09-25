@@ -1,39 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let token = null;
-let dataVersion = null;
-let departmentsInfo = null;
-let sectorsInfo = null;
+let UIInfo = null;
+let appInfo = null;
 let userInfo = null;
-let uiInfo = null;
+let departmentsInfo = null;
 
 try {
-	token = localStorage.getItem("strao-token");
-	dataVersion = localStorage.getItem("strao-data-version");
-	departmentsInfo = JSON.parse(localStorage.getItem("strao-departments-info"));
-	sectorsInfo = JSON.parse(localStorage.getItem("strao-sectors-info"));
-	userInfo = JSON.parse(localStorage.getItem("strao-user-info"));
-	uiInfo = JSON.parse(localStorage.getItem("strao-ui-info"));
+	UIInfo = JSON.parse(localStorage.getItem("strao-UIInfo"));
+	appInfo = JSON.parse(localStorage.getItem("strao-AppInfo"));
+	userInfo = JSON.parse(localStorage.getItem("strao-UserInfo"));
+	departmentsInfo = JSON.parse(localStorage.getItem("strao-DepartmentsInfo"));
 
-	if (!token) {
-		throw "[STORE]: Token não encontrado.";
+	if (!UIInfo) {
+		throw "[STORE]: Os dados da interface não foram encontrados.";
 	}
-	if (!dataVersion) {
-		throw "[STORE]: A versão da data não localizada.";
-	}
-	if (!departmentsInfo) {
-		throw "[STORE]: Informações dos departamentos não encontrados.";
-	}
-	if (!sectorsInfo) {
-		throw "[STORE]: Os dados dos setores não foram encontrados.";
+	if (!appInfo) {
+		throw "[STORE]: Dados do aplicativo não localizado.";
 	}
 	if (!userInfo) {
 		throw "[STORE]: Os dados do usuário não foram encontrados.";
 	}
-	if (!uiInfo) {
-		throw "[STORE]: Os dados da interface não foram encontrados.";
+	if (!departmentsInfo) {
+		throw "[STORE]: Informações dos departamentos não encontrados.";
 	}
-	console.log("OK")
+
+	console.log("STORE LOADEAD FROM CACHE");
 } catch (error) {
 	console.log(error);
 }
@@ -41,68 +32,57 @@ try {
 export const appDataSlice = createSlice({
 	name: "appData",
 	initialState: {
-		token,
-		dataVersion,
-		departmentsInfo,
-		sectorsInfo,
+		UIInfo,
+		appInfo,
 		userInfo,
-		uiInfo
+		departmentsInfo
 	},
 	reducers: {
 		providerUpdateAppData: (state, action) => {
+			localStorage.setItem("strao-UIInfo", JSON.stringify(action.payload.UIInfo));
+			localStorage.setItem("strao-AppInfo", JSON.stringify(action.payload.appInfo));
+			localStorage.setItem("strao-UserInfo", JSON.stringify(action.payload.userInfo));
+			localStorage.setItem(
+				"strao-DepartmentsInfo",
+				JSON.stringify(action.payload.departmentsInfo)
+			);
+
 			const updateData = {
-				...state,
-				token: action.payload.token ?? null,
-				dataVersion: action.payload.dataVersion ?? null,
-				departmentsInfo: action.payload.departmentsInfo ?? null,
-				sectorsInfo: action.payload.sectorsInfo ?? null,
+				UIInfo: action.payload.UIInfo ?? null,
+				appInfo: action.payload.appInfo ?? null,
 				userInfo: action.payload.userInfo ?? null,
-				uiInfo: action.payload.uiInfo ?? null
+				departmentsInfo: action.payload.departmentsInfo ?? null
 			};
 			return updateData;
 		},
 		providerClearAllInfo: (state, action) => {
-			localStorage.clear("strao-token");
-			localStorage.clear("strao-data-version");
-			localStorage.clear("strao-department-info");
-			localStorage.clear("strao-contracts-info");
-			localStorage.clear("strao-sectors-info");
-			localStorage.clear("strao-user-info");
-			localStorage.clear("strao-ui-info");
+			localStorage.removeItem("strao-UIInfo");
+			localStorage.removeItem("strao-AppInfo");
+			localStorage.removeItem("strao-UserInfo");
+			localStorage.removeItem("strao-DepartmentsInfo");
+
 			return {
-				token: null,
-				dataVersion: null,
-				departmentInfo: null,
-				contractsInfo: null,
-				sectorsInfo: null,
+				UIInfo: null,
+				appInfo: null,
 				userInfo: null,
-				uiInfo: null
+				departmentsInfo: null
 			};
 		},
-		providerUpdateToken: (state, action) => {
-			const updateData = { ...state };
-			updateData.token = action.payload.token;
-			return updateData;
+		providerUpdateUIInfo: (state, action) => {
+			state.UIInfo = action.payload.UIInfo;
+			return state;
 		},
-		providerUpdateDepartmentsInfo: (state, action) => {
-			const updateData = { ...state };
-			updateData.departmentsInfo = action.payload.departmentsInfo;
-			return updateData;
-		},
-		providerUpdateSectorsInfo: (state, action) => {
-			const updateData = { ...state };
-			updateData.sectorsInfo = action.payload.sectorsInfo;
-			return updateData;
+		providerUpdateAppInfo: (state, action) => {
+			state.appInfo = action.payload.appInfo;
+			return state;
 		},
 		provideUpdateUserInfo: (state, action) => {
-			const updateData = { ...state };
-			updateData.userInfo = action.payload.userInfo;
-			return updateData;
+			state.userInfo = action.payload.userInfo;
+			return state;
 		},
-		providerUpdateUiInfo: (state, action) => {
-			const updateData = { ...state };
-			updateData.uiInfo = action.payload.uiInfo;
-			return updateData;
+		providerUpdateDepartmentsInfo: (state, action) => {
+			state.departmentsInfo = action.payload.departmentsInfo;
+			return state;
 		}
 	}
 });

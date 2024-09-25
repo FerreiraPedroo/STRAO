@@ -90,7 +90,7 @@ export function SupplyWarehouseShippingNew() {
 		}
 		async function getOriginators() {
 			try {
-				const response = await api.get(`supply/originator/list`);
+				const response = await api.get(`admin/originator/list`);
 				setOriginaryList(response.data.data);
 			} catch (error) {
 				setNotification({

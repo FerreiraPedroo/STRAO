@@ -36,26 +36,12 @@ export const Login = () => {
 		const responseData = await loginService(user, password, dataVersion);
 
 		if (responseData.codStatus === 200) {
-			localStorage.setItem("strao-token", responseData.data.token);
-			localStorage.setItem("strao-data-version", responseData.data.dataVersion);
-			localStorage.setItem("strao-departments-info", JSON.stringify(responseData.data.departmentsInfo));
-			localStorage.setItem("strao-sectors-info", JSON.stringify(responseData.data.sectorsInfo));
-			localStorage.setItem("strao-user-info", JSON.stringify({ name: responseData.data.userInfo.name, avatar: responseData.data.userInfo.avatar }));
-			localStorage.setItem("strao-ui-info", JSON.stringify(responseData.data.uiInfo));
 			dispatch(providerUpdateAppData(responseData.data));
-			console.log("NAVIGATE")
 			navigate("/home");
 		}
 
 		if (responseData.codStatus !== 200) {
 			setErrorLogin("Erro ao conectar.");
-			localStorage.removeItem("strao-token");
-			localStorage.removeItem("strao-data-version");
-			localStorage.removeItem("strao-departments-info");
-			localStorage.removeItem("strao-sectors-info");
-			localStorage.removeItem("strao-user-info");
-			localStorage.removeItem("strao-ui-info");
-
 			dispatch(providerClearAllInfo());
 		}
 	};
