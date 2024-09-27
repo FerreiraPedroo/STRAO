@@ -1,14 +1,13 @@
 import { api } from "../api.js";
 
-export const loginService = async (_user, _password, _dataVersion) => {
+export const loginService = async (_user, _password) => {
 	try {
 		const response = await api({
 			url: "/login",
 			method: "POST",
 			data: {
 				login: _user,
-				password: _password,
-				dataVersion: _dataVersion
+				password: _password
 			},
 			withCredentials: true
 		});
