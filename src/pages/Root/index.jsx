@@ -10,8 +10,6 @@ import * as S from "./styles.jsx";
 
 function verifyDataApp(state) {
 	if (
-		!state.appData.uiInfo ||
-		!state.appData.dataVersion ||
 		!state.appData.departmentsInfo ||
 		!state.appData.sectorsInfo ||
 		!state.appData.userInfo ||
@@ -24,13 +22,12 @@ function verifyDataApp(state) {
 
 export function Root() {
 	const result = useSelector(verifyDataApp);
-
+	console.log({result})
 	if (!result) {
 		const dispatch = useDispatch();
-		dispatch(providerClearAllInfo())
+		dispatch(providerClearAllInfo());
 
-		useSelector(verifyDataApp)
-		return <Navigate to="/login" replace={true} />;
+		return <Navigate to="/" replace={true} />;
 	}
 
 	return (

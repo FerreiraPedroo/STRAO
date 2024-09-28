@@ -265,7 +265,7 @@ export const HumanResourcesEmployeeRegister = () => {
 			if (err.response.data) {
 				errMessage = err.response.data.message;
 				if (err.response.data.codStatus == 401) {
-					onClick = () => navigate("/login");
+					onClick = () => navigate("/");
 				}
 			} else {
 				errMessage = err.message;
@@ -358,7 +358,7 @@ export const HumanResourcesEmployeeRegister = () => {
 			if (err.response.data) {
 				errMessage = err.response.data.message;
 				if (err.response.data.codStatus == 401) {
-					onClick = () => navigate("/login");
+					onClick = () => navigate("/");
 				}
 			} else {
 				errMessage = err.message;

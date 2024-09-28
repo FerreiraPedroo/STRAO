@@ -1,39 +1,42 @@
+import { useCallback, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
 	changeSectionSelected,
 	changeSectionActionSelected
 } from "../../services/store/features/menu/menu";
+
 import { useDispatch, useSelector } from "react-redux";
 
-import * as S from "./styles";
 import { sideBarImgs } from "../../helper/indexImg";
-import { useEffect } from "react";
+import * as S from "./styles";
 
 export function SideBar() {
 	const location = useLocation();
-	const departmentLocation = location.pathname.split("/")[1];
-
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const departmentLocation = location.pathname.split("/")[1];
 
 	const menuDepartment = useSelector((state) => {
-		return state.appData.departmentsInfo.find(
-			(department) => department.url_path === "/" + departmentLocation
-		);
+		return state.appData.departmentsInfo.departments.find((department) => {
+			return department.URLPath === "/" + departmentLocation;
+		});
 	});
 
 	const menuSectors = useSelector((state) => {
-		const department = state.appData.departmentsInfo.find((department) => {
-			return department.url_path === "/" + departmentLocation;
-		});
+		const department = state.appData.departmentsInfo.departments.find(
+			(department) => {
+				return department.URLPath === "/" + departmentLocation;
+			}
+		);
 
 		if (!department) {
-			return [];
+			return {};
 		}
-		
-		const sector = state.appData.sectorsInfo.filter(
-			(sector) => sector.department_id === department._id
+
+		const sector = state.appData.sectorsInfo.sectors.filter(
+			(sector) => sector.departmentID === department.ID
 		);
+
 
 		return sector;
 	});
@@ -43,7 +46,7 @@ export function SideBar() {
 
 	function selectSection(sector) {
 		dispatch(changeSectionSelected(sector.name));
-		navigate(sector.url_path);
+		navigate(sector.URLPath);
 	}
 
 	function selectSectionAction(actionName) {
@@ -64,7 +67,7 @@ export function SideBar() {
 			{menuSectors.map((sec) => (
 				<S.SectionContainer key={sec.name} onClick={() => selectSection(sec)}>
 					<S.SectionTop selected={sec.name === menuSectorSelected}>
-						<S.SectionImg src={sideBarImgs[sec.url_img]} />
+						<S.SectionImg src={sideBarImgs[sec.URLMenuImg]} />
 						<S.SectionTitle>{sec.name}</S.SectionTitle>
 					</S.SectionTop>
 				</S.SectionContainer>

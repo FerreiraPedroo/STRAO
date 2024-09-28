@@ -10,14 +10,14 @@ export const Card = ({ data }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	function selectSection(url_path) {
-		dispatch({ payload: url_path, type: "sidebar/changeSectionSelected" });
-		navigate(url_path);
+	function selectSection(URLPath) {
+		dispatch({ payload: URLPath, type: "sidebar/changeSectionSelected" });
+		navigate(URLPath);
 	}
 	return (
-		<S.Container onClick={() => selectSection(data.url_path)}>
+		<S.Container onClick={() => selectSection(data.URLPath)}>
 			<S.Box>
-				<S.Img src={sectorActionsImgs[data.url_img]} />
+				<S.Img src={sectorActionsImgs[data.URLMenuImg]} />
 				{/* <S.CategoryNotification>0</S.CategoryNotification> */}
 			</S.Box>
 			<S.CategoryName>{data.name}</S.CategoryName>

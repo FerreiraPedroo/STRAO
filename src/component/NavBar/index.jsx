@@ -15,10 +15,10 @@ export const NavBar = () => {
 
 	const [showMenu, setShowMenu] = useState(false);
 
-	function menuNavigation(url_path) {
+	function menuNavigation(URLPath) {
 		setShowMenu((prevState) => !prevState);
 		dispatch({ payload: "", type: "sidebar/changeSectionSelected" });
-		navigate(url_path);
+		navigate(URLPath);
 	}
 
 	return (
@@ -30,13 +30,13 @@ export const NavBar = () => {
 						onClick={() => setShowMenu((prevState) => !prevState)}
 					/>
 					{showMenu && (
-						<S.MenuOptions>
-							{Object.values(menuData).map((card) => (
+						<S.MenuOptions key="menuoptions">
+							{Object.values(menuData.departments).map((card) => (
 								<S.MenuCard
 									key={card.name}
-									onClick={() => menuNavigation(card.url_path)}
+									onClick={() => menuNavigation(card.URLPath)}
 								>
-									<S.MenuCardImg src={navBarImgs[card.url_img]} />
+									<S.MenuCardImg src={navBarImgs[card.URLMenuImg]} />
 									<S.MenuCardTitle>{card.name}</S.MenuCardTitle>
 								</S.MenuCard>
 							))}

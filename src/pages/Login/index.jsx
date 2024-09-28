@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { loginService } from "services/login";
 import { useSelector, useDispatch } from "react-redux";
-
 import { providerClearAllInfo, providerUpdateToken } from "services/store/features/data/appData";
 
-import homebg2 from "./img/home-bg2.png";
+import { loginService } from "services/login";
 
 import { PageContainer } from "component/container/PageContainer/styles";
-import * as S from "./styles";
 import { SelectBranchModal } from "./SelectBranchModal";
+
+import homebg2 from "./img/home-bg2.png";
+import * as S from "./styles";
 
 export const Login = () => {
 	const { dataVersion } = useSelector((state) => state.appData);
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const [user, setUser] = useState("");
 	const [password, setPassword] = useState("");
@@ -45,12 +46,13 @@ export const Login = () => {
 			dispatch(providerClearAllInfo());
 		}
 	};
+	const goHome = () => {
+		navigate("/home");
+	};
 
 	return (
 		<PageContainer>
-			{showBranchModal && (
-				<SelectBranchModal branchList={branchList} />
-			)}
+			{showBranchModal && <SelectBranchModal goHome={goHome} branchList={branchList} />}
 			<S.LoginContainer>
 				<S.InputBox>
 					<S.Text size="2">usuário</S.Text>

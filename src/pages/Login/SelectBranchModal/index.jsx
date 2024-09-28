@@ -1,32 +1,31 @@
-import { useEffect, useState } from "react";
-import * as S from "./styles.jsx";
+import { useState } from "react";
+
+import { useDispatch } from "react-redux";
+import { providerUpdateAppData } from "services/store/features/data/appData.js";
 
 import { api } from "services/api.js";
 
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import * as S from "./styles.jsx";
 
-export function SelectBranchModal({ branchList }) {
+export function SelectBranchModal({ branchList, goHome }) {
 	const useDispath = useDispatch();
-	const navigate = useNavigate();
 
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState("");
 
 	async function changeBranchSelected(branchSelected) {
 		try {
 			if (!loading) {
-				setLoading(true);
+				setLoading("loading");
 				const response = await api.post(`/change-branch`, { branchSelected });
-
-				if (response.data.codStatus === 201) {
+				if (response.status === 201) {
 					useDispath(providerUpdateAppData(response.data));
-					navigate("/home")
+					goHome();
 				} else {
 					throw "ERRO";
 				}
 			}
 		} catch (error) {
-			setLoading(false);
+			setLoading("");
 			console.log(error);
 		}
 	}

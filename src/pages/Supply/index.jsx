@@ -8,19 +8,20 @@ import * as S from "./styles.jsx";
 
 export const Supply = () => {
 	const { pathname } = useLocation();
+
 	const departmentLocation = location.pathname.split("/")[1];
 	
 	const menuSectors = useSelector((state) => {
-		const department = state.appData.departmentsInfo.find((department) => {
-			return department.url_path === "/" + departmentLocation;
+		const department = state.appData.departmentsInfo.departments.find((department) => {
+			return department.URLPath === "/" + departmentLocation;
 		});
 
 		if (!department) {
 			return [];
 		}
 		
-		const sector = state.appData.sectorsInfo.filter(
-			(sector) => sector.department_id === department._id
+		const sector = state.appData.sectorsInfo.sectors.filter(
+			(sector) => sector.departmentID === department.ID
 		);
 
 		return sector;
@@ -29,7 +30,6 @@ export const Supply = () => {
 	return (
 		<S.Container>
 			{menuSectors.map((sector) => <Card key={sector.name} data={sector} />)}
-
 			{!menuSectors.length && <S.NoAction>Sem ações.</S.NoAction>}
 		</S.Container>
 	);
