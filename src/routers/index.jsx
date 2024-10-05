@@ -10,6 +10,8 @@ import { Home } from "pages/Home";
 ////////////////////////////////////////////////////////////////////////////////////////////
 // ADMINISTRATION
 import { Admin } from "pages/Admin";
+import { AdminCompanyEdit } from "pages/Admin/Company";
+import { AdminCompanyList } from "pages/Admin/CompanyList";
 import { AdminUsers } from "pages/Admin/User";
 import { AdminUserEdit } from "pages/Admin/UserEdit";
 import { AdminUserRegister } from "pages/Admin/UserRegister";
@@ -42,6 +44,7 @@ import { SupplyWarehouseShipping } from "pages/Supply/Warehouse/Shipping";
 import { SupplyWarehouseShippingNew } from "pages/Supply/Warehouse/Shipping/ShippingNew";
 import { SupplyWarehouseShippingItemRegister } from "pages/Supply/Warehouse/Stock/ItemRegister";
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 // import { SupplyWarehouseItems } from "pages/Supply/Warehouse/Stock/Items";
 // import { SupplyManagementItemCreate } from "pages/Supply/Management/Warehome/itemCreate";
@@ -69,6 +72,9 @@ export const router = createBrowserRouter(
 					<Route path="users" element={<AdminUsers />} />
 					<Route path="user/edit" element={<AdminUserEdit />} />
 					<Route path="user/register" element={<AdminUserRegister />} />
+
+					<Route path="companies" element={<AdminCompanyList />} />
+					<Route path="company" element={<AdminCompanyEdit />} />
 				</Route>
 
 				<Route path="management/">

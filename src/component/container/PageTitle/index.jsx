@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
  *
  * @returns
  */
-export const PageTitle = ({ title, subTitle, backUrl, pageIndex = false }) => {
+export const PageTitle = ({ title, subTitle, backUrl, pageIndex = true }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const location = useLocation();
@@ -31,7 +31,7 @@ export const PageTitle = ({ title, subTitle, backUrl, pageIndex = false }) => {
 	return (
 		<S.PageTitleContainer>
 			<S.PageHeader>
-				{!pageIndex && (
+				{pageIndex && (
 					<ButtonText
 						disabled={!backUrl}
 						typeStyle="back"

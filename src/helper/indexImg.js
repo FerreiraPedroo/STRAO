@@ -10,7 +10,9 @@ import supply from "../assets/img/menu/supply/supply.svg";
 
 // ADMIN
 import admin from "../assets/img/menu/admin/admin.svg";
-import users from "../assets/img/menu/admin/icons8_account_48.png";
+import users from "../assets/img/menu/admin/account-48.png";
+import company from "../assets/img/menu/admin/company-48.png";
+import access from "../assets/img/menu/admin/access-48.png";
 // import userList from "../assets/img/menu/icons8-account-find-48.png";
 // import userRegister from "../assets/img/menu/icons8-account-add-48.png";
 // import userDelete from "../assets/img/menu/icons8-account-delete-48.png";
@@ -46,6 +48,8 @@ export const sideBarImgs = {
 	default_invoice: invoice,
 	default_shipping: shipping,
 	default_receipt: receipt,
+	default_company: company,
+	default_access: access,
 	default_users: users,
 	default_stock: stock,
 	default_material: material,

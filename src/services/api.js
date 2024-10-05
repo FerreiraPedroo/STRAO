@@ -6,11 +6,11 @@ export const api = axios.create({
 
 api.interceptors.request.use(function (config) {
 	config.headers["Authorization"] = `Bearer ${localStorage.getItem("strao-token")}`;
+	config.headers["Strao-Info-Data-Version"] = `${localStorage.getItem("strao-infoDataVersion")}`;
 	return config;
 });
-console.log(localStorage.getItem("strao-token"))
-api.interceptors.response.use(function (response) {
-	// const updateData = response.headers['x-strao-update-data'];
 
-	return response;
-});
+// api.interceptors.response.use(function (response) {
+// 	// const updateData = response.headers['x-strao-update-data'];
+// 	return response;
+// });

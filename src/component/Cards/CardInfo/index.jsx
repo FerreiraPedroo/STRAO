@@ -20,6 +20,11 @@ export function CardInfo({ theme, data }) {
 					<S.NameTitle>
 						Nome: <S.NameText>{data.name}</S.NameText>
 					</S.NameTitle>
+					{data.status && (
+						<S.NameTitle>
+							Status: <S.NameText>{data.status == "active" ? "Ativo" : "Inativado"}</S.NameText>
+						</S.NameTitle>
+					)}
 					{data.contract && (
 						<S.NameTitle>
 							Contrato: <S.NameText>{data.contract.name}</S.NameText>
@@ -30,7 +35,7 @@ export function CardInfo({ theme, data }) {
 			{data.description && (
 				<S.Description>
 					<S.NameTitle>Descrição: </S.NameTitle>
-					<S.NameText>{data.description}</S.NameText>					
+					<S.NameText>{data.description}</S.NameText>
 				</S.Description>
 			)}
 		</S.Container>

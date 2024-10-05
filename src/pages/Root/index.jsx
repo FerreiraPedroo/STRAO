@@ -22,7 +22,7 @@ function verifyDataApp(state) {
 
 export function Root() {
 	const result = useSelector(verifyDataApp);
-	console.log({result})
+
 	if (!result) {
 		const dispatch = useDispatch();
 		dispatch(providerClearAllInfo());
