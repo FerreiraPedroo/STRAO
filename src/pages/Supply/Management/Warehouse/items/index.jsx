@@ -32,8 +32,8 @@ export function SupplyManagementItems() {
 			align: "center"
 		},
 		{
-			title: "Id",
-			htmlName: "_id",
+			title: "COD",
+			htmlName: "cod",
 			minSize: 128,
 			maxSize: 128,
 			align: "center"
@@ -53,6 +53,7 @@ export function SupplyManagementItems() {
 			maxSize: 208
 		}
 	]);
+	
 	const [listActions] = useState([
 		{
 			name: "Novo Item",

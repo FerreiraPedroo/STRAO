@@ -91,7 +91,7 @@ export const SupplyManagementStock = () => {
 
 			<PageAction actionsData={listActions} />
 
-			<PageCardList stockListData={stockList} pageLoading={pageLoading} />
+			<PageCardList listData={stockList} pageLoading={pageLoading} />
 		</PageContainer>
 	);
 };

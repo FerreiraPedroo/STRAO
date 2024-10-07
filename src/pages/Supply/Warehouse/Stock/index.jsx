@@ -101,8 +101,15 @@ export function SupplyWarehouseStock() {
 
 			try {
 				const response = await api.get(`/supply/warehouse/stock/${location.state._id}/items`);
-				setItemsList(response.data.data);
-				setPageLoading(false);
+
+				if (response.data.codStatus == 200) {
+					setItemsList(response.data.data);
+					setPageLoading(false);
+				} else if (response.data.codStatus === 500) {
+				} else if (response.data.codStatus === 422) {
+				} else {
+					throw response.data;
+				}
 			} catch (error) {
 				setNotification({
 					theme: "fail",

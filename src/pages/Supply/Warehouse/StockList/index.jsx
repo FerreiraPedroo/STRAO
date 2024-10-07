@@ -11,9 +11,11 @@ import { PageTitle } from "component/container/PageTitle/index.jsx";
 import { CreateStockModal } from "./CreateStockModal/index.jsx";
 
 import * as S from "./styles.jsx";
+import { useDispatch } from "react-redux";
 
 export function SupplyWarehouseStockList() {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const [pageLoading, setPageLoading] = useState(true);
 	const [notification, setNotification] = useState(null);
@@ -25,14 +27,16 @@ export function SupplyWarehouseStockList() {
 
 		try {
 			const response = await api.get("/supply/warehouse/stock/list");
-			const itemList = response.data.data.map((item) => {
-				return {
-					...item,
-					url_path: "/supply/warehouse/stock"
-				};
-			});
 
-			setItemList(itemList);
+			if (response.data.codStatus == 200) {
+				const itemList = response.data.data.map((item) => {
+					return { ...item, url_path: "/supply/warehouse/stock" };
+				});
+
+				setItemList(itemList);
+			} else if (response.data.codStatus === 401) {
+				dispatch(changeLoginReseted(true));
+			}
 		} catch (error) {
 			setNotification({
 				theme: "fail",
@@ -66,7 +70,7 @@ export function SupplyWarehouseStockList() {
 				loading={pageLoading}
 			/>
 
-			<PageCardList stockListData={itemList} pageLoading={pageLoading} />
+			<PageCardList listData={itemList} pageLoading={pageLoading} />
 		</S.Container>
 	);
 }
