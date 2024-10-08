@@ -89,13 +89,13 @@ export const DataTitle = styled.p`
 	color: #565656; 
 `;
 
-export const DepartmentSectorsBox = styled.div`
+export const ListBox = styled.div`
 	width: 100%;
 	display: flex;
 	align-items: start;
 	gap: 16px;
 `;
-export const SectorHead = styled.div`
+export const AssignedHead = styled.div`
 	width: 100%;
 	display: flex;
 	font-size: 0.8rem;
@@ -103,13 +103,13 @@ export const SectorHead = styled.div`
 	align-items: center;
 	border-bottom: 1px solid #c6c6c6;
 `;
-export const SectorAdded = styled.div`
+export const Assigned = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
 `;
-export const SectorNotAdded = styled.div`
+export const NotAssigned = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;

@@ -10,7 +10,8 @@ import { PageAction } from "../../../component/container/PageAction";
 
 import * as S from "./styles.jsx";
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
-import { helperHandleChangeInput } from "helper/form/handleChangeInput.js";
+import { helperHandleChangeInput } from "helper/form/helperHandleChangeInput.js";
+import { helperHandleRequestReturn } from "helper/helperHandleRequestReturn.js";
 
 export function AdminCompanyEdit() {
 	const location = useLocation();
@@ -22,39 +23,30 @@ export function AdminCompanyEdit() {
 	const [companyData, setCompanyData] = useState();
 	const [companyUpdate, setCompanyUpdate] = useState();
 
-	const [optionsSelected, setOptionsSelected] = useState({});
-
-	const handleOptionsSelected = useCallback((event) => {
-		const eName = event.target.name;
-		const eValue = event.target.value;
-
-		setOptionsSelected((prev) => {
-			prev = { ...prev, [eName]: eValue };
-			return prev;
-		});
+	const [inputChanged, setInputChanged] = useState({});
+	const handleInput = useCallback((event, setFormInput, action, type) => {
+		helperHandleChangeInput({ event, setFormInput, action, type });
 	});
 
-	// function handleHiddenShowAction(status) {
-	// 	if (actionsPageData.length) {
-	// 		setActionsPageData((prev) => {
-	// 			return prev.map((action) => {
-	// 				if (status == "active" && action.name == "Ativar") {
-	// 					action.show = false;
-	// 				}
-	// 				if (status == "active" && action.name == "Desativar") {
-	// 					action.show = true;
-	// 				}
-	// 				if (status == "inactive" && action.name == "Desativar") {
-	// 					action.show = false;
-	// 				}
-	// 				if (status == "inactive" && action.namw == "Ativar") {
-	// 					action.show = true;
-	// 				}
-	// 				return action;
-	// 			});
-	// 		});
-	// 	}
-	// }
+	const departmentSelectOptions = useMemo(() => {
+		const options = [];
+		options.push({
+			value: "",
+			name: "Selecione o departamento",
+			category: "option"
+		});
+
+		companyData &&
+			companyData.departmentsInfo.notAssigned.map((department) =>
+				options.push({
+					value: department._id,
+					name: department.name,
+					category: "option"
+				})
+			);
+
+		return options;
+	}, [companyData]);
 
 	async function changeUpdate(category, action, category_id) {
 		const dataOptions = {
@@ -106,26 +98,6 @@ export function AdminCompanyEdit() {
 		}
 	}
 
-	const departmentSelectOptions = useMemo(() => {
-		const options = [];
-		options.push({
-			value: "",
-			name: "Selecione o departamento",
-			category: "option"
-		});
-
-		companyData &&
-			companyData.departmentsInfo.notAssigned.map((department) =>
-				options.push({
-					value: department._id,
-					name: department.name,
-					category: "option"
-				})
-			);
-
-		return options;
-	}, [companyData]);
-
 	function assignedDepartmentSectorsElement(departmentId) {
 		return (
 			companyData &&
@@ -162,15 +134,13 @@ export function AdminCompanyEdit() {
 		const getUserInfo = async () => {
 			try {
 				const request = await api.get(`admin/company/${location.state._id}`);
-				// handleHiddenShowAction(request.data.data);
-				setCompanyData(request.data.data);
+				console.log(request.data.data);
+				helperHandleRequestReturn(request)({ setData: setCompanyData, notification, location });
 			} catch (error) {}
 			setLoading(false);
 		};
 		getUserInfo();
 	}, []);
-
-	// console.log(companyData);
 
 	return (
 		<PageContainer>
@@ -186,7 +156,7 @@ export function AdminCompanyEdit() {
 
 					<S.CenterContainer>
 						<S.HeaderCenter>
-							<S.HeaderTitle>Dados da companhia</S.HeaderTitle>
+							<S.HeaderTitle>Dados</S.HeaderTitle>
 						</S.HeaderCenter>
 
 						<S.PrincipalData>
@@ -205,9 +175,16 @@ export function AdminCompanyEdit() {
 								inputPlaceholder={"Status"}
 								disabled={true}
 								readOnly={true}
-								inputOnChange={(e) => {
-									helperHandleChangeInput(e, setCompanyUpdate, "add", "text");
-								}}
+								inputOnChange={(e) => null}
+							/>
+							<InputText
+								inputValue={companyData.companyInfo.cnpj}
+								inputName="cnpj"
+								inputShowInfo={true}
+								inputPlaceholder={"CNPJ"}
+								disabled={true}
+								readOnly={true}
+								inputOnChange={(e) => null}
 							/>
 						</S.PrincipalData>
 					</S.CenterContainer>
@@ -218,17 +195,15 @@ export function AdminCompanyEdit() {
 							<S.InputBox>
 								<InputSelect
 									selectName="departmentSelect"
-									selectValue={optionsSelected.departmentSelect}
+									selectValue={inputChanged.departmentSelect}
 									width="256px"
-									selectOnChange={(e) => handleOptionsSelected(e)}
+									selectOnChange={(event) => handleInput(event, setInputChanged, "add", "text")}
 									options={departmentSelectOptions}
 								/>
 								<ButtonIcon
 									typeStyle="correct"
-									disable={!optionsSelected.departmentSelect}
-									onClick={() =>
-										changeUpdate("department", "add", optionsSelected.departmentSelect)
-									}
+									disable={!inputChanged.departmentSelect}
+									onClick={() => changeUpdate("department", "add", inputChanged.departmentSelect)}
 								/>
 							</S.InputBox>
 						</S.DataHeadContainer>
@@ -245,16 +220,16 @@ export function AdminCompanyEdit() {
 											/>
 										</S.DataTitleBox>
 
-										<S.DepartmentSectorsBox>
-											<S.SectorAdded>
-												<S.SectorHead>Setores adicionados</S.SectorHead>
+										<S.ListBox>
+											<S.Assigned>
+												<S.AssignedHead>Adicionado</S.AssignedHead>
 												{assignedDepartmentSectorsElement(department._id)}
-											</S.SectorAdded>
-											<S.SectorNotAdded>
-												<S.SectorHead>Setores não adicionado</S.SectorHead>
+											</S.Assigned>
+											<S.NotAssigned>
+												<S.AssignedHead>Não adicionado</S.AssignedHead>
 												{notAssignedDepartmentSectorsElement(department._id)}
-											</S.SectorNotAdded>
-										</S.DepartmentSectorsBox>
+											</S.NotAssigned>
+										</S.ListBox>
 									</S.DataBox>
 								))
 							) : (
@@ -263,45 +238,26 @@ export function AdminCompanyEdit() {
 						</S.DataCenterContainer>
 					</S.DataContainer>
 
-					{/* <S.DataContainer>
+					<S.DataContainer>
 						<S.DataHeadContainer>
-							<S.HeaderTitle>Setores</S.HeaderTitle>
+							<S.HeaderTitle>Filiais</S.HeaderTitle>
 						</S.DataHeadContainer>
 						<S.DataCenterContainer>
 							{companyData ? (
 								<S.DataBox>
-									<S.DepartmentSectorsBox>
-										<S.SectorAdded>
-											<S.SectorHead>Setor associados</S.SectorHead>
-											{companyData.sectorsInfo.assigned.map((sector) => (
-												<S.Sector key={sector._id}>
-													<S.SectorName>{sector.name} </S.SectorName>
-													<ButtonIcon
-														typeStyle="remove"
-														onClick={() => changeUpdate("sector", "remove", sector._id)}
-													/>
-												</S.Sector>
-											))}
-										</S.SectorAdded>
-										<S.SectorNotAdded>
-											<S.SectorHead>Setor não associados</S.SectorHead>
-											{companyData.sectorsInfo.notAssigned.map((sector) => (
-												<S.Sector key={sector._id}>
-													<S.SectorName>{sector.name} </S.SectorName>
-													<ButtonIcon
-														typeStyle="add"
-														onClick={() => changeUpdate("sector", "add", sector._id)}
-													/>
-												</S.Sector>
-											))}
-										</S.SectorNotAdded>
-									</S.DepartmentSectorsBox>
+									{companyData.companyBranchesInfo.map((branch) => (
+										<S.Sector key={branch._id}>
+											<S.SectorName>{branch.name} </S.SectorName>
+											<S.SectorName>CNPJ: {branch.cnpj} </S.SectorName>
+											<ButtonIcon typeStyle="edit" onClick={() => null} />
+										</S.Sector>
+									))}
 								</S.DataBox>
 							) : (
 								<S.Empyt>Vazio</S.Empyt>
 							)}
 						</S.DataCenterContainer>
-					</S.DataContainer> */}
+					</S.DataContainer>
 				</>
 			) : (
 				<>Carregando...</>
