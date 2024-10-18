@@ -22,14 +22,14 @@ export function SupplyManagementStockCreate() {
 	async function createCenterCost() {
 		try {
 			const response = await api.post(`/management/warehouse/stock`, {
-				name: itemInfo.name,
-				description: itemInfo.description
+				...itemInfo
 			});
-
+			setItemInfo({})
 			setNotification({
 				theme: "success",
 				message: "Estoque criado com sucesso."
 			});
+
 		} catch (error) {
 			setNotification({
 				theme: "fail",
@@ -80,14 +80,14 @@ export function SupplyManagementStockCreate() {
 	return (
 		<PageContainer>
 			{modal == "localization" && (
-				<ModalSearch closeModal={setModal} setNotification={()=>""} addSelectedItem="" />
+				<ModalSearch closeModal={setModal} setNotification={() => ""} addSelectedItem="" />
 			)}
 			<PageTitle
 				title="Novo Estoque"
 				subTitle="adicione um novo estoque a companhia."
 				backUrl={"/management/warehouse/stocks"}
 				loading={false}
-			/>{" "}
+			/>
 			<S.StockInfoBlock theme="normal">
 				<S.StockInfoBlockTitle>Dados do Estoque</S.StockInfoBlockTitle>
 
@@ -127,7 +127,7 @@ export function SupplyManagementStockCreate() {
 					selectOnChange={handleItemInfo}
 					selectPlaceholder={"Status"}
 					selectShowInfo={true}
-					selectErrorMsg={itemInfoValidator.status}
+					selectErrorMsg={itemInfoValidator.status ?? ""}
 					disabled={loading}
 					readOnly=""
 					width="164px"

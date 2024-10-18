@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { api } from "../../../services/api.js";
 
 import { ButtonIcon } from "../../../component/ButtonIcon/index.jsx";
@@ -11,21 +11,23 @@ import { PageAction } from "../../../component/container/PageAction";
 import * as S from "./styles.jsx";
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 import { helperHandleChangeInput } from "helper/form/helperHandleChangeInput.js";
-import { helperHandleRequestReturn } from "helper/helperHandleRequestReturn.js";
+import { helperRequestReturn } from "helper/helperHandleRequestReturn.js";
+import { Modal } from "component/Modal/index.jsx";
 
 export function AdminCompanyEdit() {
-	const location = useLocation();
+	const navigate = useNavigate();
+	const param = useParams();
 
 	const [loading, setLoading] = useState(true);
-	const [notification, setNotification] = useState();
-	const [actionsPageData, setActionsPageData] = useState([]);
+	const [showModal, setShowModal] = useState(false);
+	const [notification, setNotification] = useState(false);
+	const [errorPage, setErrorPage] = useState(null);
 
 	const [companyData, setCompanyData] = useState();
-	const [companyUpdate, setCompanyUpdate] = useState();
 
 	const [inputChanged, setInputChanged] = useState({});
-	const handleInput = useCallback((event, setFormInput, action, type) => {
-		helperHandleChangeInput({ event, setFormInput, action, type });
+	const handleInput = useCallback((event, setData, action) => {
+		helperHandleChangeInput({ event, setData, action });
 	});
 
 	const departmentSelectOptions = useMemo(() => {
@@ -49,15 +51,6 @@ export function AdminCompanyEdit() {
 	}, [companyData]);
 
 	async function changeUpdate(category, action, category_id) {
-		const dataOptions = {
-			status: {
-				add: "active",
-				remove: "inactive",
-				activeSubTitle: <div style={{ color: "#00dd00" }}>Ativo</div>,
-				inactiveSubTitle: <div style={{ color: "#dd0000" }}>Inativo</div>
-			}
-		};
-
 		const actionField = {
 			add: "notAssigned",
 			remove: "assigned",
@@ -67,7 +60,7 @@ export function AdminCompanyEdit() {
 
 		try {
 			const request = await api.put(
-				`admin/company/${location.state.user._id}/${category}/${category_id}/${action}`
+				`admin/company/${param.id}/${category}/${category_id}/${action}`
 			);
 
 			if (request.data.codStatus === 200) {
@@ -133,10 +126,11 @@ export function AdminCompanyEdit() {
 	useEffect(() => {
 		const getUserInfo = async () => {
 			try {
-				const request = await api.get(`admin/company/${location.state._id}`);
-				console.log(request.data.data);
-				helperHandleRequestReturn(request)({ setData: setCompanyData, notification, location });
-			} catch (error) {}
+				const request = await api.get(`admin/company/${param.id}`);
+				helperRequestReturn(request, notification, navigate, setCompanyData);
+			} catch (error) {
+				setErrorPage(true)
+			}
 			setLoading(false);
 		};
 		getUserInfo();
@@ -150,10 +144,17 @@ export function AdminCompanyEdit() {
 				backUrl={"/admin/companies"}
 				loading={loading}
 			/>
+
+			{showModal ? (
+				<Modal showModal={setShowModal}>
+					<div>OK</div>
+				</Modal>
+			) : (
+				""
+			)}
+
 			{companyData ? (
 				<>
-					{/* <PageAction actionsData={actionsPageData} dataSelected={location.state._id} /> */}
-
 					<S.CenterContainer>
 						<S.HeaderCenter>
 							<S.HeaderTitle>Dados</S.HeaderTitle>
@@ -249,7 +250,7 @@ export function AdminCompanyEdit() {
 										<S.Sector key={branch._id}>
 											<S.SectorName>{branch.name} </S.SectorName>
 											<S.SectorName>CNPJ: {branch.cnpj} </S.SectorName>
-											<ButtonIcon typeStyle="edit" onClick={() => null} />
+											{/* <ButtonIcon typeStyle="edit" onClick={() => ""} /> */}
 										</S.Sector>
 									))}
 								</S.DataBox>
@@ -260,7 +261,7 @@ export function AdminCompanyEdit() {
 					</S.DataContainer>
 				</>
 			) : (
-				<>Carregando...</>
+				<>{errorPage ? <>Erro na página.</> : <>Carregando...</>}</>
 			)}
 		</PageContainer>
 	);

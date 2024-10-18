@@ -85,7 +85,7 @@ export function SupplyManagementStockEdit() {
 			};
 
 			const response = await api.put(
-				`/management/warehouse/stock/${stockInfo._id}/stock`,
+				`/management/warehouse/stock/${stockInfo._id}`,
 				newStockInfo
 			);
 

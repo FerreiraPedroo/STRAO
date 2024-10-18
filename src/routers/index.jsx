@@ -74,7 +74,7 @@ export const router = createBrowserRouter(
 					<Route path="user/register" element={<AdminUserRegister />} />
 
 					<Route path="companies" element={<AdminCompanyList />} />
-					<Route path="company" element={<AdminCompanyEdit />} />
+					<Route path="company/:id" element={<AdminCompanyEdit />} />
 				</Route>
 
 				<Route path="management/">

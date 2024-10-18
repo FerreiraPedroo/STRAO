@@ -3,44 +3,61 @@
  * @param {*} event Evento do input
  * @param {*} setFormInput Função que altero o valor do input
  * @param {*} action A ação se é adicionar "add" ou remover "remove".
- * @param {*} type O tipo de dado: "text", "files", "multiple-string"
  */
-export function helperHandleChangeInput({event, setFormInput, action, type}) {
-	const inputName = event.target.name;
-	const inputValue = event.target.value;
-	const inputType = type;
-	
-	// console.log({inputName,inputValue,inputType})
+export function helperHandleChangeInput({ event, setData, action }) {
+	const name = event.target.name;
+	const value = event.target.value;
+	const type = event.target.type;
 
-	if (action == "remove") {
+	// console.log({ event, setData, action, type });
+	// console.log({ name, value,  type });
+
+	if (action == "add") {
+		switch (type) {
+			case "select-one":
+				setData((prev) => {
+					return {
+						...prev,
+						[name]: value
+					};
+				});
+				break;
+
+			case "files":
+				const file = new Blob(event.target.files[0]);
+				let fileArray = [];
+
+				setData((prev) => {
+					if (Array.isArray(prev.files)) {
+						return {
+							...prev,
+							files: prev.files.push({
+								name: file.name,
+								type: file.type,
+								file: file
+							})
+						};
+					} else {
+						fileArray.push({
+							name: "",
+							type: "",
+							file: ""
+						});
+
+						return {
+							...prev,
+							files: fileArray
+						};
+					}
+				});
+				break;
+		}
+	} else if (action == "remove") {
 		setFormInput((prev) => {
 			const newValues = { ...prev };
 			delete newValues[inputName];
 			return newValues;
 		});
 		return;
-	}
-
-	switch (inputType) {
-		case "text":
-			setFormInput((prev) => {
-				return {
-					...prev,
-					[inputName]: inputValue
-				};
-			});
-			break;
-
-		case "files":
-			if (action == "add") {
-				setFormInput((prev) => {
-					return {
-						...prev,
-						[inputName]: inputValue
-					};
-				});
-			} else if (action == "remove") {
-			}
-			break;
 	}
 }
