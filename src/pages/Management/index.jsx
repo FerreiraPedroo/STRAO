@@ -5,6 +5,7 @@ import React from "react";
 // import { Card } from "component/Cards/Card/index.jsx";
 
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
+import { Outlet } from "react-router-dom";
 
 // import * as S from "./styles.jsx";
 
@@ -35,8 +36,8 @@ export const Management = () => {
 					<Card key={sec.name} data={sec} />
 				</S.SectionContainer>
 			))}
-
 			{!menuSectors.length && <S.NoAction>Sem ações.</S.NoAction>} */}
+			<Outlet />
 		</PageContainer>
 	);
 };

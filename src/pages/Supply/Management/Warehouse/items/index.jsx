@@ -15,59 +15,59 @@ export function SupplyManagementItems() {
 	const navigate = useNavigate();
 
 	const [notification, setNotification] = useState(null);
-
 	const [pageLoading, setPageLoading] = useState(true);
-	const [searchLoading, setSearchLoading] = useState(false);
 
 	const [itemsList, setItemsList] = useState([]);
 	const [itemSelected, setItemSelected] = useState(null);
 
-	const [listColumns] = useState([
-		{
-			title: "Status",
-			htmlName: "status",
-			size: 96,
-			minSize: 96,
-			maxSize: 96,
-			align: "center"
-		},
-		{
-			title: "COD",
-			htmlName: "cod",
-			minSize: 128,
-			maxSize: 128,
-			align: "center"
-		},
-		{
-			title: "Nome",
-			htmlName: "name",
-			size: 256,
-			minSize: 256,
-			maxSize: "auto"
-		},
-		{
-			title: "Categoria",
-			htmlName: "category",
-			size: 256,
-			minSize: 128,
-			maxSize: 208
-		}
-	]);
-	
-	const [listActions] = useState([
-		{
-			name: "Novo Item",
-			typeStyle: "add",
-			show: true,
-			action: () => navigate("/management/warehouse/item/new")
-		},
-		{
-			name: "Edit Item",
-			typeStyle: "edit",
-			show: false,
-			action: (materialData) => navigate(`/management/warehouse/item/edit`, { state: materialData })
-		}
-	]);
+	const [pageData] = useState({
+		columns: [
+			{
+				title: "STATUS",
+				htmlName: "status",
+				size: 96,
+				minSize: 96,
+				maxSize: 96,
+				align: "center"
+			},
+			{
+				title: "CODE",
+				htmlName: "code",
+				minSize: 112,
+				maxSize: 112,
+				align: "start"
+			},
+			{
+				title: "NOME",
+				htmlName: "name",
+				size: 256,
+				minSize: 256,
+				maxSize: "auto"
+			},
+			{
+				title: "CATEGORIA",
+				htmlName: "category",
+				size: 256,
+				minSize: 128,
+				maxSize: 208
+			}
+		],
+		actions: [
+			{
+				name: "Novo Item",
+				typeStyle: "add",
+				show: true,
+				action: () => navigate("/management/warehouse/item/new")
+			},
+			{
+				name: "Edit Item",
+				typeStyle: "edit",
+				show: false,
+				action: (materialData) =>
+					navigate(`/management/warehouse/item/edit`, { state: materialData })
+			}
+		]
+	});
 
 	useEffect(() => {
 		async function getItems() {
@@ -110,13 +110,13 @@ export function SupplyManagementItems() {
 				subTitle={"Registre e edite itens utitizados no almoxarifado."}
 			/>
 
-			<PageAction actionsData={listActions} dataSelected={itemSelected} loading={pageLoading} />
+			<PageAction actionsData={pageData.actions} dataSelected={itemSelected} loading={pageLoading} />
 
 			{/* <PageFilter filtersData={filters} getFiltersSelected={getItems} loading={searchStatus} /> */}
 
 			<PageList
 				listData={itemsList}
-				columns={listColumns}
+				columns={pageData.columns}
 				setDataSelected={setItemSelected}
 				loading={pageLoading}
 			/>

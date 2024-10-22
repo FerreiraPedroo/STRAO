@@ -20,6 +20,7 @@ import { AdminUserRegister } from "pages/Admin/UserRegister";
 // MANAGER
 import { Management } from "pages/Management";
 import { ManagementCenterCost } from "pages/Management/CenterCost";
+import { ManagementCategories } from "pages/Management/Categories";
 // import { ManagementContract } from "pages/Management/Contracts";
 // import { ManagementContractEdit } from "pages/Management/ContractEdit";
 
@@ -77,9 +78,10 @@ export const router = createBrowserRouter(
 					<Route path="company/:id" element={<AdminCompanyEdit />} />
 				</Route>
 
-				<Route path="management/">
-					<Route index element={<Management />} />
+				<Route path="management/" element={<Management/>}>
+					{/* <Route index element={<Management />} /> */}
 					<Route path="centers-cost" element={<ManagementCenterCost />} />
+					<Route path="categories" element={<ManagementCategories />} />
 					{/* <Route path="contracts" element={<ManagementContract />} />
 					<Route path="contract/edit" element={<ManagementContractEdit />} /> */}
 
