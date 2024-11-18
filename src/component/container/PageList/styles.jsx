@@ -120,4 +120,5 @@ export const RowText = styled.p`
 export const LoadingBox = styled.p`
 	width: 100%;
 	text-align: center;
+	padding: 16px;
 `;

@@ -53,13 +53,13 @@ export const ManagementCategories = () => {
 				typeStyle: "add",
 				show: true,
 				action: () => setModalCreate(true)
-			},
-			{
-				name: "Editar categoria",
-				typeStyle: "edit",
-				show: false,
-				action: () => setModalEdit(true)
 			}
+			// {
+			// 	name: "Editar categoria",
+			// 	typeStyle: "edit",
+			// 	show: false,
+			// 	action: () => setModalEdit(true)
+			// }
 			// {
 			// 	name: "Desativar categoria",
 			// 	typeStyle: "hidden",
@@ -86,12 +86,6 @@ export const ManagementCategories = () => {
 			}
 		]
 	});
-
-	const PageActionElement = useMemo(() => {
-		return (
-			<PageAction actionsData={pageData.actions} dataSelected={itemSelected} loading={loading} />
-		);
-	}, [loading]);
 
 	async function getItemList(filters) {
 		// SANITIZA O FILTRO PARA VALORES VAZIOS
@@ -179,7 +173,7 @@ export const ManagementCategories = () => {
 			{modalEdit && (
 				<EditItemModal
 					closeModal={setModalEdit}
-					centerCostData={itemSelected}
+					itemData={itemSelected}
 					setNotification={setNotification}
 					updateItemList={() => getItemList(filtersSelected)}
 				/>
@@ -199,7 +193,7 @@ export const ManagementCategories = () => {
 				backUrl={"/management"}
 			/>
 
-			{PageActionElement}
+			<PageAction actionsData={pageData.actions} dataSelected={itemSelected} loading={loading} />
 
 			{/* <PageFilter
 				filtersData={pageData.filters}

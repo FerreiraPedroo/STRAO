@@ -51,15 +51,15 @@ export const PageList = ({
 		setPageListData(data);
 	}, [listData]);
 
-
 	return (
 		<S.Container theme={theme}>
 			<S.CenterContainer>
-				<S.RowListContainer>
-					<S.RowHeaderBox>
-						{pageListData &&
-							pageListData.length != 0 &&
-							headerInfo.map((header) => (
+				{loading ? (
+					<S.LoadingBox>Carregando...</S.LoadingBox>
+				) : listData.length ? (
+					<S.RowListContainer>
+						<S.RowHeaderBox>
+							{headerInfo.map((header) => (
 								<S.RowHeadText
 									key={header.htmlName}
 									id={header.htmlName}
@@ -71,10 +71,9 @@ export const PageList = ({
 									{header.title}
 								</S.RowHeadText>
 							))}
-					</S.RowHeaderBox>
-					{listData &&
-						!loading &&
-						pageListData.map((data, index) => (
+						</S.RowHeaderBox>
+
+						{pageListData.map((data, index) => (
 							<S.RowBox
 								key={JSON.stringify(data)}
 								onClick={() => handleDataSelected(index)}
@@ -98,11 +97,11 @@ export const PageList = ({
 								))}
 							</S.RowBox>
 						))}
-				</S.RowListContainer>
+					</S.RowListContainer>
+				) : (
+					<S.LoadingBox>Sem registro</S.LoadingBox>
+				)}
 			</S.CenterContainer>
-
-			{loading ? <S.LoadingBox>Carregando...</S.LoadingBox> : null}
-			{!listData.length && !loading ? <S.LoadingBox>Sem registro</S.LoadingBox> : null}
 		</S.Container>
 	);
 };

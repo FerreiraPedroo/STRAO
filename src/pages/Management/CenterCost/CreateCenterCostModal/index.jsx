@@ -119,11 +119,11 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 			errors.category = "Não pode estar vazio.";
 		}
 
-		if (itemInfo.type) {
-			if (itemInfo.type === "") errors.type = "Selecione um tipo.";
-		} else {
-			errors.type = "Não pode estar vazio.";
-		}
+		// if (itemInfo.type) {
+		// 	if (itemInfo.type === "") errors.type = "Selecione um tipo.";
+		// } else {
+		// 	errors.type = "Não pode estar vazio.";
+		// }
 
 		if (!errors.name && !errors.category && !errors.type) {
 			if (modalStep == 0) {
@@ -206,7 +206,7 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 										options={categories}
 										disabled={loading || !categories}
 									/>
-									<InputSelect
+									{/* <InputSelect
 										selectName={"type"}
 										selectValue={itemInfo.type}
 										selectOnChange={handleItemInfo ?? ""}
@@ -216,7 +216,7 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 										width={"288px"}
 										options={types}
 										disabled={loading || !types}
-									/>
+									/> */}
 									<InputTextArea
 										textAreaName={"description"}
 										textAreaValue={itemInfo.description ?? ""}
@@ -260,14 +260,14 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 											})[0].name
 										}
 									</S.ModalAttributeValue>
-									<S.ModalAttribute>Tipo:</S.ModalAttribute>
+									{/* <S.ModalAttribute>Tipo:</S.ModalAttribute>
 									<S.ModalAttributeValue>
 										{
 											types.filter((type) => {
 												return type.value === itemInfo.type;
 											})[0].name
 										}
-									</S.ModalAttributeValue>
+									</S.ModalAttributeValue> */}
 									<S.ModalAttribute>Descrição:</S.ModalAttribute>
 									<S.ModalAttributeValue>{itemInfo.description}</S.ModalAttributeValue>
 								</S.ModalConfirm>

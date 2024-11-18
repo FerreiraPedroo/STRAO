@@ -8,12 +8,12 @@ import * as S from "./styles.jsx";
 export function CardInfo({ theme, data }) {
 	const navigate = useNavigate();
 
-	function goTo(url_path) {
-		navigate(url_path, { state: data });
+	function goTo(url_path, id) {
+		navigate(`${url_path}/${id}`);
 	}
 
 	return (
-		<S.Container theme={"normal"} onClick={() => goTo(data.url_path)}>
+		<S.Container theme={"normal"} onClick={() => goTo(data.url_path, data._id)}>
 			<S.Box>
 				<S.Img src={sectorActionsImgs[data.url_img]} />
 				<S.TextBox>

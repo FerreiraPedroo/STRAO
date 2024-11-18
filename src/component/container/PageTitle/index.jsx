@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
  *
  * @returns
  */
-export const PageTitle = ({ title, subTitle, backUrl, pageIndex = true }) => {
+export const PageTitle = React.memo(({ title, subTitle, backUrl, pageIndex = true }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const location = useLocation();
@@ -47,4 +47,4 @@ export const PageTitle = ({ title, subTitle, backUrl, pageIndex = true }) => {
 			</S.PageHeader>
 		</S.PageTitleContainer>
 	);
-};
+});

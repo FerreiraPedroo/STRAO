@@ -1,111 +1,43 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { api } from "services/api.js";
 
 import * as S from "./styles.jsx";
 
 import { InputTextArea } from "component/Input/TextArea/index.jsx";
-import { InputSelect } from "component/Input/Select/index.jsx";
 import { ButtonText } from "component/ButtonText/index.jsx";
 import { InputText } from "component/Input/Text/index.jsx";
 
 export function EditItemModal({
-	centerCostData,
+	itemData,
 	closeModal,
 	setNotification,
-	updateCenterCostList
+	updateItemList
 }) {
 	const [loading, setLoading] = useState(false);
 
 	const [itemInfo, setItemInfo] = useState({
-		...centerCostData,
-		category_id: centerCostData.category._id,
-		type_id: centerCostData.type._id
+		...itemData,
 	});
 	const [itemInfoValidator, setItemInfoValidator] = useState({});
 
-	const [categories, setCategories] = useState(null);
-	const [types, setTypes] = useState(null);
 
-	async function getCategoriesList() {
+	async function updateCategory() {
 		try {
-			const response = await api.get("/management/categories");
-			
-			const categoriesList = response.data.data.map((category) => {
-				const selected = itemInfo.category._id === category._id;
-				return {
-					value: category._id,
-					name: category.name,
-					selected: selected
-				};
-			});
-
-			categoriesList.unshift({
-				value: "",
-				name: "Selecione a categoria"
-			});
-
-			return categoriesList;
-		} catch (error) {
-			setNotification({
-				theme: "fail",
-				message:
-					error.response ?? error.response.data.message ?? "Erro ao obter a lista de categorias.",
-				setNotification: setNotification
-			});
-
-			return false;
-		}
-	}
-
-	async function getCostTypesList() {
-		try {
-			const response = await api.get("/management/cost-types");
-
-			const typesList = response.data.data.map((type) => {
-				const selected = itemInfo.type._id === type._id;
-				return {
-					value: type._id,
-					name: type.name,
-					selected: selected
-				};
-			});
-
-			typesList.unshift({
-				value: "",
-				name: "Seleciona um tipo"
-			});
-
-			return typesList;
-		} catch (error) {
-			setNotification({
-				theme: "fail",
-				message: error.response.data.message ?? "Erro ao obter a lista de tipos de categoria.",
-				setNotification: setNotification
-			});
-			return false;
-		}
-	}
-
-	async function updateCenterCost() {
-		try {
-			const response = await api.put(`/management/center-cost`, {
-				center_cost_id: itemInfo._id,
+			const response = await api.put(`/management/category`, {
 				name: itemInfo.name,
-				category_id: itemInfo.category_id,
-				type_id: itemInfo.type_id,
 				description: itemInfo.description
 			});
 
 			setNotification({
 				theme: "success",
-				message: "Centro de custo atualizado sucesso."
+				message: "Categoria atualizado sucesso."
 			});
-			updateCenterCostList();
+			updateItemList();
 			closeModal(null);
 		} catch (error) {
 			setNotification({
 				theme: "fail",
-				message: "Não foi possivel atualizar o centro de custo, tentar novamente."
+				message: "Não foi possivel atualizar a categoria, tentar novamente."
 			});
 		}
 	}
@@ -121,20 +53,8 @@ export function EditItemModal({
 			errors.name = "Não pode estar vazio.";
 		}
 
-		if (itemInfo.category_id) {
-			if (itemInfo.category_id === "") errors.category_id = "Selecione a categoria.";
-		} else {
-			errors.category_id = "Não pode estar vazio.";
-		}
-
-		if (itemInfo.type_id) {
-			if (itemInfo.type_id === "") errors.type_id = "Selecione um tipo.";
-		} else {
-			errors.type_id = "Não pode estar vazio.";
-		}
-
-		if (!errors.name && !errors.category_id && !errors.type_id) {
-			updateCenterCost();
+		if (!errors.name) {
+			updateCategory();
 		} else {
 			setItemInfoValidator(errors);
 		}
@@ -151,22 +71,6 @@ export function EditItemModal({
 			return newItem;
 		});
 	}
-
-	useEffect(() => {
-		async function getInitialData() {
-			setLoading(true);
-			const categoriesList = await getCategoriesList();
-			const typesList = await getCostTypesList();
-
-			if (categoriesList && typesList) {
-				setCategories(categoriesList);
-				setTypes(typesList);
-				setLoading(false);
-			}
-		}
-
-		getInitialData();
-	}, []);
 
 	return (
 		<S.Container>
@@ -185,28 +89,6 @@ export function EditItemModal({
 						inputShowInfo={true}
 						inputErrorMsg={itemInfoValidator.name}
 						disabled={loading}
-					/>
-					<InputSelect
-						selectName={"category_id"}
-						selectValue={itemInfo.category_id ?? ""}
-						selectOnChange={handleItemInfo}
-						selectPlaceholder={"Categoria"}
-						selectShowInfo={true}
-						selectErrorMsg={itemInfoValidator.category_id}
-						width={"256px"}
-						options={categories}
-						disabled={loading || !categories}
-					/>
-					<InputSelect
-						selectName={"type_id"}
-						selectValue={itemInfo.type_id ?? ""}
-						selectOnChange={handleItemInfo}
-						selectPlaceholder={"Tipo"}
-						selectShowInfo={true}
-						selectErrorMsg={itemInfoValidator.type_id}
-						width={"256px"}
-						options={types}
-						disabled={loading || !types}
 					/>
 					<InputTextArea
 						textAreaName={"description"}

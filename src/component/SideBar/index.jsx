@@ -42,16 +42,16 @@ export function SideBar() {
 	});
 
 	const menuSectorSelected = useSelector((state) => state.menu.sectionSelected);
-	const menuSectorActionSelected = useSelector((state) => state.menu.sectionActionSelected);
+	// const menuSectorActionSelected = useSelector((state) => state.menu.sectionActionSelected);
 
 	function selectSection(sector) {
 		dispatch(changeSectionSelected(sector.name));
 		navigate(sector.URLPath);
 	}
 
-	function selectSectionAction(actionName) {
-		dispatch(changeSectionActionSelected(actionName));
-	}
+	// function selectSectionAction(actionName) {
+	// 	dispatch(changeSectionActionSelected(actionName));
+	// }
 
 	useEffect(() => {
 		dispatch(changeSectionActionSelected(""));

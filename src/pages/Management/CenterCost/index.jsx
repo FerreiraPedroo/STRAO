@@ -44,14 +44,15 @@ export const ManagementCenterCost = () => {
 				size: 0,
 				minSize: 96,
 				maxSize: "25%;"
-			},
-			{
-				title: "TIPO",
-				htmlName: "type",
-				size: 0,
-				minSize: 96,
-				maxSize: "20%;"
 			}
+			// ,
+			// {
+			// 	title: "TIPO",
+			// 	htmlName: "type",
+			// 	size: 0,
+			// 	minSize: 96,
+			// 	maxSize: "20%;"
+			// }
 		],
 		actions: [
 			{
