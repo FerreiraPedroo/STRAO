@@ -4,13 +4,14 @@ import * as S from "./styles.jsx";
 import { api } from "services/api.js";
 
 import { InputTextArea } from "component/Input/TextArea/index.jsx";
-import { ButtonText } from "component/ButtonText/index.jsx";
+import { ButtonText } from "component/Buttons/ButtonText/index.jsx";
 import { InputText } from "component/Input/Text/index.jsx";
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 import { PageTitle } from "component/container/PageTitle/index.jsx";
-import { ButtonIcon } from "component/ButtonIcon/index.jsx";
 import { InputSelect } from "component/Input/Select/index.jsx";
 import { ModalSearch } from "component/ModalSearch/index.jsx";
+import { NotificationModal } from "component/Notification/modal.jsx";
+import { ButtonIcon } from "component/ButtonIcon/index.jsx";
 
 export function SupplyManagementStockCreate() {
 	const [loading, setLoading] = useState(false);
@@ -18,18 +19,18 @@ export function SupplyManagementStockCreate() {
 	const [itemInfo, setItemInfo] = useState({});
 	const [itemInfoValidator, setItemInfoValidator] = useState({});
 	const [modal, setModal] = useState(null);
+	const [notification, setNotification] = useState(null);
 
 	async function createCenterCost() {
 		try {
 			const response = await api.post(`/management/warehouse/stock`, {
 				...itemInfo
 			});
-			setItemInfo({})
+			setItemInfo({});
 			setNotification({
 				theme: "success",
 				message: "Estoque criado com sucesso."
 			});
-
 		} catch (error) {
 			setNotification({
 				theme: "fail",
@@ -79,6 +80,13 @@ export function SupplyManagementStockCreate() {
 
 	return (
 		<PageContainer>
+			{notification && (
+				<NotificationModal
+					theme={notification.theme}
+					message={notification.message}
+					setNotification={setNotification}
+				/>
+			)}
 			{modal == "localization" && (
 				<ModalSearch closeModal={setModal} setNotification={() => ""} addSelectedItem="" />
 			)}
@@ -151,15 +159,16 @@ export function SupplyManagementStockCreate() {
 					height={"92px"}
 					disabled={loading}
 				/>
+				<S.ButtonContainer width={"320px"}>
+					<ButtonIcon
+						value="Salvar"
+						typeStyle="correct"
+						onClick={handleItemInfoValidation}
+						disable={false}
+					/>
+					<S.ActionText>Salvar</S.ActionText>
+				</S.ButtonContainer>
 			</S.StockInfoBlock>
-			<S.ButtonBox>
-				<ButtonText
-					typeStyle={"normal"}
-					disabled={loading}
-					value="Registrar"
-					onClick={handleItemInfoValidation}
-				/>
-			</S.ButtonBox>
 		</PageContainer>
 	);
 }

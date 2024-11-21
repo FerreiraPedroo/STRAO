@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { api } from "services/api.js";
 
 import * as Yup from "yup";
@@ -12,7 +12,6 @@ import { PageTitle } from "component/container/PageTitle/index.jsx";
 import { InputTextArea } from "component/Input/TextArea/index.jsx";
 import { InputSelect } from "component/Input/Select/index.jsx";
 import { ButtonIcon } from "component/ButtonIcon/index.jsx";
-import { InputDate } from "component/Input/Date/index.jsx";
 import { InputText } from "component/Input/Text/index.jsx";
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
@@ -24,7 +23,7 @@ const editStockSchema = Yup.object().shape({
 });
 
 export function SupplyManagementStockEdit() {
-	const location = useLocation();
+	const params = useParams();
 	const [notification, setNotification] = useState(null);
 
 	const [pageLoading, setPageLoading] = useState(true);
@@ -55,39 +54,16 @@ export function SupplyManagementStockEdit() {
 		}
 	}
 
-	async function getContracts() {
-		try {
-			const response = await api.get(`/management/contracts`);
-
-			return response.data.data;
-		} catch (error) {
-			setNotification({
-				theme: "fail",
-				message:
-					error.response && error.response.data.message ? error.response.statusText : error.message,
-				setNotification: setNotification
-			});
-
-			return null;
-		}
-	}
-
 	async function updateStock() {
 		try {
 			setStockSaveLoading(true);
-			console.log(editStockInfo)
 			const newStockInfo = {
 				name: editStockInfo.name,
 				description: editStockInfo.description,
-				status: editStockInfo.status,
-				contract_id: editStockInfo.contract_id || null,
-
+				status: editStockInfo.status
 			};
 
-			const response = await api.put(
-				`/management/warehouse/stock/${stockInfo._id}`,
-				newStockInfo
-			);
+			const response = await api.put(`/management/warehouse/stock/${stockInfo._id}`, newStockInfo);
 
 			setStockInfo((prev) => {
 				Object.entries(editStockInfo).forEach(([name, value]) => {
@@ -131,7 +107,6 @@ export function SupplyManagementStockEdit() {
 	}
 
 	function handleStockInfo(event) {
-		
 		setStockInfoValidator(() => {
 			const handleValid = delete stockInfoValidator[event.target.name];
 			return handleValid;
@@ -162,32 +137,16 @@ export function SupplyManagementStockEdit() {
 		async function loadInitialData() {
 			setPageLoading(true);
 
-			const stockData = await getStock(location.state._id);
-			const contractsData = await getContracts();
+			const stockData = await getStock(params.id);
 
 			if (stockData) {
 				setStockInfo(stockData);
 
 				const stockInfo = {
 					name: stockData.name,
-					contract_id: stockData.contract,
 					status: stockData.status,
 					description: stockData.description
 				};
-
-				const contractsOptions = contractsData.map((contract) => {
-					const selected = stockInfo.contract_id === contract._id;
-					return {
-						value: contract._id,
-						name: contract.name,
-						selected
-					};
-				});
-
-				contractsOptions.unshift({
-					value: "",
-					name: "Selecione um contrato"
-				});
 
 				const statusOptions = [
 					{
@@ -206,7 +165,6 @@ export function SupplyManagementStockEdit() {
 					}
 				];
 
-				setContractsOptionInfo(contractsOptions);
 				setStatusOptionInfo(statusOptions);
 				setEditStockInfo(stockInfo);
 
@@ -241,6 +199,15 @@ export function SupplyManagementStockEdit() {
 
 				<S.UserDataContent>
 					<InputText
+						inputName={"code"}
+						inputValue={editStockInfo.code ?? ""}
+						inputWidth={"320px"}
+						inputPlaceholder={"Code"}
+						inputShowInfo={true}
+						disabled={true}
+					/>
+					
+					<InputText
 						inputName={"name"}
 						inputValue={editStockInfo.name ?? ""}
 						inputWidth={"320px"}
@@ -250,17 +217,7 @@ export function SupplyManagementStockEdit() {
 						inputErrorMsg={stockInfoValidator.name}
 						disabled={pageLoading || !editingStockInfo}
 					/>
-					<InputSelect
-						selectName={"contract_id"}
-						selectValue={editStockInfo.contract_id ?? ""}
-						selectOnChange={handleStockInfo}
-						selectPlaceholder={"Contrato"}
-						selectShowInfo={true}
-						selectErrorMsg={stockInfoValidator.contract_id}
-						width={"320px"}
-						options={contractsOptionInfo}
-						disabled={pageLoading || !editingStockInfo}
-					/>
+
 					<InputSelect
 						selectName={"status"}
 						selectValue={editStockInfo.status ?? ""}

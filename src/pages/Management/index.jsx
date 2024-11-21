@@ -1,6 +1,6 @@
 import React from "react";
-// import { useSelector } from "react-redux";
-// import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 // import { Card } from "component/Cards/Card/index.jsx";
 
@@ -30,14 +30,14 @@ export const Management = () => {
 	// });
 
 	return (
-		<PageContainer>
+		<div>
 			{/* {menuSectors.map((sec) => (
 				<S.SectionContainer onClick={() => selectSection(sec)}>
 					<Card key={sec.name} data={sec} />
 				</S.SectionContainer>
-			))}
-			{!menuSectors.length && <S.NoAction>Sem ações.</S.NoAction>} */}
+			))} */}
+			{/* {!menuSectors.length && <S.NoAction>Sem ações.</S.NoAction>} */}
 			<Outlet />
-		</PageContainer>
+		</div>
 	);
 };

@@ -30,7 +30,7 @@ export const UserDataContent = styled.div`
 export const ButtonContainer = styled.div`
 	${({ width }) => width && `width:${width};`}
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	align-items: center;
 	gap: 8px;
 `;

@@ -3,7 +3,7 @@ import { array, object, string } from "yup";
 
 import { api } from "services/api.js";
 
-import { ButtonText } from "component/ButtonText/index.jsx";
+import { ButtonText } from "component/Buttons/ButtonText/index.jsx";
 import { InputSelect } from "component/Input/Select/index.jsx";
 import { InputImages } from "component/Input/Image/index.jsx";
 import { InputText } from "component/Input/Text/index.jsx";

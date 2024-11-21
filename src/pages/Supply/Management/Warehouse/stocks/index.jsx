@@ -17,8 +17,6 @@ export const SupplyManagementStock = () => {
 	const [pageLoading, setPageLoading] = useState(true);
 	const [notification, setNotification] = useState(null);
 
-	const [modalCreateStock, setModalCreateStock] = useState(false);
-
 	const [stockList, setStockList] = useState(null);
 
 	const [listActions] = useState([
@@ -56,10 +54,6 @@ export const SupplyManagementStock = () => {
 		setPageLoading(false);
 	}
 
-	async function updateStockList() {
-		getStockList();
-	}
-
 	useEffect(() => {
 		getStockList();
 	}, []);
@@ -74,17 +68,9 @@ export const SupplyManagementStock = () => {
 				/>
 			)}
 
-			{/* {modalCreateStock && (
-				<CreateStockModal
-					updateStockList={updateStockList}
-					setNotification={setNotification}
-					closeModal={setModalCreateStock}
-				/>
-			)} */}
-
 			<PageTitle
 				title="Lista de estoque"
-				subTitle="gerencie os estoques da companhia, cada estoque pertence a uma filial."
+				subTitle="gerencie os estoques da companhia, cada estoque pertence a filial."
 				backUrl={"/management"}
 				loading={pageLoading}
 			/>
