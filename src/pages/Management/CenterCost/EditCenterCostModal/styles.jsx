@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 const props = {
 	textFontFamily: "Arial",
 	titleTextColor: "#999",
@@ -30,7 +29,7 @@ export const Modal = styled.div`
 	flex-direction: column;
 	align-items: center;
 	background-color: #fff;
-	padding: 18px;
+	padding: 12px;
 	border-radius: 12px;
 
 	@media (max-width: 720px) {
@@ -38,29 +37,45 @@ export const Modal = styled.div`
 		left: 0;
 	}
 `;
+
+export const ModalTitle = styled.div`
+	width: 100%;
+	display: flex;
+`;
+
 export const ModalClose = styled.div`
-	width: 30px;
+	width: 42px;
+	height: 40px;
 	font-size: 1.5rem;
 	font-weight: bolder;
-	align-self: end;
 	text-align: center;
 	border-radius: 50%;
 	color: black;
 
+	&::after {
+		position: relative;
+		content: "X";
+		top: 5px;
+		left: 1px;
+	}
+
 	&:hover {
 		cursor: pointer;
-		color: #999;
+		background-color: #eee;
 	}
 `;
+
 export const ModalMessageTitle = styled.div`
 	width: 100%;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
+	padding-left: 8px;
 	font-family: ${props.textFontFamily};
-	font-size: 28px;
+	font-size: 1.5rem;
 	font-weight: bold;
 `;
+
 export const ModalContent = styled.div`
 	width: 100%;
 	height: 100%;

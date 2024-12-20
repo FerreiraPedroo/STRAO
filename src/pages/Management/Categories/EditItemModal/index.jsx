@@ -4,7 +4,7 @@ import { api } from "services/api.js";
 import * as S from "./styles.jsx";
 
 import { InputTextArea } from "component/Input/TextArea/index.jsx";
-import { ButtonText } from "component/ButtonText/index.jsx";
+import { ButtonText } from "component/Buttons/ButtonText/index.jsx";
 import { InputText } from "component/Input/Text/index.jsx";
 
 export function EditItemModal({

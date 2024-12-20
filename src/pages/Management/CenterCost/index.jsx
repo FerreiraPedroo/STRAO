@@ -13,6 +13,7 @@ import { PageContainer } from "component/container/PageContainer/styles.jsx";
 import { CreateCenterCostModal } from "./CreateCenterCostModal/index.jsx";
 import { DeleteCenterCostModal } from "./DeleteCenterCostModal/index.jsx";
 import { EditCenterCostModal } from "./EditCenterCostModal/index.jsx";
+import { PageFilter } from "component/container/PageFilter/index.jsx";
 
 export const ManagementCenterCost = () => {
 	const navigate = useNavigate();
@@ -26,7 +27,7 @@ export const ManagementCenterCost = () => {
 
 	const [centerCostList, setCenterCostList] = useState([]);
 	const [filtersSelected, setFiltersSelected] = useState({});
-	const [centerCostSelected, setCenterCostSelected] = useState(null);
+	const [centerCostSelected, setCenterCostSelected] = useState("");
 
 	const [pageData] = useState({
 		columns: [
@@ -34,25 +35,17 @@ export const ManagementCenterCost = () => {
 				title: "STATUS",
 				htmlName: "status",
 				size: 0,
+				minSize: 80,
+				maxSize: 80
+			},
+			{
+				title: "CODE",
+				htmlName: "code",
+				size: 0,
 				minSize: 96,
 				maxSize: 96
 			},
-			{ title: "NOME", htmlName: "name", size: 0, minSize: 120, maxSize: "100%;" },
-			{
-				title: "CATEGORIA",
-				htmlName: "category",
-				size: 0,
-				minSize: 96,
-				maxSize: "25%;"
-			}
-			// ,
-			// {
-			// 	title: "TIPO",
-			// 	htmlName: "type",
-			// 	size: 0,
-			// 	minSize: 96,
-			// 	maxSize: "20%;"
-			// }
+			{ title: "NOME", htmlName: "name", size: 0, minSize: 120, maxSize: "100%;" }
 		],
 		actions: [
 			{
@@ -140,7 +133,7 @@ export const ManagementCenterCost = () => {
 				setNotification: setNotification
 			});
 
-			setCenterCostSelected(null);
+			setCenterCostSelected("");
 		} catch (error) {
 			setNotification({
 				theme: "fail",
@@ -197,6 +190,7 @@ export const ManagementCenterCost = () => {
 				subTitle="gerencie os centros de custo que ficarão disponivel."
 				backUrl={"/management"}
 				loading={loading}
+				pageIndex={false}
 			/>
 
 			<PageAction

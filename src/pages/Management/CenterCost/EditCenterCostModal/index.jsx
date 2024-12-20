@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { api } from "services/api.js";
 
 import * as S from "./styles.jsx";
 
 import { InputTextArea } from "component/Input/TextArea/index.jsx";
-import { InputSelect } from "component/Input/Select/index.jsx";
-import { ButtonText } from "component/ButtonText/index.jsx";
+import { ButtonText } from "component/Buttons/ButtonText/index.jsx";
 import { InputText } from "component/Input/Text/index.jsx";
 
 export function EditCenterCostModal({
@@ -17,51 +16,15 @@ export function EditCenterCostModal({
 	const [loading, setLoading] = useState(false);
 
 	const [itemInfo, setItemInfo] = useState({
-		...centerCostData,
-		category_id: centerCostData.category._id,
+		...centerCostData
 	});
 	const [itemInfoValidator, setItemInfoValidator] = useState({});
-
-	const [categories, setCategories] = useState(null);
-
-	async function getCategoriesList() {
-		try {
-			const response = await api.get("/management/categories");
-			
-			const categoriesList = response.data.data.map((category) => {
-				const selected = itemInfo.category._id === category._id;
-				return {
-					value: category._id,
-					name: category.name,
-					selected: selected
-				};
-			});
-
-			categoriesList.unshift({
-				value: "",
-				name: "Selecione a categoria"
-			});
-
-			return categoriesList;
-		} catch (error) {
-			setNotification({
-				theme: "fail",
-				message:
-					error.response ?? error.response.data.message ?? "Erro ao obter a lista de categorias.",
-				setNotification: setNotification
-			});
-
-			return false;
-		}
-	}
 
 	async function updateCenterCost() {
 		try {
 			const response = await api.put(`/management/center-cost`, {
 				center_cost_id: itemInfo._id,
 				name: itemInfo.name,
-				category_id: itemInfo.category_id,
-				type_id: itemInfo.type_id,
 				description: itemInfo.description
 			});
 
@@ -90,13 +53,7 @@ export function EditCenterCostModal({
 			errors.name = "Não pode estar vazio.";
 		}
 
-		if (itemInfo.category_id) {
-			if (itemInfo.category_id === "") errors.category_id = "Selecione a categoria.";
-		} else {
-			errors.category_id = "Não pode estar vazio.";
-		}
-
-		if (!errors.name && !errors.category_id) {
+		if (!errors.name) {
 			updateCenterCost();
 		} else {
 			setItemInfoValidator(errors);
@@ -115,27 +72,14 @@ export function EditCenterCostModal({
 		});
 	}
 
-	useEffect(() => {
-		async function getInitialData() {
-			setLoading(true);
-			const categoriesList = await getCategoriesList();
-
-			if (categoriesList) {
-				setCategories(categoriesList);
-				setLoading(false);
-			}
-		}
-
-		getInitialData();
-	}, []);
-
 	return (
 		<S.Container>
 			<S.Modal theme={""}>
-				<S.ModalClose theme={""} onClick={() => closeModal(false)}>
-					☓
-				</S.ModalClose>
-				<S.ModalMessageTitle>{"Editando centro de custo"}</S.ModalMessageTitle>
+				<S.ModalTitle>
+					<S.ModalClose theme={""} onClick={() => closeModal(false)}></S.ModalClose>
+					<S.ModalMessageTitle>{"Editando centro de custo"}</S.ModalMessageTitle>
+				</S.ModalTitle>
+
 				<S.ModalContent>
 					<InputText
 						inputName={"name"}
@@ -146,17 +90,6 @@ export function EditCenterCostModal({
 						inputShowInfo={true}
 						inputErrorMsg={itemInfoValidator.name}
 						disabled={loading}
-					/>
-					<InputSelect
-						selectName={"category_id"}
-						selectValue={itemInfo.category_id ?? ""}
-						selectOnChange={handleItemInfo}
-						selectPlaceholder={"Categoria"}
-						selectShowInfo={true}
-						selectErrorMsg={itemInfoValidator.category_id}
-						width={"256px"}
-						options={categories}
-						disabled={loading || !categories}
 					/>
 					<InputTextArea
 						textAreaName={"description"}
