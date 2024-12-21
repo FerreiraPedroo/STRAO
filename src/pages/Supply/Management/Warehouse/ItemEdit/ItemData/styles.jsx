@@ -9,7 +9,7 @@ export const InnerContainer = styled.main`
 	justify-content: start;
 	align-content: start;
 
-	${({ theme }) => PageStyle.container(theme)};
+	${PageStyle.container};
 
 	padding-top: 12px;
 	padding-bottom: 16px;
@@ -21,7 +21,7 @@ export const HeaderInner = styled.div`
 `;
 
 export const HeaderInnerTitle = styled.p`
-	${({ theme }) => PageStyle.containerTitle(theme)};
+	${PageStyle.containerTitle};
 `;
 
 export const UserDataContent = styled.div`

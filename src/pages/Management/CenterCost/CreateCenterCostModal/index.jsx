@@ -114,7 +114,7 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 							<ButtonText
 								typeStyle={"normal"}
 								disabled={loading}
-								value="AVANÇAR"
+								text="AVANÇAR"
 								onClick={handleItemInfoValidation}
 							/>
 						</S.ButtonBox>
@@ -142,13 +142,13 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 							<ButtonText
 								typeStyle={"normal"}
 								disabled={loading}
-								value="VOLTAR"
+								text="Voltar"
 								onClick={() => setModalStep(0)}
 							/>
 							<ButtonText
 								typeStyle={"normal"}
 								disabled={loading}
-								value="Registrar"
+								text="Registrar"
 								onClick={handleItemInfoValidation}
 							/>
 						</S.ButtonBox>

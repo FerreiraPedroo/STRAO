@@ -105,15 +105,13 @@ export function EditCenterCostModal({
 				</S.ModalContent>
 				<S.ButtonBox>
 					<ButtonText
-						typeStyle={"normal"}
 						disabled={loading}
-						value="Registrar"
+						text="Registrar"
 						onClick={handleItemInfoValidation}
 					/>
 					<ButtonText
-						typeStyle={"normal"}
 						disabled={loading}
-						value="Cancelar"
+						text="Cancelar"
 						onClick={() => closeModal(false)}
 					/>
 				</S.ButtonBox>

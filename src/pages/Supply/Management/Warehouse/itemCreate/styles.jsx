@@ -9,7 +9,7 @@ export const BlockInfoContainer = styled.div`
 	justify-content: start;
 	align-content: start;
 
-	${({ theme }) => BlockInfoContainerStyle.container(theme)};
+	${BlockInfoContainerStyle.container};
 
 	padding-bottom: 8px;
 `;
@@ -21,7 +21,7 @@ export const DataContainer = styled.div`
 `;
 
 export const BlockInfoTitle = styled.p`
-	${({ theme }) => BlockInfoContainerStyle.containerTitle(theme)};
+	${BlockInfoContainerStyle.containerTitle};
 `;
 
 export const InputBox = styled.div`

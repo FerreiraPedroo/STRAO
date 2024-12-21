@@ -45,7 +45,6 @@ export const ModalMessageTitle = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-family: ${props.textFontFamily};
 	font-size: 28px;
 	font-weight: bold;
 `;
