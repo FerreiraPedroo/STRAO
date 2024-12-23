@@ -22,6 +22,7 @@ function verifyDataApp(state) {
 
 export function Root() {
 	const result = useSelector(verifyDataApp);
+	console.log("Verificação do usuario /root/index")
 
 	if (!result) {
 		const dispatch = useDispatch();

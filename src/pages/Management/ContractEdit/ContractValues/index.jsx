@@ -6,7 +6,7 @@ import { NotificationModal } from "../../../../component/Notification/modal.jsx"
 import { InputTextArea } from "../../../../component/Input/TextArea/index.jsx";
 import { InputSelect } from "../../../../component/Input/Select/index.jsx";
 import { InputText } from "../../../../component/Input/Text/index.jsx";
-import { ButtonIcon } from "../../../../component/ButtonIcon/index.jsx";
+import { ButtonIcon } from "../../../../component/Buttons/ButtonIcon/index.jsx";
 
 import * as S from "./styles.jsx";
 

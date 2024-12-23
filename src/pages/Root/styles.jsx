@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
 	display: flex;
 	height: 100%;
-	background-color: var(--background-color);
+	background-color: #ECEEF4;
 	gap: 8px;
 `;
 
