@@ -14,7 +14,7 @@ import { InputFile } from "component/Input/File";
 import { PageTitle } from "component/container/PageTitle";
 import { PageContainer } from "component/container/PageContainer/styles";
 import { InputSelect } from "component/Input/Select";
-import { ButtonIcon } from "component/ButtonIcon";
+import { ButtonIcon } from "component/Buttons/ButtonIcon";
 
 import * as S from "./styles";
 import { PageAction } from "component/container/PageAction";

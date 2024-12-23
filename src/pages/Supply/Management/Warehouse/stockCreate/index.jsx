@@ -11,7 +11,7 @@ import { PageTitle } from "component/container/PageTitle/index.jsx";
 import { InputSelect } from "component/Input/Select/index.jsx";
 import { ModalSearch } from "component/ModalSearch/index.jsx";
 import { NotificationModal } from "component/Notification/modal.jsx";
-import { ButtonIcon } from "component/ButtonIcon/index.jsx";
+import { ButtonIcon } from "component/Buttons/ButtonIcon/index.jsx";
 
 export function SupplyManagementStockCreate() {
 	const [loading, setLoading] = useState(false);

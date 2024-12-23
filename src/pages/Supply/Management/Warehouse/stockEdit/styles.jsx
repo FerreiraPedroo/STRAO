@@ -8,7 +8,7 @@ export const InnerContainer = styled.main`
 	align-items: center;
 	gap: 8px;
 
-	${({ theme }) => PageStyle.container(theme)};
+	${PageStyle.container};
 `;
 
 export const HeaderInner = styled.div`
@@ -16,7 +16,7 @@ export const HeaderInner = styled.div`
 `;
 
 export const HeaderInnerTitle = styled.p`
-	${({ theme }) => PageStyle.containerTitle(theme)};
+	${PageStyle.containerTitle};
 `;
 
 export const UserDataContent = styled.div`

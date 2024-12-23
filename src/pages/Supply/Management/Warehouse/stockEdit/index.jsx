@@ -11,7 +11,7 @@ import { PageTitle } from "component/container/PageTitle/index.jsx";
 
 import { InputTextArea } from "component/Input/TextArea/index.jsx";
 import { InputSelect } from "component/Input/Select/index.jsx";
-import { ButtonIcon } from "component/ButtonIcon/index.jsx";
+import { ButtonIcon } from "component/Buttons/ButtonIcon/index.jsx";
 import { InputText } from "component/Input/Text/index.jsx";
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 

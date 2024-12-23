@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { BlockInfoContainerStyle } from "styles/container.jsx"
 
 export const StockInfoBlock = styled.div`
-	${({theme}) => BlockInfoContainerStyle.container(theme)}
+	${BlockInfoContainerStyle.container}
 	width: 100%;
 `;
 export const StockInfoBlockTitle = styled.div`
-	${({theme}) => BlockInfoContainerStyle.containerTitle(theme)}
+	${BlockInfoContainerStyle.containerTitle}
 `;
 
 export const LocationInfoBlock = styled.div`

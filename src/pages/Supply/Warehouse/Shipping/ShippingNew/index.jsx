@@ -9,7 +9,7 @@ import { NotificationModal } from "component/Notification/modal";
 import { PageTitle } from "component/container/PageTitle";
 import { PageContainer } from "component/container/PageContainer/styles";
 import { InputSelect } from "component/Input/Select";
-import { ButtonIcon } from "component/ButtonIcon";
+import { ButtonIcon } from "component/Buttons/ButtonIcon";
 
 import * as S from "./styles";
 import { InputTextArea } from "component/Input/TextArea";

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "services/api.js";
 
-import { ButtonIcon } from "component/ButtonIcon/index.jsx";
+import { ButtonIcon } from "component/Buttons/ButtonIcon/index.jsx";
 
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 

@@ -1,14 +1,8 @@
 const pageTitleStyle = {
-	pageTitle: {
-		light: `
+	pageTitle: `
       color: #009;
       background-color: transparent;
-      `,
-		dark: `
-      color: #407;
-      background-color: transparent;
       `
-	}
 };
 
 export { pageTitleStyle };
