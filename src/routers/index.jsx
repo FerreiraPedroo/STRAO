@@ -9,8 +9,9 @@ import { Home } from "pages/Home";
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 import { adminRoutes } from "pages/Admin/routes";
-import { supplyRoutes } from "pages/Supply/routes";
+import { supplyRoutes } from "modules/Supply/routes.jsx";
 import { managementRoutes } from "pages/Management/routes";
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 // HUMAN RESOURCES

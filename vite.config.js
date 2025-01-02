@@ -10,10 +10,11 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			component: "/src/component",
-			pages: "/src/pages",
 			services: "/src/services",
+			modules: "/src/modules",
 			helper: "/src/helper",
 			styles: "/src/styles",
+			pages: "/src/pages",
 		}
 	}
 });

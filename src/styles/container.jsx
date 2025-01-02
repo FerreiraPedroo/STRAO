@@ -7,7 +7,7 @@ export const PageStyle = {
     border: 1px solid #4E5F8F;
     background-color: #D3D9E1;
     box-shadow: 2px 2px 0px rgba(78, 95, 143, 0.9);
-    padding: 6px 12px 8px 12px;
+    padding: 8px 12px 8px 12px;
     border-radius: 4px;
     `,
 	containerTitle: `
@@ -53,7 +53,7 @@ export const BlockInfoContainerStyle = {
   border: 1px solid #4E5F8F;
   background-color: #D3D9E1;
   box-shadow: 2px 2px 0px rgba(78, 95, 143, 0.9);
-  padding: 16px;
+  padding: 12px 16px;
   border-radius: 4px;
   `,
 	containerTitle: `
@@ -61,6 +61,6 @@ export const BlockInfoContainerStyle = {
   font-size: 1.2rem;
   font-weight: 600;
   color: #1B1464;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   `
 };
