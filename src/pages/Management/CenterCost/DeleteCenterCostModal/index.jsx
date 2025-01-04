@@ -11,8 +11,8 @@ export function DeleteCenterCostModal({ centerCostData, closeModal }) {
 
 	return (
 		<S.Container>
-			<S.Modal theme={"theme"}>
-				<S.ModalClose theme={"theme"} onClick={() => closeModal(false)}>
+			<S.Modal>
+				<S.ModalClose onClick={() => closeModal(false)}>
 					☓
 				</S.ModalClose>
 				<S.ModalMessageTitle>{centerCostData.name}</S.ModalMessageTitle>

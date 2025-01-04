@@ -9,7 +9,7 @@ import { PageTitle } from "component/container/PageTitle";
 import { InputText } from "component/Input/Text";
 import { InputDate } from "component/Input/Date";
 import { InputSelect } from "component/Input/Select";
-import { ButtonIcon } from "component/ButtonIcon";
+import { ButtonIcon } from "component/Buttons/ButtonIcon";
 
 import { PageContainer } from "component/container/PageContainer/styles";
 

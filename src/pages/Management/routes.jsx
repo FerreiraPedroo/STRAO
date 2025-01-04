@@ -3,23 +3,23 @@ import { Route } from "react-router-dom";
 // MANAGER
 import { Management } from ".";
 import { ManagementCenterCost } from "pages/Management/CenterCost";
-import { ManagementCategories } from "pages/Management/Categories";
+import { ManagementItemCategory } from "modules/Supply/pages/Management/Warehouse/ItemCategory";
 // import { ManagementContract } from "pages/Management/Contracts";
 // import { ManagementContractEdit } from "pages/Management/ContractEdit";
 
 // MANAGER > SUPPLY /////////////////////////////////////////////////////////////////////
-import { SupplyManagementStock } from "pages/Supply/Management/Warehouse/stocks";
-import { SupplyManagementStockEdit } from "pages/Supply/Management/Warehouse/stockEdit";
-import { SupplyManagementStockCreate } from "pages/Supply/Management/Warehouse/stockCreate";
-import { SupplyManagementItems } from "pages/Supply/Management/Warehouse/items";
-import { SupplyManagementItemCreate } from "pages/Supply/Management/Warehouse/itemCreate";
-import { SupplyManagementItemEdit } from "pages/Supply/Management/Warehouse/ItemEdit/index";
+import { SupplyManagementStock } from "modules/Supply/pages/Management/Warehouse/stock/stockList";
+import { SupplyManagementStockEdit } from "modules/Supply/pages/Management/Warehouse/stock/stockEdit";
+import { SupplyManagementStockCreate } from "modules/Supply/pages/Management/Warehouse/stock/stockCreate";
+import { SupplyManagementItems } from "modules/Supply/pages/Management/Warehouse/item/itemList";
+import { SupplyManagementItemCreate } from "modules/Supply/pages/Management/Warehouse/item/itemCreate";
+import { SupplyManagementItemEdit } from "modules/Supply/pages/Management/Warehouse/item/ItemEdit/index";
 
 export const managementRoutes = (
 	<Route path="management">
 		<Route index element={<Management />} />
 		<Route path="centers-cost" element={<ManagementCenterCost />} />
-		<Route path="categories" element={<ManagementCategories />} />
+		<Route path="item-category" element={<ManagementItemCategory />} />
 		{/* <Route path="contracts" element={<ManagementContract />} /> */}
 		{/* <Route path="contract/edit" element={<ManagementContractEdit />} /> */}
 

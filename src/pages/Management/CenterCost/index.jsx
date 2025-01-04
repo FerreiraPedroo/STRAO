@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { api } from "services/api.js";
 
 import { NotificationModal } from "component/Notification/modal.jsx";
-// import { PageFilter } from "component/container/PageFilter";
 import { PageAction } from "component/container/PageAction";
 import { PageTitle } from "component/container/PageTitle";
 import { PageList } from "component/container/PageList";
@@ -13,7 +12,6 @@ import { PageContainer } from "component/container/PageContainer/styles.jsx";
 import { CreateCenterCostModal } from "./CreateCenterCostModal/index.jsx";
 import { DeleteCenterCostModal } from "./DeleteCenterCostModal/index.jsx";
 import { EditCenterCostModal } from "./EditCenterCostModal/index.jsx";
-import { PageFilter } from "component/container/PageFilter/index.jsx";
 
 export const ManagementCenterCost = () => {
 	const navigate = useNavigate();
@@ -121,31 +119,6 @@ export const ManagementCenterCost = () => {
 		setLoading(false);
 	}
 
-	async function deleteCenterCost() {
-		try {
-			const { data } = await api.delete(`/management/center-cost/change-status`, {
-				params: { center_cost_id: centerCostSelected }
-			});
-
-			setNotification({
-				theme: "success",
-				message: `Centro de custo excluido com sucesso.`,
-				setNotification: setNotification
-			});
-
-			setCenterCostSelected("");
-		} catch (error) {
-			setNotification({
-				theme: "fail",
-				message:
-					error.response.data && error.response.data.message
-						? error.response.statusText
-						: error.message,
-				setNotification: setNotification
-			});
-		}
-	}
-
 	useEffect(() => {
 		getCenterCostList(filtersSelected);
 	}, []);
@@ -190,7 +163,7 @@ export const ManagementCenterCost = () => {
 				subTitle="gerencie os centros de custo que ficarão disponivel."
 				backUrl={"/management"}
 				loading={loading}
-				pageIndex={false}
+				backPage={false}
 			/>
 
 			<PageAction

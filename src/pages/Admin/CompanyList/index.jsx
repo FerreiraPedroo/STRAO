@@ -66,7 +66,7 @@ export function AdminCompanyList() {
 				title="Lista das companhias"
 				subTitle="Selecione uma companhia para visualizar."
 				backUrl={"/"}
-				pageIndex={false}
+				backPage={false}
 				loading={pageLoading}
 			/>
 

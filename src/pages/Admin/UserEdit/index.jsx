@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { api } from "../../../services/api.js";
 
-import { ButtonIcon } from "../../../component/ButtonIcon/index.jsx";
+import { ButtonIcon } from "../../../component/Buttons/ButtonIcon/index.jsx";
 import { InputText } from "../../../component/Input/Text";
 import { InputSelect } from "../../../component/Input/Select";
 import { PageTitle } from "../../../component/container/PageTitle";

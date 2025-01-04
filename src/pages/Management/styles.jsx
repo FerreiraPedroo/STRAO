@@ -5,7 +5,6 @@ export const NoAction = styled.div`
 	text-align: center;
 `;
 
-
 export const SectionContainer = styled.div`
 	display: flex;
 	flex-wrap: wrap;

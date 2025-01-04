@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { api } from "../../../services/api";
 
-import { ButtonIcon } from "../../../component/ButtonIcon";
+import { ButtonIcon } from "../../../component/Buttons/ButtonIcon";
 import { PageTitle } from "../../../component/container/PageTitle";
 import { DocumentModal } from "./AddDocumentModal/index";
 
