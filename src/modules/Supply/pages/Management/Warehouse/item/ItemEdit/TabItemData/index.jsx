@@ -149,7 +149,7 @@ export function TabItemData({
 						value="Salvar"
 						typeStyle="correct"
 						onClick={handleDataInfoValidation}
-						disabled={!isDataInfoChanged.length || isSaving}
+						disabled={!Object.entries(tabChanged).length || isSaving}
 					/>
 					<S.ActionText>Salvar</S.ActionText>
 				</S.ButtonContainer>
