@@ -10,6 +10,7 @@ import { InputText } from "component/Input/Text/index.jsx";
 
 import * as S from "./styles.jsx";
 import { NotificationModal } from "component/Notification/modal.jsx";
+import { Modal } from "component/Modal/index.jsx";
 
 const supplierInfoSchema = object({
 	supplier: string().required(),
@@ -58,7 +59,7 @@ export function ItemSupplierModal({ itemId, showModal, setNotification }) {
 			return false;
 		}
 	}
- 
+
 	async function handleSubmit() {
 		const validation = await handleValidation();
 
@@ -90,7 +91,8 @@ export function ItemSupplierModal({ itemId, showModal, setNotification }) {
 			setNotification({
 				theme: "fail",
 				message:
-					(error.response && error.response.data.message) ?? "Erro ao cadastrar a referência do item.",
+					(error.response && error.response.data.message) ??
+					"Erro ao cadastrar a referência do item.",
 				setNotification: setNotification
 			});
 
@@ -125,69 +127,65 @@ export function ItemSupplierModal({ itemId, showModal, setNotification }) {
 	}, []);
 
 	return (
-		<S.Container>
-			<S.Modal>
-				<S.ModalClose onClick={() => showModal(false)}>☓</S.ModalClose>
-				<S.ModalMessageTitle>Nova referencia de fornecedor</S.ModalMessageTitle>
-				<S.InputBox>
-					<InputSelect
-						selectName="supplier"
-						selectValue={dataInfo.supplier ?? ""}
-						selectOnChange={handleDataInfo}
-						selectPlaceholder="Fornecedor do item"
-						selectShowInfo={true}
-						selectErrorMsg={errorsValidation.supplier}
-						disabled={pageLoading || saveDataStatus}
-						width="448px"
-						options={suppliers}
-					/>
+		<Modal title="Nova referencia de fornecedor" width="580px">
+			<S.InputBox>
+				<InputSelect
+					selectName="supplier"
+					selectValue={dataInfo.supplier ?? ""}
+					selectOnChange={handleDataInfo}
+					selectPlaceholder="Fornecedor do item"
+					selectShowInfo={true}
+					selectErrorMsg={errorsValidation.supplier}
+					disabled={pageLoading || saveDataStatus}
+					width="448px"
+					options={suppliers}
+				/>
 
-					<InputText
-						inputId=""
-						inputType="text"
-						inputName="supplier_item_reference"
-						inputValue={dataInfo.supplier_item_reference ?? ""}
-						inputOnChange={handleDataInfo}
-						inputPlaceholder="Referência do item no fornecedor"
-						inputShowInfo={true}
-						inputWidth="448px"
-						inputErrorMsg={errorsValidation.supplier_item_reference}
-						inputOnBlur={() => ""}
-						disabled={pageLoading || saveDataStatus}
-					/>
+				<InputText
+					inputId=""
+					inputType="text"
+					inputName="supplier_item_reference"
+					inputValue={dataInfo.supplier_item_reference ?? ""}
+					inputOnChange={handleDataInfo}
+					inputPlaceholder="Referência do item no fornecedor"
+					inputShowInfo={true}
+					inputWidth="448px"
+					inputErrorMsg={errorsValidation.supplier_item_reference}
+					inputOnBlur={() => ""}
+					disabled={pageLoading || saveDataStatus}
+				/>
 
-					<InputText
-						inputId=""
-						inputType="text"
-						inputName="supplier_item_description"
-						inputValue={dataInfo.supplier_item_description ?? ""}
-						inputOnChange={handleDataInfo}
-						inputPlaceholder="Descrição do item no fornecedor"
-						inputShowInfo={true}
-						inputWidth="448px"
-						inputErrorMsg={errorsValidation.supplier_item_description}
-						inputOnBlur={() => ""}
-						disabled={pageLoading || saveDataStatus}
-					/>
+				<InputText
+					inputId=""
+					inputType="text"
+					inputName="supplier_item_description"
+					inputValue={dataInfo.supplier_item_description ?? ""}
+					inputOnChange={handleDataInfo}
+					inputPlaceholder="Descrição do item no fornecedor"
+					inputShowInfo={true}
+					inputWidth="448px"
+					inputErrorMsg={errorsValidation.supplier_item_description}
+					inputOnBlur={() => ""}
+					disabled={pageLoading || saveDataStatus}
+				/>
 
-					<InputImages
-						name="supplier_item_image"
-						width="448px"
-						value={dataInfo.supplier_item_image ?? ""}
-						placeholder="Imagens do item do fornecedor"
-						sizeMax={3}
-						onChange={handleDataInfo}
-						onBlur={() => ""}
-						errorMsg=""
-						showInfo={true}
-						disabled={pageLoading || saveDataStatus}
-					/>
-				</S.InputBox>
-				<S.ButtonBox>
-					<ButtonText onClick={() => handleSubmit()} value={"REGISTRAR"} />
-					<ButtonText onClick={() => showModal(false)} value={"CANCELAR"} />
-				</S.ButtonBox>
-			</S.Modal>
-		</S.Container>
+				<InputImages
+					name="supplier_item_image"
+					width="448px"
+					value={dataInfo.supplier_item_image ?? ""}
+					placeholder="Imagens do item do fornecedor"
+					sizeMax={3}
+					onChange={handleDataInfo}
+					onBlur={() => ""}
+					errorMsg=""
+					showInfo={true}
+					disabled={pageLoading || saveDataStatus}
+				/>
+			</S.InputBox>
+			<S.ButtonBox>
+				<ButtonText onClick={() => handleSubmit()} value={"REGISTRAR"} />
+				<ButtonText onClick={() => showModal(false)} value={"CANCELAR"} />
+			</S.ButtonBox>
+		</Modal>
 	);
 }

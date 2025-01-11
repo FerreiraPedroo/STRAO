@@ -9,12 +9,13 @@ export function helperHandleChangeInput({ event, setData, action }) {
 	const value = event.target.value;
 	const type = event.target.type;
 
-	// console.log({ event, setData, action, type });
-	// console.log({ name, value,  type });
+	console.log({ event, setData, action });
+	console.log({ name, value,  type });
 
 	if (action == "add") {
 		switch (type) {
-			case "select-one":
+			case "text":
+			case "textarea":
 				setData((prev) => {
 					return {
 						...prev,

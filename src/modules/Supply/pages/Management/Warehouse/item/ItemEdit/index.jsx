@@ -102,9 +102,16 @@ export function SupplyManagementItemEdit() {
 
 					{tabSelected == "Referências" ? (
 						<ManagementReferenceSupplier
-							itemId={dataInfo._id}
-							infoData={dataInfo.supply_reference}
+							infoData={dataInfo}
+							setDataInfo={setDataInfo}
+							isSaving={isSaving}
+							setIsSaving={setIsSaving}
+							tabSelected={tabSelected}
+							tabChanged={tabChanged}
+							setTabChanged={setTabChanged}
 							setNotification={setNotification}
+							dataInfoChanged={dataInfoChanged}
+							setDataInfoChanged={setDataInfoChanged}
 						/>
 					) : null}
 				</>
