@@ -17,10 +17,8 @@ export const InputImages = ({
 	const [files, setFiles] = useState([]);
 
 	function change(e) {
-		const newBlobImg = new Blob([e.target.files[0]]);
-
 		const newImgs = [...files];
-		newImgs.push(newBlobImg);
+		newImgs.push(e.target.files[0]);
 
 		setFiles(newImgs);
 		onChange({ target: { value: newImgs, name: name } });
@@ -39,7 +37,7 @@ export const InputImages = ({
 					width={width}
 					type="file"
 					name={name}
-					accept="image/*"
+					accept="image/png, image/jpeg"
 					onChange={change}
 					onBlur={onBlur}
 					placeholder={!showInfo ? placeholder : ""}

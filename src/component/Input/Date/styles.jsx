@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { InputTheme } from "styles/input";
+import { InputTextStyle } from "styles/inputs/inputText";
 
 export const Container = styled.div`
 	${({ width }) => width && `max-width:${width};`}
@@ -20,7 +20,8 @@ export const TitleText = styled.p`
 	font-weight: 500;
 	font-size: 0.85rem;
 
-	${({ theme }) => InputTheme.text(theme)}
+	${InputTextStyle.text}
+
 
 	${({ disabled }) => disabled && "color: #b6b6b6;"}
 `;
@@ -32,13 +33,14 @@ export const Input = styled.input`
 		color: #c9c9c9;
 	}
 
-	${({ theme }) => InputTheme.input(theme)}
-
 	&:disabled {
 		border: 1px solid #c0c0c0;
 		background-color: #e0e0e0;
 		color: #b6b6b6;
 	}
+
+	${InputTextStyle.input}
+
 `;
 
 export const ErrorMsg = styled.div`

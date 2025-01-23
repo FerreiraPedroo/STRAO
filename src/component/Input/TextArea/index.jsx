@@ -6,7 +6,7 @@ export const InputTextArea = ({
 	textAreaName,
 	textAreaValue,
 	textAreaMin = "128px",
-	textAreaMax = "256px",
+	textAreaMax = "100%",
 	textAreaOnChange,
 	textAreaPlaceholder,
 	textAreaShowInfo = false,
@@ -16,15 +16,15 @@ export const InputTextArea = ({
 	textAreaOnBlur = () => "",
 	disabled,
 	readOnly,
-	theme = "normal"
+
 }) => {
 	return (
-		<S.Container width={width} height={height} theme={theme}>
-			<S.TitleText disabled={disabled} theme={theme}>
+		<S.Container width={width} height={height}>
+			<S.TitleText disabled={disabled}>
 				{((textAreaValue && textAreaShowInfo) || textAreaShowInfo) && textAreaPlaceholder}
 			</S.TitleText>
 
-			<S.TextArea theme={theme}
+			<S.TextArea
 				id={textAreaId}
 				name={textAreaName}
 				min={textAreaMin}

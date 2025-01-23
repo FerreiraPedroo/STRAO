@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { InputTheme } from "styles/input";
+import { InputFilesStyle } from "styles/inputs/inputFiles";
 
 export const Container = styled.div`
 	${({ width }) => width && `width:${width};`}
@@ -28,7 +28,7 @@ export const TitleText = styled.p`
 	font-weight: 500;
 	font-size: 0.85rem;
 
-	${({ theme }) => InputTheme.text(theme)}
+	${InputFilesStyle.text}
 
 	${({ disabled }) => disabled && "color: #b6b6b6;"}
 `;

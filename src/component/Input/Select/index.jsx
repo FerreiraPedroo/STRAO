@@ -13,26 +13,28 @@ export const InputSelect = ({
 	readOnly,
 	width = "164px",
 	options,
-	theme = "normal",
 	disableErrorMsg = false
 }) => {
 	return (
-		<S.Container width={width} theme={theme}>
-			<S.TitleText disabled={disabled} theme={theme}>
+		<S.Container width={width}>
+			<S.TitleText disabled={disabled}>
 				{((selectValue && selectShowInfo) || selectShowInfo) && selectPlaceholder}
 			</S.TitleText>
+
 			<S.Select
-				theme={theme}
 				id={selectId}
 				name={selectName}
 				width={width}
-				defaultValue=""
+				defaultValue={
+					options && options.find((option) => option.selected)
+						? options.find((option) => option.selected).value
+						: ""
+				}
 				onChange={selectOnChange}
 				placeholder={selectPlaceholder}
 				disabled={disabled}
 				readOnly={readOnly}
 			>
-
 				{options instanceof Array &&
 					options.map((option, index) =>
 						option.type === "optionGroup" ? (
@@ -41,13 +43,17 @@ export const InputSelect = ({
 							</S.OptionGroup>
 						) : (
 							/* eslint-disable-next-line */
-							<S.Option key={option.value + "-" + index} selected={option.selected} value={option.value} theme={theme}>
+							<S.Option
+								key={option.value + "-" + index}
+								// selected={option.selected}
+								value={option.value}
+							>
 								{option.name}
 							</S.Option>
 						)
 					)}
 			</S.Select>
-			{!disableErrorMsg &&<S.ErrorMsg>{selectErrorMsg}</S.ErrorMsg>}
+			{!disableErrorMsg && <S.ErrorMsg>{selectErrorMsg}</S.ErrorMsg>}
 		</S.Container>
 	);
 };

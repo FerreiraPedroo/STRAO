@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { InputTheme } from "styles/input";
+import { InputTextAreaStyle } from "styles/inputs/inputTextArea";
 
 export const Container = styled.div`
 	${({ width }) => width && `max-width:${width};`}
 	width: 100%;
-	min-width: 128px;
+	min-width: 168px;
 	min-height: 50px;
 	display: flex;
 	flex-direction: column;
@@ -18,16 +18,16 @@ export const TitleText = styled.p`
 	left: 1px;
 
 	font-weight: 500;
-	font-size: 0.85rem;
+	font-size: 0.9rem;
 
-	${({ theme }) => InputTheme.text(theme)}
+	${InputTextAreaStyle.text}
 
-	${({ disabled }) => disabled && "color: #b6b6b6;"}
+	${({ disabled }) => disabled && "color: #36393D;"}
 `;
 export const TextArea = styled.textarea`
-	${({ theme }) => InputTheme.input(theme)}
-
 	width: 100%;
+	${({ width }) => width && `max-width:${width};`}
+	min-width: 100%;
 	min-height: 28px;
 	${({ min }) => min && `min-width:${min};`}
 	${({ max }) => max && `max-width:${max};`}
@@ -41,8 +41,9 @@ export const TextArea = styled.textarea`
 	&:disabled {
 		border: 1px solid #c0c0c0;
 		background-color: #e0e0e0;
-		color: #b6b6b6;
+		color: #46494D;
 	}
+	${InputTextAreaStyle.input}
 `;
 
 export const ErrorMsg = styled.p`
@@ -53,6 +54,6 @@ export const ErrorMsg = styled.p`
 	text-overflow: ellipsis;
 	color: darkred;
 	padding-right: 2px;
-	text-shadow: 0 0 4px lightcoral;
+	text-shadow: 0 0 2px lightcoral;
 	text-align: right;
 `;

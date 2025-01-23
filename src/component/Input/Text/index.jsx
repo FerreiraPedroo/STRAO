@@ -14,12 +14,11 @@ export const InputText = ({
 	inputOnBlur = () => "",
 	disabled,
 	readOnly,
-	theme = "normal",
 	disableErrorMsg = false
 }) => {
 	return (
-		<S.Container width={inputWidth} theme={theme}>
-			<S.TitleText disabled={disabled} theme={theme}>
+		<S.Container width={inputWidth}>
+			<S.TitleText disabled={disabled}>
 				{((inputValue && inputShowInfo) || inputShowInfo) && inputPlaceholder}
 			</S.TitleText>
 
@@ -35,7 +34,6 @@ export const InputText = ({
 				readOnly={readOnly}
 				onBlur={(e) => inputOnBlur(e)}
 				width={inputWidth}
-				theme={theme}
 			/>
 			{!disableErrorMsg && <S.ErrorMsg>{inputErrorMsg}</S.ErrorMsg>}
 		</S.Container>

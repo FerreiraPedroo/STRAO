@@ -1,19 +1,18 @@
 import styled from "styled-components";
-import { InputTheme } from "styles/input";
+import { InputSelectStyle } from "styles/inputs/inputSelect";
 
 export const Container = styled.div`
-	/* height: 58px; */
 	${({ width }) => width && `max-width:${width};`}
-	min-width: 128px;
 	width: 100%;
-
+	min-width: 128px;
+	height: 58px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 `;
 export const TitleText = styled.p`
 	height: 16px;
-	
+
 	position: relative;
 	top: -2px;
 	left: 1px;
@@ -21,9 +20,9 @@ export const TitleText = styled.p`
 	font-weight: 500;
 	font-size: 0.9rem;
 
-	${({ theme }) => InputTheme.text(theme)}
+	${InputSelectStyle.text}
 
-	${({ disabled }) => disabled && "color: #b6b6b6;"}	
+	${({ disabled }) => disabled && "color: #36393D;"}
 `;
 export const Select = styled.select`
 	min-width: 160px;
@@ -36,20 +35,20 @@ export const Select = styled.select`
 	&:disabled {
 		border: 1px solid #c0c0c0;
 		background-color: #e0e0e0;
-		color: #b6b6b6;
+		color: #101010;
 	}
 
-	${({ theme }) => InputTheme.input(theme)}
+	${InputSelectStyle.input}
 `;
-
 export const Option = styled.option`
-	${({ theme }) => InputTheme.input(theme)}
+	${InputSelectStyle.input}
 `;
 export const OptionGroup = styled.optgroup`
-	color: #868686;
+	color: #36393d;
 	font-weight: 500;
 	font-size: 1rem;
 `;
+
 export const ErrorMsg = styled.p`
 	min-height: 14px;
 	font-size: 0.7rem;
@@ -58,6 +57,6 @@ export const ErrorMsg = styled.p`
 	text-overflow: ellipsis;
 	color: darkred;
 	padding-right: 2px;
-	text-shadow: 0 0 4px lightcoral;
+	text-shadow: 0 0 2px lightcoral;
 	text-align: right;
 `;
