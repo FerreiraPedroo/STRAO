@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	width: 100%;
-	height: 48px;
+	height: 54px;
 	display: flex;
 	justify-content: space-between;
 	place-items: center;
@@ -94,7 +94,6 @@ export const MenuCardTitle = styled.p`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-family: "Courier New";
 	font-style: normal;
 	font-weight: 500;
 	font-size: 1.2rem;

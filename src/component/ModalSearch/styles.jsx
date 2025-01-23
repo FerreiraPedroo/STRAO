@@ -9,7 +9,6 @@ export const StockInfoBlockTitle = styled.div`
 	${({ theme }) => BlockInfoContainerStyle.containerTitle(theme)}
 `;
 const props = {
-	textFontFamily: "Arial",
 	titleTextColor: "#999",
 	errorTextColor: "#f66",
 	successTextColor: "#6f6",
@@ -65,7 +64,6 @@ export const ModalMessageTitle = styled.div`
 	align-items: center;
 	justify-content: center;
 	top: -30px;
-	font-family: ${props.textFontFamily};
 	font-size: 28px;
 	font-weight: bold;
 `;

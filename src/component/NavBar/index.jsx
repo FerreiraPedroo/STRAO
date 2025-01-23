@@ -25,17 +25,11 @@ export const NavBar = () => {
 		<S.Container onMouseLeave={() => setShowMenu(false)}>
 			<S.LeftContainer>
 				<S.MenuContainer>
-					<S.MenuButton
-						src={icon_menu}
-						onClick={() => setShowMenu((prevState) => !prevState)}
-					/>
+					<S.MenuButton src={icon_menu} onClick={() => setShowMenu((prevState) => !prevState)} />
 					{showMenu && (
 						<S.MenuOptions key="menuoptions">
 							{Object.values(menuData.departments).map((card) => (
-								<S.MenuCard
-									key={card.name}
-									onClick={() => menuNavigation(card.URLPath)}
-								>
+								<S.MenuCard key={card.name} onClick={() => menuNavigation(card.URLPath)}>
 									<S.MenuCardImg src={navBarImgs[card.URLMenuImg]} />
 									<S.MenuCardTitle>{card.name}</S.MenuCardTitle>
 								</S.MenuCard>
@@ -53,14 +47,14 @@ export const NavBar = () => {
 				</S.Title>
 			</S.LeftContainer>
 
-			{/* <S.RightContainer>
-				<S.NotificationBox>
+			<S.RightContainer>
+				{/* <S.NotificationBox>
 					<Clipboard size={32} />
 					<S.NotificationNumber>0</S.NotificationNumber>
-				</S.NotificationBox>
-				<S.Avatar src={user_avatar} />
-				<S.UserName>STRAO</S.UserName>
-			</S.RightContainer> */}
+				</S.NotificationBox> */}
+				{/* <S.Avatar src={user_avatar} /> */}
+				{/* <S.UserName>STRAO</S.UserName> */}
+			</S.RightContainer>
 		</S.Container>
 	);
 };

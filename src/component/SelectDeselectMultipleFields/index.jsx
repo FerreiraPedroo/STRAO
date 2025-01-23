@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ButtonIcon } from "../ButtonIcon";
+import { ButtonIcon } from "../Buttons/ButtonIcon";
 import { InputSelect } from "../Input/Select";
 import { InputText } from "../Input/Text";
 

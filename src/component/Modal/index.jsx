@@ -1,24 +1,15 @@
 import React from "react";
 import * as S from "./styles.jsx";
 
-import { ButtonText } from "component/ButtonText/index.jsx";
-
-export function Modal({ children, showModal }) {
+export function Modal({ children, showModal, title, width}) {
 	return (
 		<S.Container>
-			<S.Modal theme={"normal"}>
-				<S.ModalClose theme={"normal"} onClick={() => showModal(null)}>
-					☓
-				</S.ModalClose>
+			<S.Modal width={width}>
+				<S.ModalHeaderBox>
+					<S.ModalMessageTitle>{title}</S.ModalMessageTitle>
+					<S.ModalClose onClick={() => showModal(null)}>☓</S.ModalClose>
+				</S.ModalHeaderBox>
 				{children}
-				<S.ButtonBox>
-					<ButtonText
-						typeStyle={"normal"}
-						disabled={false}
-						value="FECHAR"
-						onClick={() => showModal(true)}
-					/>
-				</S.ButtonBox>
 			</S.Modal>
 		</S.Container>
 	);

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const props = {
-	textFontFamily: "Arial",
 	titleTextColor: "#999",
 	errorTextColor: "#f66",
 	successTextColor: "#6f6",
@@ -19,7 +18,6 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	place-items: center;
-	font-family: ${props.textFontFamily};
 
 	border: 1px solid #ddd;
 
@@ -160,7 +158,6 @@ export const ModalMessage = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-family: ${props.textFontFamily};
 	font-size: 1.3rem;
 	font-weight: bold;
 	padding: 16px;
@@ -191,7 +188,6 @@ export const ModalMessageTitle = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-family: ${props.textFontFamily};
 	font-size: 2rem;
 	font-weight: bold;
 

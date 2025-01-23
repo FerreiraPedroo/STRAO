@@ -3,11 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
 	changeSectionSelected,
 	changeSectionActionSelected
-} from "../../services/store/features/menu/menu";
+} from "services/store/features/menu/menu";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { sideBarImgs } from "../../helper/indexImg";
+import { sideBarImgs } from "helper/indexImg";
 import * as S from "./styles";
 
 export function SideBar() {
@@ -23,11 +23,9 @@ export function SideBar() {
 	});
 
 	const menuSectors = useSelector((state) => {
-		const department = state.appData.departmentsInfo.departments.find(
-			(department) => {
-				return department.URLPath === "/" + departmentLocation;
-			}
-		);
+		const department = state.appData.departmentsInfo.departments.find((department) => {
+			return department.URLPath === "/" + departmentLocation;
+		});
 
 		if (!department) {
 			return {};
@@ -37,21 +35,15 @@ export function SideBar() {
 			(sector) => sector.departmentID === department.ID
 		);
 
-
 		return sector;
 	});
 
 	const menuSectorSelected = useSelector((state) => state.menu.sectionSelected);
-	// const menuSectorActionSelected = useSelector((state) => state.menu.sectionActionSelected);
 
 	function selectSection(sector) {
 		dispatch(changeSectionSelected(sector.name));
 		navigate(sector.URLPath);
 	}
-
-	// function selectSectionAction(actionName) {
-	// 	dispatch(changeSectionActionSelected(actionName));
-	// }
 
 	useEffect(() => {
 		dispatch(changeSectionActionSelected(""));
