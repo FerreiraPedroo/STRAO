@@ -1,15 +1,17 @@
-import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
+import React from "react";
 
 import * as S from "./styles.jsx";
 import { CardInfo } from "component/Cards/CardInfo/index.jsx";
 
-export function PageCardList({ theme = "normal", listData, pageLoading }) {
+export function PageCardList({ listData, pageLoading }) {
 	return (
-		<S.Container theme={theme}>
-			{listData && listData.map((stock) => <CardInfo key={stock._id} data={stock} />)}
+		<S.Container>
+			{listData && listData.length
+				? listData.map((stock) => <CardInfo key={stock._id} data={stock} />)
+				: null}
 
 			{pageLoading && <>Carregando...</>}
-			{listData && pageLoading ? <>Nenhum estoque...</> : null}
+			{listData && !listData.length ? <>Nenhum estoque...</> : null}
 		</S.Container>
 	);
 }

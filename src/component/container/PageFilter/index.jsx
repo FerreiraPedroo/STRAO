@@ -3,7 +3,7 @@ import { CaretDown, CaretUp } from "phosphor-react";
 
 import * as S from "./styles.jsx";
 
-import { ButtonIcon } from "component/ButtonIcon/index.jsx";
+import { ButtonIcon } from "component/Buttons/ButtonIcon/index.jsx";
 import { InputSelect } from "component/Input/Select/index";
 import { InputText } from "component/Input/Text";
 

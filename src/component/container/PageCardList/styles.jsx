@@ -1,17 +1,15 @@
 import styled from "styled-components";
-import { PageStyle } from "styles/container";
+import { pageListStyle } from "styles/component/container/pageList";
 
 export const Container = styled.div`
 	width: 100%;
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-	justify-content: start;
-	align-content: start;
+	justify-content: center;
+	align-content: center;
 
-	${({ theme }) => PageStyle.container(theme)};
-
-	padding-top: 12px;
-	padding-bottom: 16px;
 	gap: 8px;
+
+	${pageListStyle.container};
 `;

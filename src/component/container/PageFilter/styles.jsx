@@ -7,7 +7,7 @@ export const Container = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 
-	${({ theme }) => PageStyle.container(theme)};
+	${PageStyle.container};
 `;
 
 export const TitleBox = styled.div`
@@ -17,7 +17,7 @@ export const TitleBox = styled.div`
 `;
 
 export const Title = styled.div`
-	${({ theme }) => PageStyle.containerTitle(theme)};
+	${PageStyle.containerTitle};
 `;
 
 export const OpenButton = styled.div`

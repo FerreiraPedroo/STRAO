@@ -8,7 +8,7 @@ export const Container = styled.div`
 	justify-content: start;
 	align-content: start;
 
-	${({ theme }) => PageStyle.container(theme)};
+	${PageStyle.container};
 
 	padding-bottom: 32px;
 `;

@@ -7,6 +7,6 @@ export const PageContainer = styled.div`
 	flex-wrap: wrap;
 	justify-content: start;
 	align-content: start;
-	padding: 8px;
-	gap: 8px;
+	padding: 20px 24px 16px 16px;
+	gap: 10px;
 `;

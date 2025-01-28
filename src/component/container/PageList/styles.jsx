@@ -1,87 +1,51 @@
 import styled from "styled-components";
-import { PageStyle } from "styles/container";
+import { pageListStyle } from "styles/component/container/pageList";
 
-export const Container = styled.div`
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: start;
-	align-content: start;
-
-	${({ theme }) => PageStyle.container(theme)};
-
-	padding-bottom: 32px;
-`;
-
-export const CenterContainer = styled.div`
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-`;
 
 export const RowListContainer = styled.div`
 	display: flex;
 	width: 100%;
-	align-self: start;
 	flex-direction: column;
-	padding: 8px 0;
 `;
 export const RowHeaderBox = styled.div`
 	width: 100%;
 	height: 28px;
 	display: flex;
 	justify-content: start;
-	box-sizing: content-box;
-	margin-bottom: 0px;
 `;
+
 export const RowHeadText = styled.p`
 	${({ width }) => width && `width:${width}px`};
 	${({ minWidth }) => minWidth && `min-width:${minWidth}px`};
 	${({ maxWidth }) => maxWidth && `max-width:${maxWidth}px`};
-	${({ align }) => (align ? `text-align:${align}` : `text-align: start;`)};
+	${({ align }) => (align ? `justify-content:${align};` : `justify-content: start;`)};
 	height: 28px;
 
 	display: flex;
 	align-items: center;
 	flex-grow: 1;
 
-	font-size: 0.9rem;
+	font-size: 1rem;
 	font-style: italic;
 	font-weight: 600;
 
-	padding: 0 10px;
+	padding: 0 8px;
 
-	background-color: #e5e5e5;
-	color: #767676;
-	border-top: 1px solid #c0c0c0;
-	border-bottom: 1px solid #c0c0c0;
-
-	&:first-child {
-		justify-content: center;
-		border-left: 1px solid #c0c0c0;
-	}
-
-	&:last-child {
-		border-right: 1px solid #c0c0c0;
-	}
+	${pageListStyle.rowHeaderBox}
 `;
 
 export const RowBox = styled.div`
 	display: flex;
 	width: 100%;
 	justify-content: start;
-	cursor: pointer;
-	margin: 0px;
-	border-top: 1px solid #c0c0c0;
-	border-left: 1px solid #c0c0c0;
-	border-right: 1px solid #c0c0c0;
 	border-collapse: collapse;
 
-	&:last-child {
-		border-bottom: 1px solid #c0c0c0;
-	}
+	margin: 0px;
+	cursor: pointer;
+
+	${pageListStyle.rowBox}
 `;
+
 export const RowText = styled.p`
 	${({ width }) => width && `width:${width}px`};
 	${({ minWidth }) => minWidth && `min-width:${minWidth}px`};
@@ -93,8 +57,8 @@ export const RowText = styled.p`
 			? "white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
 			: `white-space: wrap; word-wrap:break-word; `};
 
-	font-size: 0.8rem;
-	padding: 4px 10px;
+	font-size: 0.9rem;
+	padding: 4px 6px;
 	background: #f8f8f8;
 	z-index: 1;
 	flex-grow: 1;
@@ -103,7 +67,6 @@ export const RowText = styled.p`
 		props["data-hover"] &&
 		!props["data-selected"] &&
 		`
-		font-weight: 500;
 		background: #DCDCDC;
 		z-index: 2;
 	`}

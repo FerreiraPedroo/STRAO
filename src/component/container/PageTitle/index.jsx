@@ -2,18 +2,18 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import * as S from "./styles.jsx";
-import { ButtonText } from "../../ButtonText/index";
+import { ButtonText } from "../../Buttons/ButtonText/index";
 import { useDispatch } from "react-redux";
 
 /**
  * @param title - String - Titulo principal da página.
  * @param subTitle - String - Sub titulo da página.
  * @param backUrl - String - Url para ser direcionado quando clicar no botão.
- * @param pageIndex - String - Se a página é index, não temo como voltar pelo botão.
+ * @param backPage - String - Se a página é index, não temo como voltar pelo botão.
  *
  * @returns
  */
-export const PageTitle = React.memo(({ title, subTitle, backUrl, pageIndex = true }) => {
+export const PageTitle = React.memo(({ title, subTitle, backUrl, backPage = false }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const location = useLocation();
@@ -30,12 +30,11 @@ export const PageTitle = React.memo(({ title, subTitle, backUrl, pageIndex = tru
 
 	return (
 		<S.PageTitleContainer>
-			<S.PageHeader>
-				{pageIndex && (
+
+				{backPage && (
 					<ButtonText
 						disabled={!backUrl}
-						typeStyle="back"
-						value={"Voltar"}
+						text={"Voltar"}
 						onClick={selectSection}
 					/>
 				)}
@@ -44,7 +43,7 @@ export const PageTitle = React.memo(({ title, subTitle, backUrl, pageIndex = tru
 					<S.PageTitle>{title}</S.PageTitle>
 					<S.PageSubTitle>{subTitle}</S.PageSubTitle>
 				</S.PageTitleBox>
-			</S.PageHeader>
+
 		</S.PageTitleContainer>
 	);
 });
