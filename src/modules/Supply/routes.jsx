@@ -7,6 +7,9 @@ import { SupplyWarehouseStock } from "./pages/Warehouse/Stock";
 // SUPPLY > WAREHOUSE > SHIPPING (EXPEDIÇÃO)
 import { SupplyWarehouseShipping } from "./pages/Warehouse/Shipping";
 import { SupplyWarehouseShippingNew } from "./pages/Warehouse/Shipping/ShippingNew";
+// SUPPLY > SUPPLIER
+import { SupplySupplierList } from "./pages/Supplier/SupplierList";
+import { SupplySupplierNew } from "./pages/Supplier/SupplierNew";
 
 
 
@@ -17,27 +20,12 @@ export const supplyRoutes = (
 		<Route path="warehouse/stock" element={<SupplyWarehouseStock />} />
 		<Route path="warehouse/shipping" element={<SupplyWarehouseShipping />} />
 		<Route path="warehouse/shipping/new" element={<SupplyWarehouseShippingNew />} />
+		<Route path="suppliers" element={<SupplySupplierList />} />
+		<Route path="supplier/new" element={<SupplySupplierNew />} />
 
 		{/* <Route path="stock/items" element={<SupplyWarehouseItems />} /> */}
 		{/* <Route path="item/edit" element={<SupplyWarehouseItemEdit />} /> */}
 		{/* <Route path="item/register" element={<SupplyWarehouseItemRegister />} /> */}
 
-		{/* <Route path="rh">
-<Route index element={<HumanResources />} />
-<Route path="employee" element={<HumanResourcesEmployee />} />
-<Route
-    path="employee/register"
-    element={<HumanResourcesEmployeeRegister />}
-/>
-<Route
-    path="employee/sheet/edit"
-    element={<HumanResourcesEmployeeSheetEdit />}
-/>
-
-<Route
-    path="employee/sheet"
-    element={<HumanResourcesEmployeeSheet />}
-/>
-</Route> */}
 	</Route>
 );

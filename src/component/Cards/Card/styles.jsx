@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { CardStyle } from "styles/cards";
 
 export const Container = styled.div`
   display: flex;
@@ -11,18 +12,15 @@ export const Container = styled.div`
   width: 256px;
   height: 160px;
 
-  background: #dddddd;
-  border: 1px solid #a9a9a9;
-  box-shadow: 0px 1px 1px #767676, inset 1px 1px 2px #ffffff;
-  border-radius: 2px;
-
   cursor: pointer;
   user-select: none;
   overflow: hidden;
 
   &:hover {
-    border: 1px solid black;
+    border: 1px solid transparent;
   }
+
+  ${CardStyle.container};
 `;
 
 export const Box = styled.div`
@@ -52,6 +50,7 @@ export const CategoryNotification = styled.p`
 export const CategoryName = styled.p`
   width: 100%;
   text-align: center;
+  align-content: center;
   font-weight: 500;
   font-size: 1.2rem;
 `;

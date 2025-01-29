@@ -33,12 +33,12 @@ export const InputBox = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
+	gap: 10px;
 `;
 
 export const ButtonBox = styled.div`
 	height: 100%;
 	display: flex;
 	gap: 16px;
-	/* padding: 12px; */
+	padding: 16px 0 0 0;
 `;

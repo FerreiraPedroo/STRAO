@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CardStyle } from "styles/cards";
+
 
 export const Container = styled.div`
 	display: flex;
@@ -22,7 +22,13 @@ export const Container = styled.div`
 		border: 1px solid #4E5F8F;
 	}
 
-	${({theme}) => CardStyle.container(theme)}
+    color: #4E5F8F;
+    border: 1px solid #DEE2E6;
+    background-color: #F5F5F5;
+    box-shadow: 2px 2px 0px rgba(78, 95, 143, 0.9);
+    padding: 6px 12px 6px 12px;
+    border-radius: 4px;
+	
 `;
 
 export const Box = styled.div`

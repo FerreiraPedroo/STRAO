@@ -11,9 +11,11 @@ export const Card = ({ data }) => {
 	const dispatch = useDispatch();
 
 	function selectSection(URLPath) {
+		console.log("OK")
 		dispatch({ payload: URLPath, type: "sidebar/changeSectionSelected" });
 		navigate(URLPath);
 	}
+
 	return (
 		<S.Container onClick={() => selectSection(data.URLPath)}>
 			<S.Box>

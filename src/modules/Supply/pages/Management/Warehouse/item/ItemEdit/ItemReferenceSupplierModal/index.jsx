@@ -13,9 +13,9 @@ import { NotificationModal } from "component/Notification/modal.jsx";
 import { Modal } from "component/Modal/index.jsx";
 
 const supplierInfoSchema = object({
-	supplier: string().required(),
-	supplier_item_description: string().required(),
-	supplier_item_reference: string().required(),
+	supplier: string().required("É necessário escolher um fornecedor."),
+	supplier_item_description: string().required("É necessário a descrição."),
+	supplier_item_reference: string().required("É necessário a referência."),
 	supplier_item_image: array().ensure()
 });
 
@@ -103,8 +103,8 @@ export function ItemSupplierModal({ itemId, showModal, setNotification }) {
 	useEffect(() => {
 		async function getSupplier() {
 			try {
-				const response = await api.get("/supply/suppliers");
-
+				const response = await api.get("/management/supply/suppliers");
+				console.log({response})
 				const data = response.data.data.map((supplier) => ({
 					value: supplier._id,
 					name: supplier.name
@@ -127,7 +127,7 @@ export function ItemSupplierModal({ itemId, showModal, setNotification }) {
 	}, []);
 
 	return (
-		<Modal title="Nova referencia de fornecedor" width="580px">
+		<Modal title="Nova referencia de fornecedor" width="580px" showModal={showModal}>
 			<S.InputBox>
 				<InputSelect
 					selectName="supplier"
@@ -183,8 +183,8 @@ export function ItemSupplierModal({ itemId, showModal, setNotification }) {
 				/>
 			</S.InputBox>
 			<S.ButtonBox>
-				<ButtonText onClick={() => handleSubmit()} value={"REGISTRAR"} />
-				<ButtonText onClick={() => showModal(false)} value={"CANCELAR"} />
+				<ButtonText onClick={() => handleSubmit()} text={"REGISTRAR"} />
+				<ButtonText onClick={() => showModal(false)} text={"CANCELAR"} />
 			</S.ButtonBox>
 		</Modal>
 	);
