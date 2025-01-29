@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ButtonIconTheme } from "../../styles";
+import { ButtonIconTheme } from "../../../styles/component/buttons/buttonIcon";
 
 export const ButtonIcon = styled.button`
 	min-width: ${({ width }) => `${width}px`};

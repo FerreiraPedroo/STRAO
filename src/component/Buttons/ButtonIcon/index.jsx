@@ -31,19 +31,17 @@ const Icons = {
  * @returns
  */
 export const ButtonIcon = ({
-	value,
 	typeStyle = "normal",
-	disable,
+	disabled,
 	onClick,
-	loading
+	loading = false
 }) => {
 	return (
 		<S.ButtonIcon
 			typeStyle={typeStyle}
-			value={value}
 			width={36}
 			height={28}
-			disabled={disable || loading}
+			disabled={disabled || loading}
 			onClick={onClick}
 		>
 			{loading ? <CircleNotch size={24} color="#ffffff" /> : Icons[typeStyle]}
