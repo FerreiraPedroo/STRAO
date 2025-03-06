@@ -1,16 +1,32 @@
-import axios from "axios";
+import { CONFIG } from "config/config.jsx";
 
-export const api = axios.create({
-	baseURL: "http://127.0.0.1:3030"
-});
+const configDefault = {
+	headers: {
+		"Content-type": "application/json",
+		"Authorization": `Bearer ${localStorage.getItem("strao-token")}`,
+		"Strao-Info-Data-Version": `${localStorage.getItem("strao-infoDataVersion")}`
+	}
+};
 
-api.interceptors.request.use(function (config) {
-	config.headers["Authorization"] = `Bearer ${localStorage.getItem("strao-token")}`;
-	config.headers["Strao-Info-Data-Version"] = `${localStorage.getItem("strao-infoDataVersion")}`;
-	return config;
-});
+export const api = async (url, config = {}) => {
+	const configFinal = {
+		...config,
+		...configDefault
+	};
 
-// api.interceptors.response.use(function (response) {
-// 	// const updateData = response.headers['x-strao-update-data'];
-// 	return response;
-// });
+	try {
+		const response = await fetch(`${CONFIG.urlApi}${url}`, configFinal);
+		const responseJson = await response.json();
+
+		return responseJson;
+	} catch (error) {
+		if (
+			error.message.includes("Failed to fetch") ||
+			error.message.includes("ERR_CONNECTION_REFUSED")
+		) {
+			return { codStatus: 404, message: "Servidor indisponível ou conexão recusada.", data: null };
+		} else {
+			return { codStatus: 404, message: `Erro desconhecido: ${error}`, data: null };
+		}
+	}
+};

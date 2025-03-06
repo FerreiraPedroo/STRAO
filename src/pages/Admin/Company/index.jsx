@@ -6,7 +6,6 @@ import { ButtonIcon } from "../../../component/Buttons/ButtonIcon/index.jsx";
 import { InputText } from "../../../component/Input/Text";
 import { InputSelect } from "../../../component/Input/Select";
 import { PageTitle } from "../../../component/container/PageTitle";
-import { PageAction } from "../../../component/container/PageAction";
 
 import * as S from "./styles.jsx";
 import { PageContainer } from "component/container/PageContainer/styles.jsx";

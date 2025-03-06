@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { providerUpdateAppData } from "services/store/features/data/appData.js";
@@ -7,8 +8,9 @@ import { api } from "services/api.js";
 
 import * as S from "./styles.jsx";
 
-export function SelectBranchModal({ branchList, goHome }) {
+export function SelectBranchModal({ closeModal, branchList }) {
 	const useDispath = useDispatch();
+	const navigate = useNavigate();
 
 	const [loading, setLoading] = useState("");
 
@@ -16,10 +18,14 @@ export function SelectBranchModal({ branchList, goHome }) {
 		try {
 			if (!loading) {
 				setLoading("loading");
-				const response = await api.post(`/change-branch`, { branchSelected });
-				if (response.status === 201) {
+				const response = await api(`/change-branch`, {
+					method: "POST",
+					body: JSON.stringify({ branchSelected })
+				});
+
+				if (response.codStatus) {
 					useDispath(providerUpdateAppData(response.data));
-					goHome();
+					navigate("/home");
 				} else {
 					throw "ERRO";
 				}
@@ -32,8 +38,12 @@ export function SelectBranchModal({ branchList, goHome }) {
 
 	return (
 		<S.Container>
-			<S.Modal theme={""}>
-				<S.ModalMessageTitle>{"SELECIONE A EMPRESA"}</S.ModalMessageTitle>
+			<S.Modal>
+				<S.ModalHeader>
+					<S.ModalButtonClose onClick={() => closeModal(false)}>X</S.ModalButtonClose>
+					<S.ModalMessageTitle>SELECIONE A EMPRESA</S.ModalMessageTitle>
+				</S.ModalHeader>
+
 				<S.ModalContent>
 					{branchList &&
 						branchList.map((branch) => {
@@ -52,6 +62,8 @@ export function SelectBranchModal({ branchList, goHome }) {
 							);
 						})}
 				</S.ModalContent>
+
+				<S.ModalFooter>{/* <S.ModalMessageTitle>BUTTON</S.ModalMessageTitle> */}</S.ModalFooter>
 			</S.Modal>
 		</S.Container>
 	);

@@ -6,7 +6,7 @@ import { api } from "services/api";
 import { PageTitle } from "component/container/PageTitle";
 import { PageFilter } from "component/container/PageFilter";
 import { PageList } from "component/container/PageList";
-import { PageAction } from "component/container/PageAction";
+import { PageActions } from "component/container/PageActions";
 import { PageContainer } from "component/container/PageContainer/styles";
 
 // const filters = [
@@ -123,7 +123,7 @@ export const HumanResourcesEmployee = () => {
 				loading={findStatus}
 			/>
 
-			<PageAction
+			<PageActions
 				actionsData={listActions}
 				dataSelected={employeeSelected}
 				loading={findStatus}

@@ -6,7 +6,7 @@ import { NotificationFull } from "../../../component/Notification/full.jsx";
 import { PageFilter } from "../../../component/container/PageFilter";
 import { PageList } from "../../../component/container/PageList";
 import { PageTitle } from "../../../component/container/PageTitle";
-import { PageAction } from "../../../component/container/PageAction";
+import { PageActions } from "../../../component/container/PageActions/index.jsx";
 
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
@@ -192,7 +192,7 @@ export const AdminUsers = () => {
 				backUrl={"/admin"}
 				loading={loading}
 			/>
-			<PageAction
+			<PageActions
 				actionsData={userPageData.actions}
 				dataSelected={userSelected}
 				loading={loading}

@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { PageList } from "../../../component/container/PageList";
 import { PageTitle } from "../../../component/container/PageTitle";
 import { PageFilter } from "../../../component/container/PageFilter";
-import { PageAction } from "../../../component/container/PageAction";
+import { PageAction } from "../../../component/container/PageActions";
 import { api } from "../../../services/api";
 
 import { monthList } from "../../../helper/defaultDataForm";

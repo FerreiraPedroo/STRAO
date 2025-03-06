@@ -1,41 +1,34 @@
 import { api } from "../api.js";
 
-export const loginService = async (_user, _password) => {
+export const loginService = async (user, password) => {
 	try {
-		const response = await api({
-			url: "/login",
+		const response = await api("/login", {
 			method: "POST",
-			data: {
-				login: _user,
-				password: _password
-			},
+			body: JSON.stringify({
+				login: user,
+				password: password
+			}),
 			withCredentials: true
 		});
 
-		const { data } = response;
-
-		return data;
+		return response;
 	} catch (err) {
 		return {
 			codStatus: 500,
 			message: "Erro ao conectar.",
-			data: err.response.data
+			data: null
 		};
 	}
 };
 
 export const logoutService = async () => {
 	try {
-		const { data } = await api({
-			url: "/logout",
+		const response = await api("/logout", {
 			method: "POST",
 			withCredentials: true
 		});
-		return data;
+		return response;
 	} catch (err) {
-		if (err.response.data) {
-			return err.response.data;
-		}
 		return {
 			codStatus: 0,
 			codName: "",

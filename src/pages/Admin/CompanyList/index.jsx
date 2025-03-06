@@ -4,11 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { api } from "services/api.js";
 import { NotificationModal } from "component/Notification/modal.jsx";
 
-import { PageAction } from "component/container/PageAction/index.jsx";
 import { PageCardList } from "component/container/PageCardList/index.jsx";
 import { PageTitle } from "component/container/PageTitle/index.jsx";
-
-import { CreateStockModal } from "./CreateStockModal/index.jsx";
 
 import * as S from "./styles.jsx";
 import { useDispatch } from "react-redux";
