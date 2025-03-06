@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { pageTitleStyle } from "styles/component/container/pageTitle"
+import { pageTitleStyle } from "styles/component/container/pageTitle";
 
 export const PageTitleContainer = styled.div`
 	width: 100%;
@@ -8,8 +8,7 @@ export const PageTitleContainer = styled.div`
 	justify-content: flex-start;
 	align-items: flex-start;
 	margin: 0px;
-	gap: 24px;
-	padding-bottom: 8px;
+	/* padding: 12px 0; */
 `;
 
 export const PageTitleBox = styled.div`
@@ -22,7 +21,7 @@ export const PageTitle = styled.h1`
 	display: flex;
 	align-items: center;
 
-	font-size: 2.8rem;
+	font-size: 1.8rem;
 	font-style: italic;
 	font-weight: bold;
 	line-height: 1;
@@ -35,7 +34,7 @@ export const PageSubTitle = styled.h2`
 	display: flex;
 	white-space: wrap;
 	align-items: center;
-	font-size: 1rem;
+	font-size: 0.9rem;
 
 	${pageTitleStyle.pageTitle}
 `;

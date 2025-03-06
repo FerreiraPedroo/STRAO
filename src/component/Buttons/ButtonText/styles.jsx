@@ -2,22 +2,21 @@ import styled from "styled-components";
 
 export const Button = styled.button`
 	position: relative;
-	min-width: ${({ width }) => (width ? `${width}px` : "32px")};
+	min-width: ${({ width }) => (width ? `${width}px` : "48px")};
 	height: ${({ height }) => (height ? `${height}px` : "32px")};
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 1rem;
-	font-weight: 500;
-	padding: 8px;
+	padding: 0 16px;
 
 	border-radius: 6px;
 
-	cursor: pointer;
 	user-select: none;
-
+	
 	&:hover {
+		cursor: pointer;
 		box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
 		top: 2px;
 		left: 2px;

@@ -7,6 +7,7 @@ import user_avatar from "../../assets/img/user_avatar.png";
 import icon_menu from "../../assets/icons/menu/menu.svg";
 
 import { navBarImgs } from "../../helper/indexImg";
+import { Clipboard } from "phosphor-react";
 
 export const NavBar = () => {
 	const navigate = useNavigate();
@@ -23,7 +24,7 @@ export const NavBar = () => {
 
 	return (
 		<S.Container onMouseLeave={() => setShowMenu(false)}>
-			<S.LeftContainer>
+			<S.StartContainer>
 				<S.MenuContainer>
 					<S.MenuButton src={icon_menu} onClick={() => setShowMenu((prevState) => !prevState)} />
 					{showMenu && (
@@ -45,16 +46,17 @@ export const NavBar = () => {
 				>
 					STRAO
 				</S.Title>
-			</S.LeftContainer>
+			</S.StartContainer>
 
 			<S.RightContainer>
 				{/* <S.NotificationBox>
 					<Clipboard size={32} />
 					<S.NotificationNumber>0</S.NotificationNumber>
 				</S.NotificationBox> */}
-				{/* <S.Avatar src={user_avatar} /> */}
-				{/* <S.UserName>STRAO</S.UserName> */}
 			</S.RightContainer>
+			<S.FinalContainer>
+				<S.Avatar src={user_avatar} />
+			</S.FinalContainer>
 		</S.Container>
 	);
 };

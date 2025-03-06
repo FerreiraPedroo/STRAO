@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { pageListStyle } from "styles/component/container/pageList";
+// import { PageListStyle } from "styles/component/container/pageList";
 
 export const Container = styled.div`
 	width: 100%;
@@ -11,5 +11,5 @@ export const Container = styled.div`
 
 	gap: 8px;
 
-	${pageListStyle.container};
-`;
+	`;
+	/* ${pageListStyle.container}; */

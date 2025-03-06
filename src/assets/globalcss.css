@@ -1,5 +1,5 @@
 :root {
-  
+
   --box-sizing: border-box;
   --background-color: #ECEEF4;
 
@@ -108,6 +108,7 @@
 
 
 }
+
 * {
   margin: 0px;
   border: 0px;
@@ -117,12 +118,13 @@
   box-sizing: border-box;
   letter-spacing: 1px;
   /* max-width: 1440px; */
-  /* border: 1px solid blue; */
-
+    /* border: 1px solid blue; */
 }
+
 body {
   height: 100%;
   background-color: #ECEEF4;
+
 }
 html {
   height: 100%;

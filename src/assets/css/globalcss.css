@@ -1,0 +1,145 @@
+:root {
+  --app-theme: light;
+
+  /*-----------------------------------------------------------*/
+  /* components/cards/Card* THEMES                             */
+  /*-----------------------------------------------------------*/
+  /*LIGHT*/
+  --card-text-color-normal: #4E5F8F;
+  --card-text-color-disabled-normal: rgba(78, 95, 143, 0.5);
+  --card-border-normal: 1px solid #DEE2E6;
+  --card-background-color-normal: #F5F5F5;
+  /* --card-box-shadow-normal: 2px 2px 0px rgba(78, 95, 143, 0.9); */
+  /*DARK*/
+  --card-text-color-dark: #FFF;
+  --card-text-color-disabled-dark: rgba(78, 95, 143, 0.5);
+  --card-border-dark: 1px solid #4E5F8F;
+  --card-background-color-dark: #222;
+  --card-box-shadow-dark: 2px 2px 0px rgba(78, 95, 143, 0.9);
+ 
+
+
+  
+    /*################################################*/
+    /**** components/cards/Card* THEMES ******/
+    /*################################################*/
+    /*LIGHT*/
+    /* --card-text-color-normal: #4E5F8F;
+    --card-text-color-disabled-normal: rgba(78, 95, 143, 0.5);
+    --card-border-normal: 1px solid #DEE2E6;
+    --card-background-color-normal: #F5F5F5; */
+    /* --card-box-shadow-normal: 2px 2px 0px rgba(78, 95, 143, 0.9); */
+    /*DARK*/
+    /* --card-text-color-dark: #FFF;
+    --card-text-color-disabled-dark: rgba(78, 95, 143, 0.5);
+    --card-border-dark: 1px solid #4E5F8F;
+    --card-background-color-dark: #222;
+    --card-box-shadow-dark: 2px 2px 0px rgba(78, 95, 143, 0.9); */
+    /*################################################*/
+    
+  
+  
+    /*################################################*/
+    /**** components/Input/* THEMES ******/
+    /*################################################*/
+    /*LIGHT*/
+    --input-text-color-normal: #4E5F8F;
+    --input-border-normal: 1px solid #888888;
+    --input-background-color-normal: #fff;
+    /*DARK*/
+    --input-text-color-dark: #FFF;
+    --input-border-dark: 1px solid #4E5F8F;
+    --input-background-color-dark: #222;
+    /*################################################*/
+    /* INPUT SUPERIOR TEXT*/
+    /*LIGHT*/
+    --input-title-text-color-normal: #1B1464;
+    --input-title-border-normal: 1px solid #888888;
+    --input-title-background-color-normal: #fff;
+    /*DARK*/
+    --input-title-text-color-dark: #FFF;
+    --input-title-border-dark: 1px solid #4E5F8F;
+    --input-title-background-color-dark: #222;
+    /*################################################*/
+  
+
+    --box-sizing: border-box;
+    --background-color: #ECEEF4;
+  
+    /*################################################*/
+    /**** components/container/pageTitle THEMES *******/
+    /*################################################*/
+    /*LIGHT*/
+    --page-title-text-color-normal: #283B72;
+    --page-title-background-color-normal: #ECEEF4;
+    /*NIGHT*/
+    --page-title-text-color-dark: #FFF;
+    --page-title-background-color-dark: #000;
+    /*################################################*/
+
+
+
+  /*################################################*/
+  /********************* PAGE THEMES ****************/
+  /*################################################*/
+  /*----------------------CONTAINER-----------------*/
+  /*LIGHT*/
+  --page-container-text-color-normal: #4E5F8F;
+  --page-container-text-color-disabled-normal: rgba(78, 95, 143, 0.5);
+  --page-container-border-normal: 1px solid #4E5F8F;
+  --page-container-background-color-normal: #D3D9E1;
+  --page-container-box-shadow-normal: 2px 2px 0px rgba(78, 95, 143, 0.9);
+  /*DARK*/
+  --page-container-text-color-dark: #FFF;
+  --page-container-text-color-disabled-dark: rgba(78, 95, 143, 0.5);
+  --page-container-border-dark: 1px solid #4E5F8F;
+  --page-container-background-color-dark: #222;
+  --page-container-box-shadow-dark: 2px 2px 0px rgba(78, 95, 143, 0.9);
+  
+  /*-------------------CONTAINER TITLE--------------*/
+  /*LIGHT*/
+  --page-container-title-text-color-normal: #1B1464;
+  --page-container-title-text-size: 1rem;
+  /*DARK*/
+  --page-container-title-text-color-dark: #FFF;
+  /*################################################*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  }
+  * {
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    font-family: 'Roboto';
+    font-size: 16px;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    max-width: 1440px;
+    /* border: 1px solid blue; */
+  
+  }
+  body {
+    height: 100vh;
+    background-color: #ECEEF4;
+  }
+  html {
+    height: 100vh;
+    background-color: #ECEEF4;
+  }
+  

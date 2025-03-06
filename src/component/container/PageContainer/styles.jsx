@@ -2,11 +2,10 @@ import styled from "styled-components";
 
 export const PageContainer = styled.div`
 	width: 100%;
-	height: 100%;
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: start;
-	align-content: start;
-	padding: 20px 24px 16px 16px;
-	gap: 10px;
+	flex-direction: column;
+	padding: 12px 20px 20px 12px;
+	gap: 12px;
+	overflow: hidden;
+	border: 2px solid red;
 `;

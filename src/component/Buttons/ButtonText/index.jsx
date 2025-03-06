@@ -7,7 +7,7 @@ import * as S from "./styles";
  */
 export const ButtonText = ({ text, disabled = false, onClick, loading = false, width = 80 }) => {
 	return (
-		<S.Button width={width} height={40} disabled={disabled || loading} onClick={onClick}>
+		<S.Button width={width} height={32} disabled={disabled || loading} onClick={onClick}>
 			{text}
 		</S.Button>
 	);

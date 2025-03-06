@@ -1,18 +1,9 @@
 import styled from "styled-components";
-import { PageStyle } from "styles/container";
+import { PageActionsStyle } from "styles/component/container/pageActions";
 
 export const Container = styled.div`
 	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: start;
-	align-items: center;
-	gap: 16px;
-	padding: 12px;
-	border-radius: 6px;
-
-	${PageStyle.container};
-
+	${PageActionsStyle.container};
 `;
 
 export const ButtonBox = styled.div`
@@ -26,8 +17,7 @@ export const ButtonBox = styled.div`
 
 export const ButtonText = styled.div`
 	font-size: 1rem;
-	font-weight: 500;
+	/* font-weight: 500; */
 	white-space: wrap;
 	text-align: start;
-	line-height: 14px;
 `;

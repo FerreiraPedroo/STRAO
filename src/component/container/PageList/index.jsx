@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import * as S from "./styles.jsx";
 
-import { BlockInfoContainer } from "modules/Supply/components/BoxInfo/styles";
-
 // Exemplo
 const columns = [
 	{
@@ -22,24 +20,10 @@ const columns = [
 /**
  *
  */
-export const PageList = ({
-	listData,
-	columns = [],
-	setDataSelected,
-	dataSelected,
-	loading,
-	theme = "normal"
-}) => {
+export const PageList = ({ listData, columns, setDataSelected, dataSelected, loading }) => {
 	const [pageListData, setPageListData] = useState(null);
-
 	const [headerInfo, setHeaderInfo] = useState(columns);
-	const [rowSelected, setRowSelected] = useState();
 	const [rowHover, setRowHover] = useState();
-
-	function handleDataSelected(index) {
-		setDataSelected(listData[index]);
-		setRowSelected(index);
-	}
 
 	function handleRowHover(index) {
 		setRowHover(index);
@@ -61,10 +45,10 @@ export const PageList = ({
 	}, [listData]);
 
 	return (
-		<BlockInfoContainer>
+		<S.ComponentContainer>
 			{loading ? (
 				<S.LoadingBox>Carregando...</S.LoadingBox>
-			) : listData.length ? (
+			) : listData && listData.length ? (
 				<S.RowListContainer>
 					<S.RowHeaderBox>
 						{headerInfo.map((header) => (
@@ -81,34 +65,36 @@ export const PageList = ({
 						))}
 					</S.RowHeaderBox>
 
-					{pageListData.map((data, index) => (
-						<S.RowBox
-							key={JSON.stringify(data)}
-							onClick={() => handleDataSelected(index)}
+					{pageListData &&
+						pageListData.map((data, index) => (
+							<S.RowBox
+							key={data.id}
+							onClick={() => setDataSelected(listData[index])}
 							onMouseEnter={() => handleRowHover(index)}
 							onMouseLeave={() => handleRowHover()}
-						>
-							{headerInfo.map((column) => (
-								<S.RowText
-									key={column.htmlName}
-									minWidth={column.minSize}
-									maxWidth={column.maxSize}
-									width={column.size}
-									align={column.align}
-									data-hover={index == rowHover}
-									data-selected={index == rowSelected}
-								>
-									{data[column.htmlName] instanceof Object
-										? data[column.htmlName].name
-										: data[column.htmlName]}
-								</S.RowText>
-							))}
-						</S.RowBox>
-					))}
+							>
+
+								{headerInfo.map((column) => (
+									<S.RowText
+										key={column.htmlName}
+										minWidth={column.minSize}
+										maxWidth={column.maxSize}
+										width={column.size}
+										align={column.align}
+										data-hover={index == rowHover}
+										data-selected={data.name == dataSelected.name}
+									>
+										{data[column.htmlName] instanceof Object
+											? data[column.htmlName].name
+											: data[column.htmlName]}
+									</S.RowText>
+								))}
+							</S.RowBox>
+						))}
 				</S.RowListContainer>
 			) : (
 				<S.LoadingBox>Sem registro</S.LoadingBox>
 			)}
-		</BlockInfoContainer>
+		</S.ComponentContainer>
 	);
 };

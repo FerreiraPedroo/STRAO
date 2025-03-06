@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
 	changeSectionSelected,
@@ -16,29 +16,27 @@ export function SideBar() {
 	const dispatch = useDispatch();
 	const departmentLocation = location.pathname.split("/")[1];
 
-	const menuDepartment = useSelector((state) => {
-		return state.appData.departmentsInfo.departments.find((department) => {
-			return department.URLPath === "/" + departmentLocation;
-		});
-	});
-
-	const menuSectors = useSelector((state) => {
-		const department = state.appData.departmentsInfo.departments.find((department) => {
+	const { menuDepartment, menuSectors, menuSectorSelected } = useSelector((state) => {
+		const menuDepartment = state.appData.departmentsInfo.departments.find((department) => {
 			return department.URLPath === "/" + departmentLocation;
 		});
 
-		if (!department) {
-			return {};
+		if (!menuDepartment) {
+			return [];
 		}
 
-		const sector = state.appData.sectorsInfo.sectors.filter(
-			(sector) => sector.departmentID === department.ID
+		const menuSectors = state.appData.sectorsInfo.sectors.filter(
+			(sector) => sector.departmentID === menuDepartment.ID
 		);
 
-		return sector;
-	});
+		const menuSectorSelected = state.menu.sectionSelected;
 
-	const menuSectorSelected = useSelector((state) => state.menu.sectionSelected);
+		return {
+			menuDepartment,
+			menuSectors,
+			menuSectorSelected
+		};
+	});
 
 	function selectSection(sector) {
 		dispatch(changeSectionSelected(sector.name));
@@ -55,10 +53,13 @@ export function SideBar() {
 	return (
 		<S.Container>
 			<S.DepartmentTitle>{menuDepartment.name}</S.DepartmentTitle>
-			<S.HrLine />
 			{menuSectors.map((sec) => (
-				<S.SectionContainer key={sec.name} onClick={() => selectSection(sec)}>
-					<S.SectionTop selected={sec.name === menuSectorSelected}>
+				<S.SectionContainer
+					key={sec.name}
+					selected={sec.name === menuSectorSelected}
+					onClick={() => selectSection(sec)}
+				>
+					<S.SectionTop>
 						<S.SectionImg src={sideBarImgs[sec.URLMenuImg]} />
 						<S.SectionTitle>{sec.name}</S.SectionTitle>
 					</S.SectionTop>

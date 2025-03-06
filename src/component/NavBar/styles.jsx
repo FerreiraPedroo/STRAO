@@ -2,55 +2,46 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	width: 100%;
-	height: 54px;
 	display: flex;
-	justify-content: space-between;
-	place-items: center;
-	padding: 16px 16px;
 `;
 
 /* TITLE */
 export const Title = styled.p`
-	width: 100%;
-	text-align: center;
-	font-size: 1.80rem;
+	font-size: 1.4rem;
 	font-weight: bold;
-	color: #464646;
-	padding-top: 2px;
+	color: #424242;
 
 	&:hover {
 		cursor: pointer;
 	}
 `;
 
-/* LEFT CONTAINER */
-export const LeftContainer = styled.div`
+/* START CONTAINER */
+export const StartContainer = styled.div`
 	width: 100%;
 	display: flex;
-	gap: 6px;
+	gap: 20px;
+	padding: 16px;
 `;
 
 /* MENU */
 export const MenuContainer = styled.div`
 	position: relative;
-	width: 2rem;
 	display: flex;
 	place-items: center;
-	justify-content: center;
 	z-index: 100;
 `;
 export const MenuButton = styled.img`
-	width: 36px;
+	width: 24px;
 
 	&:hover {
 		cursor: pointer;
-		border: 1px solid transparent;
 	}
 `;
 export const MenuOptions = styled.div`
 	position: absolute;
-	top: 2.50rem;
-	left: -1.0rem;
+	top: 2.5rem;
+	left: -1rem;
 	min-width: 256px;
 
 	display: flex;
@@ -59,15 +50,13 @@ export const MenuOptions = styled.div`
 	align-items: flex-start;
 	padding: 16px;
 	gap: 16px;
+	border-radius: 0 4px 4px 0;
 
-	background: #c8c8c8;
+	background: #e0e0e0;
 	border: 1px solid #747679;
-	/* border-radius: 0 0 4px 0; */
-	/* border-top: 0; */
 `;
 export const MenuCard = styled.div`
 	display: flex;
-	/* flex-direction: column; */
 	align-items: center;
 	padding: 6px;
 	gap: 8px;
@@ -75,8 +64,9 @@ export const MenuCard = styled.div`
 
 	width: 100%;
 	height: 5.25rem;
+	border-radius: 4px;
 
-	background: #b0b0b0;
+	background: #f0f0f0;
 	border: 1px solid #747679;
 
 	&:hover {
@@ -90,16 +80,13 @@ export const MenuCardImg = styled.img`
 	min-height: 3.5rem;
 `;
 export const MenuCardTitle = styled.p`
-	width:100%;
+	width: 100%;
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	font-style: normal;
-	font-weight: 500;
-	font-size: 1.2rem;
+	font-size: 1rem;
 	line-height: 0.9rem;
-	text-align: center;
-	color: #000000;
+	color: #1f1f1f;
 `;
 
 /**
@@ -107,9 +94,10 @@ export const MenuCardTitle = styled.p`
  */
 export const RightContainer = styled.div`
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	/* justify-content: center;
+	align-items: center; */
 	gap: 16px;
+	padding: 8px;
 `;
 export const NotificationBox = styled.div`
 	display: flex;
@@ -125,9 +113,17 @@ export const NotificationNumber = styled.p`
 	top: 2px;
 	color: #ff0000;
 	font-weight: bold;
-    cursor: pointer;
+	cursor: pointer;
 `;
-export const Avatar = styled.img``;
+
+export const FinalContainer = styled.div`
+	display: flex;
+	place-items: center;
+	padding: 4px 16px;
+`;
+export const Avatar = styled.img`
+	height: 46px;
+`;
 export const UserName = styled.p`
 	display: flex;
 	place-items: center;

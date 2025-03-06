@@ -1,122 +1,104 @@
 import styled from "styled-components";
 
-const props = {
-	navMenuButtonTextSize: "1rem",
-	navMenuButtonSizeWidth: "100px",
-	navMenuButtonSizeHeight: "96px",
-	navMenuButtonBackColor: "#C0C0C0",
-
-	navMenuContainerBackColor: "#F8F8F8"
-};
-
 export const Container = styled.div`
-	width: 100%;
-	height: 100%;
+	min-width: 208px;
+	width: 208px;
 	display: flex;
 	flex-direction: column;
 	place-items: center;
-	padding: 6px 8px;
-	background-color: #F6F6F6;
-	gap:6px;
+	padding: 0 4px 8px 4px;
+	/* background-color: #f6f6f6; */
 `;
 /* HR SEPARATOR */
 export const HrLine = styled.hr`
-	margin: 0px 8px;
 	width: 100%;
 	border: 1px solid #c0c0c0;
 `;
 export const DepartmentTitle = styled.div`
 	width: 100%;
-	height: 56px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	text-align: center;
-	font-size: 1.4rem;
+
+	font-size: 1.2rem;
 	font-style: italic;
 	font-weight: 600;
-	color: #464646;
+	padding: 12px 0 12px 8px;
+	color: #1f1f1f;
 `;
 export const SectionContainer = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding: 4px 6px;
 	border: 1px solid transparent;
 
-	&:hover{
+	&:hover {
+		background-color: #e0e0e0;
 		cursor: pointer;
 	}
 
+	${({ selected }) =>
+		selected &&
+		`
+		background-color: #e0e0e0;
+		border: 1px solid #C8C8C8;	
+	`};
 `;
 export const SectionTop = styled.div`
 	width: 100%;
 	display: flex;
 	align-items: center;
-	border: 1px solid transparent;
-	padding: 4px 4px;
-	gap: 4px;
-
-	&:hover{
-		background-color: #e0e0e0;
-	}
-
-	${({ selected }) => selected && `
-		background-color: #e0e0e0;
-		border: 1px solid #C8C8C8;	
-	`};
-
+	gap: 8px;
 `;
 export const SectionImg = styled.img`
-	min-width: 2.5rem;
-	width: 2.5rem;
-	min-height: 2.5rem;
-	height:  2.5rem;
+	min-width: 24px;
+	width: 24px;
+	min-height: 24px;
+	height: 24px;
 `;
 export const SectionTitle = styled.div`
 	font-style: italic;
 	font-size: 0.9rem;
-	font-weight: 600;
-	color: #767676;
+	color: #1f1f1f;
 	user-select: none;
 `;
 export const ArrowDown = styled.p`
-	${({ selected }) => selected ? "visibility: visible" : "visibility: hidden"};
+	${({ selected }) => (selected ? "visibility: visible" : "visibility: hidden")};
 	line-height: 4px;
-	
+
 	&::after {
-		content: '▾';
+		content: "▾";
 	}
 `;
-
 
 export const Action = styled.div`
 	width: 100%;
 	display: flex;
 	align-items: center;
 	padding: 8px 6px;
-	border-left: 1px solid #C8C8C8;
-	border-right: 1px solid #C8C8C8;
+	border-left: 1px solid #c8c8c8;
+	border-right: 1px solid #c8c8c8;
 	gap: 6px;
-	
+
 	&:hover {
-		${({ selected }) => !selected && `
+		${({ selected }) =>
+			!selected &&
+			`
 			background-color: #e0e0e0;
 			cursor: pointer;
 		`}
 	}
 
-	&:last-child{
-		border-bottom: 1px solid #C8C8C8;
+	&:last-child {
+		border-bottom: 1px solid #c8c8c8;
 	}
-	
-	${({ selected }) => selected && "background-color: #c0c0c0; color: #333; "};
 
+	${({ selected }) => selected && "background-color: #c0c0c0; color: #333; "};
 `;
 
 export const ActionImg = styled.img`
 	min-width: 2rem;
-	width:  2rem;
+	width: 2rem;
 	min-height: 2rem;
 	height: 2rem;
 `;
