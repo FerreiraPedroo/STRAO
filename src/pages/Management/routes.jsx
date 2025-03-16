@@ -16,8 +16,8 @@ import { SupplyManagementItemCreate } from "modules/Supply/pages/Management/Ware
 import { SupplyManagementItemEdit } from "modules/Supply/pages/Management/Warehouse/item/ItemEdit/index";
 
 export const managementRoutes = (
-	<Route path="management">
-		<Route index element={<Management />} />
+	<Route path="management" element={<Management />} >
+		{/* <Route index element={<Management />} /> */}
 		<Route path="centers-cost" element={<ManagementCenterCost />} />
 		<Route path="item-category" element={<ManagementItemCategory />} />
 		{/* <Route path="contracts" element={<ManagementContract />} /> */}

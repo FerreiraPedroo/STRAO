@@ -28,16 +28,16 @@ export const Management = () => {
 
 	// 	return sector;
 	// });
+	{
+		/* {menuSectors.map((sec) => (
+		<S.SectionContainer onClick={() => selectSection(sec)}>
+			<Card key={sec.name} data={sec} />
+		</S.SectionContainer>
+	))} */
+	}
+	{
+		/* {!menuSectors.length && <S.NoAction>Sem ações.</S.NoAction>} */
+	}
 
-	return (
-		<div>
-			{/* {menuSectors.map((sec) => (
-				<S.SectionContainer onClick={() => selectSection(sec)}>
-					<Card key={sec.name} data={sec} />
-				</S.SectionContainer>
-			))} */}
-			{/* {!menuSectors.length && <S.NoAction>Sem ações.</S.NoAction>} */}
-			<Outlet />
-		</div>
-	);
+	return <Outlet />;
 };

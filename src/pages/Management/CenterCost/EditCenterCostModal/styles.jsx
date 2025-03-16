@@ -1,12 +1,4 @@
 import styled from "styled-components";
-const props = {
-	textFontFamily: "Arial",
-	titleTextColor: "#999",
-	errorTextColor: "#f66",
-	successTextColor: "#6f6",
-	bgColor: "",
-	inputBgColorDisable: "#ddd"
-};
 
 export const Container = styled.div`
 	position: absolute;
@@ -14,28 +6,42 @@ export const Container = styled.div`
 	left: 0;
 	width: 100%;
 	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	background-color: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(2px);
 	z-index: 100;
 	user-select: none;
 `;
 
 export const Modal = styled.div`
 	position: absolute;
-	left: calc(50% - 250px);
-	top: calc(50% - 250px);
-	width: 500px;
-	height: 500px;
+	left: calc(50% - 260px);
+	top: calc(10%);
+	width: 520px;
+	height: auto;
+	max-height: 70%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	background-color: #fff;
-	padding: 12px;
 	border-radius: 12px;
 
-	@media (max-width: 720px) {
-		width: 100%;
+	@media (max-width: 540px) {
+		width: 90%;
+		position: relative;
 		left: 0;
+		top: 0;
 	}
+`;
+
+export const ModalHeader = styled.div`
+	width: 100%;
+	display: flex;
+	border-radius: 12px 12px 0 0;
+	background-color: #eeeeee;
+	padding: 6px 0 ;
 `;
 
 export const ModalTitle = styled.div`
@@ -44,24 +50,15 @@ export const ModalTitle = styled.div`
 `;
 
 export const ModalClose = styled.div`
-	width: 42px;
-	height: 40px;
-	font-size: 1.5rem;
-	font-weight: bolder;
-	text-align: center;
-	border-radius: 50%;
-	color: black;
-
-	&::after {
-		position: relative;
-		content: "X";
-		top: 5px;
-		left: 1px;
-	}
-
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.4rem;
+	margin: 2px 16px;
+	font-weight: bold;
 	&:hover {
+		color: tomato;
 		cursor: pointer;
-		background-color: #eee;
 	}
 `;
 
@@ -69,26 +66,24 @@ export const ModalMessageTitle = styled.div`
 	width: 100%;
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
-	padding-left: 8px;
-	font-size: 1.5rem;
+	justify-content: center;
+	font-size: 1.2rem;
+	text-align: start;
+
+	padding: 0px 50px 0px 0;
 	font-weight: bold;
 `;
 
 export const ModalContent = styled.div`
 	width: 100%;
 	height: 100%;
+
+	overflow: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	padding: 12px;
-`;
-
-export const ButtonBox = styled.div`
-	display: flex;
-	padding: 12px;
-	gap: 12px;
+	gap: 8px;
+	padding: 16px 24px;
 `;
 
 export const ButtonFormSubmit = styled.button`
@@ -109,5 +104,15 @@ export const ButtonFormSubmit = styled.button`
 		border-color: #000;
 		background-color: #999;
 	}
+`;
 
+export const ModalFooter = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 8px;
+	gap: 18px;
+	border-radius: 0 0 12px 12px;
+	background-color: #eeeeee;
 `;

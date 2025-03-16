@@ -38,7 +38,7 @@ export const Login = () => {
 
 	const handleLogin = async () => {
 		const responseData = await loginService(user, password);
-
+		console.log(responseData)
 		if (responseData.codStatus == 201) {
 			dispatch(providerUpdateToken(responseData.data));
 			setBranchList(responseData.data.branches);

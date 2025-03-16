@@ -22,10 +22,13 @@ export function EditCenterCostModal({
 
 	async function updateCenterCost() {
 		try {
-			const response = await api.put(`/management/center-cost`, {
-				center_cost_id: itemInfo._id,
-				name: itemInfo.name,
-				description: itemInfo.description
+			const response = await api(`/management/center-cost`, {
+				method: "PUT",
+				body: JSON.stringify({
+					center_cost_id: itemInfo._id,
+					name: itemInfo.name,
+					description: itemInfo.description
+				})
 			});
 
 			setNotification({
@@ -33,6 +36,7 @@ export function EditCenterCostModal({
 				message: "Centro de custo atualizado sucesso."
 			});
 			updateCenterCostList();
+			
 			closeModal(null);
 		} catch (error) {
 			setNotification({
@@ -74,11 +78,11 @@ export function EditCenterCostModal({
 
 	return (
 		<S.Container>
-			<S.Modal theme={""}>
-				<S.ModalTitle>
-					<S.ModalClose theme={""} onClick={() => closeModal(false)}></S.ModalClose>
+			<S.Modal>
+				<S.ModalHeader>
+					<S.ModalClose onClick={() => closeModal(false)}>X</S.ModalClose>
 					<S.ModalMessageTitle>{"Editando centro de custo"}</S.ModalMessageTitle>
-				</S.ModalTitle>
+				</S.ModalHeader>
 
 				<S.ModalContent>
 					<InputText
@@ -103,18 +107,11 @@ export function EditCenterCostModal({
 						disabled={loading}
 					/>
 				</S.ModalContent>
-				<S.ButtonBox>
-					<ButtonText
-						disabled={loading}
-						text="Registrar"
-						onClick={handleItemInfoValidation}
-					/>
-					<ButtonText
-						disabled={loading}
-						text="Cancelar"
-						onClick={() => closeModal(false)}
-					/>
-				</S.ButtonBox>
+
+				<S.ModalFooter>
+					<ButtonText disabled={loading} text="Atualizar" onClick={handleItemInfoValidation} />
+					<ButtonText disabled={loading} text="Cancelar" onClick={() => closeModal(false)} />
+				</S.ModalFooter>
 			</S.Modal>
 		</S.Container>
 	);

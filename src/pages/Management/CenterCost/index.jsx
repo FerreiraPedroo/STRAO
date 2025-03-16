@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "services/api.js";
 
 import { NotificationModal } from "component/Notification/modal.jsx";
-import { PageAction } from "component/container/PageAction";
+import { PageActions } from "component/container/PageActions/index.jsx";
 import { PageTitle } from "component/container/PageTitle";
 import { PageList } from "component/container/PageList";
 
@@ -47,23 +47,17 @@ export const ManagementCenterCost = () => {
 		],
 		actions: [
 			{
-				name: "Novo centro de custo",
+				name: "Novo",
 				typeStyle: "add",
 				show: true,
 				action: () => setModalCreateCenterCost(true)
 			},
 			{
-				name: "Editar centro de custo",
+				name: "Editar",
 				typeStyle: "edit",
 				show: false,
 				action: () => setModalEditCenterCost(true)
 			}
-			// {
-			// 	name: "Desativar centro de custo",
-			// 	typeStyle: "hidden",
-			// 	show: false,
-			// 	action: () => setModalDeleteCenterCost(true)
-			// }
 		],
 		filters: [
 			{
@@ -85,6 +79,7 @@ export const ManagementCenterCost = () => {
 		]
 	});
 
+	console.log({centerCostSelected});
 	async function getCenterCostList(filters) {
 		// SANITIZA O FILTRO PARA VALORES VAZIOS
 		const sanitizedFilters = {};
@@ -96,26 +91,29 @@ export const ManagementCenterCost = () => {
 			}
 		}
 
-		setCenterCostSelected("");
 		setLoading(true);
-
+		
 		try {
-			const response = await api.get("/management/centers-cost", {
+			const params = new URLSearchParams(sanitizedFilters);
+			const response = await api(`/management/centers-cost?${params.toString()}`, {
+				method: "GET",
 				params: { ...sanitizedFilters }
 			});
-
-			setCenterCostList(response.data.data);
+			
+			if (response.codStatus != 200) {
+				throw response;
+			}
+			
+			setCenterCostList(response.data);
 		} catch (error) {
 			setNotification({
 				theme: "fail",
-				message:
-					error.response.data && error.response.data.message
-						? error.response.statusText
-						: error.message,
+				message: error.message,
 				setNotification: setNotification
 			});
 		}
-
+		
+		setCenterCostSelected("");
 		setLoading(false);
 	}
 
@@ -159,14 +157,13 @@ export const ManagementCenterCost = () => {
 			)}
 
 			<PageTitle
-				title="Lista dos centros de custo"
-				subTitle="gerencie os centros de custo que ficarão disponivel."
+				title="Centros de custo"
 				backUrl={"/management"}
 				loading={loading}
 				backPage={false}
 			/>
 
-			<PageAction
+			<PageActions
 				actionsData={pageData.actions}
 				dataSelected={centerCostSelected}
 				loading={loading}

@@ -17,9 +17,12 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 
 	async function createCenterCost() {
 		try {
-			const response = await api.post(`/management/center-cost`, {
-				name: itemInfo.name,
-				description: itemInfo.description
+			const response = await api(`/management/center-cost`, {
+				method: "POST",
+				body: JSON.stringify({
+					name: itemInfo.name,
+					description: itemInfo.description
+				})
 			});
 
 			setNotification({
@@ -79,66 +82,72 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 
 	return (
 		<S.Container>
-			<S.Modal theme={""}>
-				<S.ModalTitle>
-					<S.ModalClose theme={""} onClick={() => closeModal(false)}></S.ModalClose>
+			<S.Modal>
+				<S.ModalHeader>
+					<S.ModalClose onClick={() => closeModal(false)}>X</S.ModalClose>
 					<S.ModalMessageTitle>{"Novo Centro de Custo"}</S.ModalMessageTitle>
-				</S.ModalTitle>
+				</S.ModalHeader>
 
 				{modalStep == 0 && (
-					<S.ModalContent>
-						<S.InputBox>
-							<InputText
-								inputName={"name"}
-								inputValue={itemInfo.name ?? ""}
-								inputWidth={"288px"}
-								inputOnChange={handleItemInfo}
-								inputPlaceholder={"Nome"}
-								inputShowInfo={true}
-								inputErrorMsg={itemInfoValidator.name}
-								disabled={loading}
-							/>
-							<InputTextArea
-								textAreaName={"description"}
-								textAreaValue={itemInfo.description ?? ""}
-								textAreaOnChange={handleItemInfo}
-								textAreaPlaceholder={"Descrição"}
-								textAreaShowInfo={true}
-								textAreaErrorMsg={itemInfoValidator.description}
-								width={"288px"}
-								height={"92px"}
-								disabled={loading}
-							/>
-						</S.InputBox>
-						<S.ButtonBox>
+					<>
+						<S.ModalContent>
+							<S.InputBox>
+								<InputText
+									inputName={"name"}
+									inputValue={itemInfo.name ?? ""}
+									inputWidth={"288px"}
+									inputOnChange={handleItemInfo}
+									inputPlaceholder={"Nome"}
+									inputShowInfo={true}
+									inputErrorMsg={itemInfoValidator.name}
+									disabled={loading}
+								/>
+								<InputTextArea
+									textAreaName={"description"}
+									textAreaValue={itemInfo.description ?? ""}
+									textAreaOnChange={handleItemInfo}
+									textAreaPlaceholder={"Descrição"}
+									textAreaShowInfo={true}
+									textAreaErrorMsg={itemInfoValidator.description}
+									width={"288px"}
+									height={"92px"}
+									disabled={loading}
+								/>
+							</S.InputBox>
+						</S.ModalContent>
+						<S.ModalFooter>
 							<ButtonText
 								typeStyle={"normal"}
 								disabled={loading}
-								text="AVANÇAR"
+								text="Próximo"
 								onClick={handleItemInfoValidation}
 							/>
-						</S.ButtonBox>
-					</S.ModalContent>
+						</S.ModalFooter>
+					</>
 				)}
 
 				{modalStep == 1 && (
-					<S.ConfirmContent>
-						<S.ModalConfirmText>
-							ATENÇÃO! DEPOIS DE CADASTRADO O CENTRO DE CUSTO NÃO PODERÁ SER ALTERADO APENAS
-							DESABILITADO.
-						</S.ModalConfirmText>
-						<S.ModalConfirmText>
-							CONFIRME OS DADOS DO CENTRO DE CUSTO E CLIQUE EM REGISTRAR
-						</S.ModalConfirmText>
+					<>
+						<S.ConfirmContent>
+							<S.ModalConfirmText>
+								ATENÇÃO! DEPOIS DE CADASTRADO O NOME DO CENTRO DE CUSTO NÃO PODERÁ SER ALTERADO APENAS
+								DESABILITADO.
+							</S.ModalConfirmText>
+							<S.ModalConfirmText>
+								CONFIRME OS DADOS DO CENTRO DE CUSTO E CLIQUE EM REGISTRAR
+							</S.ModalConfirmText>
 
-						<S.ModalConfirm>
-							<S.ModalAttribute>Nome:</S.ModalAttribute>
-							<S.ModalAttributeValue>{itemInfo.name}</S.ModalAttributeValue>
-							<S.ModalAttribute>Descrição:</S.ModalAttribute>
-							<S.ModalAttributeValue>{itemInfo.description}</S.ModalAttributeValue>
-						</S.ModalConfirm>
-
-						<S.ButtonBox>
+							<S.ModalConfirm>
+								<S.ModalAttribute>Nome:</S.ModalAttribute>
+								<S.ModalAttributeValue>{itemInfo.name}</S.ModalAttributeValue>
+							</S.ModalConfirm>
+							<S.ModalConfirm>
+								<S.ModalAttribute>Descrição:</S.ModalAttribute>
+								<S.ModalAttributeValue>{itemInfo.description}</S.ModalAttributeValue>
+							</S.ModalConfirm>
+							
+						</S.ConfirmContent>
+						<S.ModalFooter>
 							<ButtonText
 								typeStyle={"normal"}
 								disabled={loading}
@@ -151,8 +160,8 @@ export function CreateCenterCostModal({ closeModal, setNotification, updateCente
 								text="Registrar"
 								onClick={handleItemInfoValidation}
 							/>
-						</S.ButtonBox>
-					</S.ConfirmContent>
+						</S.ModalFooter>
+					</>
 				)}
 			</S.Modal>
 		</S.Container>

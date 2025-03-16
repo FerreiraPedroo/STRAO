@@ -4,7 +4,7 @@ import { api } from "services/api.js";
 
 import { NotificationModal } from "component/Notification/modal.jsx";
 import { PageFilter } from "component/container/PageFilter";
-import { PageAction } from "component/container/PageAction";
+import { PageActions } from "component/container/PageActions/index.jsx";
 import { PageTitle } from "component/container/PageTitle";
 import { PageList } from "component/container/PageList";
 
@@ -200,7 +200,7 @@ export const ManagementContract = () => {
 				loading={loading}
 			/>
 
-			<PageAction
+			<PageActions
 				actionsData={pageData.actions}
 				dataSelected={contractSelected}
 				loading={loading}
