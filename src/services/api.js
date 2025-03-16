@@ -1,14 +1,14 @@
 import { CONFIG } from "config/config.jsx";
 
-const configDefault = {
-	headers: {
-		"Content-type": "application/json",
-		"Authorization": `Bearer ${localStorage.getItem("strao-token")}`,
-		"Strao-Info-Data-Version": `${localStorage.getItem("strao-infoDataVersion")}`
-	}
-};
-
 export const api = async (url, config = {}) => {
+	const configDefault = {
+		headers: {
+			"Content-type": "application/json",
+			Authorization: `Bearer ${localStorage.getItem("strao-token")}`,
+			"Strao-Data-Info-Version": `${localStorage.getItem("strao-infoDataVersion")}`
+		}
+	};
+
 	const configFinal = {
 		...config,
 		...configDefault

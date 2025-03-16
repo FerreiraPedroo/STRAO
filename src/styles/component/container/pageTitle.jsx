@@ -1,6 +1,6 @@
 const pageTitleStyle = {
 	pageTitle: `
-      color: #009;
+      color: #222;
       background-color: transparent;
       `
 };

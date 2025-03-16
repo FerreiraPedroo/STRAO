@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	display: flex;
-	height: 100%;
-	background-color: #ECEEF4;
+	height: 100vh;
+	overflow: hidden;
+	flex-direction: column;
 	gap: 8px;
 `;
 
@@ -14,12 +15,13 @@ export const HrLine = styled.hr`
 `;
 
 export const CenterContainer = styled.div`
-	min-width: 224px;
-	width: 224px;
+	width: 100vw;
 	height: 100vh;
 	display: flex;
-	flex-direction: column;
-	background-color: #F6F6F6;
-	border-right: 1px solid rgba(0,0,0,0.08);
-	box-shadow: 1px 2px 10px 1px rgba(0,0,0,0.05);
+	overflow: hidden;
+	gap: 16px;
+`;
+
+export const Message = styled.div`
+	padding: 20px;
 `;

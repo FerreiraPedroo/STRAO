@@ -48,7 +48,7 @@ export const appDataSlice = createSlice({
 	},
 	reducers: {
 		providerUpdateAppData: (state, action) => {
-			localStorage.setItem("strao-token", action.payload.token ? action.payload.token : null);
+			localStorage.setItem("strao-token", action.payload ? action.payload.token : null);
 			localStorage.setItem(
 				"strao-UIInfo",
 				action.payload.UIInfo ? JSON.stringify(action.payload.UIInfo) : null
