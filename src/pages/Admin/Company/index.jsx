@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { api } from "../../../services/api.js";
+import { useNavigate, useParams } from "react-router-dom";
+import { api } from "services/api.js";
 
-import { ButtonIcon } from "../../../component/Buttons/ButtonIcon/index.jsx";
-import { InputText } from "../../../component/Input/Text";
-import { InputSelect } from "../../../component/Input/Select";
-import { PageTitle } from "../../../component/container/PageTitle";
+import { ButtonIcon } from "component/Buttons/ButtonIcon/index.jsx";
+import { InputText } from "component/Input/Text/index.jsx";
+import { InputSelect } from "component/Input/Select/index.jsx";
+import { PageTitle } from "component/container/PageTitle/index.jsx";
 
 import * as S from "./styles.jsx";
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
@@ -58,9 +58,9 @@ export function AdminCompanyEdit() {
 		};
 
 		try {
-			const request = await api.put(
-				`admin/company/${param.id}/${category}/${category_id}/${action}`
-			);
+			const request = await api(`/admin/company/${param.id}/${category}/${category_id}/${action}`, {
+				method: "PUT"
+			});
 
 			if (request.data.codStatus === 200) {
 				setCompanyData((prevState) => {
@@ -125,10 +125,11 @@ export function AdminCompanyEdit() {
 	useEffect(() => {
 		const getUserInfo = async () => {
 			try {
-				const request = await api.get(`admin/company/${param.id}`);
+				const request = await api(`/admin/branch/${param.id}`, { method: "GET" });
+				
 				helperRequestReturn(request, notification, navigate, setCompanyData);
 			} catch (error) {
-				setErrorPage(true)
+				setErrorPage(true);
 			}
 			setLoading(false);
 		};
@@ -138,9 +139,8 @@ export function AdminCompanyEdit() {
 	return (
 		<PageContainer>
 			<PageTitle
-				title="Editar companhia"
-				subTitle="gerencie os dados da companhia."
-				backUrl={"/admin/companies"}
+				title="Editar filial"
+				backUrl={"/admin/branchs"}
 				loading={loading}
 			/>
 
