@@ -1,86 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { api } from "../../../services/api.js";
+import { useDispatch } from "react-redux";
+import { changeLoginReset } from "services/store/features/actions/actions.js";
+import { api } from "services/api.js";
 
-import { ButtonIcon } from "../../../component/Buttons/ButtonIcon/index.jsx";
-import { InputText } from "../../../component/Input/Text";
-import { InputSelect } from "../../../component/Input/Select";
-import { PageTitle } from "../../../component/container/PageTitle";
-import { PageAction } from "../../../component/container/PageAction";
+import { ButtonIcon } from "component/Buttons/ButtonIcon/index.jsx";
+import { InputText } from "component/Input/Text";
+import { InputSelect } from "component/Input/Select";
+import { PageTitle } from "component/container/PageTitle";
 
 import * as S from "./styles.jsx";
-import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
 export function AdminUserEdit() {
 	const location = useLocation();
 
 	const [loading, setLoading] = useState(true);
 	const [notification, setNotification] = useState();
-	const [actionsPageData, setActionsPageData] = useState([
-		{
-			name: "Desativar",
-			typeStyle: "hidden",
-			show: false,
-			action: (userId) => {
-				changeUpdate("status", "remove", userId);
-			}
-		},
-		{
-			name: "Ativar",
-			typeStyle: "show",
-			show: false,
-			action: (userId) => {
-				changeUpdate("status", "add", userId);
-			}
-		}
-	]);
 
 	const [userData, setUserData] = useState();
 	const [departmentSelect, setDepartmentSelect] = useState("");
 
-	// if (category === "status") {
-	// 	handleHiddenShowAction(actionField[action]);
-	// 	setUserData((prev) => {
-	// 		const prevData = { ...prev };
-	// 		prevData.userInfo.status = actionField[action];
-
-	// 		return prevData;
-	// 	});
-	// 	return;
-	// }
-
-	function handleHiddenShowAction(status) {
-		if (actionsPageData) {
-			setActionsPageData((prev) => {
-				return prev.map((action) => {
-					if (status == "active" && action.name == "Ativar") {
-						action.show = false;
-					}
-					if (status == "active" && action.name == "Desativar") {
-						action.show = true;
-					}
-					if (status == "inactive" && action.name == "Desativar") {
-						action.show = false;
-					}
-					if (status == "inactive" && action.namw == "Ativar") {
-						action.show = true;
-					}
-					return action;
-				});
-			});
-		}
-	}
-
 	async function changeUpdate(category, action, category_id) {
-		const dataOptions = {
-			status: {
-				add: "active",
-				remove: "inactive",
-				activeSubTitle: <div style={{ color: "#00dd00" }}>Ativo</div>,
-				inactiveSubTitle: <div style={{ color: "#dd0000" }}>Inativo</div>
-			}
-		};
-
 		const actionField = {
 			add: "available",
 			remove: "user",
@@ -89,11 +29,12 @@ export function AdminUserEdit() {
 		};
 
 		try {
-			const request = await api.put(
-				`admin/user/${location.state.user._id}/${category}/${category_id}/${action}`
+			const response = await api(
+				`/admin/user/${location.state.user._id}/${category}/${category_id}/${action}`,
+				{ method: "PUT" }
 			);
 
-			if (request.data.codStatus === 200) {
+			if (response.codStatus == 201) {
 				setUserData((prevState) => {
 					const actualState = { ...prevState };
 
@@ -113,6 +54,10 @@ export function AdminUserEdit() {
 
 					return actualState;
 				});
+			} else if (response.codStatus == 401) {
+				useDispatch(changeLoginReset(true));
+			} else {
+				setNotification({ theme: "fail", message: response.message });
 			}
 		} catch (error) {
 			if (error.response) {
@@ -173,10 +118,9 @@ export function AdminUserEdit() {
 	useEffect(() => {
 		const getUserInfo = async () => {
 			try {
-				const request = await api.get(`admin/user/${location.state.user._id}`);
+				const request = await api(`/admin/user/${location.state.user._id}`, { method: "GET" });
 
-				handleHiddenShowAction(request.data.data.userInfo.status);
-				setUserData(request.data.data);
+				setUserData(request.data);
 			} catch (error) {}
 			setLoading(false);
 		};
@@ -184,71 +128,71 @@ export function AdminUserEdit() {
 	}, []);
 
 	return (
-		<PageContainer>
-			<PageTitle
-				title="Editar usuário"
-				subTitle="adicione ou remova permissões do usuário."
-				backUrl={"/admin/users"}
-				loading={loading}
-			/>
+		<S.Container>
+			<PageTitle title="Editar usuário" />
 			{userData ? (
 				<>
-					<PageAction actionsData={actionsPageData} dataSelected={location.state.user._id} />
-
-					<S.CenterContainer>
-						<S.HeaderCenter>
-							<S.HeaderTitle>Dados do usuário</S.HeaderTitle>
-						</S.HeaderCenter>
-
-						<S.PrincipalData>
-							<InputText
-								inputValue={userData.userInfo.register}
-								inputName={"register"}
-								inputShowInfo={true}
-								inputPlaceholder={"Nº de registro"}
-								disabled={true}
-							/>
-							<InputText
-								inputValue={userData.userInfo.email}
-								inputName="email"
-								inputShowInfo={true}
-								inputPlaceholder={"Email"}
-								disabled={true}
-							/>
-							<InputText
-								inputValue={userData.userInfo.name}
-								inputName="name"
-								inputShowInfo={true}
-								inputPlaceholder={"Nome"}
-								disabled={true}
-							/>
-							<InputText
-								inputValue={userData.userInfo.birth_date}
-								inputName="borthDate"
-								disabled={true}
-								inputShowInfo={true}
-								inputPlaceholder={"Data de nascimento"}
-							/>
-						</S.PrincipalData>
-					</S.CenterContainer>
-
 					<S.DataContainer>
-						<S.DataHeadContainer>
-							<S.HeaderTitle>Departamentos</S.HeaderTitle>
+						<S.HeaderContainer>
+							<S.HeaderTitle>Dados do usuário</S.HeaderTitle>
+						</S.HeaderContainer>
+
+						<S.DataCenterContainer>
 							<S.InputBox>
-								<InputSelect
-									selectValue={departmentSelect}
-									width="256px"
-									selectOnChange={(e) => setDepartmentSelect(e.target.value)}
-									options={departmentSelectOptions()}
+								<InputText
+									inputValue={userData.userInfo.name}
+									inputName="name"
+									inputShowInfo={true}
+									inputPlaceholder={"Nome"}
+									disabled={true}
 								/>
-								<ButtonIcon
-									typeStyle="correct"
-									disable={!departmentSelect}
-									onClick={() => changeUpdate("department", "add", departmentSelect)}
+								<InputText
+									inputValue={userData.userInfo.register ?? ""}
+									inputName={"register"}
+									inputShowInfo={true}
+									inputPlaceholder={"Nº de registro"}
+									disabled={true}
 								/>
 							</S.InputBox>
-						</S.DataHeadContainer>
+							<S.InputBox>
+								<InputText
+									inputValue={userData.userInfo.email}
+									inputName="email"
+									inputShowInfo={true}
+									inputPlaceholder={"Email"}
+									disabled={true}
+								/>
+								<InputText
+									inputValue={userData.userInfo.birth_date ?? ""}
+									inputName="birthDate"
+									inputShowInfo={true}
+									inputPlaceholder={"Data de nascimento"}
+									disabled={true}
+								/>
+							</S.InputBox>
+						</S.DataCenterContainer>
+					</S.DataContainer>
+
+					<S.DataContainer>
+						<S.HeaderContainer>
+							<S.HeaderTitle>Departamentos</S.HeaderTitle>
+						</S.HeaderContainer>
+
+						<S.InputBox>
+							<InputSelect
+								selectValue={departmentSelect}
+								width="256px"
+								selectShowInfo={false}
+								selectPlaceholder={""}
+								selectOnChange={(e) => setDepartmentSelect(e.target.value)}
+								options={departmentSelectOptions()}
+							/>
+							<ButtonIcon
+								typeStyle="correct"
+								disabled={!departmentSelect}
+								onClick={() => changeUpdate("department", "add", departmentSelect)}
+							/>
+						</S.InputBox>
 
 						<S.DataCenterContainer>
 							<S.HeaderTitle>Departamentos associados ao usuário</S.HeaderTitle>
@@ -281,10 +225,11 @@ export function AdminUserEdit() {
 						</S.DataCenterContainer>
 					</S.DataContainer>
 
-					<S.DataContainer>
-						<S.DataHeadContainer>
+					{/* <S.DataContainer>
+						<S.HeaderContainer>
 							<S.HeaderTitle>Contratos</S.HeaderTitle>
-						</S.DataHeadContainer>
+						</S.HeaderContainer>
+
 						<S.DataCenterContainer>
 							{userData.contractsInfo ? (
 								<S.DataBox>
@@ -319,11 +264,11 @@ export function AdminUserEdit() {
 								<S.Empyt>Vazio</S.Empyt>
 							)}
 						</S.DataCenterContainer>
-					</S.DataContainer>
+					</S.DataContainer> */}
 				</>
 			) : (
 				<>Carregando...</>
 			)}
-		</PageContainer>
+		</S.Container>
 	);
 }

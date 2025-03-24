@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../../services/api.js";
+import { api } from "services/api.js";
 
-import { NotificationFull } from "../../../component/Notification/full.jsx";
-import { PageFilter } from "../../../component/container/PageFilter";
-import { PageList } from "../../../component/container/PageList";
-import { PageTitle } from "../../../component/container/PageTitle";
-import { PageActions } from "../../../component/container/PageActions/index.jsx";
+import { NotificationFull } from "component/Notification/full.jsx";
+import { PageFilter } from "component/container/PageFilter/index.jsx";
+import { PageList } from "component/container/PageList/index.jsx";
+import { PageTitle } from "component/container/PageTitle/index.jsx";
+import { PageActions } from "component/container/PageActions/index.jsx";
 
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 
@@ -22,17 +22,18 @@ export const AdminUsers = () => {
 	const [userPageData] = useState({
 		columns: [
 			{
-				title: "status",
+				title: "STATUS",
 				htmlName: "status",
 				size: 0,
 				minSize: 120,
 				maxSize: 120
 			},
-			{ title: "nome", htmlName: "name", size: 0, minSize: 120, maxSize: 700 },
+			{ title: "NOME", htmlName: "name", size: 0, minSize: 120, maxSize: 700 },
 			{
-				title: "email",
+				title: "E-MAIL",
 				htmlName: "email",
 				size: 0,
+				align: "start",
 				minSize: 120,
 				maxSize: 320
 			}
@@ -83,6 +84,7 @@ export const AdminUsers = () => {
 				htmlName: "status",
 				htmlPlaceholder: "Status",
 				defaultOption: 0,
+				showInfo: true,
 				options: [
 					{ name: "Todos", value: "" },
 					{ name: "Ativo", value: "active" },
@@ -106,11 +108,10 @@ export const AdminUsers = () => {
 			setLoading(true);
 			setUserSelected("");
 			try {
-				const response = await api.get("/admin/users", {
-					params: { ...sanitizedFilters }
-				});
+				const params = new URLSearchParams(sanitizedFilters);
+				const response = await api(`/admin/users?${params}`, { method: "GET" });
 
-				setUserList(response.data.data);
+				setUserList(response.data);
 			} catch (error) {
 				if (error.response && error.response.status === 401) {
 					error.response.data.url = removeLoginData();
@@ -186,12 +187,7 @@ export const AdminUsers = () => {
 					buttonTitle={notification.buttonTitle}
 				/>
 			)}
-			<PageTitle
-				title="Lista de usuários do sistema"
-				subTitle="administre o acesso ao sistema"
-				backUrl={"/admin"}
-				loading={loading}
-			/>
+			<PageTitle title="Usuários do sistema" backUrl={"/admin"} loading={loading} />
 			<PageActions
 				actionsData={userPageData.actions}
 				dataSelected={userSelected}

@@ -1,11 +1,11 @@
 import { Route } from "react-router-dom";
 
 import { Admin } from "pages/Admin";
-import { AdminCompanyEdit } from "pages/Admin/Company";
-import { AdminCompanyList } from "pages/Admin/CompanyList";
-import { AdminUsers } from "pages/Admin/User";
-import { AdminUserEdit } from "pages/Admin/UserEdit";
-import { AdminUserRegister } from "pages/Admin/UserRegister";
+import { AdminBranchEdit } from "pages/Admin/Branch";
+import { AdminBranchList } from "pages/Admin/BranchList";
+import { AdminUsers } from "pages/Admin/User/UserList";
+import { AdminUserEdit } from "pages/Admin/User/UserEdit";
+import { AdminUserRegister } from "pages/Admin/User/UserRegister";
 
 export const adminRoutes = (
 	<Route path="/admin">
@@ -14,7 +14,7 @@ export const adminRoutes = (
 		<Route path="user/edit" element={<AdminUserEdit />} />
 		<Route path="user/register" element={<AdminUserRegister />} />
 
-		<Route path="companies" element={<AdminCompanyList />} />
-		<Route path="company/:id" element={<AdminCompanyEdit />} />
+		<Route path="branchs" element={<AdminBranchList />} />
+		<Route path="branch/:id" element={<AdminBranchEdit />} />
 	</Route>
 );

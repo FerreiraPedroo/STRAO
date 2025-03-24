@@ -1,4 +1,20 @@
 import styled from "styled-components";
+import { PageContainer } from "component/container/PageContainer/styles";
+import { BlockStyle } from "styles/component/container/blockContainer";
+
+export const Container = styled(PageContainer)``;
+
+export const DataContainer = styled.div`
+	${BlockStyle.container}
+	max-width: 520px;
+	justify-content: center;
+`;
+export const HeaderContainer = styled.div`
+	width: 100%;
+`;
+export const HeaderTitle = styled.p`
+	${BlockStyle.title}
+`;
 
 const props = {
 	paragraphTextSize: "16px",
@@ -13,8 +29,15 @@ export const Form = styled.form`
 	width: 320px;
 	display: flex;
 	flex-direction: column;
+	gap: 20px;
 `;
 export const InputBox = styled.div``;
+export const ButtonBox = styled.div`
+	width: 100%;
+	padding: 10px;
+	place-items: center;
+`;
+
 export const InputTitleText = styled.p`
 	font-size: 1rem;
 	white-space: nowrap;
