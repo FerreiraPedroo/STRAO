@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { providerClearAllInfo } from "services/store/features/data/appData";
-import { changeLoginReseted } from "services/store/features/actions/actions.js";
+import { changeLoginReset } from "services/store/features/actions/actions.js";
 
 import { Outlet, useNavigate } from "react-router-dom";
 import { NavBar } from "component/NavBar";
@@ -10,6 +10,7 @@ import { SideBar } from "component/SideBar";
 import * as S from "./styles.jsx";
 import { Modal } from "component/Modal/index.jsx";
 import { ButtonText } from "component/Buttons/ButtonText/index.jsx";
+// import { NotificationModal } from "component/Notification/modal.jsx";
 
 /**
  * Esta função é repassada para o STORE no redux.
@@ -35,6 +36,7 @@ export function Root() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const result = useSelector(verifyDataApp);
+	// const notification = useSelector((state) => state.notification);
 
 	// console.log("Verificação do usuario /root/index");
 
@@ -51,7 +53,7 @@ export function Root() {
 							text="Fechar"
 							onClick={() => {
 								dispatch(providerClearAllInfo());
-								dispatch(changeLoginReseted(false));
+								dispatch(changeLoginReset(false));
 								navigate("/");
 							}}
 						/>
@@ -61,6 +63,10 @@ export function Root() {
 					<S.Message>Para atualizar os dados da aplicação ou autenticação</S.Message>
 				</Modal>
 			) : null}
+			{/* {!notification.length ? (
+				<NotificationModal/>
+			):null} */}
+
 			<NavBar />
 			{/* <S.HrLine /> */}
 			<S.CenterContainer>

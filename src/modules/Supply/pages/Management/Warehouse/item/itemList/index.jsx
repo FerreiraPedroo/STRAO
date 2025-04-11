@@ -6,10 +6,11 @@ import { api } from "services/api";
 import { NotificationModal } from "component/Notification/modal";
 
 import { PageContainer } from "component/container/PageContainer/styles";
-import { PageAction } from "component/container/PageAction";
+import { PageActions } from "component/container/PageActions";
 import { PageTitle } from "component/container/PageTitle";
 import { PageList } from "component/container/PageList";
 import { PageFilter } from "component/container/PageFilter";
+
 
 export function SupplyManagementItems() {
 	const navigate = useNavigate();
@@ -74,9 +75,8 @@ export function SupplyManagementItems() {
 			setPageLoading(true);
 
 			try {
-				const response = await api.get(`/management/supply/warehouse/items`);
-
-				setItemsList(response.data.data);
+				const response = await api(`/management/supply/warehouse/items`, { method: "GET" });
+				setItemsList(response.data);
 				setPageLoading(false);
 			} catch (error) {
 				setNotification({
@@ -103,14 +103,13 @@ export function SupplyManagementItems() {
 					setNotification={setNotification}
 				/>
 			)}
+			<PageTitle title="Itens" />
 
-			<PageTitle
-				title="Itens"
-				backUrl={"/management"}
-				subTitle={"Registre e edite itens."}
+			<PageActions
+				actionsData={pageData.actions}
+				dataSelected={itemSelected}
+				loading={pageLoading}
 			/>
-
-			<PageAction actionsData={pageData.actions} dataSelected={itemSelected} loading={pageLoading} />
 
 			{/* <PageFilter filtersData={filters} getFiltersSelected={getItems} loading={searchStatus} /> */}
 
@@ -118,6 +117,7 @@ export function SupplyManagementItems() {
 				listData={itemsList}
 				columns={pageData.columns}
 				setDataSelected={setItemSelected}
+				dataSelected={itemSelected}
 				loading={pageLoading}
 			/>
 		</PageContainer>

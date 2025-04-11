@@ -7,7 +7,7 @@ import { NotificationModal } from "component/Notification/modal";
 
 import { PageList } from "component/container/PageList";
 import { PageFilter } from "component/container/PageFilter";
-import { PageAction } from "component/container/PageAction";
+import { PageActions } from "component/container/PageActions";
 import { PageTitle } from "component/container/PageTitle";
 import * as S from "./styles";
 

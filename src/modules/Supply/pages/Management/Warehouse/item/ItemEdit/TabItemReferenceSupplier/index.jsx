@@ -8,7 +8,7 @@ import { ItemSupplierModal } from "../ItemReferenceSupplierModal/index.jsx";
 
 import {
 	BlockInfoContainer,
-	BlockInfoTitle,
+	HeaderTitle,
 	BlockInfoData
 } from "modules/Supply/components/BoxInfo/styles";
 
@@ -80,7 +80,7 @@ export function ManagementReferenceSupplier({
 			</BlockInfoContainer>
 
 			<BlockInfoContainer>
-				<BlockInfoTitle>Referência do fornecedor</BlockInfoTitle>
+				<HeaderTitle>Referência do fornecedor</HeaderTitle>
 
 				{infoData && infoData.supply_references.length ? (
 					infoData.supply_references.map((data) => (

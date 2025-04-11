@@ -6,7 +6,7 @@ import { NotePencil } from "phosphor-react";
 
 import { NotificationModal } from "component/Notification/modal.jsx";
 import { PageTitle } from "component/container/PageTitle/index.jsx";
-import { PageAction } from "component/container/PageAction/index.jsx";
+import { PageActions } from "component/container/PageActions/index.jsx";
 
 export function SupplyWarehouseItemEdit() {
 	const navigate = useNavigate();
@@ -47,7 +47,7 @@ export function SupplyWarehouseItemEdit() {
 				icon={<NotePencil size={32} />}
 				backButton={true}
 			/>
-			<PageAction
+			<PageActions
 				actionsData={itemActions}
 				dataSelected={true}
 				loading={loading}

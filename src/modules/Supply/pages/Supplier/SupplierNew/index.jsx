@@ -15,12 +15,13 @@ import { PageContainer } from "component/container/PageContainer/styles";
 import { InputSelect } from "component/Input/Select";
 
 // import * as S from "./styles";
-import { PageAction } from "component/container/PageAction";
+import { PageActions } from "component/container/PageActions";
 import {
 	BlockInfoContainer,
 	BlockInfoData,
-	BlockInfoTitle,
-	BlockInputBox
+	HeaderTitle,
+	BlockInputBox,
+	HeaderContainer
 } from "modules/Supply/components/BoxInfo/styles";
 
 export function SupplySupplierNew() {
@@ -158,7 +159,7 @@ export function SupplySupplierNew() {
 
 			{!pageLoading ? (
 				<>
-					<PageAction
+					<PageActions
 						actionsData={[
 							{
 								name: "Salvar",
@@ -171,7 +172,9 @@ export function SupplySupplierNew() {
 						loading={false}
 					/>
 					<BlockInfoContainer>
-						<BlockInfoTitle>Informações</BlockInfoTitle>
+						<HeaderContainer>
+						<HeaderTitle>Informações</HeaderTitle>
+						</HeaderContainer>
 						<BlockInfoData>
 							<BlockInputBox>
 								<InputText
@@ -291,7 +294,7 @@ export function SupplySupplierNew() {
 					</BlockInfoContainer>
 
 					<BlockInfoContainer>
-						<BlockInfoTitle>Localização</BlockInfoTitle>
+						<HeaderTitle>Localização</HeaderTitle>
 						<BlockInfoData>
 							<BlockInputBox>
 

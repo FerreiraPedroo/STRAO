@@ -6,7 +6,7 @@ import { api } from "services/api";
 import { NotificationModal } from "component/Notification/modal";
 
 import { PageContainer } from "component/container/PageContainer/styles";
-import { PageAction } from "component/container/PageAction";
+import { PageActions } from "component/container/PageActions";
 import { PageTitle } from "component/container/PageTitle";
 import { PageList } from "component/container/PageList";
 
@@ -108,7 +108,7 @@ export function SupplySupplierList() {
 				subTitle={"Fornecedores cadastrados no sistema."}
 			/>
 
-			<PageAction actionsData={pageData.actions} dataSelected={supplierSelected} loading={pageLoading} />
+			<PageActions actionsData={pageData.actions} dataSelected={supplierSelected} loading={pageLoading} />
 
 			{/* <PageFilter filtersData={filters} getFiltersSelected={getItems} loading={searchStatus} /> */}
 

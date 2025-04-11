@@ -7,7 +7,7 @@ import { api } from "services/api";
 import { NotificationModal } from "component/Notification/modal";
 
 import { PageList } from "component/container/PageList";
-import { PageAction } from "component/container/PageAction";
+import { PageActions } from "component/container/PageActions";
 import { PageTitle } from "component/container/PageTitle";
 import * as S from "./styles";
 
@@ -83,7 +83,7 @@ export function SupplyWarehouseReceipt() {
 				subTitle={"Registre o recebimento de materiais selecionando o estoque e a origem do material."}
 			/>
 
-			<PageAction actionsData={listActions} dataSelected={null} loading={pageLoading} />
+			<PageActions actionsData={listActions} dataSelected={null} loading={pageLoading} />
 
 			{/* <PageFilter filtersData={filters} getFiltersSelected={getItems} loading={searchStatus} /> */}
 

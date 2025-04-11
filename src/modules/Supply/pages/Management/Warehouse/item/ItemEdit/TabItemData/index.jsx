@@ -10,17 +10,15 @@ import { ButtonIcon } from "component/Buttons/ButtonIcon/index.jsx";
 
 import * as S from "./styles.jsx";
 import {
-	BlockInfoContainer,
-	BlockInfoTitle,
-	BlockInfoData
+	BlockInfoData,
+	HeaderContainer,
+	HeaderTitle
 } from "modules/Supply/components/BoxInfo/styles";
-import { checkInputChangedDataInfo } from "helper/inputChangedData.js";
+
+import { PageActions } from "component/container/PageActions/index.jsx";
 
 const validateDataSchema = Yup.object().shape({
-	name: Yup.string()
-		.required("O nome não pode ser vazio.")
-		.min(4, "Minímo de caracteres é 4")
-		.max(50, "Maximo de caracteres é 50"),
+	name: Yup.string().min(4, "Minímo de caracteres é 4").max(50, "Maximo de caracteres é 50"),
 	status: Yup.mixed().oneOf(["ATIVO", "INATIVO"], "Status inválido")
 });
 
@@ -36,7 +34,7 @@ export function TabItemData({
 	setIsSaving,
 	setNotification
 }) {
-	const [isDataInfoChanged, setIsDataInfoChanged] = useState([]);
+	const [localDataInfoChanged, setLocalDataInfoChanged] = useState({});
 	const [dataValidatorError, setDataValidatorError] = useState({});
 
 	function handleDataInfo(event) {
@@ -47,18 +45,32 @@ export function TabItemData({
 			});
 		}
 
-		setDataInfoChanged((prev) => {
-			const newData = { ...prev };
+		const newData = { ...dataInfoChanged };
+		const newLocalData = { ...localDataInfoChanged };
+
+		if (dataInfoChanged[event.target.name] && dataInfo[event.target.name] == event.target.value) {
+			delete newData[event.target.name];
+			setDataInfoChanged(newData);
+
+			delete newLocalData[event.target.name];
+			setLocalDataInfoChanged(newLocalData);
+		} else {
 			newData[event.target.name] = event.target.value;
-			return newData;
-		});
+			setDataInfoChanged(newData);
 
-		const isDataChanged = checkInputChangedDataInfo(event, dataInfo, isDataInfoChanged);
+			newLocalData[event.target.name] = event.target.value;			
+			console.log(newLocalData)
+			setLocalDataInfoChanged(newLocalData);
+		}
 
-		if (isDataChanged) {
-			setIsDataInfoChanged(isDataChanged);
+		if (Object.entries(newData).length) {
 			setTabChanged((prev) => {
-				isDataChanged.length ? (prev[tabSelected] = true) : delete prev[tabSelected];
+				prev[tabSelected] = true;
+				return { ...prev };
+			});
+		} else {
+			setTabChanged((prev) => {
+				delete prev[tabSelected];
 				return { ...prev };
 			});
 		}
@@ -67,13 +79,15 @@ export function TabItemData({
 	// ENVIA OS DADOS VALIDADOS DO ITEM PARA SER ATUALIZADO.
 	async function updateData() {
 		setIsSaving(true);
+
 		try {
-			const dataChangedInfo = Object.fromEntries;
+			//const dataChangedInfo = Object.fromEntries;
 			await api.put(`/management/warehouse/item/${dataInfoChanged._id}/item`, {
 				...dataInfoChanged
 			});
 
 			const dataChanged = { ...dataInfoChanged };
+
 			setDataInfoChanged(dataChanged);
 			setDataInfo(dataChanged);
 
@@ -94,10 +108,12 @@ export function TabItemData({
 
 	// VALIDA AS INFORMAÇÕES DO ITEM ANTES DE ENVIAR PARA SER ATUALIZADO.
 	async function handleDataInfoValidation() {
+		console.log(localDataInfoChanged)
 		try {
-			await validateDataSchema.validate(dataInfoChanged, {
+			await validateDataSchema.validate(localDataInfoChanged, {
 				abortEarly: false
 			});
+			//await updateData();
 		} catch (error) {
 			const errors = error.inner.reduce((prev, element) => {
 				if (!prev[element.path]) {
@@ -138,30 +154,37 @@ export function TabItemData({
 			  })
 			: []
 	);
+	// DADOS DA PAGINA DE ACOES (PAGE ACTIONS)
+	const [pageData] = useState({
+		actions: [
+			{
+				name: "Salvar",
+				typeStyle: "correct",
+				show: true,
+				action: ()=>handleDataInfoValidation()
+			}
+		]
+	});
 
-	useEffect(() => {}, [isDataInfoChanged]);
+	useEffect(() => {}, []);
 
 	return (
 		<>
-			<BlockInfoContainer>
-				<S.ButtonContainer>
-					<ButtonIcon
-						value="Salvar"
-						typeStyle="correct"
-						onClick={handleDataInfoValidation}
-						disabled={!Object.entries(tabChanged).length || isSaving}
-					/>
-					<S.ActionText>Salvar</S.ActionText>
-				</S.ButtonContainer>
-			</BlockInfoContainer>
-			<BlockInfoContainer>
-				<BlockInfoTitle>Dados do Item</BlockInfoTitle>
+			<PageActions
+				actionsData={pageData.actions}
+				loading={!Object.entries(tabChanged).length || isSaving}
+			/>
+
+			<S.DataContainer>
+				<S.HeaderContainer>
+					<S.HeaderTitle>Dados do Item</S.HeaderTitle>
+				</S.HeaderContainer>
 				<BlockInfoData>
 					<InputText
 						inputName={"name"}
 						inputWidth={"480px"}
 						inputPlaceholder={"Nome"}
-						inputValue={dataInfoChanged.name ?? ""}
+						inputValue={localDataInfoChanged.name ?? dataInfo.name}
 						inputOnChange={handleDataInfo}
 						inputErrorMsg={dataValidatorError.name}
 						disabled={isSaving}
@@ -169,7 +192,7 @@ export function TabItemData({
 					/>
 					<InputSelect
 						selectName={"status"}
-						selectValue={dataInfoChanged.status ?? ""}
+						selectValue={localDataInfoChanged.status ?? dataInfo.status}
 						selectOnChange={handleDataInfo}
 						selectPlaceholder={"Status"}
 						selectShowInfo={true}
@@ -180,7 +203,7 @@ export function TabItemData({
 					/>
 					<InputSelect
 						selectName={"item_category"}
-						selectValue={dataInfoChanged.item_category ?? ""}
+						selectValue={localDataInfoChanged.item_category ?? dataInfo.item_category}
 						selectOnChange={handleDataInfo}
 						selectPlaceholder={"Categoria do Item"}
 						selectShowInfo={true}
@@ -191,7 +214,7 @@ export function TabItemData({
 					/>
 					<InputTextArea
 						textAreaName={"aditional_description"}
-						textAreaValue={dataInfoChanged.aditional_description ?? ""}
+						textAreaValue={localDataInfoChanged.aditional_description ?? dataInfo.aditional_description}
 						width={"480px"}
 						height={"96px"}
 						textAreaPlaceholder={"Descrição"}
@@ -201,7 +224,7 @@ export function TabItemData({
 						textAreaShowInfo={true}
 					/>
 				</BlockInfoData>
-			</BlockInfoContainer>
+			</S.DataContainer>
 		</>
 	);
 }

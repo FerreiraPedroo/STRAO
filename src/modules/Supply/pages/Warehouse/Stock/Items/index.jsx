@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { NotificationModal } from "component/Notification/modal.jsx";
 import { PageTitle } from "component/container/PageTitle/index.jsx";
 import { PageFilter } from "component/container/PageFilter/index.jsx";
-import { PageAction } from "component/container/PageAction/index.jsx";
+import { PageActions } from "component/container/PageActions/index.jsx";
 import { PageList } from "component/container/PageList/index.jsx";
 
 const itemColumns = [
@@ -150,7 +150,7 @@ export function SupplyWarehouseItems() {
 				getFiltersSelected={getItems}
 				loading={loading}
 			/>
-			<PageAction
+			<PageActions
 				actionsData={itemActions}
 				dataSelected={itemSelected}
 				loading={loading}

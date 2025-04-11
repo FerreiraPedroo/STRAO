@@ -42,9 +42,9 @@ export function SupplyManagementStockEdit() {
 
 	async function getStock(stockId) {
 		try {
-			const response = await api.get(`/management/warehouse/stock/${stockId}`);
+			const response = await api(`/management/warehouse/stock/${stockId}`, { method: "GET" });
 
-			return response.data.data;
+			return response.data;
 		} catch (error) {
 			setNotification({
 				theme: "fail",
@@ -67,9 +67,9 @@ export function SupplyManagementStockEdit() {
 				theme: "success",
 				message: "Estoque excluido com sucesso."
 			});
-			setShowModal(null)
+			setShowModal(null);
 			setPageLoading(false);
-			navigate("/management/warehouse/stocks")
+			navigate("/management/warehouse/stocks");
 		} catch (error) {
 			setNotification({
 				theme: "fail",

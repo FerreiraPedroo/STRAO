@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { api } from "services/api.js";
 
 import { NotificationModal } from "component/Notification/modal.jsx";
 // import { PageFilter } from "component/container/PageFilter";
-import { PageAction } from "component/container/PageAction";
+import { PageActions } from "component/container/PageActions/index.jsx";
 import { PageTitle } from "component/container/PageTitle";
 import { PageList } from "component/container/PageList";
 
@@ -15,7 +14,6 @@ import { DeleteItemModal } from "./DeleteItemModal/index.jsx";
 import { EditItemModal } from "./EditItemModal/index.jsx";
 
 export const ManagementItemCategory = () => {
-	const navigate = useNavigate();
 
 	const [loading, setLoading] = useState(true);
 	const [notification, setNotification] = useState();
@@ -49,13 +47,13 @@ export const ManagementItemCategory = () => {
 		],
 		actions: [
 			{
-				name: "Nova categoria",
+				name: "Novo",
 				typeStyle: "add",
 				show: true,
 				action: () => setModalCreate(true)
-			}
+			},
 			// {
-			// 	name: "Editar categoria",
+			// 	name: "Editar",
 			// 	typeStyle: "edit",
 			// 	show: false,
 			// 	action: () => setModalEdit(true)
@@ -103,12 +101,10 @@ export const ManagementItemCategory = () => {
 		setItemSelected("");
 		setLoading(true);
 
+		const params = new URLSearchParams(sanitizedFilters);
 		try {
-			const response = await api.get("/management/supply/item-categories", {
-				params: { ...sanitizedFilters }
-			});
-
-			setItemList(response.data.data);
+			const response = await api(`/management/supply/item-categories${params}`, { method: "GET" });
+			setItemList(response.data);
 		} catch (error) {
 			setNotification({
 				theme: "fail",
@@ -125,8 +121,9 @@ export const ManagementItemCategory = () => {
 
 	async function deleteItem() {
 		try {
-			const { data } = await api.delete(`/management/center-cost/change-status`, {
-				params: { center_cost_id: itemSelected }
+			const params = new URLSearchParams({ center_cost_id: itemSelected });
+			const { data } = await api(`/management/center-cost/change-status${params}`, {
+				method: "DELETE"
 			});
 
 			setNotification({
@@ -187,12 +184,9 @@ export const ManagementItemCategory = () => {
 				/>
 			)}
 
-			<PageTitle
-				title="Lista das categoria de item"
-				subTitle="agrupa os item em categorias."
-			/>
+			<PageTitle title="Lista das categoria de item"/>
 
-			<PageAction actionsData={pageData.actions} dataSelected={itemSelected} loading={loading} />
+			<PageActions actionsData={pageData.actions} dataSelected={itemSelected} loading={loading} />
 
 			{/* <PageFilter
 				filtersData={pageData.filters}

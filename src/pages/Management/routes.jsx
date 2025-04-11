@@ -23,6 +23,7 @@ export const managementRoutes = (
 		{/* <Route path="contracts" element={<ManagementContract />} /> */}
 		{/* <Route path="contract/edit" element={<ManagementContractEdit />} /> */}
 
+
 		{/*
          //
          // INTEGRAÇÃO ENTRE MODULOS 

@@ -123,7 +123,7 @@ export function SupplyWarehouseShippingNew() {
 			/>
 
 			<S.BlockInfoContainer theme="normal">
-				<S.BlockInfoTitle>Informações</S.BlockInfoTitle>
+				<S.HeaderTitle>Informações</S.HeaderTitle>
 				<S.DataContainer>
 					<S.InputBox>
 						<InputSelect
@@ -160,7 +160,7 @@ export function SupplyWarehouseShippingNew() {
 			</S.BlockInfoContainer>
 
 			<S.BlockInfoContainer theme="normal">
-				<S.BlockInfoTitle>Destinatário</S.BlockInfoTitle>
+				<S.HeaderTitle>Destinatário</S.HeaderTitle>
 				<S.DataContainer>
 					<S.InputBox>
 						<InputSelect
@@ -181,7 +181,7 @@ export function SupplyWarehouseShippingNew() {
 			</S.BlockInfoContainer>
 
 			<S.BlockInfoContainer theme="normal">
-				<S.BlockInfoTitle>Lista de items da expedição</S.BlockInfoTitle>
+				<S.HeaderTitle>Lista de items da expedição</S.HeaderTitle>
 				<S.DataContainer>
 					<S.InputBox>
 						<InputSelect

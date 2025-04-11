@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux";
+import { changeLoginReset } from "services/store/features/actions/actions";
+
 /**
  *	TRATA OS STATUS DO RETORNO DA REQUISIÇÃO
  * @param {*} request - os dados de resposta da trquisição.
@@ -8,21 +11,16 @@
  * @returns
  */
 export function helperRequestReturn(request, notification, setData, transformData = null) {
-	if (request.data.codStatus == 200) {
+	const dispatch = useDispatch();
+	if (request.codStatus == 201) {
 		if (!transformData) {
-			setData(request.data.data);
+			setData(request.data);
 		} else {
-			setData(transformData(request.data.data));
+			setData(transformData(request.data));
 		}
-	} else if (requestHTTPData.data.codStatus == 401) {
-		clearData();
-		notification({
-			title: "NÃO AUTORIZADO",
-			msg: "Por favor efetue o login novamente, redirecionando.",
-			cb: navigate("/login")
-		});
-		setTimeout(() => navigate("/login"), 3000);
-	} else if (this.requestHTTPData.data.codStatus == 422) {
+	} else if (request.codStatus == 401) {
+		dispatch(changeLoginReset(true));
+	} else if (request.codStatus == 422) {
 		notification({ title: "Titulo", msg: "Mensagem" });
 	} else {
 		notification({ tile: "titulo", msg: "outra mensagem" });

@@ -21,7 +21,9 @@ export function SupplyManagementItemEdit() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isSaving, setIsSaving] = useState(false);
 
+	// DADOS ORIGINAL DO ITEM
 	const [dataInfo, setDataInfo] = useState({});
+	// SERVE PARA SALVAR OS DADOS QUE FORAM ALTERADOS MAS NÃO SALVOS
 	const [dataInfoChanged, setDataInfoChanged] = useState({});
 
 	const [tabSelected, setTabSelected] = useState("Dados");
@@ -36,15 +38,16 @@ export function SupplyManagementItemEdit() {
 			setIsLoading(true);
 
 			try {
-				const responseItem = await api.get(
-					`/management/supply/warehouse/item/${location.state._id}`
-				);
-				const responseItemCategories = await api.get(`/management/supply/item-categories`);
+				const responseItem = await api(`/management/supply/warehouse/item/${location.state._id}`, {
+					method: "GET"
+				});
+				const responseItemCategories = await api(`/management/supply/item-categories`, {
+					method: "GET"
+				});
 
-				responseItem.data.data.itemCategories = responseItemCategories.data.data;
+				responseItem.data.itemCategories = responseItemCategories.data;
 
-				setDataInfo(responseItem.data.data);
-				setDataInfoChanged(responseItem.data.data);
+				setDataInfo(responseItem.data);
 				setIsLoading(false);
 			} catch (error) {
 				setNotification({
@@ -65,20 +68,14 @@ export function SupplyManagementItemEdit() {
 				<NotificationModal message={notification.message} setNotification={setNotification} />
 			)}
 
-			<PageTitle
-				title="Editando Item"
-				backUrl={"/management/warehouse/items"}
-				backPage={true}
-				subTitle={
-					"Edite as informações do item selecionado, selecione uma aba para alterar dados especificos do item."
-				}
-			/>
+			<PageTitle title="Editando Item" />
 
 			<Tabs
 				tabChanged={tabChanged}
 				tabButtons={tabButtons}
 				tabSelected={tabSelected}
 				tabSelectButton={setTabSelected}
+				isSaving={isSaving}
 			/>
 
 			{isLoading ? (

@@ -20,7 +20,7 @@ export const DataContainer = styled.div`
 	flex-direction: column;
 `;
 
-export const BlockInfoTitle = styled.p`
+export const HeaderTitle = styled.p`
 	${({ theme }) => BlockInfoContainerStyle.containerTitle(theme)};
 `;
 

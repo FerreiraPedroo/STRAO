@@ -5,7 +5,7 @@ import { api } from "services/api.js";
 import { NotificationModal } from "component/Notification/modal.jsx";
 
 import { PageCardList } from "component/container/PageCardList/index.jsx";
-import { PageAction } from "component/container/PageAction/index.jsx";
+import { PageActions } from "component/container/PageActions/index.jsx";
 import { PageTitle } from "component/container/PageTitle";
 
 
@@ -75,7 +75,7 @@ export const SupplyManagementStock = () => {
 				loading={pageLoading}
 			/>
 
-			<PageAction actionsData={listActions} />
+			<PageActions actionsData={listActions} />
 
 			<PageCardList listData={stockList} pageLoading={pageLoading} />
 		</PageContainer>

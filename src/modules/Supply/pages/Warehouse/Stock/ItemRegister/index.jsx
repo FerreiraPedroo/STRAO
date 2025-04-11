@@ -4,7 +4,7 @@ import * as S from "./styles.jsx";
 
 import { PageTitle } from "component/container/PageTitle/index.jsx";
 import { NotificationModal } from "component/Notification/modal.jsx";
-import { PageAction } from "component/container/PageAction/index.jsx";
+import { PageActions } from "component/container/PageActions/index.jsx";
 import { ItemSupplierInfo } from "component/WareHouse/Item/Supplier/index.jsx";
 
 
@@ -65,7 +65,7 @@ export function SupplyWarehouseShippingItemRegister() {
 				/>
 			)}
 			<PageTitle title={"Registro de item"} backButton={true} />
-			<PageAction actionsData={itemActions} dataSelected={true} loading={loading} />
+			<PageActions actionsData={itemActions} dataSelected={true} loading={loading} />
 			{itemData && <ItemSupplierInfo itemData={itemData} />}
 		</S.Container>
 	);
