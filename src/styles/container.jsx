@@ -25,10 +25,10 @@ export const PageStyle = {
 
 export const BlockInfoContainerStyle = {
 	container: `
-//   color: #4E5F8F;
-//   border: 1px solid #4E5F8F;
-//   background-color: #D3D9E1;
-//   box-shadow: 2px 2px 0px rgba(78, 95, 143, 0.9);
+  color: #4E5F8F;
+  border: 1px solid #4E5F8F;
+  background-color: #D3D9E1;
+  box-shadow: 2px 2px 0px rgba(78, 95, 143, 0.9);
   padding: 12px 16px;
   border-radius: 4px;
   `,

@@ -48,6 +48,8 @@ export const InputStyles = {
 		z-index: 10;		
 		position: absolute;
 		width: 128px;
+		font-size: 1rem;
+		text-align: center;
 		top: -14px;
 		left: 20px;
 		background-color: #fff;

@@ -1,6 +1,7 @@
 import { CONFIG } from "config/config.jsx";
 
 export const api = async (url, config = {}) => {
+	// console.log({url, config })
 	const configDefault = {
 		headers: {
 			"Content-type": "application/json",
@@ -13,13 +14,15 @@ export const api = async (url, config = {}) => {
 		...config,
 		...configDefault
 	};
-
+	// console.log({configFinal})
 	try {
 		const response = await fetch(`${CONFIG.urlApi}${url}`, configFinal);
+		// console.log({response})
 		const responseJson = await response.json();
 
 		return responseJson;
 	} catch (error) {
+		// console.log({error})
 		if (
 			error.message.includes("Failed to fetch") ||
 			error.message.includes("ERR_CONNECTION_REFUSED")

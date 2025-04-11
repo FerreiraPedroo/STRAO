@@ -11,6 +11,7 @@ import { Home } from "pages/Home";
 import { adminRoutes } from "pages/Admin/routes";
 import { supplyRoutes } from "modules/Supply/routes.jsx";
 import { managementRoutes } from "pages/Management/routes";
+import { humanResourcesRoutes } from "modules/HumanResources/routes";
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,6 +23,7 @@ import { managementRoutes } from "pages/Management/routes";
 // import { HumanResourcesEmployeeSheetEdit } from "../pages/HumanResources/EmployeeSheetEdit";
 
 export const router = createBrowserRouter(
+	
 	createRoutesFromElements(
 		<Route path="/">
 			<Route path="/" element={<Login />} />
@@ -33,7 +35,10 @@ export const router = createBrowserRouter(
 
 				{managementRoutes}
 
-				{supplyRoutes}
+				{humanResourcesRoutes}
+
+
+				{/* {supplyRoutes} */}
 			</Route>
 		</Route>
 	)

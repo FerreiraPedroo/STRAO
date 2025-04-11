@@ -7,7 +7,7 @@ export const actionsSlice = createSlice({
 
     },
     reducers: {
-        changeLoginReseted: (state, action) => {
+        changeLoginReset: (state, action) => {
             return {
                 ...state,
                 loginReseted: action.payload
@@ -16,6 +16,6 @@ export const actionsSlice = createSlice({
     }
 })
 
-export const { changeLoginReseted } = actionsSlice.actions;
+export const { changeLoginReset } = actionsSlice.actions;
 
 export default actionsSlice.reducer;

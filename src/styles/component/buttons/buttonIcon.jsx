@@ -20,6 +20,7 @@ const ButtonColorGroup = {
         color: #9F9F9F;
         border: 2px solid #6BA76B;
         background-color: #4E744E;
+        box-shadow: 0px 0px 0px #000000;
     }
     &:hover:disabled{
         cursor: default;
@@ -32,6 +33,7 @@ const ButtonColorGroup = {
         color: #9F9F9F;
         border: 2px solid #A5C2CC;
         background-color: #81ADD8;
+        box-shadow: 0px 0px 0px #000000;
     }
     &:hover:disabled{
         cursor: default;
@@ -44,6 +46,7 @@ const ButtonColorGroup = {
         color: #D1D1D1;
         border: 2px solid #DEDEDE;
         background-color: #AFACAC;
+        box-shadow: 0px 0px 0px #000000;
     }
     &:hover:disabled{
         cursor: default;
