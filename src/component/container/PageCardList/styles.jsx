@@ -1,15 +1,16 @@
 import styled from "styled-components";
-// import { PageListStyle } from "styles/component/container/pageList";
+import { BlockStyle } from "styles/component/container/blockContainer";
 
 export const Container = styled.div`
+	${BlockStyle.container}
+	gap: 12px;
+	height: 100%;
+	padding: 20px;
+	align-content: flex-start;
+`;
+
+export const LastBox = styled.div`
 	width: 100%;
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-content: center;
-
-	gap: 8px;
-
-	`;
-	/* ${pageListStyle.container}; */
+	padding: 20px;
+	text-align: center;
+`;

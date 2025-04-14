@@ -1,5 +1,5 @@
 // RH
-import rh from "../assets/img/menu/rh/rh.svg";
+import person from "../assets/img/menu/people/people.svg";
 // import employees from "../assets/img/menu/icons8-member-48.png";
 // import employeeSheet from "../assets/img/menu/icons8-spreadsheet-48.png";
 // import employeeList from "../assets/img/menu/icons8-employees-48.png";
@@ -38,7 +38,7 @@ export const navBarImgs = {
 	default_management: management,
 	default_supply: supply,
 	default_admin: admin,
-	default_rh: rh
+	default_person: person
 };
 export const sideBarImgs = {
 	default_centercost: centersCost,
@@ -60,10 +60,10 @@ export const sideBarImgs = {
 };
 
 export const sectorActionsImgs = {
-	employees: "",
-	employeeList: "",
-	employeeRegister: "",
-	employeeSheet: "",
+	people: "",
+	peopleList: "",
+	peopleRegister: "",
+	peopleSheet: "",
 
 	users: "",
 	userList: "",

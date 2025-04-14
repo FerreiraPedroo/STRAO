@@ -2,38 +2,30 @@ import styled from "styled-components";
 
 
 export const Container = styled.div`
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 10px;
-	gap: 10px;
 
-	position: relative;
-	width: 100%;
-	height: auto;
-
-	border-radius: 2px;
+	padding: 12px 16px;
+	border-radius: 4px;
+	border: 1px solid #DEE2E6;
+	background-color: #F5F5F5;
 
 	cursor: pointer;
 	user-select: none;
-	overflow: hidden;
 
 	&:hover {
-		border: 1px solid #4E5F8F;
+		border: 1px solid #aaa;
 	}
 
-    color: #4E5F8F;
-    border: 1px solid #DEE2E6;
-    background-color: #F5F5F5;
-    box-shadow: 2px 2px 0px rgba(78, 95, 143, 0.9);
-    padding: 6px 12px 6px 12px;
-    border-radius: 4px;
-	
+    color: #4E5F8F;	
 `;
 
 export const Box = styled.div`
 	width: 100%;
 	display: flex;
+	align-items: center;
 	gap: 8px;
 `;
 
@@ -54,14 +46,11 @@ export const TextBox = styled.div`
 
 export const NameTitle = styled.span`
 	width: 100%;
-
 	font-size: 0.9rem;
-	font-weight: 500;
 `;
 
 export const NameText = styled.span`
 	text-align: start;
-	font-weight: 500;
 	color: #333;
 	font-size: 0.9rem;
 `;
@@ -69,5 +58,4 @@ export const NameText = styled.span`
 export const Description = styled.span`
 	text-align: justify;
 	font-size: 0.9rem;
-	font-weight: 500;
 `;

@@ -9,9 +9,10 @@ export function PageCardList({ listData, pageLoading }) {
 			{listData && listData.length
 				? listData.map((stock) => <CardInfo key={stock._id} data={stock} />)
 				: null}
-
-			{pageLoading && <>Carregando...</>}
-			{listData && !listData.length ? <>Nenhum estoque...</> : null}
+			
+				{pageLoading && <S.LastBox>Carregando...</S.LastBox>}
+				{listData && !listData.length ? <S.LastBox>Nenhum companhia</S.LastBox> : null}
+			
 		</S.Container>
 	);
 }

@@ -18,8 +18,24 @@ export function CardInfo({ data }) {
 				<S.Img src={sectorActionsImgs[data.url_img]} />
 				<S.TextBox>
 					<S.NameTitle>
-						Nome: <S.NameText>{data.name}</S.NameText>
+						Razão social: <S.NameText>{data.name}</S.NameText>
 					</S.NameTitle>
+					{data.state && (
+						<S.NameTitle>
+							Estado: <S.NameText>{data.state}</S.NameText>
+						</S.NameTitle>
+					)}
+					{data.city && (
+						<S.NameTitle>
+							Cidade: <S.NameText>{data.city}</S.NameText>
+						</S.NameTitle>
+					)}
+					{data.district && (
+						<S.NameTitle>
+							Bairro: <S.NameText>{data.district}</S.NameText>
+						</S.NameTitle>
+					)}
+
 					<S.NameTitle>
 						Status: <S.NameText>{data.status}</S.NameText>
 					</S.NameTitle>

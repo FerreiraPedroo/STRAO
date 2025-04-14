@@ -10,28 +10,31 @@ import * as S from "./styles.jsx";
  * dataSelected - UMA STRING PARA QUE OS BOTÕES FIQUE HABILITADOS OU DESABILITADOS //
  * loading - SE O COMPONENTE PAI ESTÁ ESPERANDO ALGUM DADO PARA PODE DESABILITAR AS AÇÕES.
  *
- * ```
+ * @example
+ * ```JS
  * const actions: [
  * 	{
  * 		title: "Excluir",
- * 			typeStyle: "remove",
- *          show: true,
- * 			action: () => {}
- * 		},
- * 		{
- * 			title: "Editar",
- * 			typeStyle: "edit",
- *          show: true,
- * 			action: (data) =>
- * 				navigate("/admin/data/edit", {
- * 					state: { dataId: data._id }
- * 				})
- * 		}
- * 	]
+ * 		typeStyle: "remove",
+ *		show: true,
+        disable: true,
+ * 		action: () => {}
+ * 	},
+ * 	{
+ * 		title: "Editar",
+ * 		typeStyle: "edit",
+ * 		show: true,
+ * 	    disable: true,
+ * 		action: (data) =>
+ *				navigate("/admin/data/edit", {
+ *				state: { dataId: data._id }
+ *		})
+ * 	}
+ * ]
  * ```
  * @returns
  */
-export function PageActions({ actionsData = [], dataSelected, loading = false }) {
+export function PageActions({ actionsData = [], dataSelected = null, loading = false }) {
 	return (
 		<S.Container key="pageAction">
 			{actionsData.map((action) => (
@@ -39,7 +42,7 @@ export function PageActions({ actionsData = [], dataSelected, loading = false })
 					<ButtonIcon
 						typeStyle={action.typeStyle}
 						onClick={() => action.action(dataSelected)}
-						disable={loading}
+						disabled={loading || action.disable}
 					/>
 					<S.ButtonText>{action.name}</S.ButtonText>
 				</S.ButtonBox>

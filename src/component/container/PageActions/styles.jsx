@@ -18,6 +18,7 @@ export const ButtonBox = styled.div`
 export const ButtonText = styled.div`
 	font-size: 1rem;
 	/* font-weight: 500; */
+	user-select: none;
 	white-space: wrap;
 	text-align: start;
 `;

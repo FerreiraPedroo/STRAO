@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Button = styled.button`
 	position: relative;
 	min-width: ${({ width }) => (width ? `${width}px` : "48px")};
+	max-width: ${({ width }) => (width ? `${width}px` : "48px")};
 	height: ${({ height }) => (height ? `${height}px` : "32px")};
 
 	display: flex;
