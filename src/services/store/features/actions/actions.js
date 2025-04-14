@@ -3,19 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 export const actionsSlice = createSlice({
     name: "actions",
     initialState: {
-        loginReseted: false,
+        loginRequest: false,
 
     },
     reducers: {
-        changeLoginReset: (state, action) => {
+        setLoginReset: (state, action) => {
             return {
                 ...state,
-                loginReseted: action.payload
+                loginRequest: action.payload
             };
         }
     }
 })
 
-export const { changeLoginReset } = actionsSlice.actions;
+export const { setLoginReset } = actionsSlice.actions;
 
 export default actionsSlice.reducer;

@@ -7,5 +7,4 @@ export const PageContainer = styled.div`
 	padding: 12px 20px 20px 12px;
 	gap: 12px;
 	overflow: hidden;
-	border: 2px solid red;
 `;

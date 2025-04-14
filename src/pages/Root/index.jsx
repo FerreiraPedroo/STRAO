@@ -1,15 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { providerClearAllInfo } from "services/store/features/data/appData";
-import { changeLoginReset } from "services/store/features/actions/actions.js";
+import { setLoginReset } from "services/store/features/actions/actions.js";
 
 import { Outlet, useNavigate } from "react-router-dom";
+import { ButtonText } from "component/Buttons/ButtonText/index.jsx";
+import { Modal } from "pages/Root/Modal/index.jsx";
 import { NavBar } from "component/NavBar";
 import { SideBar } from "component/SideBar";
 
 import * as S from "./styles.jsx";
-import { Modal } from "component/Modal/index.jsx";
-import { ButtonText } from "component/Buttons/ButtonText/index.jsx";
 // import { NotificationModal } from "component/Notification/modal.jsx";
 
 /**
@@ -25,7 +25,7 @@ function verifyDataApp(state) {
 		!state.appData.sectorsInfo ||
 		!state.appData.userInfo ||
 		!state.appData.token ||
-		state.actions.loginReseted
+		state.actions.loginRequest
 	) {
 		return true;
 	}
@@ -43,6 +43,7 @@ export function Root() {
 	return (
 		<S.Container>
 			{result ? (
+				
 				<Modal
 					showModal={true}
 					title="ERROR"
@@ -53,7 +54,7 @@ export function Root() {
 							text="Fechar"
 							onClick={() => {
 								dispatch(providerClearAllInfo());
-								dispatch(changeLoginReset(false));
+								dispatch(setLoginReset(false));
 								navigate("/");
 							}}
 						/>

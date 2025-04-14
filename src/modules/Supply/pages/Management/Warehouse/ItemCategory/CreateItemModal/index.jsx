@@ -7,7 +7,7 @@ import { InputTextArea } from "component/Input/TextArea/index.jsx";
 import { InputSelect } from "component/Input/Select/index.jsx";
 import { ButtonText } from "component/Buttons/ButtonText/index.jsx";
 import { InputText } from "component/Input/Text/index.jsx";
-import { Loading } from "component/Loading/index.jsx";
+
 import { helperHandleChangeInput } from "helper/form/helperHandleChangeInput.js";
 
 export function CreateItemModal({ closeModal, setNotification, updateItemList }) {
@@ -79,7 +79,6 @@ export function CreateItemModal({ closeModal, setNotification, updateItemList })
 				</S.ModalHeader>
 				{loading ? (
 					<>
-						<Loading />
 					</>
 				) : (
 					<>

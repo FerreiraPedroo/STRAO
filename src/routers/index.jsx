@@ -11,7 +11,7 @@ import { Home } from "pages/Home";
 import { adminRoutes } from "pages/Admin/routes";
 import { supplyRoutes } from "modules/Supply/routes.jsx";
 import { managementRoutes } from "pages/Management/routes";
-import { humanResourcesRoutes } from "modules/HumanResources/routes";
+import { personRoutes } from "modules/Persons/routes";
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,7 +35,7 @@ export const router = createBrowserRouter(
 
 				{managementRoutes}
 
-				{humanResourcesRoutes}
+				{personRoutes}
 
 
 				{/* {supplyRoutes} */}

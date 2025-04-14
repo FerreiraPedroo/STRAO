@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { changeLoginReset } from "services/store/features/actions/actions.js";
+import { setLoginReset } from "services/store/features/actions/actions.js";
 
 import { api } from "services/api.js";
 import { NotificationModal } from "component/Notification/modal.jsx";
@@ -31,7 +31,7 @@ export function AdminBranchList() {
 					
 					setList(list);
 				} else if (response.codStatus === 401) {
-					dispatch(changeLoginReset(true));
+					dispatch(setLoginReset(true));
 				}
 			} catch (error) {
 				setNotification({

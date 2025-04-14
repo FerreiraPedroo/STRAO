@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { changeLoginReset } from "services/store/features/actions/actions.js";
+import { setLoginReset } from "services/store/features/actions/actions.js";
 import { api } from "services/api.js";
 
 import { ButtonIcon } from "component/Buttons/ButtonIcon/index.jsx";
@@ -55,7 +55,7 @@ export function AdminUserEdit() {
 					return actualState;
 				});
 			} else if (response.codStatus == 401) {
-				useDispatch(changeLoginReset(true));
+				useDispatch(setLoginReset(true));
 			} else {
 				setNotification({ theme: "fail", message: response.message });
 			}

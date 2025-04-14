@@ -9,7 +9,7 @@ import { InputText } from "component/Input/Text/index.jsx";
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 import { PageTitle } from "component/container/PageTitle/index.jsx";
 import { InputSelect } from "component/Input/Select/index.jsx";
-import { ModalSearch } from "component/ModalSearch/index.jsx";
+
 import { NotificationModal } from "component/Notification/modal.jsx";
 import { ButtonIcon } from "component/Buttons/ButtonIcon/index.jsx";
 import { useNavigate } from "react-router-dom";
@@ -90,9 +90,7 @@ export function SupplyManagementStockCreate() {
 					setNotification={setNotification}
 				/>
 			)}
-			{modal == "localization" && (
-				<ModalSearch closeModal={setModal} setNotification={() => ""} addSelectedItem="" />
-			)}
+
 			<PageTitle
 				title="Novo Estoque"
 				subTitle="adicione um novo estoque a companhia."
@@ -113,25 +111,6 @@ export function SupplyManagementStockCreate() {
 					inputErrorMsg={itemInfoValidator.name}
 					disabled={loading}
 				/>
-
-				{/* <S.LocationInfoBlock>
-					<InputText
-						inputName={"management_location_id"}
-						inputValue={itemInfo.management_location_id ?? ""}
-						inputWidth={"288px"}
-						inputOnChange={handleItemInfo}
-						inputPlaceholder={"Localização"}
-						inputShowInfo={true}
-						inputErrorMsg={itemInfoValidator.management_location_id}
-						readOnly={true}
-						disabled={loading}
-					/>
-					<ButtonIcon
-						typeStyle={"find"}
-						onClick={() => setModal("localization")}
-						loading={loading}
-					/>
-				</S.LocationInfoBlock> */}
 
 				<InputSelect
 					selectName="status"

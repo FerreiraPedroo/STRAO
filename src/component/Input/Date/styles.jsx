@@ -1,33 +1,30 @@
 import styled from "styled-components";
-import { InputTextStyle } from "styles/inputs/inputText";
+import { InputStyles } from "styles/inputs/InputStyles";
 
 export const Container = styled.div`
+	${InputStyles.container}
 	${({ width }) => width && `max-width:${width};`}
-	width: 100%;
-	min-width: 128px;
-	height: 58px;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
 `;
+
+export const TitleBox = styled.div`
+	${InputStyles.textBox}
+`;
+
 export const TitleText = styled.p`
-	height: 16px;
-
-	position: relative;
-	top: -2px;
-	left: 1px;
-
-	font-weight: 500;
-	font-size: 0.85rem;
-
-	${InputTextStyle.text}
-
-
-	${({ disabled }) => disabled && "color: #b6b6b6;"}
+	${InputStyles.text};
+	/* ${({ disabled }) => disabled && "color: #36393D;"} */
 `;
+
+export const ErrorMsg = styled.p`
+	${InputStyles.errorMessage}
+
+	&:hover:after {
+		content: ${({ errorMsg }) => errorMsg && `"${errorMsg}"`};
+	}
+`;
+
 export const Input = styled.input`
-	min-width: 160px;
-	min-height: 30px;
+	${InputStyles.input};
 
 	&::placeholder {
 		color: #c9c9c9;
@@ -36,21 +33,11 @@ export const Input = styled.input`
 	&:disabled {
 		border: 1px solid #c0c0c0;
 		background-color: #e0e0e0;
-		color: #b6b6b6;
+		color: #46494d;
 	}
 
-	${InputTextStyle.input}
+	&:read-only {
+		cursor: default;
+	}
 
-`;
-
-export const ErrorMsg = styled.div`
-	min-height: 14px;
-	font-size: 0.7rem;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	color: darkred;
-	padding-right: 2px;
-	text-shadow: 0 0 4px lightcoral;
-	text-align: right;
 `;

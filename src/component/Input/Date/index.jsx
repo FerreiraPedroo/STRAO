@@ -2,37 +2,36 @@ import React from "react";
 import * as S from "./styles";
 
 export const InputDate = ({
-	inputId,
-	inputName,
-	inputValue,
-	inputOnChange,
-	inputPlaceholder,
-	inputShowInfo = false,
-	inputErrorMsg,
-	width,
+	id,
+	name,
+	value,
+	onChange,
+	placeholder,
+	showInfo = false,
+	width = "256px",
+	errorMsg,
+	onBlur = () => "",
 	disabled,
-	readOnly,
-	theme = "normal"
+	readOnly
 }) => {
 	return (
-		<S.Container width={width} theme={theme}>
-			<S.TitleText disabled={disabled} theme={theme}>
-				{(inputValue || inputShowInfo) && inputPlaceholder}
-			</S.TitleText>
+		<S.Container width={width}>
+			<S.TitleBox>
+				<S.TitleText disabled={disabled}>{(value || showInfo) && placeholder}</S.TitleText>
+				{errorMsg && <S.ErrorMsg errorMsg={errorMsg}>❗</S.ErrorMsg>}
+			</S.TitleBox>
 
 			<S.Input
-				id={inputId}
+				id={id}
 				type={"date"}
-				onChange={(e) => inputOnChange(e)}
-				name={inputName}
-				value={inputValue}
-				placeholder={!inputShowInfo ? inputPlaceholder : ""}
+				onChange={(e) => onChange(e)}
+				name={name}
+				value={value}
+				placeholder={!showInfo ? placeholder : ""}
 				disabled={disabled}
 				readOnly={readOnly}
 				width={width}
-				theme={theme}
 			/>
-			<S.ErrorMsg>{inputErrorMsg}</S.ErrorMsg>
 		</S.Container>
 	);
 };

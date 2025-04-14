@@ -32,7 +32,7 @@ export function SupplyWarehouseStockList() {
 
 				setItemList(itemList);
 			} else if (response.data.codStatus === 401) {
-				dispatch(changeLoginReset(true));
+				dispatch(setLoginReset(true));
 			}
 		} catch (error) {
 			setNotification({

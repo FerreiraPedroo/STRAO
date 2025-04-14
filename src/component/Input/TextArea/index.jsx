@@ -15,8 +15,7 @@ export const InputTextArea = ({
 	textAreaErrorMsg,
 	textAreaOnBlur = () => "",
 	disabled,
-	readOnly,
-
+	readOnly
 }) => {
 	return (
 		<S.Container width={width} height={height}>
@@ -32,7 +31,7 @@ export const InputTextArea = ({
 				onChange={textAreaOnChange}
 				onBlur={(e) => textAreaOnBlur(e)}
 				placeholder={!textAreaShowInfo ? textAreaPlaceholder : ""}
-				value={textAreaValue}
+				value={textAreaValue == null ? "" : textAreaValue}
 				height={height}
 				width={width}
 				disabled={disabled}

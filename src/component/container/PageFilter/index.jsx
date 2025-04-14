@@ -66,9 +66,9 @@ export const PageFilter = ({ theme = "normal", filtersData = [], getFiltersSelec
 	}, []);
 
 	return (
-		<S.Container theme={theme}>
+		<S.Container>
 			<S.TitleBox>
-				<S.Title theme={theme}>Filtros</S.Title>
+				<S.Title>Filtros</S.Title>
 				<S.OpenButton>
 					{openContainer ? (
 						<CaretUp onClick={handleOpenStatus} size={24} />

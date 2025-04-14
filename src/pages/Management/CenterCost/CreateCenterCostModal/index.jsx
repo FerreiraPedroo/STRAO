@@ -6,7 +6,6 @@ import * as S from "./styles.jsx";
 import { InputTextArea } from "component/Input/TextArea/index.jsx";
 import { ButtonText } from "component/Buttons/ButtonText/index.jsx";
 import { InputText } from "component/Input/Text/index.jsx";
-import { Loading } from "component/Loading/index.jsx";
 
 export function CreateCenterCostModal({ closeModal, setNotification, updateCenterCostList }) {
 	const [loading, setLoading] = useState(false);

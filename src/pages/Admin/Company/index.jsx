@@ -10,8 +10,8 @@ import { PageTitle } from "component/container/PageTitle/index.jsx";
 import * as S from "./styles.jsx";
 import { PageContainer } from "component/container/PageContainer/styles.jsx";
 import { helperHandleChangeInput } from "helper/form/helperHandleChangeInput.js";
-import { helperRequestReturn } from "helper/helperHandleRequestReturn.js";
-import { Modal } from "component/Modal/index.jsx";
+import { handleApiResponse } from "helper/handleApiResponse.js";
+import { Modal } from "pages/Root/Modal/index.jsx";
 
 export function AdminCompanyEdit() {
 	const navigate = useNavigate();
@@ -125,9 +125,9 @@ export function AdminCompanyEdit() {
 	useEffect(() => {
 		const getUserInfo = async () => {
 			try {
-				const request = await api(`/admin/branch/${param.id}`, { method: "GET" });
-				
-				helperRequestReturn(request, notification, navigate, setCompanyData);
+				const response = await api(`/admin/branch/${param.id}`, { method: "GET" });
+
+				handleApiResponse({ response, setNotification, navigate, setData: setCompanyData });
 			} catch (error) {
 				setErrorPage(true);
 			}
@@ -138,11 +138,7 @@ export function AdminCompanyEdit() {
 
 	return (
 		<PageContainer>
-			<PageTitle
-				title="Editar filial"
-				backUrl={"/admin/branchs"}
-				loading={loading}
-			/>
+			<PageTitle title="Editar filial" backUrl={"/admin/branchs"} loading={loading} />
 
 			{showModal ? (
 				<Modal showModal={setShowModal}>

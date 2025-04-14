@@ -11,7 +11,6 @@ import { Tabs } from "component/Tabs/tabs.jsx";
 import { TabItemData } from "./TabItemData/index.jsx";
 import { ManagementReferenceSupplier } from "./TabItemReferenceSupplier/index.jsx";
 
-import { Loading } from "component/Loading/index.jsx";
 
 export function SupplyManagementItemEdit() {
 	const navigate = useNavigate();
@@ -79,7 +78,7 @@ export function SupplyManagementItemEdit() {
 			/>
 
 			{isLoading ? (
-				<Loading size={96} text="Carregando os dados" />
+				<>"Carregando os dados" </>
 			) : (
 				<>
 					{tabSelected == "Dados" ? (

@@ -14,6 +14,7 @@ export default defineConfig({
 			modules: "/src/modules",
 			helper: "/src/helper",
 			styles: "/src/styles",
+			config: "/src/config",
 			pages: "/src/pages",
 		}
 	}

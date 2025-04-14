@@ -18,6 +18,25 @@ const columns = [
 ];
 
 /**
+ * @example
+ * [{
+ *		title: "nome",
+ *		htmlName: "name",
+ *		size: 96,
+ *		minSize: 96,
+ *		maxSize: 128,
+ *		align: "center",
+ *		overflow: "no/yes",
+ *		transform: (data) => data
+ *	},
+ *	{
+ *		title: "status",
+ *		htmlName: "status",
+ *		size: 96,
+ *		minSize: 96,
+ *		maxSize: 128,
+ *		align: "center"
+ *	}]
  *
  */
 export const PageList = ({ listData, columns, setDataSelected, dataSelected, loading }) => {
@@ -46,9 +65,7 @@ export const PageList = ({ listData, columns, setDataSelected, dataSelected, loa
 
 	return (
 		<S.ComponentContainer>
-			{loading ? (
-				<S.LoadingBox>Carregando...</S.LoadingBox>
-			) : listData && listData.length ? (
+			{!loading && listData && listData.length ? (
 				<S.RowListContainer>
 					<S.RowHeaderBox>
 						{headerInfo.map((header) => (
@@ -68,12 +85,11 @@ export const PageList = ({ listData, columns, setDataSelected, dataSelected, loa
 					{pageListData &&
 						pageListData.map((data, index) => (
 							<S.RowBox
-							key={data.id}
-							onClick={() => setDataSelected(listData[index])}
-							onMouseEnter={() => handleRowHover(index)}
-							onMouseLeave={() => handleRowHover()}
+								key={data._id}
+								onClick={() => setDataSelected(listData[index])}
+								onMouseEnter={() => handleRowHover(index)}
+								onMouseLeave={() => handleRowHover()}
 							>
-
 								{headerInfo.map((column) => (
 									<S.RowText
 										key={column.htmlName}
@@ -82,7 +98,8 @@ export const PageList = ({ listData, columns, setDataSelected, dataSelected, loa
 										width={column.size}
 										align={column.align}
 										data-hover={index == rowHover}
-										data-selected={data.name == dataSelected.name}
+										data-selected={data.name == (dataSelected ? dataSelected.name : "")}
+										overflow="yes"
 									>
 										{data[column.htmlName] instanceof Object
 											? data[column.htmlName].name
@@ -92,8 +109,17 @@ export const PageList = ({ listData, columns, setDataSelected, dataSelected, loa
 							</S.RowBox>
 						))}
 				</S.RowListContainer>
-			) : (
-				<S.LoadingBox>Sem registro</S.LoadingBox>
+			) : null}
+
+			{loading && !listData.length && (
+				<S.RowListContainer>
+					<S.LoadingBox>Carregando...</S.LoadingBox>
+				</S.RowListContainer>
+			)}
+			{!loading && !listData.length && (
+				<S.RowListContainer>
+					<S.LoadingBox>Sem registro</S.LoadingBox>
+				</S.RowListContainer>
 			)}
 		</S.ComponentContainer>
 	);

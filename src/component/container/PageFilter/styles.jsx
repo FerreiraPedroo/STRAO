@@ -1,13 +1,10 @@
 import styled from "styled-components";
+import { PageFiltersStyle } from "styles/component/container/pageFilters";
 import { PageStyle } from "styles/container";
 
 export const Container = styled.div`
+	${PageFiltersStyle.container};
 	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-
-	${PageStyle.container};
 `;
 
 export const TitleBox = styled.div`
@@ -17,7 +14,7 @@ export const TitleBox = styled.div`
 `;
 
 export const Title = styled.div`
-	${PageStyle.containerTitle};
+	${PageFiltersStyle.title};
 `;
 
 export const OpenButton = styled.div`
@@ -30,10 +27,9 @@ export const OpenButton = styled.div`
 `;
 
 export const InputBox = styled.div`
-	height: 100%;
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: end;
-	gap: 0 12px;
+	gap: 8px 12px;
 `;

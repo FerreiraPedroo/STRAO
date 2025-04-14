@@ -1,17 +1,12 @@
 import styled from "styled-components";
-// import { pageListStyle } from "styles/component/container/pageList";
+import { BlockStyle } from "styles/component/container/blockContainer";
 
 export const ComponentContainer = styled.div`
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: start;
-	align-content: start;
+	${BlockStyle.container}
+	height: 100%;
 	overflow: auto;
-	border-radius: 0;
 	padding: 0;
-	
+
 	&::-webkit-scrollbar {
 		width: 6px;
 	}
@@ -19,14 +14,15 @@ export const ComponentContainer = styled.div`
 		background-color: darkgray;
 		border-radius: 6px;
 	}
-	
+
 	&::-webkit-scrollbar-thumb:active {
 		background-color: #333;
 	}
-`;
+	`;
 
 export const RowListContainer = styled.div`
 	display: flex;
+	height: 100%;
 	width: 100%;
 	flex-direction: column;
 	background-color: #fff;
@@ -56,7 +52,6 @@ export const RowHeadText = styled.p`
 
 	padding: 6px 8px;
 `;
-/* ${pageListStyle.rowHeaderBox} */
 
 export const RowBox = styled.div`
 	display: flex;
@@ -66,8 +61,12 @@ export const RowBox = styled.div`
 
 	margin: 0px;
 	cursor: pointer;
+
+	border-top: 1px solid #c0c0c0;
+	&:last-child {
+		border-bottom: 1px solid #c0c0c0;
+	}
 `;
-/* ${pageListStyle.rowBox} */
 
 export const RowText = styled.p`
 	${({ width }) => width && `width:${width}px`};
@@ -82,8 +81,7 @@ export const RowText = styled.p`
 
 	font-size: 0.9rem;
 	padding: 12px 6px;
-	/* background: #f8f8f8; */
-	z-index: 1;
+
 	flex-grow: 1;
 
 	${(props) =>
@@ -91,7 +89,6 @@ export const RowText = styled.p`
 		!props["data-selected"] &&
 		`
 		background: #DCDCDC;
-		z-index: 2;
 	`}
 
 	${(props) =>
@@ -100,6 +97,13 @@ export const RowText = styled.p`
 		background-color: #808080;
 		color: #fff;
 		font-weight: 500;
+	`}
+	
+	${(props) =>
+		props["data-hover"] &&
+		props["data-selected"] &&
+		`
+		background: #a0a0a0;
 	`}
 `;
 

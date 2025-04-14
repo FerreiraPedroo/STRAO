@@ -11,9 +11,9 @@ export const InputSelect = ({
 	selectErrorMsg,
 	disabled,
 	readOnly,
-	width = "164px",
+	width = "160px",
 	options,
-	disableErrorMsg = false
+	disableErrorMsg = true
 }) => {
 	return (
 		<S.Container width={width}>

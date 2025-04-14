@@ -7,9 +7,9 @@ import { InputText } from "component/Input/Text/index.jsx";
 import { InputSelect } from "component/Input/Select/index.jsx";
 import { PageTitle } from "component/container/PageTitle/index.jsx";
 
-import { Modal } from "component/Modal/index.jsx";
+import { Modal } from "pages/Root/Modal/index.jsx";
 import { useDispatch } from "react-redux";
-import { changeLoginReset } from "services/store/features/actions/actions.js";
+import { setLoginReset } from "services/store/features/actions/actions.js";
 import { NotificationModal } from "component/Notification/modal.jsx";
 
 import * as S from "./styles.jsx";
@@ -96,7 +96,7 @@ export function AdminBranchEdit() {
 				setIsChanged(true);
 				setNotification({ theme: "success", message: response.message });
 			} else if (response.codStatus == 401) {
-				dispatch(changeLoginReset(true));
+				dispatch(setLoginReset(true));
 			} else {
 				setNotification({ theme: "fail", message: response.message });
 			}
@@ -140,7 +140,7 @@ export function AdminBranchEdit() {
 					setBranchData(response.data);
 					setBranchDataOriginal(response.data);
 				} else if (response.codStatus == 401) {
-					dispatch(changeLoginReset(true));
+					dispatch(setLoginReset(true));
 				} else {
 					setNotification({ theme: "fail", message: response.message });
 				}

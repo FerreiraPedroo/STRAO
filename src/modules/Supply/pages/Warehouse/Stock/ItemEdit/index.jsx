@@ -52,8 +52,7 @@ export function SupplyWarehouseItemEdit() {
 				dataSelected={true}
 				loading={loading}
 			/>
-			PÁGINA NÃO FUNCIONANDO
-			{/* <ItemSupplierInfo item={item.id} /> */}
+
 		</S.Container>
 	);
 }

@@ -3,7 +3,6 @@ import * as S from "./styles";
 
 export const InputText = ({
 	inputId,
-	inputType = "text",
 	inputName,
 	inputValue,
 	inputOnChange,
@@ -18,16 +17,19 @@ export const InputText = ({
 }) => {
 	return (
 		<S.Container width={inputWidth}>
-			<S.TitleText disabled={disabled}>
-				{((inputValue && inputShowInfo) || inputShowInfo) && inputPlaceholder}
-			</S.TitleText>
+			<S.TitleBox>
+				<S.TitleText disabled={disabled}>
+					{((inputValue && inputShowInfo) || inputShowInfo) && inputPlaceholder}
+				</S.TitleText>
+				{inputErrorMsg && <S.ErrorMsg errorMsg={inputErrorMsg}>❗</S.ErrorMsg>}
+			</S.TitleBox>
 
 			<S.Input
 				id={inputId}
 				userSelect={false}
 				onChange={inputOnChange}
 				name={inputName}
-				type={inputType}
+				type={"text"}
 				value={inputValue}
 				placeholder={!inputShowInfo ? inputPlaceholder : ""}
 				disabled={disabled}
@@ -35,7 +37,6 @@ export const InputText = ({
 				onBlur={(e) => inputOnBlur(e)}
 				width={inputWidth}
 			/>
-			{!disableErrorMsg && <S.ErrorMsg>{inputErrorMsg}</S.ErrorMsg>}
 		</S.Container>
 	);
 };

@@ -10,7 +10,7 @@ import { InputText } from "component/Input/Text/index.jsx";
 
 import * as S from "./styles.jsx";
 import { NotificationModal } from "component/Notification/modal.jsx";
-import { Modal } from "component/Modal/index.jsx";
+import { Modal } from "pages/Root/Modal/index.jsx";
 
 const supplierInfoSchema = object({
 	supplier: string().required("É necessário escolher um fornecedor."),
