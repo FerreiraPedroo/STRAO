@@ -17,20 +17,26 @@ export function SideBar() {
 	const departmentLocation = location.pathname.split("/")[1];
 
 	const { menuDepartment, menuSectors, menuSectorSelected } = useSelector((state) => {
-		const menuDepartment = state.appData.departmentsInfo.departments.find((department) => {
-			return department.URLPath === "/" + departmentLocation;
-		});
+		let menuDepartment = [];
+		let menuSectors = [];
+		let menuSectorSelected = [];
 
-		if (!menuDepartment) {
-			return [];
+		if (state.appData.departmentsInfo) {
+			menuDepartment = state.appData.departmentsInfo.departments.find((department) => {
+				return department.URLPath === "/" + departmentLocation;
+			});
+
+			if (!menuDepartment) {
+				return [];
+			}
 		}
+		if (state.appData.departmentsInfo) {
+			menuSectors = state.appData.sectorsInfo.sectors.filter(
+				(sector) => sector.departmentID === menuDepartment.ID
+			);
 
-		const menuSectors = state.appData.sectorsInfo.sectors.filter(
-			(sector) => sector.departmentID === menuDepartment.ID
-		);
-
-		const menuSectorSelected = state.menu.sectionSelected;
-
+			menuSectorSelected = state.menu.sectionSelected;
+		}
 		return {
 			menuDepartment,
 			menuSectors,
@@ -52,7 +58,7 @@ export function SideBar() {
 
 	return (
 		<S.Container>
-			<S.DepartmentTitle>{menuDepartment.name}</S.DepartmentTitle>
+			<S.DepartmentTitle>{menuDepartment && menuDepartment.name}</S.DepartmentTitle>
 			{menuSectors.map((sec) => (
 				<S.SectionContainer
 					key={sec.name}
